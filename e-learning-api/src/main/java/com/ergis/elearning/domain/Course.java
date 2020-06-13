@@ -24,6 +24,9 @@ public class Course {
     @JsonIgnore
     private Set<User> users = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
+    private Set<TestBase> tests = new HashSet<>();
+
     public Course() {}
 
     public Long getId() {
@@ -72,6 +75,14 @@ public class Course {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public Set<TestBase> getTests() {
+        return tests;
+    }
+
+    public void setTests(Set<TestBase> tests) {
+        this.tests = tests;
     }
 
     /*
