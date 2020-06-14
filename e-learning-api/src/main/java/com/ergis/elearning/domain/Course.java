@@ -1,9 +1,11 @@
 package com.ergis.elearning.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +22,13 @@ public class Course {
     private String description;
     private String teacher_name;
     private String teacher_email;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date created_date;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date updated_date;
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
     @JsonIgnore
     private Set<User> users = new HashSet<>();
@@ -28,6 +37,15 @@ public class Course {
     private Set<TestBase> tests = new HashSet<>();
 
     public Course() {}
+
+    @PrePersist
+    private void onCreate() {
+        this.created_date = new Date();
+        this.updated_date = this.created_date;
+    }
+
+    @PreUpdate
+    private void onUpdate() { this.updated_date = new Date(); }
 
     public Long getId() {
         return id;
