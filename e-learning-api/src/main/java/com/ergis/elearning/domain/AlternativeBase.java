@@ -17,7 +17,6 @@ public class AlternativeBase {
     @NotBlank(message = "Question description is required")
     private String description;
     @NotNull
-    @AssertFalse
     private Boolean correct;
 
     @ManyToOne(fetch = FetchType.LAZY)

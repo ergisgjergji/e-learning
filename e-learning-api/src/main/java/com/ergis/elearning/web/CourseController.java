@@ -50,12 +50,12 @@ public class CourseController {
     }
 
     // Tested [YES]
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getCourseById(@PathVariable String id, Principal principal) {
+    @GetMapping("/{course_id}")
+    public ResponseEntity<?> getCourseById(@PathVariable String course_id, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
-        Course course = courseService.findByIdAndUser(Long.parseLong(id), user);
-        if(course == null) throw new CourseIdException("Course with id '" +id+ "' not found");
+        Course course = courseService.findByIdAndUser(Long.parseLong(course_id), user);
+        if(course == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
 
         return new ResponseEntity<Course>(course, HttpStatus.OK);
     }
@@ -71,12 +71,13 @@ public class CourseController {
 
     // TEACHER
     // Tested [YES] (waiting for JWT)
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{course_id}")
     public ResponseEntity<?> deleteCourse(@PathVariable String course_id, Principal principal) {
 
         courseService.delete(Long.parseLong(course_id), principal.getName());
         return new ResponseEntity<String>("Course with id '" + course_id + "' was successfully deleted", HttpStatus.OK);
     }
+
 
     //#region ------------------------------------------ USER-COURSE ---------------------------------------------------
 
