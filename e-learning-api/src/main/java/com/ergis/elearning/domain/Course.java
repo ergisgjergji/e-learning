@@ -36,6 +36,9 @@ public class Course {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
     private Set<TestBase> tests = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
+    private Set<Test> students_tests = new HashSet<>();
+
     public Course() {}
 
     @PrePersist
@@ -87,6 +90,22 @@ public class Course {
         this.teacher_email = owner_email;
     }
 
+    public Date getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
+    }
+
+    public Date getUpdated_date() {
+        return updated_date;
+    }
+
+    public void setUpdated_date(Date updated_date) {
+        this.updated_date = updated_date;
+    }
+
     public Set<User> getUsers() {
         return users;
     }
@@ -101,6 +120,14 @@ public class Course {
 
     public void setTests(Set<TestBase> tests) {
         this.tests = tests;
+    }
+
+    public Set<Test> getStudents_tests() {
+        return students_tests;
+    }
+
+    public void setStudents_tests(Set<Test> students_tests) {
+        this.students_tests = students_tests;
     }
 
     /*

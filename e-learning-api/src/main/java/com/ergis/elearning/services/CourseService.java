@@ -47,6 +47,7 @@ public class CourseService {
 
     public Course update(Course updatedCourse, String username) {
 
+        // Only 'name' and 'description' are allowed to be updated
         // Make sure course_id is set
         // Make sure principal has a course with this id
 
@@ -56,9 +57,12 @@ public class CourseService {
         Course course = courseRepository.findByIdAndUsers(updatedCourse.getId(), user);
         if(course == null) throw new CourseIdException("Course with id '" +updatedCourse.getId()+ "' not found");
 
-        updatedCourse.setUsers(course.getUsers());
-        updatedCourse.setTeacher_name(userService.findByUsername(username).getFull_name());
-        updatedCourse.setTeacher_email(username);
+        Course duplicateName = courseRepository.findByName(updatedCourse.getName());
+        if(duplicateName != null) throw new CourseNameException("A course with name '" +updatedCourse.getName()+ "' already exists");
+
+        course.setName(updatedCourse.getName());
+        course.setTeacher_name(userService.findByUsername(username).getFull_name());
+        course.setTeacher_email(username);
 
         return courseRepository.save(updatedCourse);
     }

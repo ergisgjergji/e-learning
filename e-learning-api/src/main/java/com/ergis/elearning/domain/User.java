@@ -47,6 +47,9 @@ public class User {
     @JsonIgnore
     private Set<Course> courses = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "user", orphanRemoval = true)
+    private Set<Test> tests = new HashSet<>();
+
     public User() {}
 
     @PrePersist
@@ -138,6 +141,14 @@ public class User {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public Set<Test> getTests() {
+        return tests;
+    }
+
+    public void setTests(Set<Test> tests) {
+        this.tests = tests;
     }
 
     //#region Utility methods for ManyToMany relationship
