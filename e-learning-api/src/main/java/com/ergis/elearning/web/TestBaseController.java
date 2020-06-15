@@ -1,7 +1,7 @@
 package com.ergis.elearning.web;
 
 import com.ergis.elearning.domain.TestBase;
-import com.ergis.elearning.services.TestService;
+import com.ergis.elearning.services.TestBaseService;
 import com.ergis.elearning.services.errors.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.Set;
 public class TestBaseController {
 
     @Autowired
-    private TestService testService;
+    private TestBaseService testBaseService;
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
@@ -33,7 +33,7 @@ public class TestBaseController {
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
         if(errors != null) return errors;
 
-        TestBase test = testService.create(newTest, Long.parseLong(course_id), principal.getName());
+        TestBase test = testBaseService.create(newTest, Long.parseLong(course_id), principal.getName());
         return new ResponseEntity<TestBase>(test, HttpStatus.CREATED);
     }
 
@@ -41,7 +41,7 @@ public class TestBaseController {
     @GetMapping("/{course_id}/all")
     public ResponseEntity<?> getAllCourseTests(@PathVariable String course_id, Principal principal) {
 
-        Set<TestBase> courseTests = testService.findAllByCourse(Long.parseLong(course_id), principal.getName());
+        Set<TestBase> courseTests = testBaseService.findAllByCourse(Long.parseLong(course_id), principal.getName());
         return new ResponseEntity<Set<TestBase>>(courseTests, HttpStatus.OK);
     }
 
@@ -49,7 +49,7 @@ public class TestBaseController {
     @DeleteMapping("/{course_id}/{testbase_id}")
     public ResponseEntity<?> deleteTest(@PathVariable String course_id, @PathVariable String testbase_id, Principal principal) {
 
-        testService.delete(Long.parseLong(course_id), Long.parseLong(testbase_id), this.username);
+        testBaseService.delete(Long.parseLong(course_id), Long.parseLong(testbase_id), this.username);
         return new ResponseEntity<String>("Test with id '" +testbase_id+ "'was successfully deleted", HttpStatus.OK);
     }
 }

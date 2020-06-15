@@ -1,6 +1,7 @@
 package com.ergis.elearning.services;
 
 import com.ergis.elearning.domain.Course;
+import com.ergis.elearning.domain.TestBase;
 import com.ergis.elearning.domain.User;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseIdException;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseNotFoundException;
@@ -23,6 +24,10 @@ public class UserService {
     private IUserRepository userRepository;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private TestBaseService testBaseService;
+    @Autowired
+    private TestService testService;
 
     public User create(User user) {
 
@@ -147,6 +152,8 @@ public class UserService {
         // Make sure teacher has a course with this id
         // Make sure student with this id exists
         // Check whether student is already registered
+        // Add course in student's list of courses
+        // Foreach TestBase of that Course, create a new Test for this student
 
         User teacher = this.findByUsername(username);
         Course teacherCourse = courseRepository.findByIdAndUsers(course_id, teacher);
@@ -158,8 +165,15 @@ public class UserService {
         Course studentCourse = courseRepository.findByIdAndUsers(course_id, student);
         if(studentCourse != null) throw new CourseNotFoundException("Student is already registered in the course with id " + course_id);
 
+        // Step 1: Add to course
         student.addCourse(teacherCourse);
         userRepository.save(student);
+
+        // Step 2: For each course's TestBase create a Test for student
+        Set<TestBase> testBases = testBaseService.findAllByCourse(course_id, username);
+        for(TestBase testBase: testBases) {
+            testService.create(testBase, teacherCourse, student);
+        }
 
         return userRepository.findAllByCoursesAndRole(teacherCourse, "STUDENT");
     }

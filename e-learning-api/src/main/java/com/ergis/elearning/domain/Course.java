@@ -34,9 +34,11 @@ public class Course {
     private Set<User> users = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
+    @JsonIgnore
     private Set<TestBase> tests = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
+    @JsonIgnore
     private Set<Test> students_tests = new HashSet<>();
 
     public Course() {}

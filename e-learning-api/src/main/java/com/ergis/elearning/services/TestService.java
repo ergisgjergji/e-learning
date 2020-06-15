@@ -1,11 +1,6 @@
 package com.ergis.elearning.services;
 
 import com.ergis.elearning.domain.*;
-import com.ergis.elearning.exceptions.CourseExceptions.CourseIdException;
-import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesException;
-import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeException;
-import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdException;
-import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseQuestionsException;
 import com.ergis.elearning.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,89 +11,43 @@ import java.util.Set;
 public class TestService {
 
     @Autowired
-    private ITestBaseRepository testBaseRepository;
+    private ITestRepository testRepository;
     @Autowired
-    private IQuestionBaseRepository questionBaseRepository;
+    private IQuestionRepository questionRepository;
     @Autowired
-    private IAlternativeBaseRepository alternativeBaseRepository;
+    private IAlternativeRepository alternativeRepository;
     @Autowired
     private ICourseRepository courseRepository;
     @Autowired
-    private IUserRepository userRepository;
+    private UserService userService;
 
-    // Logic for test validation
-    private Boolean isTestValid(TestBase testBase) {
+    public void create(TestBase testBase, Course course, User student) {
 
-        if(testBase.getQuestions().size() == 0) throw new TestBaseQuestionsException("Test must contain some questions");
+        Test test = new Test();
+        test.setHeader(testBase.getHeader());
+        test.setScored_points(0);
+        test.setTotal_points(testBase.getQuestions().size());
+        test.setCompleted(false);
+        test.setPassed(false);
+        test.setCourse(course);
+        test.setUser(student);
+        testRepository.save(test);
 
-        for(QuestionBase question: testBase.getQuestions()) {
-            Integer type = question.getType();
+        for (QuestionBase questionBase : testBase.getQuestions()) {
+            Question question = new Question();
+            question.setDescription(questionBase.getDescription());
+            question.setType(questionBase.getType());
+            question.setTest(test);
+            questionRepository.save(question);
 
-            if(type == null) throw new QuestionBaseTypeException("Question type is required");
-            if(!(type >= 1 && question.getType() <= 3)) throw new QuestionBaseTypeException("Invalid question type");
-            if(question.getAlternatives().size() == 0) throw new QuestionBaseAlternativesException("Question must contain some alternatives");
-
-            if(type == 1 && question.getAlternatives().size() != 2) throw new QuestionBaseAlternativesException("'Yes/No' question must have only 2 alternatives");
-            if(type == 2 && question.getAlternatives().size() != 4) throw new QuestionBaseAlternativesException("'Single choice' question must have 4 alternatives");
-            if(type == 3 && question.getAlternatives().size() != 4) throw new QuestionBaseAlternativesException("'Multi-choice' question must have 4 alternatives");
-
-            Integer correct = 0;
-
-            for(AlternativeBase alternative: question.getAlternatives()) {
-                if(alternative.getCorrect() == true) correct++;
-            }
-
-            if(type == 1 && correct != 1) throw new QuestionBaseAlternativesException("'Yes/No' question must have 1 correct answer");
-            if(type == 2 && correct != 1) throw new QuestionBaseAlternativesException("'Single choice' question must have 1 correct answer");
-            if(type == 3 && correct != 2) throw new QuestionBaseAlternativesException("'Multi-choice' question must have 2 correct answer");
-        }
-
-        return true;
-    }
-
-    public TestBase create(TestBase testBase, Long course_id, String username) {
-
-        User user = userRepository.findByUsername(username);
-        Course course = courseRepository.findByIdAndUsers(course_id, user);
-        if(course == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
-
-        if(this.isTestValid(testBase)) {
-
-            testBase.setCourse(course);
-            testBaseRepository.save(testBase);
-            for (QuestionBase question : testBase.getQuestions()) {
-                question.setTest(testBase);
-                questionBaseRepository.save(question);
-
-                for (AlternativeBase alternative : question.getAlternatives()) {
-                    alternative.setQuestion(question);
-                    alternativeBaseRepository.save(alternative);
-                }
+            for (AlternativeBase alternativeBase : questionBase.getAlternatives()) {
+                Alternative alternative = new Alternative();
+                alternative.setDescription(alternativeBase.getDescription());
+                alternative.setCorrect(alternativeBase.getCorrect());
+                alternative.setChecked(false);
+                alternative.setQuestion(question);
+                alternativeRepository.save(alternative);
             }
         }
-
-        return testBase;
-    }
-
-    public Set<TestBase> findAllByCourse(Long course_id, String username) {
-
-        User user = userRepository.findByUsername(username);
-        Course course = courseRepository.findByIdAndUsers(course_id, user);
-        if(course == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
-
-        return testBaseRepository.findAllByCourse(course);
-    }
-
-    public void delete(Long course_id, Long testbase_id, String username) {
-
-        User user = userRepository.findByUsername(username);
-
-        Course course = courseRepository.findByIdAndUsers(course_id, user);
-        if(course == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
-
-        TestBase testBase = testBaseRepository.findByIdAndCourse(testbase_id, course);
-        if(testBase == null) throw new TestBaseIdException("Test with id '" +testbase_id+ "' not found");
-
-        testBaseRepository.delete(testBase);
     }
 }

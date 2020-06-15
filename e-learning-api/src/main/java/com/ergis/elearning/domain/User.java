@@ -48,6 +48,7 @@ public class User {
     private Set<Course> courses = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "user", orphanRemoval = true)
+    @JsonIgnore
     private Set<Test> tests = new HashSet<>();
 
     public User() {}
