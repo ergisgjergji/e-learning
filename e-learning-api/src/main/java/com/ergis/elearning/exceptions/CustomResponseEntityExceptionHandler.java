@@ -9,6 +9,8 @@ import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdException;
 import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdExceptionResponse;
 import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseQuestionsException;
 import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseQuestionsExceptionResponse;
+import com.ergis.elearning.exceptions.TestExceptions.TestIdException;
+import com.ergis.elearning.exceptions.TestExceptions.TestIdExceptionResponse;
 import com.ergis.elearning.exceptions.UserExceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    //#region ----------------------------------------- User Exceptions -----------------------------------------
+    //#region - User Exceptions -
     @ExceptionHandler
     public final ResponseEntity<Object> handleIdNotFoundException(UserIdException ex, WebRequest request) {
         UserIdExceptionResponse exceptionResponse = new UserIdExceptionResponse(ex.getMessage());
@@ -42,7 +44,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
     //#endregion
 
-    //#region ----------------------------------------- Course Exceptions ----------------------------------------------
+    //#region - Course Exceptions -
     @ExceptionHandler
     public final ResponseEntity<Object> handleCourseNotFoundException(CourseNotFoundException ex, WebRequest request) {
         CourseNotFoundExceptionResponse exceptionResponse = new CourseNotFoundExceptionResponse(ex.getMessage());
@@ -62,7 +64,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
     //#endregion-------------
 
-    //#region ----------------------------------------- TestBase Exceptions
+    //#region - TestBase Exceptions -
     @ExceptionHandler
     public final ResponseEntity<Object> handleTestBaseIdException(TestBaseIdException ex, WebRequest request) {
         TestBaseIdExceptionResponse exceptionResponse = new TestBaseIdExceptionResponse(ex.getMessage());
@@ -76,7 +78,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
     //#endregion
 
-    //#region ----------------------------------------- QuestionBase Exceptions -----------------------------------------
+    //#region - QuestionBase Exceptions -
     @ExceptionHandler
     public final ResponseEntity<Object> handleQuestionBaseTypeException(QuestionBaseTypeException ex, WebRequest request) {
         QuestionBaseTypeExceptionResponse exceptionResponse = new QuestionBaseTypeExceptionResponse(ex.getMessage());
@@ -86,6 +88,14 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleQuestionBaseAlternativesException(QuestionBaseAlternativesException ex, WebRequest request) {
         QuestionBaseAlternativesExceptionResponse exceptionResponse = new QuestionBaseAlternativesExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    //#endregion
+
+    //#region - Test Exceptions -
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleTestIdException(TestIdException ex, WebRequest request) {
+        TestIdExceptionResponse exceptionResponse = new TestIdExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
     //#endregion

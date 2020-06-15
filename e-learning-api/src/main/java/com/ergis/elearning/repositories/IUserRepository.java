@@ -13,6 +13,7 @@ public interface IUserRepository extends CrudRepository<User, Long> {
     User getById(Long id);
     User findByUsername(String username);
     User findByIdAndRole(Long id, String role);
+    User findByIdAndRoleAndCourses(Long id, String role, Course course);
 
     Set<User> findAll();
 
