@@ -6,6 +6,7 @@ import com.ergis.elearning.services.errors.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/testbase")
 @CrossOrigin
-// TEACHER
+@PreAuthorize("hasRole('TEACHER')")
 public class TestBaseController {
 
     @Autowired
@@ -24,7 +25,6 @@ public class TestBaseController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    // Tested [YES] (waiting for JWT)
     @PostMapping("/{course_id}") 
     public ResponseEntity<?> createTest(@Valid @RequestBody TestBase newTest, @PathVariable String course_id, BindingResult result, Principal principal) {
 
@@ -35,7 +35,6 @@ public class TestBaseController {
         return new ResponseEntity<TestBase>(test, HttpStatus.CREATED);
     }
 
-    // Tested [YES] (waiting for JWT)
     @GetMapping("/{course_id}/all")
     public ResponseEntity<?> getAllCourseTests(@PathVariable String course_id, Principal principal) {
 
@@ -43,7 +42,6 @@ public class TestBaseController {
         return new ResponseEntity<Set<TestBase>>(courseTests, HttpStatus.OK);
     }
 
-    // Tested [YES] (waiting for JWT)
     @DeleteMapping("/{course_id}/{testbase_id}")
     public ResponseEntity<?> deleteTest(@PathVariable String course_id, @PathVariable String testbase_id, Principal principal) {
 

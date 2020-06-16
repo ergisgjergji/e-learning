@@ -29,7 +29,6 @@ public class CourseController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    // Tested [YES] (waiting for JWT)
     @PreAuthorize("hasRole('TEACHER')")
     @PostMapping("")
     public ResponseEntity<?> createCourse(@Valid @RequestBody Course course, BindingResult result, Principal principal) {
@@ -41,7 +40,6 @@ public class CourseController {
         return new ResponseEntity<Course>(course1, HttpStatus.CREATED);
     }
 
-    // Tested [YES]
     @PreAuthorize("hasRole('TEACHER')")
     @PutMapping("")
     public ResponseEntity<?> updateCourse(@RequestBody Course course, Principal principal) {
@@ -50,7 +48,6 @@ public class CourseController {
         return new ResponseEntity<Course>(updatedCourse, HttpStatus.OK);
     }
 
-    // Tested [YES]
     @GetMapping("/{course_id}")
     public ResponseEntity<?> getCourseById(@PathVariable String course_id, Principal principal) {
 
@@ -61,7 +58,6 @@ public class CourseController {
         return new ResponseEntity<Course>(course, HttpStatus.OK);
     }
 
-    // Tested [YES] (waiting for JWT)
     @GetMapping("/all")
     public ResponseEntity<?> getAllCourses(Principal principal) {
 
@@ -69,7 +65,6 @@ public class CourseController {
         return new ResponseEntity<Set<Course>>(courses, HttpStatus.OK);
     }
 
-    // Tested [YES]
     @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{course_id}")
     public ResponseEntity<?> deleteCourse(@PathVariable String course_id, Principal principal) {
@@ -81,7 +76,6 @@ public class CourseController {
 
     //#region ------------------------------------------ USER-COURSE ---------------------------------------------------
 
-    // Tested [YES] (waiting for JWT)
     @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/{course_id}/students/registered")
     public ResponseEntity<?> getAllRegisteredStudents(@PathVariable String course_id, Principal principal) {
@@ -90,7 +84,6 @@ public class CourseController {
         return new ResponseEntity<Set<User>>(registeredStudents, HttpStatus.OK);
     }
 
-    // Tested [YES] (waiting for JWT)
     @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/{course_id}/students/not-registered")
     public ResponseEntity<?> getAllNonRegisteredStudents(@PathVariable String course_id, Principal principal) {
@@ -99,7 +92,6 @@ public class CourseController {
         return new ResponseEntity<Set<User>>(registeredStudents, HttpStatus.OK);
     }
 
-    // Tested [YES] (waiting for JWT)
     @PreAuthorize("hasRole('TEACHER')")
     @PostMapping("/{course_id}/students/{student_id}")
     public ResponseEntity<?> addStudent(@PathVariable String course_id, @PathVariable String student_id, Principal principal) {
@@ -108,7 +100,6 @@ public class CourseController {
         return new ResponseEntity<Set<User>>(courseStudents, HttpStatus.OK);
     }
 
-    // Tested [YES] (waiting for JWT)
     @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{course_id}/students/{student_id}")
     public ResponseEntity<?> deleteStudent(@PathVariable String course_id, @PathVariable String student_id, Principal principal) {

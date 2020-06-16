@@ -6,6 +6,7 @@ import com.ergis.elearning.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -19,8 +20,7 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    // STUDENT
-    // Tested [YES] (waiting for JWT)
+    @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/{course_id}/{student_id}/list")
     public ResponseEntity<?> getStudentTestListByCourse(@PathVariable String course_id, @PathVariable String student_id, Principal principal) {
 
@@ -28,8 +28,7 @@ public class TestController {
         return new ResponseEntity<Set<TestViewModel>>(testList, HttpStatus.OK);
     }
 
-    // STUDENT
-    // Tested [YES] (waiting for JWT)
+    @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/{course_id}/{test_id}")
     public ResponseEntity<?> getTestById(@PathVariable String course_id, @PathVariable String test_id, Principal principal) {
 
@@ -37,8 +36,7 @@ public class TestController {
         return new ResponseEntity<Test>(test, HttpStatus.OK);
     }
 
-    // TEACHER (for the moment)
-    // Tested [YES] (waiting for JWT)
+    @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/{course_id}/{student_id}/completed")
     public ResponseEntity<?> getStudentCompletedTestListByCourse(@PathVariable String course_id, @PathVariable String student_id, Principal principal) {
 
@@ -46,8 +44,7 @@ public class TestController {
         return new ResponseEntity<Set<Test>>(studentCourseCompletedTests, HttpStatus.OK);
     }
 
-    // STUDENT
-    // Tested [YES] (waiting for JWT)
+    @PreAuthorize("hasRole('STUDENT')")
     @PostMapping("/{course_id}/{test_id}")
     public ResponseEntity<?> evaluateTest(@RequestBody Test test, @PathVariable String course_id, @PathVariable String test_id, Principal principal) {
 

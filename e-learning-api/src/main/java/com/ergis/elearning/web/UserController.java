@@ -37,7 +37,6 @@ public class UserController {
         return new ResponseEntity<User>(user1, HttpStatus.CREATED);
     }
 
-    // Tested [YES] (waiting for JWT)
     @PutMapping("")
     public ResponseEntity<?> updateUser(@Valid @RequestBody User user, BindingResult result, Principal principal) {
 
