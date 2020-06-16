@@ -18,7 +18,6 @@ public class TestController {
 
     @Autowired
     private TestService testService;
-    private String username = "student1@test.com";
 
     // STUDENT
     // Tested [YES] (waiting for JWT)

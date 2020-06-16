@@ -24,8 +24,6 @@ public class TestBaseController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    private String username = "teacher1@test.com";
-
     // Tested [YES] (waiting for JWT)
     @PostMapping("/{course_id}") 
     public ResponseEntity<?> createTest(@Valid @RequestBody TestBase newTest, @PathVariable String course_id, BindingResult result, Principal principal) {
@@ -49,7 +47,7 @@ public class TestBaseController {
     @DeleteMapping("/{course_id}/{testbase_id}")
     public ResponseEntity<?> deleteTest(@PathVariable String course_id, @PathVariable String testbase_id, Principal principal) {
 
-        testBaseService.delete(Long.parseLong(course_id), Long.parseLong(testbase_id), this.username);
+        testBaseService.delete(Long.parseLong(course_id), Long.parseLong(testbase_id), principal.getName());
         return new ResponseEntity<String>("Test with id '" +testbase_id+ "'was successfully deleted", HttpStatus.OK);
     }
 }

@@ -35,25 +35,14 @@ public class UserController {
         return new ResponseEntity<User>(user1, HttpStatus.CREATED);
     }
 
-//    @PutMapping("")
-//    // Tested [NO] (waiting for JWT)
-//    public ResponseEntity<?> updateUser(@Valid @RequestBody User user, BindingResult result, Principal principal) {
-//
-//        ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
-//        if(errors != null) return errors;
-//
-//        User updatedUser = userService.update(user, principal.getName());
-//        return new ResponseEntity<User>(updatedUser, HttpStatus.OK);
-//    }
-
     @PutMapping("")
     // Tested [YES] (waiting for JWT)
-    public ResponseEntity<?> updateUser(@Valid @RequestBody User user, BindingResult result) {
+    public ResponseEntity<?> updateUser(@Valid @RequestBody User user, BindingResult result, Principal principal) {
 
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
         if(errors != null) return errors;
 
-        User updatedUser = userService.update(user, "student1@test.com");
+        User updatedUser = userService.update(user, principal.getName());
         return new ResponseEntity<User>(updatedUser, HttpStatus.OK);
     }
 
