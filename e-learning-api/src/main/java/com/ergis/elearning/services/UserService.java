@@ -11,6 +11,7 @@ import com.ergis.elearning.exceptions.UserExceptions.UsernameException;
 import com.ergis.elearning.repositories.ICourseRepository;
 import com.ergis.elearning.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -28,6 +29,8 @@ public class UserService {
     private TestBaseService testBaseService;
     @Autowired
     private TestService testService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder; // Comes with Spring Security
 
     public User create(User user) {
 
