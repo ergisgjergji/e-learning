@@ -20,7 +20,6 @@ import static com.ergis.elearning.security.SecurityConstants.SIGN_UP_URLS;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        securedEnabled = true,
         jsr250Enabled = true,
         prePostEnabled = true
 )

@@ -6,6 +6,8 @@ import com.ergis.elearning.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +25,7 @@ public class UserController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    // ADMIN
-    // Tested [YES]
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
     public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult result) {
 
@@ -35,8 +36,8 @@ public class UserController {
         return new ResponseEntity<User>(user1, HttpStatus.CREATED);
     }
 
-    @PutMapping("")
     // Tested [YES] (waiting for JWT)
+    @PutMapping("")
     public ResponseEntity<?> updateUser(@Valid @RequestBody User user, BindingResult result, Principal principal) {
 
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
@@ -46,8 +47,7 @@ public class UserController {
         return new ResponseEntity<User>(updatedUser, HttpStatus.OK);
     }
 
-    // ADMIN
-    // Tested [YES]
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable String id) {
 
@@ -55,33 +55,29 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    // ADMIN
-    // Tested [YES]
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<?> getAllUsers() {
 
         return new ResponseEntity<Set<User>>(userService.findAll(), HttpStatus.OK);
     }
 
-    // ADMIN
-    // Tested [YES]
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/students")
     public ResponseEntity<?> getAllStudents() {
 
         return new ResponseEntity<Set<User>>(userService.findByRole("STUDENT"), HttpStatus.OK);
     }
 
-    // ADMIN
-    // Tested [YES]
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/teachers")
     public ResponseEntity<?> getAllTeachers() {
 
         return new ResponseEntity<Set<User>>(userService.findByRole("TEACHER"), HttpStatus.OK);
     }
 
-    // ADMIN
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    // Tested [YES]
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
 
         userService.delete(Long.parseLong(id));

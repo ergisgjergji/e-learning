@@ -36,10 +36,12 @@ public class UserService {
 
         if(user.getRegistration_date() == null) throw new RegistrationDateException("Registration date is required");
 
-        User existingUser = this.findByUsername(user.getUsername());
+        User existingUser = userRepository.findByUsername(user.getUsername());
         if(existingUser != null) throw new UsernameException("Username '" + user.getUsername() + "' already exists");
 
         user.setRole(user.getRole().toUpperCase());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
 
@@ -83,12 +85,12 @@ public class UserService {
 
             user.setUsername(updatedUser.getUsername());
             user.setFull_name(updatedUser.getFull_name());
-            user.setPassword(updatedUser.getPassword());
+            user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
         }
         else {
             user.setUsername(updatedUser.getUsername());
             user.setFull_name(updatedUser.getFull_name());
-            user.setPassword(updatedUser.getPassword());
+            user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
             user.setFaculty(updatedUser.getFaculty());
             user.setRole(updatedUser.getRole());
         }

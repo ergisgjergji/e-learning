@@ -1,7 +1,9 @@
 package com.ergis.elearning.security;
 
 import com.ergis.elearning.domain.User;
+import com.ergis.elearning.repositories.IUserRepository;
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +17,15 @@ import static com.ergis.elearning.security.SecurityConstants.SECRET_KEY;
 @Component
 public class JwtTokenProvider {
 
+    @Autowired
+    private IUserRepository userRepository;
+
     // Generate the token
 
     public String generateToken(Authentication authentication) {
 
         // Get the user that is authenticated at this point
+
         User user = (User)authentication.getPrincipal();
 
         Date now = new Date(System.currentTimeMillis());
