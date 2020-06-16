@@ -1,10 +1,12 @@
 package com.ergis.elearning.services;
 
+import com.ergis.elearning.ViewModel.ChangePasswordViewModel;
 import com.ergis.elearning.domain.Course;
 import com.ergis.elearning.domain.TestBase;
 import com.ergis.elearning.domain.User;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseIdException;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseNotFoundException;
+import com.ergis.elearning.exceptions.UserExceptions.PasswordException;
 import com.ergis.elearning.exceptions.UserExceptions.UserIdException;
 import com.ergis.elearning.exceptions.UserExceptions.RegistrationDateException;
 import com.ergis.elearning.exceptions.UserExceptions.UsernameException;
@@ -85,18 +87,36 @@ public class UserService {
 
             user.setUsername(updatedUser.getUsername());
             user.setFull_name(updatedUser.getFull_name());
-            user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
         }
         else {
             user.setUsername(updatedUser.getUsername());
             user.setFull_name(updatedUser.getFull_name());
-            user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
             user.setFaculty(updatedUser.getFaculty());
             user.setRole(updatedUser.getRole());
         }
         
         // Update
         return userRepository.save(user);
+    }
+
+    public void changePassword(Long user_id, ChangePasswordViewModel changePasswordViewModel, String username) {
+
+        // If user is an admin changing pw for a student/teacher, no need for old-password matching
+        // If it is a user changing his own password, old-password must match
+
+        User principal = userRepository.findByUsername(username);
+        User user = userRepository.getById(user_id);
+        if(user == null) throw new UserIdException("User with id '" +user_id+ "' not found");
+
+        if (!principal.getRole().equals("ADMIN")) {
+            if (principal.getId() != user_id) throw new UserIdException("Invalid user_id");
+
+            if (!bCryptPasswordEncoder.matches(changePasswordViewModel.getOld_password(), user.getPassword()))
+                throw new PasswordException("Old password does not match");
+        }
+        user.setPassword(bCryptPasswordEncoder.encode(changePasswordViewModel.getNew_password()));
+        userRepository.save(user);
+
     }
 
     public  void delete(Long id) {

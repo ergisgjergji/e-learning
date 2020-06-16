@@ -1,5 +1,6 @@
 package com.ergis.elearning.web;
 
+import com.ergis.elearning.ViewModel.ChangePasswordViewModel;
 import com.ergis.elearning.domain.User;
 import com.ergis.elearning.services.errors.MapValidationErrorService;
 import com.ergis.elearning.services.UserService;
@@ -45,6 +46,16 @@ public class UserController {
 
         User updatedUser = userService.update(user, principal.getName());
         return new ResponseEntity<User>(updatedUser, HttpStatus.OK);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordViewModel changePasswordViewModel, BindingResult result, Principal principal) {
+
+        ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
+        if(errors != null) return errors;
+
+        userService.changePassword(changePasswordViewModel.getId(), changePasswordViewModel, principal.getName());
+        return new ResponseEntity<String>("Password was changed successfully", HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

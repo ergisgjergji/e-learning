@@ -61,10 +61,9 @@ public class CourseService {
         if(duplicateName != null) throw new CourseNameException("A course with name '" +updatedCourse.getName()+ "' already exists");
 
         course.setName(updatedCourse.getName());
-        course.setTeacher_name(userService.findByUsername(username).getFull_name());
-        course.setTeacher_email(username);
+        course.setDescription(updatedCourse.getDescription());
 
-        return courseRepository.save(updatedCourse);
+        return courseRepository.save(course);
     }
 
     public void delete(Course course) {
