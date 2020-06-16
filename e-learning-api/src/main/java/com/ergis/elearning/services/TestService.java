@@ -7,9 +7,11 @@ import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdException;
 import com.ergis.elearning.exceptions.TestExceptions.TestIdException;
 import com.ergis.elearning.exceptions.UserExceptions.UserIdException;
 import com.ergis.elearning.repositories.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -123,5 +125,50 @@ public class TestService {
 
         Set<Test> studentCourseCompletedTests = testRepository.findAllByUserAndCourseAndCompleted(student, course, true);
         return studentCourseCompletedTests;
+    }
+
+    public void evaluateTest(Long course_id, Long test_id, Test postTest, String username) {
+
+        // Make sure course exists and belongs to user
+        // Make sure test exists and belongs to course
+        // Check if existing test is already completed
+
+        User student = userRepository.findByUsername(username);
+        Course studentCourse = courseRepository.findByIdAndUsers(course_id, student);
+        if(studentCourse == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
+
+        Test test = testRepository.findByIdAndUserAndCourse(test_id, student, studentCourse);
+        if(test == null) throw new TestIdException("Test with id '" +test_id+ "' not found");
+        if(test.getCompleted() == true) throw new TestIdException("Test with id '" +test_id+ "' is already completed.");
+
+        Integer correctAnswers = 0;
+
+        for(Question postQuestion: postTest.getQuestions()) {
+
+            Boolean error = false;
+            for(Alternative postAlternative: postQuestion.getAlternatives()) {
+
+                Alternative alternative = alternativeRepository.getById(postAlternative.getId());
+                alternative.setChecked(postAlternative.getChecked());
+                alternativeRepository.save(alternative);
+
+                if(alternative.getChecked() != alternative.getCorrect())
+                    error = true;
+            }
+            if(!error)
+                correctAnswers++;
+        }
+
+        test.setScored_points(correctAnswers);
+        double resultPercent = (double) correctAnswers/test.getTotal_points();
+
+        if(resultPercent < 0.4)
+            test.setPassed(false);
+        else
+            test.setPassed(true);
+        test.setCompleted(true);
+        test.setCompleted_time(new Date());
+
+        testRepository.save(test);
     }
 }

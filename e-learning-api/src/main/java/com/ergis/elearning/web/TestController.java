@@ -46,4 +46,13 @@ public class TestController {
         Set<Test> studentCourseCompletedTests = testService.getStudentCompletedTestListByCourse(Long.parseLong(course_id), Long.parseLong(student_id), principal.getName());
         return new ResponseEntity<Set<Test>>(studentCourseCompletedTests, HttpStatus.OK);
     }
+
+    // STUDENT
+    // Tested [YES] (waiting for JWT)
+    @PostMapping("/{course_id}/{test_id}")
+    public ResponseEntity<?> evaluateTest(@RequestBody Test test, @PathVariable String course_id, @PathVariable String test_id, Principal principal) {
+
+        testService.evaluateTest(Long.parseLong(course_id), Long.parseLong(course_id), test, principal.getName());
+        return new ResponseEntity<String>("Test was evaluated successfully.", HttpStatus.OK);
+    }
 }
