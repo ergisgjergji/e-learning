@@ -26,16 +26,57 @@ class Header extends Component {
         window.location.href = "/";
     }
 
-    render() {
-
-        const { user, isAuthenticated } = this.props.authStore;
-
-        const logged_in_menu = (
+    renderLogic = (isAuthenticated, user) => {
+        const admin_menu = (
             <>
                 <Nav className="mr-auto" navbar>
                     <NavItem>
+                        <Link to="/adminPanel" className="nav-link">
+                            Home
+                        </Link>
+                    </NavItem>
+                </Nav>
+
+                <Nav className="ml-auto" navbar>
+                    <NavItem>
                         <Link to="/dashboard" className="nav-link">
-                            Dashboard
+                            <i className="fa fa-user-circle mr-1"> Welcome, {user.full_name}</i>
+                        </Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                    </NavItem>
+                </Nav>
+            </>
+        );
+        const teacher_menu = (
+            <>
+                <Nav className="mr-auto" navbar>
+                    <NavItem>
+                        <Link to="/teacherPanel" className="nav-link">
+                            Home
+                        </Link>
+                    </NavItem>
+                </Nav>
+
+                <Nav className="ml-auto" navbar>
+                    <NavItem>
+                        <Link to="/dashboard" className="nav-link">
+                            <i className="fa fa-user-circle mr-1"> Welcome, {user.full_name}</i>
+                        </Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                    </NavItem>
+                </Nav>
+            </>
+        );
+        const student_menu = (
+            <>
+                <Nav className="mr-auto" navbar>
+                    <NavItem>
+                        <Link to="/studentPanel" className="nav-link">
+                            Home
                         </Link>
                     </NavItem>
                 </Nav>
@@ -56,14 +97,30 @@ class Header extends Component {
             <>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Link to="/register" className="nav-link"> Sign Up </Link>
-                    </NavItem>
-                    <NavItem>
                         <Link to="/login" className="nav-link"> Login </Link>
                     </NavItem>
                 </Nav>
             </>
         );
+
+        if(!isAuthenticated)
+            return logged_out_menu;
+        
+        else {
+            switch(user.role) {
+                case "ADMIN":
+                    return admin_menu;
+                case "TEACHER":
+                    return teacher_menu;
+                case "STUDENT":
+                    return student_menu;
+            }
+        }
+    }
+
+    render() {
+
+        const { user, isAuthenticated } = this.props.authStore;
 
         return (
             <Navbar color="primary" dark expand="sm" className="mb-4">
@@ -72,7 +129,7 @@ class Header extends Component {
                     <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         {
-                            isAuthenticated ? logged_in_menu : logged_out_menu
+                            this.renderLogic(isAuthenticated, user)
                         }
                     </Collapse>
                 </Container>
