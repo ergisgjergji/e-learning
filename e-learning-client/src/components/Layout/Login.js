@@ -23,27 +23,27 @@ class Login extends Component {
         if(this.props.authStore.isAuthenticated)
             switch(this.props.authStore.user.role) {
                 case "ADMIN":
-                    this.props.history.push("/adminPanel");
+                    this.props.history.push("/adminPanel"); break;
                 case "TEACHER":
-                    this.props.history.push("/teacherPanel");
+                    this.props.history.push("/teacherPanel"); break;
                 case "STUDENT":
-                    this.props.history.push("/studentPanel");
+                    this.props.history.push("/studentPanel"); break;
             }
     }
 
     componentWillReceiveProps (nextProps) {
-        if(this.state.errors != nextProps.errorStore)
+        if(this.state.errors !== nextProps.errorStore)
             this.setState({ errors: nextProps.errorStore });
         
             
         if(nextProps.authStore.isAuthenticated)
             switch(nextProps.authStore.user.role) {
                 case "ADMIN":
-                    this.props.history.push("/adminPanel");
+                    this.props.history.push("/adminPanel"); break;
                 case "TEACHER":
-                    this.props.history.push("/teacherPanel");
+                    this.props.history.push("/teacherPanel"); break;
                 case "STUDENT":
-                    this.props.history.push("/studentPanel");
+                    this.props.history.push("/studentPanel"); break;
             }
     }
 

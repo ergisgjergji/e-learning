@@ -30,20 +30,30 @@ class Header extends Component {
         const admin_menu = (
             <>
                 <Nav className="mr-auto" navbar>
-                    <NavItem>
+                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/adminPanel" className="nav-link">
                             Home
+                        </Link>
+                    </NavItem>
+                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
+                        <Link to="/adminPanel/students" className="nav-link">
+                            Manage students
+                        </Link>
+                    </NavItem>
+                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
+                        <Link to="/adminPanel/teachers" className="nav-link">
+                            Manage teachers
                         </Link>
                     </NavItem>
                 </Nav>
 
                 <Nav className="ml-auto" navbar>
-                    <NavItem>
+                    <NavItem className="text-left my-auto mx-2">
                         <Link to="/dashboard" className="nav-link">
                             <i className="fa fa-user-circle mr-1"> Welcome, {user.full_name}</i>
                         </Link>
                     </NavItem>
-                    <NavItem>
+                    <NavItem className="text-left my-auto mx-2">
                         <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
                     </NavItem>
                 </Nav>
@@ -105,7 +115,6 @@ class Header extends Component {
 
         if(!isAuthenticated)
             return logged_out_menu;
-        
         else {
             switch(user.role) {
                 case "ADMIN":
@@ -123,9 +132,9 @@ class Header extends Component {
         const { user, isAuthenticated } = this.props.authStore;
 
         return (
-            <Navbar color="primary" dark expand="sm" className="mb-4">
+            <Navbar color="primary" dark expand="md" className="mb-4">
                 <Container>
-                    <Link to="/" className="navbar-brand"> E-Learning </Link>
+                    <Link to="/" className="navbar-brand px-3 border rounded"> E-Learning </Link>
                     <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         {

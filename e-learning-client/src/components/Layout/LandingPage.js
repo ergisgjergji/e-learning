@@ -7,15 +7,15 @@ import { Image } from 'reactstrap';
 
 class LandingPage extends Component {
 
-    componentDidMount() {
+    componentDidMount() {   
         if(this.props.authStore.isAuthenticated)
             switch(this.props.authStore.user.role) {
                 case "ADMIN":
-                    return this.props.history.push("/adminPanel");
+                    this.props.history.push("/adminPanel"); break;
                 case "TEACHER":
-                    return this.props.history.push("/teacherPanel");
+                    this.props.history.push("/teacherPanel"); break;
                 case "STUDENT":
-                    return this.props.history.push("/studentPanel");
+                    this.props.history.push("/studentPanel"); break;
             }
     }
 
