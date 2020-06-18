@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_STUDENTS, GET_TEACHERS, GET_USER, GET_ERRORS } from './types';
+import { GET_STUDENTS, GET_TEACHERS, GET_USER, DELETE_STUDENT, DELETE_TEACHER, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 
 export const getStudents = () => dispatch => {
@@ -45,4 +45,22 @@ export const getUserById = (id, history) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => history.push("/adminPanel"));
+};
+
+export const deleteStudent = (id) => dispatch => {
+    
+    axios.delete(`/api/user/${id}`)
+        .then(res => dispatch({
+            type: DELETE_STUDENT,
+            payload: id
+        }));
+};
+
+export const deleteTeacher = (id) => dispatch => {
+    
+    axios.delete(`/api/user/${id}`)
+        .then(res => dispatch({
+            type: DELETE_TEACHER,
+            payload: id
+        }));
 };

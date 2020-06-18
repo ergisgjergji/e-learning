@@ -11,3 +11,5 @@ export const PASSWORD_MISMATCH = "PASSWORD_MISMATCH";
 export const GET_STUDENTS = "GET_STUDENTS";
 export const GET_TEACHERS = "GET_TEACHERS";
 export const GET_USER = "GET_USER";
+export const DELETE_STUDENT = "DELETE_STUDENT";
+export const DELETE_TEACHER = "DELETE_TEACHER";

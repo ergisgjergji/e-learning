@@ -3,15 +3,34 @@ import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getStudents } from './../../redux/actions/userActions';
+import { getStudents, deleteStudent } from './../../redux/actions/userActions';
 
 import ReactTable from 'react-table-v6';
-import 'react-table-v6/react-table.css';
+import { confirmAlert } from 'react-confirm-alert';
 
 class StudentsTable extends Component {
 
     componentDidMount() {
         this.props.getStudents();   
+    }
+
+    onDeleteClick = (id) => {
+
+        confirmAlert({
+			title: 'Confirm',
+			message: 'Are u sure u want to delete this student?',
+			buttons: [
+				{
+					label: 'Yes',
+					className: "confirm-yes",
+					onClick: () => this.props.deleteStudent(id)
+				},
+				{
+					label: 'No',
+					className: "confirm-no"
+			  	}
+			]
+		})
     }
 
     render() {
@@ -28,7 +47,7 @@ class StudentsTable extends Component {
               return (
                 <>
                     <button className="btn btn-sm btn-secondary shadow mr-2" onClick={() => console.log(props.original)}>Edit</button>
-                    <button className="btn btn-sm btn-danger shadow" onClick={() => console.log(props.original)}>Delete</button>
+                    <button className="btn btn-sm btn-danger shadow" onClick={this.onDeleteClick.bind(this, props.original.id)}>Delete</button>
                 </>
               )
             }}
@@ -44,7 +63,7 @@ class StudentsTable extends Component {
                 <ReactTable
                     columns={columns}
                     data={students}
-                    noDataText={"No data..."}
+                    noDataText={"No data"}
                     filterable
                     defaultPageSize={10}
                 />
@@ -62,4 +81,4 @@ const mapStateToProps = state => ({
     userStore: state.userStore
 });
 
-export default connect(mapStateToProps, { getStudents })(StudentsTable);
+export default connect(mapStateToProps, { getStudents, deleteStudent })(StudentsTable);

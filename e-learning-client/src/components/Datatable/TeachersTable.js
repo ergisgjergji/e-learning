@@ -3,15 +3,33 @@ import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getTeachers } from './../../redux/actions/userActions';
+import { getTeachers, deleteTeacher } from './../../redux/actions/userActions';
 
 import ReactTable from 'react-table-v6';
-import 'react-table-v6/react-table.css';
+import { confirmAlert } from 'react-confirm-alert';
 
 class TeachersTable extends Component {
 
     componentDidMount() {
         this.props.getTeachers();   
+    }
+
+    onDeleteClick = (id) => {
+        confirmAlert({
+			title: 'Confirm',
+			message: 'Are u sure u want to delete this teacher?',
+			buttons: [
+				{
+					label: 'Yes',
+					className: "confirm-yes",
+					onClick: () => this.props.deleteTeacher(id)
+				},
+				{
+					label: 'No',
+					className: "confirm-no"
+			  	}
+			]
+		})
     }
 
     render() {
@@ -28,7 +46,7 @@ class TeachersTable extends Component {
               return (
                 <>
                     <button className="btn btn-sm btn-secondary shadow mr-2" onClick={() => console.log(props.original)}>Edit</button>
-                    <button className="btn btn-sm btn-danger shadow" onClick={() => console.log(props.original)}>Delete</button>
+                    <button className="btn btn-sm btn-danger shadow" onClick={this.onDeleteClick.bind(this, props.original.id)}>Delete</button>
                 </>
               )
             }}
@@ -44,7 +62,7 @@ class TeachersTable extends Component {
                 <ReactTable
                     columns={columns}
                     data={teachers}
-                    noDataText={"No data..."}
+                    noDataText={"No data"}
                     filterable
                     defaultPageSize={10}
                 />
@@ -62,4 +80,4 @@ const mapStateToProps = state => ({
     userStore: state.userStore
 });
 
-export default connect(mapStateToProps, { getTeachers })(TeachersTable);
+export default connect(mapStateToProps, { getTeachers, deleteTeacher })(TeachersTable);
