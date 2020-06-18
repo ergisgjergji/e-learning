@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './css/App.css';
 
@@ -9,10 +9,13 @@ import { loadUser } from './redux/actions/authActions';
 import Header from './components/Layout/Header';
 import LandingPage from './components/Layout/LandingPage';
 import Login from './components/Layout/Login';
+import StudentsTable from './components/Datatable/StudentsTable';
+import TeachersTable from './components/Datatable/TeachersTable';
 
 class App extends Component {
 
-  componentDidMount() {
+  constructor() {
+    super();
     store.dispatch(loadUser());
   }
 
@@ -28,6 +31,10 @@ class App extends Component {
         {
           // PRIVATE Routes
         }
+        <Switch>
+          <Route exact path="/adminPanel/students" component={StudentsTable}/>
+          <Route exact path="/adminPanel/teachers" component={TeachersTable}/>
+        </Switch>
       </>
     );
   }

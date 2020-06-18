@@ -19,6 +19,18 @@ class LandingPage extends Component {
             }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.authStore.isAuthenticated)
+            switch(nextProps.authStore.user.role) {
+                case "ADMIN":
+                    this.props.history.push("/adminPanel"); break;
+                case "TEACHER":
+                    this.props.history.push("/teacherPanel"); break;
+                case "STUDENT":
+                    this.props.history.push("/studentPanel"); break;
+            }
+    }
+
     render() {
         return (
             <div className="landing">

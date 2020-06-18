@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_STUDENTS, GET_TEACHERS, GET_USER } from './types';
+import { GET_STUDENTS, GET_TEACHERS, GET_USER, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 
 export const getStudents = () => dispatch => {
