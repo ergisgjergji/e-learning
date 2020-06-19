@@ -64,3 +64,42 @@ export const deleteTeacher = (id) => dispatch => {
             payload: id
         }));
 };
+
+export const addUser = (user, history) => dispatch => {
+
+    axios.post("/api/user", user)
+        .then(res => {
+            history.goBack();
+            dispatch(clearErrors());
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+}
+
+export const updateUser = (user, history) => dispatch => {
+
+    axios.put("/api/user", user)
+        .then(res => {
+            history.goBack();
+            dispatch(clearErrors());
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+}
+
+export const getUser = (id, history) => dispatch => {
+
+    axios.get(`/api/user/${id}`)
+        .then(res => {
+            dispatch({
+                type: GET_USER,
+                payload: res.data
+            });
+            dispatch(clearErrors());
+        })
+        .catch(err => history.goBack());
+}

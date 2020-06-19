@@ -46,7 +46,7 @@ class StudentsTable extends Component {
             { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>
-                    <button className="btn btn-sm btn-secondary shadow mr-2" onClick={() => console.log(props.original)}>Edit</button>
+                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-secondary shadow mr-2">Edit</Link>
                     <button className="btn btn-sm btn-danger shadow" onClick={this.onDeleteClick.bind(this, props.original.id)}>Delete</button>
                 </>
               )
@@ -57,7 +57,7 @@ class StudentsTable extends Component {
             <div className="col-11 col-md-11 col-lg-10 mx-auto p-4 my-4 border rounded shadow">
   
                 <h1 className="display-4 text-center">Students</h1>
-                <button className="btn bn-lg btn-primary">Add student</button>
+                <Link to="/adminPanel/addStudent" className="btn bn-lg btn-primary">Add student</Link>
                 <br/><br/>
   
                 <ReactTable
