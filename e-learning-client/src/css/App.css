@@ -66,3 +66,8 @@ img {
     color: #bbb !important;
   }
   
+  .rt-td {
+    white-space: normal !important;
+    text-overflow: clip !important;
+    overflow: auto !important;
+  }

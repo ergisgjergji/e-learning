@@ -52,9 +52,9 @@ class AddStudent extends Component {
                 <div className="row mb-4">
                     <div className="col-10 col-md-9 col-lg-7 m-auto">
                          
-                        <Link to="/adminPanel/students" className="btn btn-secondary btn-sm shadow"> 
+                        <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
                             {`< Go back`} 
-                        </Link>
+                        </button>
 
                         <h5 className="display-4 text-center">New Student</h5>
                         <hr />
@@ -91,8 +91,12 @@ class AddStudent extends Component {
                                 <div className="form-group col-md-12">
                                     <label htmlFor="start_date">Registration Date</label>
                                     <input type="date" id="registration_date" name="registration_date"
-                                        className="form-control form-control-md shadow " 
+                                        className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.registration_date})} 
                                         value={registration_date} onChange={this.onChange} />
+                                    { 
+                                        errors.registration_date ? 
+                                            (<div className="invalid-feedback"> { errors.registration_date } </div>) : null 
+                                    }
                                 </div>
 
                                 <div className="form-group col-md-12">

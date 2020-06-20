@@ -52,9 +52,9 @@ class AddTeacher extends Component {
                 <div className="row">
                     <div className="col-10 col-md-9 col-lg-7 m-auto">
                             
-                        <Link to="/adminPanel/students" className="btn btn-secondary btn-sm shadow"> 
+                        <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
                             {`< Go back`} 
-                        </Link>
+                        </button>
 
                         <h5 className="display-4 text-center">New Teacher</h5>
                         <hr />

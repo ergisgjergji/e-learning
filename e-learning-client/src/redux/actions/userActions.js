@@ -69,7 +69,18 @@ export const addUser = (user, history) => dispatch => {
 
     axios.post("/api/user", user)
         .then(res => {
-            history.goBack();
+            if(user.role === "STUDENT") {
+                history.push({
+                    pathname: '/adminPanel/students',
+                    notification_message: "Student added successfully."
+                });
+            }
+            else if(user.role === "TEACHER") {
+                history.push({
+                    pathname: '/adminPanel/teachers',
+                    notification_message: "Teacher added successfully."
+                });
+            }
             dispatch(clearErrors());
         })
         .catch(err => dispatch({
@@ -82,13 +93,40 @@ export const updateUser = (user, history) => dispatch => {
 
     axios.put("/api/user", user)
         .then(res => {
-            history.goBack();
+            if(user.role === "STUDENT") {
+                history.push({
+                    pathname: '/adminPanel/students',
+                    notification_message: "Changes were saved successfully."
+                });
+            }
+            if(user.role === "TEACHER") {
+                history.push({
+                    pathname: '/adminPanel/teachers',
+                    notification_message: "Changes were saved successfully."
+                });
+            }
             dispatch(clearErrors());
         })
         .catch(err => dispatch({
             type: GET_ERRORS,
             payload: err.response.data
         }));
+}
+
+export const resetPassword = (resetPasswordModel, fromRoute, history) => dispatch => {
+    
+    axios.post(`/api/user/reset-password`, resetPasswordModel)
+        .then(res => {
+            history.push(fromRoute);
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+            history.push("/adminPanel");
+        });
 }
 
 export const getUser = (id, history) => dispatch => {

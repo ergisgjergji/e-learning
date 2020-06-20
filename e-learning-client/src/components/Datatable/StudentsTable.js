@@ -7,11 +7,12 @@ import { getStudents, deleteStudent } from './../../redux/actions/userActions';
 
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
+import { ToastContainer, toast } from 'react-toastify';
 
 class StudentsTable extends Component {
 
     componentDidMount() {
-        this.props.getStudents();   
+        this.props.getStudents();
     }
 
     onDeleteClick = (id) => {
@@ -23,7 +24,17 @@ class StudentsTable extends Component {
 				{
 					label: 'Yes',
 					className: "confirm-yes",
-					onClick: () => this.props.deleteStudent(id)
+					onClick: () => {
+                        this.props.deleteStudent(id);
+                        toast.info(`ℹ Student with id '${id}' was deleted successfully.`, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true
+                        });
+                    }
 				},
 				{
 					label: 'No',
@@ -38,15 +49,18 @@ class StudentsTable extends Component {
         const { students } = this.props.userStore;
         
         const columns = [
-            { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" }, width: 100 },
+            { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
             { Header: "Full name", accessor: "full_name", sortable: true, style: { textAlign: "center" } },
             { Header: "Username", accessor: "username", sortable: true, style: { textAlign: "center" } },
-            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" } },
-            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" } },
+            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
+            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
             { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>
-                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-secondary shadow mr-2">Edit</Link>
+                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-dark shadow-sm mr-2 my-1">Edit</Link>
+                    <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/students" }} className="btn btn-sm btn-secondary shadow-sm mr-2 my-1">
+                        Reset password
+                    </Link>
                     <button className="btn btn-sm btn-danger shadow" onClick={this.onDeleteClick.bind(this, props.original.id)}>Delete</button>
                 </>
               )
@@ -54,7 +68,7 @@ class StudentsTable extends Component {
           ];
 
         return (
-            <div className="col-11 col-md-11 col-lg-10 mx-auto p-4 my-4 border rounded shadow">
+            <div className="col-12 col-md-11 col-lg-10 mx-auto p-4 my-4 border rounded shadow">
   
                 <h1 className="display-4 text-center">Students</h1>
                 <Link to="/adminPanel/addStudent" className="btn bn-lg btn-primary">Add student</Link>
@@ -66,6 +80,18 @@ class StudentsTable extends Component {
                     noDataText={"No data"}
                     filterable
                     defaultPageSize={10}
+                />
+
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={4000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover={false}
                 />
             </div>
         );

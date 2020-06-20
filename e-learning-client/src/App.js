@@ -12,6 +12,7 @@ import TeachersTable from './components/Datatable/TeachersTable';
 import AddStudent from './components/User/AddStudent';
 import AddTeacher from './components/User/AddTeacher';
 import UpdateUser from './components/User/UpdateUser';
+import ResetPassword from './components/User/ResetPassword';
 
 class App extends Component {
 
@@ -38,6 +39,7 @@ class App extends Component {
           <Route exact path="/adminPanel/addStudent" component={AddStudent}/>
           <Route exact path="/adminPanel/addTeacher" component={AddTeacher}/>
           <Route exact path="/adminPanel/updateUser/:id" component={UpdateUser}/>
+          <Route exact path="/adminPanel/resetPassword/:id" component={ResetPassword}/>
         </Switch>
       </>
     );

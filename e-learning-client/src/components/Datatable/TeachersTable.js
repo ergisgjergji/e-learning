@@ -7,11 +7,12 @@ import { getTeachers, deleteTeacher } from './../../redux/actions/userActions';
 
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
+import { ToastContainer, toast } from 'react-toastify';
 
 class TeachersTable extends Component {
 
     componentDidMount() {
-        this.props.getTeachers();   
+        this.props.getTeachers();
     }
 
     onDeleteClick = (id) => {
@@ -22,7 +23,17 @@ class TeachersTable extends Component {
 				{
 					label: 'Yes',
 					className: "confirm-yes",
-					onClick: () => this.props.deleteTeacher(id)
+					onClick: () => {
+                        this.props.deleteTeacher(id);
+                        toast.info(`[ℹ] Teacher with id ${id} was deleted successfully.`, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true
+                        });
+                    }
 				},
 				{
 					label: 'No',
@@ -37,15 +48,18 @@ class TeachersTable extends Component {
         const { teachers } = this.props.userStore;
         
         const columns = [
-            { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" }, width: 100 },
+            { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
             { Header: "Full name", accessor: "full_name", sortable: true, style: { textAlign: "center" } },
             { Header: "Username", accessor: "username", sortable: true, style: { textAlign: "center" } },
-            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" } },
-            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" } },
+            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
+            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
             { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>
-                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-secondary shadow mr-2">Edit</Link>
+                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-dark shadow-sm mr-2 my-1">Edit</Link>
+                    <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/teachers" }} className="btn btn-sm btn-secondary shadow-sm mr-2 my-1">
+                        Reset password
+                    </Link>
                     <button className="btn btn-sm btn-danger shadow" onClick={this.onDeleteClick.bind(this, props.original.id)}>Delete</button>
                 </>
               )
@@ -65,6 +79,18 @@ class TeachersTable extends Component {
                     noDataText={"No data"}
                     filterable
                     defaultPageSize={10}
+                />
+
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={4000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover={false}
                 />
             </div>
         );

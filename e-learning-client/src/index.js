@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './css/index.css';
 import './css/App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'react-table-v6/react-table.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './css/react-confirm-alert.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
