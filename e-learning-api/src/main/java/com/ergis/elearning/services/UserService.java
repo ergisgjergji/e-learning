@@ -1,6 +1,7 @@
 package com.ergis.elearning.services;
 
 import com.ergis.elearning.ViewModel.ChangePasswordViewModel;
+import com.ergis.elearning.ViewModel.ResetPasswordViewModel;
 import com.ergis.elearning.domain.Course;
 import com.ergis.elearning.domain.TestBase;
 import com.ergis.elearning.domain.User;
@@ -117,6 +118,15 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(changePasswordViewModel.getNew_password()));
         userRepository.save(user);
 
+    }
+
+    public void resetPassword(ResetPasswordViewModel resetPasswordViewModel, String username) {
+
+        User user = userRepository.getById(resetPasswordViewModel.getId());
+        if(user == null) throw new UserIdException("User with id '" +resetPasswordViewModel.getId()+ "' not found");
+
+        user.setPassword(bCryptPasswordEncoder.encode(resetPasswordViewModel.getNew_password()));
+        userRepository.save(user);
     }
 
     public  void delete(Long id) {
