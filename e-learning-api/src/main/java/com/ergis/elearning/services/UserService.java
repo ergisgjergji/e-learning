@@ -48,7 +48,15 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(Long id) {
+    public User findById(Long id, String username) {
+
+        // Admin has right to get any user
+        // If user not admin, make sure id's match
+
+        User principal = userRepository.findByUsername(username);
+
+        if (!principal.getRole().equals("ADMIN"))
+            if (principal.getId() != id) throw new UserIdException("You have no access");
 
         User user = userRepository.getById(id);
         if(user == null) throw new UserIdException("User with id '" +id+ "' not found");
@@ -80,7 +88,8 @@ public class UserService {
 
         if(updatedUser.getId() == null) throw new UserIdException("User id is missing");
 
-        User user = this.findById(updatedUser.getId());
+        User user = userRepository.getById(updatedUser.getId());
+        if(user == null) throw new UserIdException("User with id '" +updatedUser.getId()+ "' not found");
 
         User principal = userRepository.findByUsername(username);
         if (!principal.getRole().equals("ADMIN")) {
@@ -135,7 +144,8 @@ public class UserService {
         // If user role is teacher, delete his courses too
         // Delete the actual user
 
-        User user = this.findById(id);
+        User user = userRepository.getById(id);
+        if(user == null) throw new UserIdException("User with id '" +id+ "' not found");
 
         Set<Course> userCourses = user.getCourses();
 

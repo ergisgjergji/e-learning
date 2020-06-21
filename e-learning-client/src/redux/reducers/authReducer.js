@@ -1,4 +1,4 @@
-import { SET_USER, LOGOUT_USER } from '../actions/types';
+import { SET_USER, UPDATE_USER, LOGOUT_USER } from '../actions/types';
 
 const initialState = {
     token: localStorage.getItem('token'),
@@ -26,6 +26,13 @@ export default function( state = initialState, action ) {
                 token: null,
                 user: {}
             };
+
+        case UPDATE_USER:
+            const currUser = state.user;
+            return {
+                ...state,
+                user: { ...currUser, ...action.payload }
+            }
 
         default:
             return state;

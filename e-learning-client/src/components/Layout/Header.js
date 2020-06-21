@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, Container } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, Container, UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from './../../redux/actions/authActions';
@@ -11,10 +11,24 @@ class Header extends Component {
         super();
 
         this.state = {
+            isAuthenticated: false,
+            user: {},
             isOpen: false
         };
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
+    }
+
+    componentDidMount() {
+        const { user, isAuthenticated } = this.props.authStore;
+        this.setState({ user, isAuthenticated });
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        
+        const { isAuthenticated, user } = nextProps.authStore;
+        if(this.state.user.full_name !== user.full_name || this.state.user.username !== user.username || this.state.isAuthenticated !== isAuthenticated)
+            this.setState({ isAuthenticated, user });
     }
 
     toggle = () => {
@@ -27,6 +41,7 @@ class Header extends Component {
     }
 
     renderLogic = (isAuthenticated, user) => {
+
         const admin_menu = (
             <>
                 <Nav className="mr-auto" navbar>
@@ -48,15 +63,25 @@ class Header extends Component {
                 </Nav>
 
                 <Nav className="ml-auto" navbar>
-                    <NavItem className="text-left my-auto mx-2">
-                        <Link to="/dashboard" className="nav-link">
-                            <i className="fa fa-user-circle mr-1"> Welcome, {user.full_name}</i>
-                        </Link>
-                    </NavItem>
-                    <NavItem className="text-left my-auto mx-2">
-                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
-                    </NavItem>
-                </Nav>
+                            <NavItem className="text-left my-auto mx-2">
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem className="bg-light"> 
+                                            <Link to="/profile/edit" className="text-dark">Edit profile</Link>
+                                        </DropdownItem>
+                                        <DropdownItem divider/>
+                                        <DropdownItem  className="bg-light"> 
+                                            <Link to="/profile/changePassword" className="text-dark">Change password</Link>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </NavItem>
+
+                            <NavItem className="text-left my-auto mx-2">
+                                <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                            </NavItem>
+                        </Nav>
             </>
         );
         const teacher_menu = (
@@ -70,15 +95,25 @@ class Header extends Component {
                 </Nav>
 
                 <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <Link to="/dashboard" className="nav-link">
-                            <i className="fa fa-user-circle mr-1"> Welcome, {user.full_name}</i>
-                        </Link>
-                    </NavItem>
-                    <NavItem>
-                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
-                    </NavItem>
-                </Nav>
+                            <NavItem className="text-left my-auto mx-2">
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem className="bg-light"> 
+                                            <Link to="/profile/edit" className="text-dark">Edit profile</Link>
+                                        </DropdownItem>
+                                        <DropdownItem divider/>
+                                        <DropdownItem  className="bg-light"> 
+                                            <Link to="/profile/changePassword" className="text-dark">Change password</Link>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </NavItem>
+
+                            <NavItem className="text-left my-auto mx-2">
+                                <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                            </NavItem>
+                        </Nav>
             </>
         );
         const student_menu = (
@@ -92,15 +127,25 @@ class Header extends Component {
                 </Nav>
 
                 <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <Link to="/dashboard" className="nav-link">
-                            <i className="fa fa-user-circle mr-1"> Welcome, {user.full_name}</i>
-                        </Link>
-                    </NavItem>
-                    <NavItem>
-                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
-                    </NavItem>
-                </Nav>
+                            <NavItem className="text-left my-auto mx-2">
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem className="bg-light"> 
+                                            <Link to="/profile/edit" className="text-dark">Edit profile</Link>
+                                        </DropdownItem>
+                                        <DropdownItem divider/>
+                                        <DropdownItem  className="bg-light"> 
+                                            <Link to="/profile/changePassword" className="text-dark">Change password</Link>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </NavItem>
+
+                            <NavItem className="text-left my-auto mx-2">
+                                <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                            </NavItem>
+                        </Nav>
             </>
         );
         const logged_out_menu = (
@@ -128,8 +173,10 @@ class Header extends Component {
     }
 
     render() {
+        console.log("render");
+        
 
-        const { user, isAuthenticated } = this.props.authStore;
+        const { user, isAuthenticated } = this.state;
 
         return (
             <Navbar color="primary" dark expand="md" className="mb-4">
@@ -137,9 +184,11 @@ class Header extends Component {
                     <Link to="/" className="navbar-brand px-3 border rounded"> E-Learning </Link>
                     <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
+
                         {
                             this.renderLogic(isAuthenticated, user)
                         }
+
                     </Collapse>
                 </Container>
             </Navbar>

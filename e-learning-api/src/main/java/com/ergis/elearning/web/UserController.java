@@ -69,11 +69,10 @@ public class UserController {
         return new ResponseEntity<String>("Password was changed successfully", HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable String id) {
+    public ResponseEntity<?> getUserById(@PathVariable String id, Principal principal) {
 
-        User user = userService.findById(Long.parseLong(id));
+        User user = userService.findById(Long.parseLong(id), principal.getName());
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 

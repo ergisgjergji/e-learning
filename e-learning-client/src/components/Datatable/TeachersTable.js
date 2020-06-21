@@ -13,6 +13,11 @@ class TeachersTable extends Component {
 
     componentDidMount() {
         this.props.getTeachers();
+
+        if(this.props.location.notification_message) {
+            toast.dismiss();
+            toast.success(`ℹ ${this.props.location.notification_message}`)
+        }
     }
 
     onDeleteClick = (id) => {

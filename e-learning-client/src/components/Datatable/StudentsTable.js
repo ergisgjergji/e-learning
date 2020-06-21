@@ -7,12 +7,17 @@ import { getStudents, deleteStudent } from './../../redux/actions/userActions';
 
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 class StudentsTable extends Component {
 
     componentDidMount() {
         this.props.getStudents();
+
+        if(this.props.location.notification_message) {
+            toast.dismiss();
+            toast.success(`ℹ ${this.props.location.notification_message}`)
+        }
     }
 
     onDeleteClick = (id) => {
@@ -26,14 +31,8 @@ class StudentsTable extends Component {
 					className: "confirm-yes",
 					onClick: () => {
                         this.props.deleteStudent(id);
-                        toast.info(`ℹ Student with id '${id}' was deleted successfully.`, {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: true,
-                            closeOnClick: true,
-                            pauseOnHover: false,
-                            draggable: true
-                        });
+                        toast.dismiss();
+                        toast.info(`ℹ Student with id '${id}' was deleted successfully.`);
                     }
 				},
 				{
@@ -80,18 +79,6 @@ class StudentsTable extends Component {
                     noDataText={"No data"}
                     filterable
                     defaultPageSize={10}
-                />
-
-                <ToastContainer
-                    position="bottom-right"
-                    autoClose={4000}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover={false}
                 />
             </div>
         );

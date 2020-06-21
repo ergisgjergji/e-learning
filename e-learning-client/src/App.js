@@ -5,6 +5,7 @@ import store from './redux/store';
 import { loadUser } from './redux/actions/authActions';
 
 import Header from './components/Layout/Header';
+import { ToastContainer } from 'react-toastify';
 import LandingPage from './components/Layout/LandingPage';
 import Login from './components/Layout/Login';
 import StudentsTable from './components/Datatable/StudentsTable';
@@ -13,6 +14,7 @@ import AddStudent from './components/User/AddStudent';
 import AddTeacher from './components/User/AddTeacher';
 import UpdateUser from './components/User/UpdateUser';
 import ResetPassword from './components/User/ResetPassword';
+import UpdateProfile from './components/User/UpdateProfile';
 
 class App extends Component {
 
@@ -40,7 +42,22 @@ class App extends Component {
           <Route exact path="/adminPanel/addTeacher" component={AddTeacher}/>
           <Route exact path="/adminPanel/updateUser/:id" component={UpdateUser}/>
           <Route exact path="/adminPanel/resetPassword/:id" component={ResetPassword}/>
+
+          <Route exact path="/profile/edit" component={UpdateProfile}/>
+
         </Switch>
+
+        <ToastContainer
+          position="bottom-right"
+          autoClose={4000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+        />
       </>
     );
   }
