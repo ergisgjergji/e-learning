@@ -120,10 +120,11 @@ public class UserService {
 
         if (!principal.getRole().equals("ADMIN")) {
             if (principal.getId() != user_id) throw new UserIdException("Invalid user_id");
-
-            if (!bCryptPasswordEncoder.matches(changePasswordViewModel.getOld_password(), user.getPassword()))
-                throw new PasswordException("Old password does not match");
         }
+        
+        if (!bCryptPasswordEncoder.matches(changePasswordViewModel.getOld_password(), user.getPassword()))
+            throw new PasswordException("Old password is incorrect");
+
         user.setPassword(bCryptPasswordEncoder.encode(changePasswordViewModel.getNew_password()));
         userRepository.save(user);
 

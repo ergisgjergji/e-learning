@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { GET_STUDENTS, GET_TEACHERS, GET_USER, DELETE_STUDENT, DELETE_TEACHER, UPDATE_USER, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
-import { loadUser } from './authActions';
 
 export const getStudents = () => dispatch => {
 
@@ -168,3 +167,22 @@ export const resetPassword = (resetPasswordModel, fromRoute, history) => dispatc
             history.push("/adminPanel");
         });
 }
+
+export const changePassword = (changePasswordModel, history) => dispatch => {
+
+    axios.post(`/api/user/change-password`, changePasswordModel)
+        .then(res => {
+            history.push({
+                pathname: "/",
+                notification_message: "Password was changed successfully."
+            });
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+        });
+}
+

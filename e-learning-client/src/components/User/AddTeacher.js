@@ -48,7 +48,7 @@ class AddTeacher extends Component {
         const { full_name, role, faculty, registration_date, username, password, errors } = this.state;
 
         return (
-            <div className="container mb-4">
+            <div className="container pt-4 mb-4">
                 <div className="row">
                     <div className="col-10 col-md-9 col-lg-7 m-auto">
                             

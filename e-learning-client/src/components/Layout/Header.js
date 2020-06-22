@@ -63,25 +63,25 @@ class Header extends Component {
                 </Nav>
 
                 <Nav className="ml-auto" navbar>
-                            <NavItem className="text-left my-auto mx-2">
-                                <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem className="bg-light"> 
-                                            <Link to="/profile/edit" className="text-dark">Edit profile</Link>
-                                        </DropdownItem>
-                                        <DropdownItem divider/>
-                                        <DropdownItem  className="bg-light"> 
-                                            <Link to="/profile/changePassword" className="text-dark">Change password</Link>
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </NavItem>
+                    <NavItem className="text-left my-auto mx-2">
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                            <DropdownMenu right>
+                                <Link to="/profile/edit" className="text-dark">
+                                    <DropdownItem className="bg-light"> Edit profile </DropdownItem>
+                                </Link>
+                                <DropdownItem divider/>
+                                <Link to="/profile/changePassword" className="text-dark">
+                                    <DropdownItem  className="bg-light"> Change password </DropdownItem>
+                                </Link>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </NavItem>
 
-                            <NavItem className="text-left my-auto mx-2">
-                                <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
-                            </NavItem>
-                        </Nav>
+                    <NavItem className="text-left my-auto mx-2">
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                    </NavItem>
+                </Nav>
             </>
         );
         const teacher_menu = (
@@ -95,25 +95,25 @@ class Header extends Component {
                 </Nav>
 
                 <Nav className="ml-auto" navbar>
-                            <NavItem className="text-left my-auto mx-2">
-                                <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem className="bg-light"> 
-                                            <Link to="/profile/edit" className="text-dark">Edit profile</Link>
-                                        </DropdownItem>
-                                        <DropdownItem divider/>
-                                        <DropdownItem  className="bg-light"> 
-                                            <Link to="/profile/changePassword" className="text-dark">Change password</Link>
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </NavItem>
+                    <NavItem className="text-left my-auto mx-2">
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                            <DropdownMenu right>
+                                <Link to="/profile/edit" className="text-dark">
+                                    <DropdownItem className="bg-light"> Edit profile </DropdownItem>
+                                </Link>
+                                <DropdownItem divider/>
+                                <Link to="/profile/changePassword" className="text-dark">
+                                    <DropdownItem  className="bg-light"> Change password </DropdownItem>
+                                </Link>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </NavItem>
 
-                            <NavItem className="text-left my-auto mx-2">
-                                <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
-                            </NavItem>
-                        </Nav>
+                    <NavItem className="text-left my-auto mx-2">
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                    </NavItem>
+                </Nav>
             </>
         );
         const student_menu = (
@@ -127,25 +127,25 @@ class Header extends Component {
                 </Nav>
 
                 <Nav className="ml-auto" navbar>
-                            <NavItem className="text-left my-auto mx-2">
-                                <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem className="bg-light"> 
-                                            <Link to="/profile/edit" className="text-dark">Edit profile</Link>
-                                        </DropdownItem>
-                                        <DropdownItem divider/>
-                                        <DropdownItem  className="bg-light"> 
-                                            <Link to="/profile/changePassword" className="text-dark">Change password</Link>
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </NavItem>
+                    <NavItem className="text-left my-auto mx-2">
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                            <DropdownMenu right>
+                                <Link to="/profile/edit" className="text-dark">
+                                    <DropdownItem className="bg-light"> Edit profile </DropdownItem>
+                                </Link>
+                                <DropdownItem divider/>
+                                <Link to="/profile/changePassword" className="text-dark">
+                                    <DropdownItem  className="bg-light"> Change password </DropdownItem>
+                                </Link>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </NavItem>
 
-                            <NavItem className="text-left my-auto mx-2">
-                                <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
-                            </NavItem>
-                        </Nav>
+                    <NavItem className="text-left my-auto mx-2">
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                    </NavItem>
+                </Nav>
             </>
         );
         const logged_out_menu = (
@@ -173,13 +173,10 @@ class Header extends Component {
     }
 
     render() {
-        console.log("render");
-        
-
         const { user, isAuthenticated } = this.state;
 
         return (
-            <Navbar color="primary" dark expand="md" className="mb-4">
+            <Navbar color="primary" dark expand="md" className="mb-0">
                 <Container>
                     <Link to="/" className="navbar-brand px-3 border rounded"> E-Learning </Link>
                     <NavbarToggler onClick={this.toggle}/>

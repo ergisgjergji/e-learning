@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getUserById, resetPassword } from './../../redux/actions/userActions';
+import { getUserById, changePassword } from './../../redux/actions/userActions';
 
 import classnames from 'classnames';
 
-class ResetPassword extends Component {
+class ChangePassword extends Component {
 
     constructor() {
         super();
 
         this.state = {
             id: "",
+            old_password: "",
             new_password: "",
-            fromRoute: "",
             errors: {}
         };
 
@@ -23,36 +23,32 @@ class ResetPassword extends Component {
     }
 
     componentDidMount() {
-        const { id } = this.props.match.params;
-        const { fromRoute } = this.props.history.location;
-        this.props.getUserById(id, this.props.history);
-        
-        this.setState({ id, fromRoute });
+        const { id } = this.props;        
+        this.setState({ id });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.state.errors != nextProps.errorStore)
+            this.setState({ errors: nextProps.errorStore });
     }
 
     onChange = e => {
-
-        if(e.target.value.length < 6)
-            this.setState({ errors: { new_password: "Password length must be at least 6." } })
-        else
-            this.setState({ errors: {} })
-
         this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit = e => {
         e.preventDefault();
 
-        const { id, new_password, fromRoute, errors } = this.state;
-        const resetPasswordModel = { id, new_password };
-        
-        if(!errors.new_password && new_password.length >= 6)
-            this.props.resetPassword(resetPasswordModel, fromRoute, this.props.history);
+        const { id, old_password, new_password, errors } = this.state;
+        const changePasswordModel = { id, old_password, new_password };
+
+        // console.log(changePasswordModel);
+        this.props.changePassword(changePasswordModel, this.props.history);
     }
 
     render() {
 
-        const { id, new_password, errors } = this.state;
+        const { id, old_password, new_password, errors } = this.state;
 
         return (
             <div className="container pt-4">
@@ -70,8 +66,19 @@ class ResetPassword extends Component {
                             <div className="form-row">
 
                                 <div className="form-group col-md-12">
+                                    <label htmlFor="new_password">Password</label>
+                                    <input type="password" id="old_password" name="old_password"
+                                        className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.password})}
+                                        value={old_password} onChange={this.onChange} />
+                                    { 
+                                        errors.password ? 
+                                            (<div className="invalid-feedback"> { errors.password } </div>) : null 
+                                    }
+                                </div>
+
+                                <div className="form-group col-md-12">
                                     <label htmlFor="new_password">New password</label>
-                                    <input type="password" id="new_password" name="new_password" required
+                                    <input type="password" id="new_password" name="new_password"
                                         className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.new_password})}
                                         value={new_password} onChange={this.onChange} />
                                     { 
@@ -80,6 +87,7 @@ class ResetPassword extends Component {
                                     }
                                 </div>
 
+                                <input type="hidden" id="id" name="id"/>
                                 <input type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save"/>
 
                             </div>
@@ -92,9 +100,16 @@ class ResetPassword extends Component {
     }
 }
 
-ResetPassword.propTypes = {
+ChangePassword.propTypes = {
+    id: PropTypes.string.isRequired,
+    errorStore: PropTypes.object.isRequired,
     getUserById: PropTypes.func.isRequired,
-    resetPassword: PropTypes.func.isRequired
+    changePassword: PropTypes.func.isRequired
 };
 
-export default connect(null, { getUserById, resetPassword })(ResetPassword);
+const mapStateToProps = (state) => ({
+    id: state.authStore.user.id,
+    errorStore: state.errorStore
+});
+
+export default connect(mapStateToProps, { getUserById, changePassword })(ChangePassword);

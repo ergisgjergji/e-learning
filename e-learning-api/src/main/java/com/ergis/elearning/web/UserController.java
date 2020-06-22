@@ -60,7 +60,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/reset-password")
-    public ResponseEntity<?> changePassword(@Valid @RequestBody ResetPasswordViewModel resetPasswordViewModel, BindingResult result, Principal principal) {
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordViewModel resetPasswordViewModel, BindingResult result, Principal principal) {
 
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
         if(errors != null) return errors;

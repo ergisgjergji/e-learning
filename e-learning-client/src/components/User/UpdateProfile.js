@@ -56,7 +56,7 @@ class UpdateProfile extends Component {
         const { id, full_name, role, faculty, registration_date, username, password, errors } = this.state;
 
         return (
-            <div className="container">
+            <div className="container pt-4">
                 <div className="row mb-4">
                     <div className="col-10 col-md-9 col-lg-7 m-auto">
                          
