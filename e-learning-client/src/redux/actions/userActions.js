@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GET_STUDENTS, GET_TEACHERS, GET_USER, DELETE_STUDENT, DELETE_TEACHER, UPDATE_USER, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
+import store from './../store';
 
 export const getStudents = () => dispatch => {
 
@@ -93,6 +94,7 @@ export const updateUser = (user, history) => dispatch => {
 
     axios.put("/api/user", user)
         .then(res => {
+            
             if(user.role === "STUDENT") {
                 history.push({
                     pathname: '/adminPanel/students',
@@ -117,24 +119,21 @@ export const updateProfile = (user, history) => dispatch => {
 
     axios.put("/api/user", user)
         .then(res => {
-            if(user.role === "ADMIN") {
-                history.push({
-                    pathname: '/adminPanel',
-                    notification_message: "Changes were saved successfully."
-                });
+
+            let route = "/";
+            switch(user.role) {
+                case "ADMIN":
+                    route = "/adminPanel"; break;
+                case "TEACHER":
+                    route = "/teacherPanel"; break;
+                case "STUDENT":
+                    route = "/studentPanel"; break;
             }
-            else if(user.role === "TEACHER") {
-                history.push({
-                    pathname: '/teacherPanel',
-                    notification_message: "Changes were saved successfully."
-                });
-            }
-            else if(user.role === "STUDENT") {
-                history.push({
-                    pathname: '/studentPanel',
-                    notification_message: "Changes were saved successfully."
-                });
-            }
+
+            history.push({
+                pathname: route,
+                notification_message: "Profile was updated successfully."
+            });
 
             const updatedUser = { username: user.username, full_name: user.full_name };
             dispatch({
@@ -172,8 +171,19 @@ export const changePassword = (changePasswordModel, history) => dispatch => {
 
     axios.post(`/api/user/change-password`, changePasswordModel)
         .then(res => {
+
+            let route = "/";
+            switch(store.getState().authStore.user.role) {
+                case "ADMIN":
+                    route = "/adminPanel"; break;
+                case "TEACHER":
+                    route = "/teacherPanel"; break;
+                case "STUDENT":
+                    route = "/studentPanel"; break;
+            }
+            
             history.push({
-                pathname: "/",
+                pathname: route,
                 notification_message: "Password was changed successfully."
             });
             dispatch(clearErrors());
