@@ -14,3 +14,6 @@ export const GET_TEACHERS = "GET_TEACHERS";
 export const GET_USER = "GET_USER";
 export const DELETE_STUDENT = "DELETE_STUDENT";
 export const DELETE_TEACHER = "DELETE_TEACHER";
+
+// Courses
+export const GET_COURSES = "GET_COURSES";

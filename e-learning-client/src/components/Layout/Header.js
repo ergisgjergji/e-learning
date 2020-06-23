@@ -100,11 +100,15 @@ class Header extends Component {
                             <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
                             <DropdownMenu right>
                                 <Link to="/profile/edit" className="text-dark">
-                                    <DropdownItem className="bg-light"> Edit profile </DropdownItem>
+                                    <DropdownItem className="bg-light"> 
+                                        <i className="fa fa-user-circle" aria-hidden="true"/> Edit profile 
+                                    </DropdownItem>
                                 </Link>
                                 <DropdownItem divider/>
                                 <Link to="/profile/changePassword" className="text-dark">
-                                    <DropdownItem  className="bg-light"> Change password </DropdownItem>
+                                    <DropdownItem  className="bg-light"> 
+                                        <i className="fa fa-key" aria-hidden="true"/> Change password 
+                                    </DropdownItem>
                                 </Link>
                             </DropdownMenu>
                         </UncontrolledDropdown>

@@ -1,0 +1,21 @@
+import { GET_COURSES } from '../actions/types';
+
+const initialState = {
+    courses: [],
+    current_course: {}
+};
+
+export default function( state = initialState, action ) {
+    
+    switch(action.type) {
+
+        case GET_COURSES:
+            return {
+                ...state,
+                courses: action.payload
+            }
+
+        default:
+            return state;   
+    }
+}

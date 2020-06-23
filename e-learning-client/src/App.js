@@ -17,6 +17,7 @@ import UpdateUser from './components/User/UpdateUser';
 import ResetPassword from './components/User/ResetPassword';
 import UpdateProfile from './components/User/UpdateProfile';
 import ChangePassword from './components/User/ChangePassword';
+import TeacherPanel from './components/Panels/TeacherPanel';
 
 class App extends Component {
 
@@ -51,6 +52,7 @@ class App extends Component {
           {
             // TEACHER
           }
+          <Route exact path="/teacherPanel" component={TeacherPanel}/>
           {
             // STUDENT
           }

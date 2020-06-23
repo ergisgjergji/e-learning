@@ -26,7 +26,7 @@ img {
   .fa.fa-edit {
     color: #18a2b9;
   }
-  .fa.fa-minus-circle {
+  .fa.fa-trash-o {
     color: red;
   }
   
@@ -70,4 +70,12 @@ img {
     white-space: normal !important;
     text-overflow: clip !important;
     overflow: auto !important;
+  }
+
+  .date-info {
+    position: absolute;
+    bottom:0;
+    left: 15px;
+    display: flex;
+    font-size: 10px;
   }
