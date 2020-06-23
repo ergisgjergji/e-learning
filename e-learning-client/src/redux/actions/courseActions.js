@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_COURSES, GET_ERRORS } from './types';
+import { GET_COURSES, DELETE_COURSE, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 import store from './../store';
 
@@ -16,5 +16,15 @@ export const getCourses = () => dispatch => {
         .catch(err => dispatch({
             type: GET_ERRORS,
             payload: err.response.data
+        }));
+};
+
+
+export const deleteCourse = (id) => dispatch => {
+    
+    axios.delete(`/api/course/${id}`)
+        .then(res => dispatch({
+            type: DELETE_COURSE,
+            payload: id
         }));
 };

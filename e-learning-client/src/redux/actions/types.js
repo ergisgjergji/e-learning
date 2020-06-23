@@ -17,3 +17,4 @@ export const DELETE_TEACHER = "DELETE_TEACHER";
 
 // Courses
 export const GET_COURSES = "GET_COURSES";
+export const DELETE_COURSE = "DELETE_COURSE";

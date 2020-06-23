@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 
 import { confirmAlert } from 'react-confirm-alert';
+import { toast } from 'react-toastify';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { deleteCourse } from './../../redux/actions/courseActions';
+import { deleteCourse } from './../../redux/actions/courseActions';
 
 class TeacherCourseItem extends Component {
 
@@ -18,7 +19,11 @@ class TeacherCourseItem extends Component {
 				{
 					label: 'Yes',
 					className: "confirm-yes",
-					// onClick: () => this.props.deleteCourse(id)
+					onClick: () => {
+                        this.props.deleteCourse(id);
+                        toast.dismiss();
+                        toast.info(`ℹ Course with id '${id}' was deleted successfully.`);
+                    }
 				},
 				{
 					label: 'No',
@@ -91,10 +96,10 @@ class TeacherCourseItem extends Component {
 }
 
 TeacherCourseItem.propTypes = {
-    // deleteCourse: PropTypes.func.isRequired
+    deleteCourse: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
 });
 
-export default connect(null, { })(TeacherCourseItem);
+export default connect(null, { deleteCourse })(TeacherCourseItem);

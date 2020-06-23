@@ -4,12 +4,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCourses } from '../../redux/actions/courseActions';
 
+import { toast } from 'react-toastify';
 import TeacherCourseItem from './../Course/TeacherCourseItem';
 
 class TeacherPanel extends Component {
 
 	componentDidMount() {
 		this.props.getCourses();
+
+		if(this.props.location.notification_message) {
+			toast.dismiss();
+			toast.success(`ℹ ${this.props.location.notification_message}`)
+		}
 	}
 
 	render() {
