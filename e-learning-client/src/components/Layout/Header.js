@@ -87,7 +87,7 @@ class Header extends Component {
         const teacher_menu = (
             <>
                 <Nav className="mr-auto" navbar>
-                    <NavItem>
+                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/teacherPanel" className="nav-link">
                             Home
                         </Link>
@@ -123,7 +123,7 @@ class Header extends Component {
         const student_menu = (
             <>
                 <Nav className="mr-auto" navbar>
-                    <NavItem>
+                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/studentPanel" className="nav-link">
                             Home
                         </Link>

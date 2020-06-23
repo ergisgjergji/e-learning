@@ -19,6 +19,7 @@ import UpdateProfile from './components/User/UpdateProfile';
 import ChangePassword from './components/User/ChangePassword';
 import TeacherPanel from './components/Panels/TeacherPanel';
 import AddCourse from './components/Course/AddCourse';
+import UpdateCourse from './components/Course/UpdateCourse';
 
 class App extends Component {
 
@@ -55,6 +56,7 @@ class App extends Component {
           }
           <Route exact path="/teacherPanel" component={TeacherPanel}/>
           <Route exact path="/teacherPanel/addCourse" component={AddCourse}/>
+          <Route exact path="/teacherPanel/updateCourse/:id" component={UpdateCourse}/>
           {
             // STUDENT
           }

@@ -42,7 +42,10 @@ public class CourseController {
 
     @PreAuthorize("hasRole('TEACHER')")
     @PutMapping("")
-    public ResponseEntity<?> updateCourse(@RequestBody Course course, Principal principal) {
+    public ResponseEntity<?> updateCourse(@Valid @RequestBody Course course, BindingResult result, Principal principal) {
+
+        ResponseEntity<?> errors = mapValidationErrorService.MapValidationError(result);
+        if(errors != null) return errors;
 
         Course updatedCourse = courseService.update(course, principal.getName());
         return new ResponseEntity<Course>(updatedCourse, HttpStatus.OK);

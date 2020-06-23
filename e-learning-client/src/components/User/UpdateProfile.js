@@ -64,7 +64,7 @@ class UpdateProfile extends Component {
                             {`< Go back`} 
                         </button>
 
-                        <h5 className="display-4 text-center">Update user</h5>
+                        <h5 className="display-4 text-center">Edit profile</h5>
                         <hr />
 
                         <form onSubmit={this.onSubmit}>

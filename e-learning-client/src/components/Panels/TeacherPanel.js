@@ -26,7 +26,7 @@ class TeacherPanel extends Component {
 			<div className="projects">
 				<div className="container">
 					<div className="row">
-						<div className="col-md-11 mx- my-4">
+						<div className="col-md-11 mx-auto my-4">
 
 							<h1 className="display-4 text-center">Courses</h1>
 

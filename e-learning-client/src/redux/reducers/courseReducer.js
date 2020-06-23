@@ -1,4 +1,4 @@
-import { GET_COURSES, DELETE_COURSE } from '../actions/types';
+import { GET_COURSES, GET_COURSE, DELETE_COURSE } from '../actions/types';
 
 const initialState = {
     courses: [],
@@ -13,6 +13,12 @@ export default function( state = initialState, action ) {
             return {
                 ...state,
                 courses: action.payload
+            }
+
+        case GET_COURSE:
+            return {
+                ...state,
+                current_course: action.payload
             }
 
         case DELETE_COURSE:

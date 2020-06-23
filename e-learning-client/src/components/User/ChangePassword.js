@@ -59,7 +59,7 @@ class ChangePassword extends Component {
                             {`< Go back`} 
                         </button>
 
-                        <h5 className="display-4 text-center">Reset password</h5>
+                        <h5 className="display-4 text-center">Change password</h5>
                         <hr />
 
                         <form onSubmit={this.onSubmit}>
