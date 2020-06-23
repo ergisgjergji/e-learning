@@ -28,3 +28,20 @@ export const deleteCourse = (id) => dispatch => {
             payload: id
         }));
 };
+
+export const addCourse = (course, history) => dispatch => {
+
+    axios.post("/api/course", course)
+        .then(res => {
+
+            history.push({
+                pathname: '/teacherPanel',
+                notification_message: "Course added successfully."
+            });
+            dispatch(clearErrors());
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+}

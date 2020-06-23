@@ -11,7 +11,7 @@ import { deleteCourse } from './../../redux/actions/courseActions';
 class TeacherCourseItem extends Component {
 
 	onDeleteClick = (id) => {
-
+        
 		confirmAlert({
 			title: 'Confirm',
 			message: 'Are u sure u want to delete this course?',
@@ -62,13 +62,13 @@ class TeacherCourseItem extends Component {
 
 								<Link to={`/teacherPanel/course/${course.id}/students`}>
 									<li className="list-group-item update">
-										<i className="fa fa-graduation-cap pr-1"> Students </i>
+										<i className="fa fa-users pr-1"> Manage Students </i>
 									</li>
 								</Link>
 
                                 <Link to={`/teacherPanel/course/${course.id}/tests`}>
 									<li className="list-group-item update">
-										<i className="fa fa-file-text-o pr-1"> Tests </i>
+										<i className="fa fa-file-text-o pr-1"> Manage Tests </i>
 									</li>
 								</Link>
 
