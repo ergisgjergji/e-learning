@@ -20,7 +20,6 @@ class TeacherPanel extends Component {
 
 	render() {
         const { courses } = this.props.courseStore;
-        console.log(courses);
 
 		return (
 			<div className="projects">
@@ -30,7 +29,7 @@ class TeacherPanel extends Component {
 
 							<h1 className="display-4 text-center">Courses</h1>
 
-							<Link to="/teacherPanel/addCourse" className="btn btn-lg btn-primary">Add Course</Link>
+							<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary">Add Course</Link>
 							<br/> <hr/>
 
 							{ 

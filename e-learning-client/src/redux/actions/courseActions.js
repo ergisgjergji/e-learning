@@ -50,8 +50,6 @@ export const getCourseById = (id, history) => dispatch => {
 
     axios.get(`/api/course/${id}`)
         .then(res => {
-            console.log(res);
-            
             dispatch({
                 type: GET_COURSE,
                 payload: res.data

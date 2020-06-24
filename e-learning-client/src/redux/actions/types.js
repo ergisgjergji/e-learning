@@ -19,3 +19,6 @@ export const DELETE_TEACHER = "DELETE_TEACHER";
 export const GET_COURSES = "GET_COURSES";
 export const GET_COURSE = "GET_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
+
+// Test
+export const GET_TESTBASE_LIST = "GET_TESTBASE_LIST";
