@@ -7,6 +7,7 @@ import { getStudentCompletedTests } from '../../../redux/actions/testActions';
 
 import { Alert } from 'reactstrap';
 import { toast } from 'react-toastify';
+import TestResultItem from './TestResultItem';
 
 class TestResultList extends Component {
 
@@ -44,7 +45,7 @@ class TestResultList extends Component {
                                 </Alert>
                                 :
                                 tests.map((test, index) => {
-                                    return <></>
+                                    return <TestResultItem key={index} test={test}/>
                                 })
                         }
 

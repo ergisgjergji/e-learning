@@ -49,9 +49,17 @@ export const getStudentCompletedTests = (course_id, student_id, history) => disp
 
     axios.get(`/api/test/${course_id}/${student_id}/completed`)
         .then(res => {
+
+            // Sort tests by 'id'
+            let tests = res.data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+            tests.map(t => {
+                // Sort questions by 'type'
+                t.questions.sort((a,b) => (a.type > b.type) ? 1 : ((b.type > a.type) ? -1 : 0));
+            })            
+
             dispatch({
                 type: GET_STUDENT_COMPLETED_TESTS,
-                payload: res.data
+                payload: tests
             });
             dispatch(clearErrors());
         })
