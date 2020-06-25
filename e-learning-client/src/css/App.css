@@ -79,3 +79,16 @@ img {
     display: flex;
     font-size: 10px;
   }
+
+  .paper {
+    box-shadow:
+      /* The second layer */
+      0 -10px 0 -5px #fcfcfc,
+      /* The second layer shadow */
+      0 -10px 1px -4px rgba(0,0,0,0.15),
+      /* The third layer */
+      0 -20px 0 -10px #fcfcfc,
+      /* The third layer shadow */
+      0 -20px 1px -9px rgba(0,0,0,0.15);
+    background: #fff;
+  }

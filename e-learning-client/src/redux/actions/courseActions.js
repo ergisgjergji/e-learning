@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_COURSES, GET_COURSE, DELETE_COURSE, GET_ERRORS } from './types';
+import { GET_COURSES, GET_COURSE, DELETE_COURSE, GET_REGISTERED_STUDENTS, GET_NONREGISTERED_STUDENTS, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 import store from './../store';
 
@@ -18,7 +18,6 @@ export const getCourses = () => dispatch => {
             payload: err.response.data
         }));
 };
-
 
 export const deleteCourse = (id) => dispatch => {
     
@@ -68,6 +67,54 @@ export const updateCourse = (course, history) => dispatch => {
                 pathname: '/teacherPanel',
                 notification_message: "Changes were saved successfully."
             });
+            dispatch(clearErrors());
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+}
+
+export const getRegisteredStudents = (id) => dispatch => {
+
+    axios.get(`/api/course/${id}/students/registered`)
+        .then(res => {
+            dispatch({
+                type: GET_REGISTERED_STUDENTS,
+                payload: res.data
+            });
+            dispatch(clearErrors());
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+}
+
+export const getNonRegisteredStudents = (id) => dispatch => {
+
+    axios.get(`/api/course/${id}/students/not-registered`)
+        .then(res => {
+            dispatch({
+                type: GET_NONREGISTERED_STUDENTS,
+                payload: res.data
+            });
+            dispatch(clearErrors());
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        }));
+}
+
+export const registerStudent = (course_id, student_id, history) => dispatch => {
+
+    axios.post(`/api/course/${course_id}/students/${student_id}`)
+        .then(res => {
+            
+            history.push({ ...history, notification_message: `Student with id '${student_id}' was registered successfully.` });
+            dispatch(getRegisteredStudents(course_id));
+            dispatch(getNonRegisteredStudents(course_id));
             dispatch(clearErrors());
         })
         .catch(err => dispatch({

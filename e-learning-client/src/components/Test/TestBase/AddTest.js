@@ -92,6 +92,10 @@ class AddTest extends Component {
 
                         <Prompt when={isBlocking} message={location => "If you leave, changes will not be saved. Continue?" } />
 
+                        <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
+                            {`< Go back`} 
+                        </button>
+
                         <div className="text-center h3">Add test</div>
                         <hr/>
 

@@ -22,6 +22,7 @@ import AddCourse from './components/Course/AddCourse';
 import UpdateCourse from './components/Course/UpdateCourse';
 import TestBaseList from './components/Test/TestBase/TestBaseList';
 import AddTest from './components/Test/TestBase/AddTest';
+import CourseStudents from './components/Course/Students/CourseStudents';
 
 class App extends Component {
 
@@ -61,6 +62,7 @@ class App extends Component {
           <Route exact path="/teacherPanel/updateCourse/:id" component={UpdateCourse}/>
           <Route exact path="/teacherPanel/course/:id/tests" component={TestBaseList}/>
           <Route exact path="/teacherPanel/course/:id/addTest" component={AddTest}/>
+          <Route exact path="/teacherPanel/course/:id/students" component={CourseStudents}/>
           {
             // STUDENT
           }

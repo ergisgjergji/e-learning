@@ -1,8 +1,10 @@
-import { GET_COURSES, GET_COURSE, DELETE_COURSE } from '../actions/types';
+import { GET_COURSES, GET_COURSE, DELETE_COURSE, GET_REGISTERED_STUDENTS, GET_NONREGISTERED_STUDENTS } from '../actions/types';
 
 const initialState = {
     courses: [],
-    current_course: {}
+    current_course: {},
+    registered_students: [],
+    nonregistered_students: []
 };
 
 export default function( state = initialState, action ) {
@@ -26,6 +28,19 @@ export default function( state = initialState, action ) {
                 ...state,
                 courses: state.courses.filter(course => course.id !== action.payload)
             }
+
+        case GET_REGISTERED_STUDENTS:
+            return {
+                ...state,
+                registered_students: action.payload
+            }
+
+        case GET_NONREGISTERED_STUDENTS:
+            return {
+                ...state,
+                nonregistered_students: action.payload
+            }
+
         default:
             return state;   
     }
