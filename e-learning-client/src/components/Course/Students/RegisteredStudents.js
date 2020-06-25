@@ -16,8 +16,7 @@ class RegisteredStudents extends Component {
     }
 
     render() {
-
-        const { students } = this.props;
+        const { course_id, students } = this.props;
         
         const columns = [
             { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
@@ -28,9 +27,8 @@ class RegisteredStudents extends Component {
             { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>
-                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-dark shadow-sm mr-2 my-1">Edit</Link>
-                    <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/students" }} className="btn btn-sm btn-secondary shadow-sm mr-2 my-1">
-                        Reset password
+                    <Link to={`/teacherPanel/course/${course_id}/student/${props.original.id}/results`} className="btn btn-sm btn-success shadow">
+                        View results <i class="fa fa-chevron-circle-right" aria-hidden="true"/>
                     </Link>
                 </>
               )

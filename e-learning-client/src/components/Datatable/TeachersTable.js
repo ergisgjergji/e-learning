@@ -56,16 +56,20 @@ class TeachersTable extends Component {
             { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
             { Header: "Full name", accessor: "full_name", sortable: true, style: { textAlign: "center" } },
             { Header: "Username", accessor: "username", sortable: true, style: { textAlign: "center" } },
-            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
-            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
+            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 140 },
+            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 140 },
             { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>
-                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-dark shadow-sm mr-2 my-1">Edit</Link>
-                    <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/teachers" }} className="btn btn-sm btn-secondary shadow-sm mr-2 my-1">
-                        Reset password
+                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-dark shadow-sm mr-1 my-1">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"/> Edit
                     </Link>
-                    <button className="btn btn-sm btn-danger shadow" onClick={this.onDeleteClick.bind(this, props.original.id)}>Delete</button>
+                    <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/teachers" }} className="btn btn-sm btn-secondary shadow-sm mr-1 my-1">
+                        <i class="fa fa-key" aria-hidden="true"/>Reset password
+                    </Link>
+                    <button className="btn btn-sm btn-danger shadow-sm my-1" onClick={this.onDeleteClick.bind(this, props.original.id)}>
+                        <i class="fa fa-trash" aria-hidden="true"/> Delete
+                    </button>
                 </>
               )
             }}
@@ -75,7 +79,10 @@ class TeachersTable extends Component {
             <div className="col-11 col-md-11 col-lg-10 mx-auto p-4 my-4 border rounded shadow">
   
                 <h1 className="display-4 text-center">Teachers</h1>
-                <Link to="/adminPanel/addTeacher" className="btn bn-lg btn-primary">Add teacher</Link>
+
+                <Link to="/adminPanel/addTeacher" className="btn bn-lg btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"/> Add teacher
+                </Link>
                 <br/><br/>
   
                 <ReactTable

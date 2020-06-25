@@ -46,7 +46,9 @@ class NonRegisteredStudents extends Component {
             { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, width: 150, Cell: props => {
               return (
                 <>
-                    <button className="btn btn-sm btn-primary shadow" onClick={this.onRegisterStudent.bind(this, course_id, props.original.id, props.original.full_name)}>Register</button>
+                    <button className="btn btn-sm btn-primary shadow" onClick={this.onRegisterStudent.bind(this, course_id, props.original.id, props.original.full_name)}>
+                        Register <i class="fa fa-registered" aria-hidden="true"/> 
+                    </button>
                 </>
               )
             }}

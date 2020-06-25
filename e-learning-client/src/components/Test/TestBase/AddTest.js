@@ -145,7 +145,9 @@ class AddTest extends Component {
                                     
                                 </div>
                                 
-                                <input type="submit" className="btn btn-lg btn-outline-success mt-0 mx-auto shadow" value="Save test"/>
+                                <button type="submit" className="btn btn-lg btn-outline-success mt-0 mx-auto shadow" value="Save test">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"/> Save
+                                </button>
 
                             </div>
                         </form>

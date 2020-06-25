@@ -98,7 +98,9 @@ class UpdateProfile extends Component {
                                 <input type="hidden" id="registration_date" name="registration_date" value={registration_date}/>
                                 <input type="hidden" id="password" name="password" value={password}/>
 
-                                <input type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg"/>
+                                <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"/> Save
+                                </button>
 
                             </div>
                         </form>

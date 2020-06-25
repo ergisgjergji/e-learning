@@ -223,7 +223,9 @@ class AddQuestion extends Component {
                                 null
                         }
 
-                        <input type="button" onClick={this.onQuestionSubmit} value="Save question" className="btn btn-md btn-outline-success ml-auto mr-4 mt-2 shadow"/>  
+                        <button onClick={this.onQuestionSubmit} className="btn btn-md btn-outline-success ml-auto mr-4 mt-2 shadow">
+                            <i class="fa fa-floppy-o" aria-hidden="true"/> Save question
+                        </button>
 
                     </div>
                 </div>

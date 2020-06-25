@@ -29,7 +29,9 @@ class TeacherPanel extends Component {
 
 							<h1 className="display-4 text-center">Courses</h1>
 
-							<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary">Add Course</Link>
+							<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary">
+								<i class="fa fa-plus-circle" aria-hidden="true"/> Add Course
+							</Link>
 							<br/> <hr/>
 
 							{ 

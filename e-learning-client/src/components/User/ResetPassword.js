@@ -80,7 +80,9 @@ class ResetPassword extends Component {
                                     }
                                 </div>
 
-                                <input type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save"/>
+                                <button type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"/> Save
+                                </button>
 
                             </div>
                         </form>

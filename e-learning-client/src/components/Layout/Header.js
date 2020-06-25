@@ -68,18 +68,24 @@ class Header extends Component {
                             <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
                             <DropdownMenu right>
                                 <Link to="/profile/edit" className="text-dark">
-                                    <DropdownItem className="bg-light"> Edit profile </DropdownItem>
+                                    <DropdownItem className="bg-light"> 
+                                        <i className="fa fa-user-circle" aria-hidden="true"/> Edit profile 
+                                    </DropdownItem>
                                 </Link>
                                 <DropdownItem divider/>
                                 <Link to="/profile/changePassword" className="text-dark">
-                                    <DropdownItem  className="bg-light"> Change password </DropdownItem>
+                                    <DropdownItem  className="bg-light"> 
+                                        <i className="fa fa-key" aria-hidden="true"/> Change password 
+                                    </DropdownItem>
                                 </Link>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </NavItem>
 
                     <NavItem className="text-left my-auto mx-2">
-                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> 
+                            Logout <i class="fa fa-sign-out" aria-hidden="true"/> 
+                        </Link>
                     </NavItem>
                 </Nav>
             </>
@@ -115,7 +121,9 @@ class Header extends Component {
                     </NavItem>
 
                     <NavItem className="text-left my-auto mx-2">
-                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> 
+                            Logout <i class="fa fa-sign-out" aria-hidden="true"/> 
+                        </Link>
                     </NavItem>
                 </Nav>
             </>
@@ -136,18 +144,24 @@ class Header extends Component {
                             <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
                             <DropdownMenu right>
                                 <Link to="/profile/edit" className="text-dark">
-                                    <DropdownItem className="bg-light"> Edit profile </DropdownItem>
+                                    <DropdownItem className="bg-light"> 
+                                        <i className="fa fa-user-circle" aria-hidden="true"/> Edit profile 
+                                    </DropdownItem>
                                 </Link>
                                 <DropdownItem divider/>
                                 <Link to="/profile/changePassword" className="text-dark">
-                                    <DropdownItem  className="bg-light"> Change password </DropdownItem>
+                                    <DropdownItem  className="bg-light"> 
+                                        <i className="fa fa-key" aria-hidden="true"/> Change password 
+                                    </DropdownItem>
                                 </Link>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </NavItem>
 
                     <NavItem className="text-left my-auto mx-2">
-                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> Logout </Link>
+                        <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> 
+                            Logout <i class="fa fa-sign-out" aria-hidden="true"/> 
+                        </Link>
                     </NavItem>
                 </Nav>
             </>
@@ -156,7 +170,7 @@ class Header extends Component {
             <>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Link to="/login" className="nav-link"> Login </Link>
+                        <Link to="/login" className="nav-link"> <i class="fa fa-sign-in" aria-hidden="true"/> Login </Link>
                     </NavItem>
                 </Nav>
             </>
