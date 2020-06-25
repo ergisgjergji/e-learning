@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { getNonRegisteredStudents, registerStudent } from './../../../redux/actions/courseActions';
 
 import ReactTable from 'react-table-v6';
-
+import { confirmAlert } from 'react-confirm-alert';
 
 class NonRegisteredStudents extends Component {
 
@@ -15,8 +15,23 @@ class NonRegisteredStudents extends Component {
         this.props.getNonRegisteredStudents(course_id);
     }
 
-    onRegisterStudent = (course_id, student_id) => {
-        this.props.registerStudent(course_id, student_id, this.props.history);
+    onRegisterStudent = (course_id, student_id, name) => {
+
+        confirmAlert({
+			title: 'Confirm',
+			message: `You are about to register '${name}' in the course. Continue?`,
+			buttons: [
+				{
+					label: 'Yes',
+					className: "confirm-yes",
+					onClick: () => this.props.registerStudent(course_id, student_id, this.props.history)
+				},
+				{
+					label: 'No',
+					className: "confirm-no"
+			  	}
+			]
+		})
     }
 
     render() {
@@ -31,7 +46,7 @@ class NonRegisteredStudents extends Component {
             { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, width: 150, Cell: props => {
               return (
                 <>
-                    <button className="btn btn-sm btn-primary shadow" onClick={this.onRegisterStudent.bind(this, course_id, props.original.id)}>Register</button>
+                    <button className="btn btn-sm btn-primary shadow" onClick={this.onRegisterStudent.bind(this, course_id, props.original.id, props.original.full_name)}>Register</button>
                 </>
               )
             }}
