@@ -84,7 +84,7 @@ class Header extends Component {
 
                     <NavItem className="text-left my-auto mx-2">
                         <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> 
-                            Logout <i class="fa fa-sign-out" aria-hidden="true"/> 
+                            Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
                         </Link>
                     </NavItem>
                 </Nav>
@@ -122,7 +122,7 @@ class Header extends Component {
 
                     <NavItem className="text-left my-auto mx-2">
                         <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> 
-                            Logout <i class="fa fa-sign-out" aria-hidden="true"/> 
+                            Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
                         </Link>
                     </NavItem>
                 </Nav>
@@ -160,7 +160,7 @@ class Header extends Component {
 
                     <NavItem className="text-left my-auto mx-2">
                         <Link to="/logout" className="nav-link" onClick={this.logout.bind(this)}> 
-                            Logout <i class="fa fa-sign-out" aria-hidden="true"/> 
+                            Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
                         </Link>
                     </NavItem>
                 </Nav>
@@ -170,7 +170,9 @@ class Header extends Component {
             <>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Link to="/login" className="nav-link"> <i class="fa fa-sign-in" aria-hidden="true"/> Login </Link>
+                        <Link to="/login" className="nav-link"> 
+                            <i className="fa fa-sign-in" aria-hidden="true"/> Login 
+                        </Link>
                     </NavItem>
                 </Nav>
             </>

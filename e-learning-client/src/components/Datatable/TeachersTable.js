@@ -62,13 +62,13 @@ class TeachersTable extends Component {
               return (
                 <>
                     <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-dark shadow-sm mr-1 my-1">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"/> Edit
+                        <i className="fa fa-pencil-square-o" aria-hidden="true"/> Edit
                     </Link>
                     <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/teachers" }} className="btn btn-sm btn-secondary shadow-sm mr-1 my-1">
-                        <i class="fa fa-key" aria-hidden="true"/>Reset password
+                        <i className="fa fa-key" aria-hidden="true"/>Reset password
                     </Link>
                     <button className="btn btn-sm btn-danger shadow-sm my-1" onClick={this.onDeleteClick.bind(this, props.original.id)}>
-                        <i class="fa fa-trash" aria-hidden="true"/> Delete
+                        <i className="fa fa-trash" aria-hidden="true"/> Delete
                     </button>
                 </>
               )

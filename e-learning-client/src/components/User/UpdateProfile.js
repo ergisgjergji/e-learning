@@ -61,7 +61,7 @@ class UpdateProfile extends Component {
                     <div className="col-10 col-md-9 col-lg-7 m-auto">
                          
                         <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
-                            {`< Go back`} 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
                         </button>
 
                         <h5 className="display-4 text-center">Edit profile</h5>
@@ -99,7 +99,7 @@ class UpdateProfile extends Component {
                                 <input type="hidden" id="password" name="password" value={password}/>
 
                                 <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"/> Save
+                                    <i className="fa fa-floppy-o" aria-hidden="true"/> Save
                                 </button>
 
                             </div>

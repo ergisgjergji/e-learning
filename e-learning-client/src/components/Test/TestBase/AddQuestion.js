@@ -14,7 +14,6 @@ class AddQuestion extends Component {
             toggleAlert: false
         };
         this.onToggleAlert.bind(this);
-        this.addQuestion.bind(this);
         this.onChange.bind(this);
         this.onChangeType.bind(this);
         this.renderSwitch.bind(this);
@@ -80,10 +79,6 @@ class AddQuestion extends Component {
             alternatives = [ {description: "", correct: false}, {description: "", correct: false}, {description: "", correct: false}, {description: "", correct: false} ];
         
         this.setState({ type, alternatives });
-    }
-
-    addQuestion = (question) => {
-
     }
 
     isFormValid = () => {
@@ -223,8 +218,8 @@ class AddQuestion extends Component {
                                 null
                         }
 
-                        <button onClick={this.onQuestionSubmit} className="btn btn-md btn-outline-success ml-auto mr-4 mt-2 shadow">
-                            <i class="fa fa-floppy-o" aria-hidden="true"/> Save question
+                        <button type="button" className="btn btn-md btn-outline-success ml-auto mr-4 mt-2 shadow" onClick={this.onQuestionSubmit}>
+                            <i className="fa fa-floppy-o" aria-hidden="true"/> Save question
                         </button>
 
                     </div>

@@ -56,7 +56,7 @@ class ChangePassword extends Component {
                     <div className="col-10 col-md-8 col-lg-7 m-auto">
                          
                         <button className="btn btn-secondary btn-sm shadow mb-4" onClick={() => this.props.history.goBack()}> 
-                            {`< Go back`} 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
                         </button>
 
                         <h5 className="display-4 text-center">Change password</h5>
@@ -89,7 +89,7 @@ class ChangePassword extends Component {
 
                                 <input type="hidden" id="id" name="id"/>
                                 <button type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"/> Save
+                                    <i className="fa fa-floppy-o" aria-hidden="true"/> Save
                                 </button>
 
                             </div>

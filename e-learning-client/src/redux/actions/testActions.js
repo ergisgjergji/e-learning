@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TESTBASE_LIST, GET_ERRORS } from './types';
+import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 import store from './../store';
 
@@ -43,4 +43,23 @@ export const addTest = (id, testBase, fromRoute, history) => dispatch => {
             });
             history.push("/teacherPanel");
         });
+}
+
+export const getStudentCompletedTests = (course_id, student_id, history) => dispatch => {
+
+    axios.get(`/api/test/${course_id}/${student_id}/completed`)
+        .then(res => {
+            dispatch({
+                type: GET_STUDENT_COMPLETED_TESTS,
+                payload: res.data
+            });
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+            history.goBack();
+        })
 }

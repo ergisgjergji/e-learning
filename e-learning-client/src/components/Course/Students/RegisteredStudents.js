@@ -28,7 +28,7 @@ class RegisteredStudents extends Component {
               return (
                 <>
                     <Link to={`/teacherPanel/course/${course_id}/student/${props.original.id}/results`} className="btn btn-sm btn-success shadow">
-                        View results <i class="fa fa-chevron-circle-right" aria-hidden="true"/>
+                        View results <i className="fa fa-chevron-circle-right" aria-hidden="true"/>
                     </Link>
                 </>
               )

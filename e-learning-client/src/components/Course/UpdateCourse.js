@@ -57,7 +57,7 @@ class UpdateCourse extends Component {
                     <div className="col-10 col-md-9 col-lg-7 m-auto">
                          
                         <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
-                            {`< Go back`} 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
                         </button>
 
                         <h5 className="display-4 text-center">Update Course</h5>

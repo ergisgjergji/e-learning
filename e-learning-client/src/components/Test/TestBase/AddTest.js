@@ -93,7 +93,7 @@ class AddTest extends Component {
                         <Prompt when={isBlocking} message={location => "If you leave, changes will not be saved. Continue?" } />
 
                         <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
-                            {`< Go back`} 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
                         </button>
 
                         <div className="text-center h3">Add test</div>
@@ -146,7 +146,7 @@ class AddTest extends Component {
                                 </div>
                                 
                                 <button type="submit" className="btn btn-lg btn-outline-success mt-0 mx-auto shadow" value="Save test">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"/> Save
+                                    <i className="fa fa-floppy-o" aria-hidden="true"/> Save
                                 </button>
 
                             </div>

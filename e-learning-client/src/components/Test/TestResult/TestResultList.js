@@ -3,21 +3,18 @@ import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCourseById } from '../../../redux/actions/courseActions';
-import { getTestBaseList } from '../../../redux/actions/testActions';
+import { getStudentCompletedTests } from '../../../redux/actions/testActions';
 
 import { Alert } from 'reactstrap';
 import { toast } from 'react-toastify';
-import TestBaseItem from './TestBaseItem';
 
-class TestBaseList extends Component {
+class TestResultList extends Component {
 
     componentDidMount() {
 
-        const { id } = this.props.match.params;
+        const { course_id, student_id } = this.props.match.params;
         // Perform this to check if course with 'id' exists
-        this.props.getCourseById(id, this.props.history);
-		this.props.getTestBaseList(id);
+        this.props.getStudentCompletedTests(course_id, student_id, this.props.history);
 
 		if(this.props.location.notification_message) {
 			toast.dismiss();
@@ -26,7 +23,6 @@ class TestBaseList extends Component {
 	}
 
     render() {
-        const { id } = this.props.match.params;
         const { tests } = this.props;
 
         return (
@@ -35,20 +31,20 @@ class TestBaseList extends Component {
 
                     <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                        <h1 className="display-4 text-center">Tests</h1>
+                        <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
+                        </button>
 
-                        <Link to={{ pathname: `/teacherPanel/course/${id}/addTest`, fromRoute: `/teacherPanel/course/${id}/tests` }} className="btn btn-md btn-primary shadow mb-4">
-                            <i className="fa fa-plus-circle" aria-hidden="true"/> Add test
-                        </Link>
+                        <h1 className="display-4 text-center mb-4">Test Results</h1>
 
                         {
                             (tests.length === 0) ?
                                 <Alert color="info" className="text-center">
-                                    This course has no tests.
+                                    This student has no completed tests.
                                 </Alert>
                                 :
                                 tests.map((test, index) => {
-                                    return <TestBaseItem key={index} test={test}/>
+                                    return <></>
                                 })
                         }
 
@@ -60,13 +56,13 @@ class TestBaseList extends Component {
     }
 }
 
-TestBaseList.propTypes = {
-    getCourseById: PropTypes.func.isRequired,
-    getTestBaseList: PropTypes.func.isRequired
+TestResultList.propTypes = {
+    tests: PropTypes.array,
+    getStudentCompletedTests: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    tests: state.testStore.testbase_list
+    tests: state.testStore.student_completed_tests
 });
 
-export default connect(mapStateToProps, { getCourseById, getTestBaseList })(TestBaseList);
+export default connect(mapStateToProps, { getStudentCompletedTests })(TestResultList);
