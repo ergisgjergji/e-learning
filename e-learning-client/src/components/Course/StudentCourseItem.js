@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Collapse, Fade, Badge, Tooltip } from 'reactstrap';
+import axios from 'axios';
+import classnames from 'classnames';
 
 import { confirmAlert } from 'react-confirm-alert';
 import { toast } from 'react-toastify';
@@ -14,10 +16,21 @@ class StudentCourseItem extends Component {
         super();
 
         this.state = {
+            tests: [],
             isDropdownOpen: false
         }
         this.toggleDropdown.bind(this);
         this.toggleTooltip.bind(this);
+    }
+
+    componentDidMount() {
+    
+        let { id } = this.props.course;
+        axios.get(`/api/test/${id}/list`)
+            .then(res => {
+                this.setState({ tests: res.data })
+            })
+            .catch(err => console.log(err));
     }
 
     toggleDropdown = () => {
@@ -31,36 +44,9 @@ class StudentCourseItem extends Component {
           });
     }
 
-    onTestHover = (e) => {
-
-    }
-
-	onDeleteClick = (id) => {
-        
-		confirmAlert({
-			title: 'Confirm',
-			message: 'Are u sure u want to delete this course?',
-			buttons: [
-				{
-					label: 'Yes',
-					className: "confirm-yes",
-					onClick: () => {
-                        this.props.deleteCourse(id);
-                        toast.dismiss();
-                        toast.info(`ℹ Course with id '${id}' was deleted successfully.`);
-                    }
-				},
-				{
-					label: 'No',
-					className: "confirm-no"
-			  	}
-			]
-		})
-	}
-
 	render() {
         const { course } = this.props;
-        const { isDropdownOpen } = this.state;
+        const { tests, isDropdownOpen } = this.state;
 
 		return (
 			<div className="container rounded">
@@ -98,40 +84,28 @@ class StudentCourseItem extends Component {
 
                                 <Collapse isOpen={isDropdownOpen}>
                                     <Fade in={isDropdownOpen}>
+                                        {
+                                            tests.map((test, index) => 
+                                                <>
+                                                    <li id={`tooltip-${index}`} className="list-group-item board bg-light">
+                                                        <Badge 
+                                                            className="ml-3 mr-1" 
+                                                            color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
+                                                        >
+                                                        { test.completed ?
+                                                                (test.passed ? "Pass" : "Fail")
+                                                                : "Take" }
+                                                        </Badge>
+                                                        { test.header }
+                                                        <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                                    </li>
 
-                                        <>
-                                            <li id="tooltip-1" className="list-group-item board bg-light">
-                                                <Badge className="ml-3 mr-1" color="success">Pass</Badge>
-                                                Teza A
-                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                            </li>
-                                            <Tooltip className="bg-danger" placement="right" target="tooltip-1" isOpen={this.state["tooltip-1"]} toggle={() => this.toggleTooltip("tooltip-1")}>
-                                                View details
-                                            </Tooltip>
-                                        </>
-
-                                        <>
-                                            <li id="tooltip-2" className="list-group-item board bg-light">
-                                                <Badge className="ml-3 mr-1" color="danger">Fail</Badge>
-                                                Teza B
-                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                            </li>
-                                            <Tooltip placement="right" target="tooltip-2" isOpen={this.state["tooltip-2"]} toggle={() => this.toggleTooltip("tooltip-2")}>
-                                                View details
-                                            </Tooltip>
-                                        </>
-
-                                        <>
-                                            <li id="tooltip-3" className="list-group-item board bg-light">
-                                                <Badge className="ml-3 mr-1" color="secondary">Take</Badge>
-                                                Teza C
-                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                            </li>
-                                            <Tooltip placement="right" target="tooltip-3" isOpen={this.state["tooltip-3"]} toggle={() => this.toggleTooltip("tooltip-3")}>
-                                                Take the test now
-                                            </Tooltip>
-                                        </>
-
+                                                    <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
+                                                        { test.completed ? "View details" : "Take the test" }
+                                                    </Tooltip>
+                                                </>
+                                            )
+                                        }
                                     </Fade>
                                 </Collapse>
 								

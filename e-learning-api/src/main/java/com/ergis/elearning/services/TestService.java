@@ -83,14 +83,12 @@ public class TestService {
         return test;
     }
 
-    public Set<TestViewModel> getStudentTestListByCourse(Long course_id, Long student_id, String username) {
+    public Set<TestViewModel> getStudentTestListByCourse(Long course_id, String username) {
 
-        // Make sure username and student_id are the same (the user is not requesting the list of another student_id)
         // Make sure student has a course with course_id
         // Map Set<Test> to Set<TestViewModel>
 
         User currentStudent = userRepository.findByUsername(username);
-        if(currentStudent.getId() != student_id) throw new UserIdException("Invalid user_id");
 
         Course studentCourse = courseRepository.findByIdAndUsers(course_id, currentStudent);
         if(studentCourse == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");

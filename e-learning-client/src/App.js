@@ -25,6 +25,7 @@ import AddTest from './components/Test/TestBase/AddTest';
 import CourseStudents from './components/Course/Students/CourseStudents';
 import TestResultList from './components/Test/TestResult/TestResultList';
 import StudentPanel from './components/Panels/StudentPanel';
+import CourseDetails from './components/Course/CourseDetails';
 
 class App extends Component {
 
@@ -70,6 +71,7 @@ class App extends Component {
             // STUDENT
           }
           <Route exact path="/studentPanel" component={StudentPanel}/>
+          <Route exact path="/studentPanel/course/:id/details" component={CourseDetails}/>
           {
             // Common
           }

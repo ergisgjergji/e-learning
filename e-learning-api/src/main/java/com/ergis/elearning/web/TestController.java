@@ -21,10 +21,10 @@ public class TestController {
     private TestService testService;
 
     @PreAuthorize("hasRole('STUDENT')")
-    @GetMapping("/{course_id}/{student_id}/list")
-    public ResponseEntity<?> getStudentTestListByCourse(@PathVariable String course_id, @PathVariable String student_id, Principal principal) {
+    @GetMapping("/{course_id}/list")
+    public ResponseEntity<?> getStudentTestListByCourse(@PathVariable String course_id, Principal principal) {
 
-        Set<TestViewModel> testList = testService.getStudentTestListByCourse(Long.parseLong(course_id), Long.parseLong(student_id), principal.getName());
+        Set<TestViewModel> testList = testService.getStudentTestListByCourse(Long.parseLong(course_id), principal.getName());
         return new ResponseEntity<Set<TestViewModel>>(testList, HttpStatus.OK);
     }
 
