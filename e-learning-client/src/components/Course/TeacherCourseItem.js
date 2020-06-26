@@ -55,19 +55,19 @@ class TeacherCourseItem extends Component {
 							<ul className="list-group shadow-lg">
 
 								<Link to={`/teacherPanel/updateCourse/${course.id}`}>
-									<li className="list-group-item board">
+									<li className="list-group-item update">
 										<i className="fa fa-edit pr-1"> Update course </i>
 									</li>
 								</Link>
 
 								<Link to={`/teacherPanel/course/${course.id}/students`}>
-									<li className="list-group-item update">
+									<li className="list-group-item board">
 										<i className="fa fa-users pr-1"> Manage Students </i>
 									</li>
 								</Link>
 
                                 <Link to={`/teacherPanel/course/${course.id}/tests`}>
-									<li className="list-group-item update">
+									<li className="list-group-item board">
 										<i className="fa fa-file-text-o pr-1"> Manage Tests </i>
 									</li>
 								</Link>

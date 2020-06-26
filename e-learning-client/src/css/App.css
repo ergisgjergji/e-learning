@@ -14,16 +14,22 @@ img {
     cursor: pointer;
     background-color: pink;
   }
+  .list-group-item.update {
+    color: #18a2b9;
+  }
   .list-group-item.update:hover {
     cursor: pointer;
     background-color: gainsboro;
+  }
+  .list-group-item.board {
+    color: #007bff;
   }
   .list-group-item.board:hover {
     cursor: pointer;
     background-color: gainsboro;
   }
   
-  .fa.fa-edit {
+  .fa.fa-edit .fa-info-circle{
     color: #18a2b9;
   }
   .fa.fa-trash-o {
@@ -91,4 +97,11 @@ img {
       /* The third layer shadow */
       0 -20px 1px -9px rgba(0,0,0,0.15);
     background: #fff;
+  }
+
+  .icon-position-right {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translate(0, -50%);
   }
