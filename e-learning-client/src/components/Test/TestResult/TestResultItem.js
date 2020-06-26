@@ -9,6 +9,10 @@ class TestResultItem extends Component {
 
         this.state = {
             header: "",
+            completed_time: "",
+            total_points: "",
+            scored_points: "",
+            passed: false,
             questions: [],
             isOpen: false
         };
@@ -16,8 +20,8 @@ class TestResultItem extends Component {
     }
 
     componentDidMount() {
-        const { header, questions } = this.props.test;
-        this.setState({ header, questions });
+        const { header, questions, completed_time, total_points, scored_points, passed } = this.props.test;
+        this.setState({ header, questions, completed_time, total_points, scored_points, passed });
     }
 
     onToggle = () => {
@@ -25,7 +29,7 @@ class TestResultItem extends Component {
     }
 
     render() {
-        const { header, questions, isOpen } = this.state;
+        const { header, questions, completed_time, total_points, scored_points, passed, isOpen } = this.state;
 
         return (
             <div className="col-12 mx-auto">
@@ -37,12 +41,44 @@ class TestResultItem extends Component {
                     <Collapse isOpen={isOpen}>
                         <Fade in={isOpen}>
                             <div className="px-4 mb-4 border">
+
                                 <div className="text-center h5 m-4"><u>{header}</u></div>
+
                                 {
                                     questions.map((question, index) => {
                                         return <QuestionResultItem key={index} question={question}/>
                                     })
                                 }
+
+                                <div className="col-12 col-md-8 col-lg-5 my-4 shadow p-0 ml-auto">
+
+                                    <div className="col-12 border rounded">
+                                        <div className="row">
+                                            <div className="col-6 text-center border-right font-weight-bold">Total:</div>
+                                            <div className="col-6 text-center">{total_points}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-12 border rounded">
+                                        <div className="row">
+                                            <div className="col-6 text-center border-right font-weight-bold">Score:</div>
+                                            <div className="col-6 text-center">{scored_points}</div>
+                                        </div>
+                                        
+                                    </div><div className="col-12 border rounded">
+                                        <div className="row">
+                                            <div className="col-6 text-center border-right font-weight-bold">Result:</div>
+                                            {
+                                                passed ? 
+                                                    <div className="col-6 text-center text-white bg-success">PASS</div> 
+                                                    : 
+                                                    <div className="col-6 text-center text-white bg-danger">FAIL</div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
                         </Fade>
                     </Collapse>

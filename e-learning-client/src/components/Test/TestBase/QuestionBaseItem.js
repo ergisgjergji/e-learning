@@ -7,9 +7,9 @@ class QuestionBaseItem extends Component {
         this.renderSwitch.bind(this);
     }
 
-    renderSwitch = (alternatives) => {
+    renderSwitch = (type, alternatives) => {
 
-        switch(alternatives.type) {
+        switch(type) {
     
           case 1:
             return (
@@ -54,7 +54,7 @@ class QuestionBaseItem extends Component {
                     <p className="text-left">{ question.description }</p>
                 </div>
                     {
-                        this.renderSwitch(question.alternatives)
+                        this.renderSwitch(question.type, question.alternatives)
                     }
             </div>
         )

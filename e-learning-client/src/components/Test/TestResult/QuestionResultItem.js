@@ -5,43 +5,65 @@ class QuestionResultItem extends Component {
 
     constructor(){
         super();
-        this.renderSwitch.bind(this);
+        this.renderLogic.bind(this);
     }
 
-    renderSwitch = (alternatives) => {
+    renderLogic = (type, alternatives) => {
+        const correctAlternatives = alternatives.filter(alt => alt.correct === true);
 
-        switch(alternatives.type) {
-    
+        switch(type) {
           case 1:
             return (
                 <div className="row">
                     {
                         alternatives.map((alt, index) => {
                             return (
-                                <div key={index} className="col-6 col-lg-3 text-center mx-auto mt-2">
+                                <div key={index} className="col-6 col-lg-6 text-center mx-auto mt-2">
                                     <input className="form-check-input" type="radio" id={index} checked={alt.checked} disabled/>
-                                    <label htmlFor={index} className={classnames("form-check-input ", {"text-success": alt.correct})}>
+                                    <label htmlFor={index} className={classnames("form-check-label ", {"text-success": alt.correct})} >
                                         {alt.description}
                                     </label>
                                 </div>
                             )
                         })
                     }
+                    {
+                        (correctAlternatives[0].checked) ?
+                            <label className="mt-2 mb-0 ml-auto text-success">
+                                <i className="fa fa-check" aria-hidden="true"/> Correct
+                            </label>
+                            :
+                            <label className="mt-2 mb-0 ml-auto text-danger">
+                                <i className="fa fa-times" aria-hidden="true"/> Incorrect
+                            </label>
+                    }
                 </div>
-            );
-    
+            );    
           default:
               return (
                 <div className="row">
                     {
-                        alternatives.map((alt, index) => {
+                        alternatives.map((alt, index) => {                            
                             return (
                                 <div key={index} className="col-6 col-md-6 col-lg-6 text-center mx-auto mt-2">
                                     <input className="form-check-input" type="checkbox" id={index} checked={alt.checked} disabled/>
-                                    <label className="form-check-label" htmlFor={index}>{alt.description}</label>
+                                    <label htmlFor={index} className={classnames("form-check-label ", {"text-success": alt.correct})} >
+                                        {alt.description}
+                                    </label>
                                 </div>
                             )
                         })
+                    }
+                    {
+                         ((type === 2 && correctAlternatives[0].checked) || (type === 3 && correctAlternatives[0].checked && correctAlternatives[1].checked)) 
+                            ?
+                            <label className="mt-2 mb-0 ml-auto text-success">
+                                <i className="fa fa-check" aria-hidden="true"/> Correct
+                            </label>
+                            :
+                            <label className="mt-2 mb-0 ml-auto text-danger">
+                                <i className="fa fa-times" aria-hidden="true"/> Incorrect
+                            </label>
                     }
                 </div>
             );
@@ -57,7 +79,7 @@ class QuestionResultItem extends Component {
                     <p className="text-left">{ question.description }</p>
                 </div>
                     {
-                        this.renderSwitch(question.alternatives)
+                        this.renderLogic(question.type, question.alternatives)
                     }
             </div>
         )
