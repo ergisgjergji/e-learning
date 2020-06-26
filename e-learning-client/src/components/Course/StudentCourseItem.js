@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import { Collapse, Fade, Badge } from 'reactstrap';
+import { Collapse, Fade, Badge, Tooltip } from 'reactstrap';
 
 import { confirmAlert } from 'react-confirm-alert';
 import { toast } from 'react-toastify';
@@ -17,10 +17,22 @@ class StudentCourseItem extends Component {
             isDropdownOpen: false
         }
         this.toggleDropdown.bind(this);
+        this.toggleTooltip.bind(this);
     }
 
     toggleDropdown = () => {
         this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
+    }
+
+    toggleTooltip = (target) => {
+        this.setState({
+            ...this.state,
+            [target]: !this.state[target]
+          });
+    }
+
+    onTestHover = (e) => {
+
     }
 
 	onDeleteClick = (id) => {
@@ -87,23 +99,38 @@ class StudentCourseItem extends Component {
                                 <Collapse isOpen={isDropdownOpen}>
                                     <Fade in={isDropdownOpen}>
 
-                                        <li className="list-group-item board bg-light">
-                                            <Badge className="ml-3 mr-1" color="success">Pass</Badge>
-                                            Teza A
-                                            <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                        </li>
+                                        <>
+                                            <li id="tooltip-1" className="list-group-item board bg-light">
+                                                <Badge className="ml-3 mr-1" color="success">Pass</Badge>
+                                                Teza A
+                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                            </li>
+                                            <Tooltip className="bg-danger" placement="right" target="tooltip-1" isOpen={this.state["tooltip-1"]} toggle={() => this.toggleTooltip("tooltip-1")}>
+                                                View details
+                                            </Tooltip>
+                                        </>
 
-                                        <li className="list-group-item board bg-light">
-                                            <Badge className="ml-3 mr-1" color="danger">Fail</Badge>
-                                            Teza B
-                                            <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                        </li>
+                                        <>
+                                            <li id="tooltip-2" className="list-group-item board bg-light">
+                                                <Badge className="ml-3 mr-1" color="danger">Fail</Badge>
+                                                Teza B
+                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                            </li>
+                                            <Tooltip placement="right" target="tooltip-2" isOpen={this.state["tooltip-2"]} toggle={() => this.toggleTooltip("tooltip-2")}>
+                                                View details
+                                            </Tooltip>
+                                        </>
 
-                                        <li className="list-group-item board bg-light">
-                                            <Badge className="ml-3 mr-1" color="secondary">Take</Badge>
-                                            Teza C
-                                            <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                        </li>
+                                        <>
+                                            <li id="tooltip-3" className="list-group-item board bg-light">
+                                                <Badge className="ml-3 mr-1" color="secondary">Take</Badge>
+                                                Teza C
+                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                            </li>
+                                            <Tooltip placement="right" target="tooltip-3" isOpen={this.state["tooltip-3"]} toggle={() => this.toggleTooltip("tooltip-3")}>
+                                                Take the test now
+                                            </Tooltip>
+                                        </>
 
                                     </Fade>
                                 </Collapse>
