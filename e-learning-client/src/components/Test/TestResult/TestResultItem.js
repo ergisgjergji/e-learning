@@ -50,7 +50,7 @@ class TestResultItem extends Component {
                                     })
                                 }
 
-                                <div className="col-12 col-md-8 col-lg-5 my-4 shadow p-0 ml-auto">
+                                <div className="col-12 col-md-8 col-lg-5 mt-4 shadow p-0 ml-auto">
 
                                     <div className="col-12 border rounded">
                                         <div className="row">
@@ -62,10 +62,13 @@ class TestResultItem extends Component {
                                     <div className="col-12 border rounded">
                                         <div className="row">
                                             <div className="col-6 text-center border-right font-weight-bold">Score:</div>
-                                            <div className="col-6 text-center">{scored_points}</div>
+                                            <div className="col-6 text-center">
+                                                {`${scored_points} (${scored_points*100/total_points}%)`}
+                                            </div>
                                         </div>
-                                        
-                                    </div><div className="col-12 border rounded">
+                                    </div>
+                                    
+                                    <div className="col-12 border rounded">
                                         <div className="row">
                                             <div className="col-6 text-center border-right font-weight-bold">Result:</div>
                                             {
@@ -77,6 +80,10 @@ class TestResultItem extends Component {
                                         </div>
                                     </div>
 
+                                </div>
+                                
+                                <div className="col-12 my-1 p-0 text-right">
+                                    <b>Note:</b> <i>Minimal passing score is 40%</i>
                                 </div>
 
                             </div>

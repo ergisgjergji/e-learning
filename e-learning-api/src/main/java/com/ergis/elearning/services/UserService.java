@@ -82,6 +82,7 @@ public class UserService {
         // Make sure user exists
         // Check the role of principal
         // If not an admin, make sure id belongs to him else throw error
+        // Check if username already exists
 
         // User rights: Change username/full_name/password
         // Admin has also right to change role/faculty
@@ -90,6 +91,11 @@ public class UserService {
 
         User user = userRepository.getById(updatedUser.getId());
         if(user == null) throw new UserIdException("User with id '" +updatedUser.getId()+ "' not found");
+
+        User duplicateUsername = userRepository.findByUsername(updatedUser.getUsername());
+        if(duplicateUsername != null)
+            if(user.getId() != duplicateUsername.getId())
+                throw new UsernameException("Username '" +updatedUser.getUsername()+ "' already exists");
 
         User principal = userRepository.findByUsername(username);
         if (!principal.getRole().equals("ADMIN")) {
