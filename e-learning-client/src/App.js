@@ -8,6 +8,7 @@ import Header from './components/Layout/Header';
 import { ToastContainer } from 'react-toastify';
 import LandingPage from './components/Layout/LandingPage';
 import Login from './components/Layout/Login';
+import Logout from './components/Layout/Logout';
 import AdminPanel from './components/Panels/AdminPanel';
 import StudentsTable from './components/Datatable/StudentsTable';
 import TeachersTable from './components/Datatable/TeachersTable';
@@ -45,6 +46,7 @@ class App extends Component {
         }
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/login" component={Login}/>
+        <Route exact path="/logout" component={Logout}/>
         {
           // PRIVATE Routes
         }
