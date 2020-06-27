@@ -79,7 +79,9 @@ class QuestionResultItem extends Component {
                     <p className="text-left">{ question.description }</p>
                 </div>
                     {
-                        this.renderLogic(question.type, question.alternatives)
+                        Object.keys(question.alternatives).length ?
+                            this.renderLogic(question.type, question.alternatives)
+                            : null
                     }
             </div>
         )
