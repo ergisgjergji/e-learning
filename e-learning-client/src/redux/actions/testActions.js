@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_ERRORS } from './types';
+import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_TEST, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 import store from './../store';
 
@@ -70,4 +70,23 @@ export const getStudentCompletedTests = (course_id, student_id, history) => disp
             });
             history.goBack();
         })
+}
+
+export const getTestById = (course_id, test_id, history) => dispatch => {
+
+    axios.get(`/api/test/${course_id}/${test_id}`)
+        .then(res => {
+            dispatch({
+                type: GET_TEST,
+                payload: res.data
+            });
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+            history.goBack();
+        });
 }

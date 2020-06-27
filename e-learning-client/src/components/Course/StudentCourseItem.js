@@ -28,7 +28,9 @@ class StudentCourseItem extends Component {
         let { id } = this.props.course;
         axios.get(`/api/test/${id}/list`)
             .then(res => {
-                this.setState({ tests: res.data })
+
+                let tests = res.data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+                this.setState({ tests })
             })
             .catch(err => console.log(err));
     }
@@ -73,38 +75,47 @@ class StudentCourseItem extends Component {
 
 								<Link to={`/studentPanel/course/${course.id}/details`}>
 									<li className="list-group-item update">
-										<i className="fa fa-info-circle pr-1"> Details </i>
+										<i className="fa fa-info-circle pr-1"> View Details </i>
 									</li>
 								</Link>
 
 								<li className="list-group-item board" onClick={this.toggleDropdown}>
-									<i className="fa fa-file-text pr-1"> Tests </i>
+									<i className="fa fa-file-text pr-1"> Manage Tests </i>
                                     <i className={`fa ${!isDropdownOpen ? 'fa-chevron-down' : 'fa-chevron-up'} icon-position-right`} aria-hidden="true"/>
 								</li>
 
                                 <Collapse isOpen={isDropdownOpen}>
                                     <Fade in={isDropdownOpen}>
                                         {
-                                            tests.map((test, index) => 
-                                                <>
-                                                    <li id={`tooltip-${index}`} className="list-group-item board bg-light">
-                                                        <Badge 
-                                                            className="ml-3 mr-1" 
-                                                            color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
-                                                        >
-                                                        { test.completed ?
-                                                                (test.passed ? "Pass" : "Fail")
-                                                                : "Take" }
-                                                        </Badge>
-                                                        { test.header }
-                                                        <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                                    </li>
+                                            tests.map((test, index) => {
 
-                                                    <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
-                                                        { test.completed ? "View details" : "Take the test" }
-                                                    </Tooltip>
-                                                </>
-                                            )
+                                                let routeTo = '';
+                                                if(test.completed)
+                                                    routeTo = `/studentPanel/course/${course.id}/test/${test.id}/details`;
+                                                else
+                                                    routeTo = `/studentPanel/course/${course.id}/test/${test.id}/complete`;
+
+                                                return (
+                                                    <Link to={routeTo}>
+                                                        <li id={`tooltip-${index}`} className="list-group-item board bg-light">
+                                                            <Badge 
+                                                                className="ml-3 mr-1" 
+                                                                color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
+                                                            >
+                                                            { test.completed ?
+                                                                    (test.passed ? "Pass" : "Fail")
+                                                                    : "Take" }
+                                                            </Badge>
+                                                            { test.header }
+                                                            <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                                        </li>
+
+                                                        <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
+                                                            { test.completed ? "View details" : "Take the test" }
+                                                        </Tooltip>
+                                                    </Link>
+                                                )
+                                            })
                                         }
                                     </Fade>
                                 </Collapse>

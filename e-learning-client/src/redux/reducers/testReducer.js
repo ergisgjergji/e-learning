@@ -1,8 +1,9 @@
-import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS } from '../actions/types';
+import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_TEST } from '../actions/types';
 
 const initialState = {
     testbase_list: [],
-    student_completed_tests: []
+    student_completed_tests: [],
+    current_test: {}
 };
 
 export default function( state = initialState, action ) {
@@ -19,6 +20,12 @@ export default function( state = initialState, action ) {
             return {
                 ...state,
                 student_completed_tests: action.payload
+            }
+
+        case GET_TEST:
+            return {
+                ...state,
+                current_test: action.payload
             }
 
         default:
