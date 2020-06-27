@@ -119,3 +119,14 @@ export const submitTest = (test, history) => dispatch => {
             });
         });
 }
+
+export const asyncSubmit = (test) => dispatch => {
+
+    axios.post('/api/test', test)
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+        })
+}

@@ -128,11 +128,9 @@ public class TestService {
     public void evaluateTest(Test postTest, String username) {
 
         // Make sure test exists
-        // Check if existing test is already completed
 
         Test test = testRepository.getById(postTest.getId());
         if(test == null) throw new TestIdException("Test with id '" +postTest.getId()+ "' not found");
-        if(test.getCompleted() == true) throw new TestIdException("Test with id '" +postTest.getId()+ "' is already completed.");
 
         Integer correctAnswers = 0;
 

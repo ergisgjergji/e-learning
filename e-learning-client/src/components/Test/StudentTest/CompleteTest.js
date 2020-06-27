@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getTestById, submitTest } from './../../../redux/actions/testActions';
+import { getTestById, submitTest, asyncSubmit } from './../../../redux/actions/testActions';
 import TestForm from './TestForm';
 
 class CompleteTest extends Component {
@@ -22,7 +22,7 @@ class CompleteTest extends Component {
 
                         {
                             Object.keys(test).length ?
-                                <TestForm history={this.props.history} test={test} submitTest={this.props.submitTest}/>
+                                <TestForm history={this.props.history} test={test} submitTest={this.props.submitTest} asyncSubmit={this.props.asyncSubmit}/>
                                 : null
                         }
                         
@@ -36,11 +36,12 @@ class CompleteTest extends Component {
 CompleteTest.propTypes = {
     test: PropTypes.object,
     getTestById: PropTypes.func.isRequired,
-    submitTest: PropTypes.func.isRequired
+    submitTest: PropTypes.func.isRequired,
+    asyncSubmit: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     test: state.testStore.complete_test
 });
 
-export default connect(mapStateToProps, { getTestById, submitTest })(CompleteTest);
+export default connect(mapStateToProps, { getTestById, submitTest, asyncSubmit })(CompleteTest);

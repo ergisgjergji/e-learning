@@ -21,9 +21,8 @@ class TestForm extends Component {
     componentDidMount() {
         // Submit the test if the windows is closed
         window.addEventListener("beforeunload", this.onWindowClose);
-        
         // Submit the test every 5 minutes
-        setInterval(this.submitInterval, 300000);
+        setInterval(this.submitInterval, 20000);
 
         const { test } = this.props;
         this.setState({ test });
@@ -32,16 +31,19 @@ class TestForm extends Component {
     componentWillUnmount() {
         window.removeEventListener("beforeunload", this.onWindowOut);
         clearInterval(this.submitInterval);
+
+        const { test } = this.state;
+        this.props.asyncSubmit(test);
     }
 
     onWindowClose = (e) => {
         const { test } = this.state;
-        // Call action to submit test
+        this.props.submitTest(test, this.props.history)
     }
 
     submitInterval = () => {
         const { test } = this.state;
-        // Call action to submit test
+        this.props.asyncSubmit(test)
     }
 
     onCompleteQuestion = (question_index, updatedAlternatives) => {
@@ -87,7 +89,11 @@ class TestForm extends Component {
 
                     <div className="text-center h5 m-4"><u>{test.header}</u></div>
 
-                    <Prompt when={isBlocking} message={location => "If you leave, the test will be submited. Continue?" } />
+                    <Prompt when={isBlocking} message={location => {
+                            location.notification_message = "Test was submitted successfully.";
+                            return "If you leave, the test will be submited. Continue?"
+                        } 
+                    } />
 
                     {
                         Object.keys(test).length ?
