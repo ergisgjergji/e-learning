@@ -22,14 +22,14 @@ class TestForm extends Component {
         // Submit the test if the windows is closed
         window.addEventListener("beforeunload", this.onWindowClose);
         // Submit the test every 5 minutes
-        setInterval(this.submitInterval, 20000);
+        setInterval(this.submitInterval, 120000);
 
         const { test } = this.props;
         this.setState({ test });
     }
 
     componentWillUnmount() {
-        window.removeEventListener("beforeunload", this.onWindowOut);
+        window.removeEventListener("beforeunload", this.onWindowClose);
         clearInterval(this.submitInterval);
 
         const { test } = this.state;
@@ -37,8 +37,12 @@ class TestForm extends Component {
     }
 
     onWindowClose = (e) => {
+        e.preventDefault();
+        
         const { test } = this.state;
-        this.props.submitTest(test, this.props.history)
+        this.props.asyncSubmit(test);
+        
+        return e.returnValue = "If you close the window, the test will be submitted.\nAre you sure you want to continue?"; 
     }
 
     submitInterval = () => {
@@ -47,7 +51,7 @@ class TestForm extends Component {
     }
 
     onCompleteQuestion = (question_index, updatedAlternatives) => {
-
+        
         const { test } = this.state;
         
         const updatedQuestions = test.questions.map((q, i) => i === question_index ? { ...q, alternatives: updatedAlternatives } : { ...q });
