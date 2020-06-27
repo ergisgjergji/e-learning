@@ -46,6 +46,25 @@ class StudentCourseItem extends Component {
           });
     }
 
+    onTakeTest = (course_id, test_id) => {
+
+        confirmAlert({
+			title: 'Confirm',
+			message: 'You are about to start this test. Once you start, you cannot go back. \nContinue?',
+			buttons: [
+				{
+					label: 'Yes',
+					className: "confirm-yes",
+					onClick: () => this.props.history.push(`/studentPanel/course/${course_id}/test/${test_id}/complete`)
+				},
+				{
+					label: 'No',
+					className: "confirm-no"
+			  	}
+			]
+		})
+    }
+
 	render() {
         const { course } = this.props;
         const { tests, isDropdownOpen } = this.state;
@@ -89,32 +108,48 @@ class StudentCourseItem extends Component {
                                         {
                                             tests.map((test, index) => {
 
-                                                let routeTo = '';
                                                 if(test.completed)
-                                                    routeTo = `/studentPanel/course/${course.id}/test/${test.id}/details`;
+                                                    return (
+                                                        <Link to={`/studentPanel/course/${course.id}/test/${test.id}/details`} key={index}>
+                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-light">
+                                                                <Badge 
+                                                                    className="ml-3 mr-1" 
+                                                                    color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
+                                                                >
+                                                                { test.completed ?
+                                                                        (test.passed ? "Pass" : "Fail")
+                                                                        : "Take" }
+                                                                </Badge>
+                                                                { test.header }
+                                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                                            </li>
+
+                                                            <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
+                                                                { test.completed ? "View details" : "Take the test" }
+                                                            </Tooltip>
+                                                        </Link>
+                                                    )
                                                 else
-                                                    routeTo = `/studentPanel/course/${course.id}/test/${test.id}/complete`;
+                                                    return (
+                                                        <div key={index}>
+                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-light" onClick={this.onTakeTest.bind(this,course.id, test.id)}>
+                                                                <Badge 
+                                                                    className="ml-3 mr-1" 
+                                                                    color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
+                                                                >
+                                                                { test.completed ?
+                                                                        (test.passed ? "Pass" : "Fail")
+                                                                        : "Take" }
+                                                                </Badge>
+                                                                { test.header }
+                                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                                            </li>
 
-                                                return (
-                                                    <Link to={routeTo}>
-                                                        <li id={`tooltip-${index}`} className="list-group-item board bg-light">
-                                                            <Badge 
-                                                                className="ml-3 mr-1" 
-                                                                color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
-                                                            >
-                                                            { test.completed ?
-                                                                    (test.passed ? "Pass" : "Fail")
-                                                                    : "Take" }
-                                                            </Badge>
-                                                            { test.header }
-                                                            <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                                        </li>
-
-                                                        <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
-                                                            { test.completed ? "View details" : "Take the test" }
-                                                        </Tooltip>
-                                                    </Link>
-                                                )
+                                                            <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
+                                                                { test.completed ? "View details" : "Take the test" }
+                                                            </Tooltip>
+                                                        </div>
+                                                    )
                                             })
                                         }
                                     </Fade>

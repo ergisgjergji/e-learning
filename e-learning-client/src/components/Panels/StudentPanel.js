@@ -32,7 +32,7 @@ class StudentPanel extends Component {
 
 							{ 
 								courses.map(course => (
-									<StudentCourseItem key={course.id} course={course}/>
+									<StudentCourseItem key={course.id} course={course} history={this.props.history}/>
 								)
 							)}
 						</div>

@@ -20,6 +20,10 @@ class TestDetails extends Component {
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
+                        <button className="btn btn-secondary btn-sm shadow mb-3" onClick={() => this.props.history.goBack()}> 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
+                        </button>
+
                         {
                             Object.keys(current_test).length ?
                                 <TestResultPaper test={current_test}/>
