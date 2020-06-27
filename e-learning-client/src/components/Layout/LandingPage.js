@@ -48,6 +48,12 @@ class LandingPage extends Component {
                                 
                                 <Link to="/login" className="btn btn-lg btn-primary mr-2"> Login </Link>
 
+                                <label className="d-block text-secondary mt-3">
+                                   <small className="rounded p-2">
+                                        <i className="fa fa-info-circle" aria-hidden="true"/> Use credentials: <u>admin@admin.com</u> & <u>123456</u> for demonstration. 
+                                    </small>
+                                </label>
+
                             </div>
                         </div>
 
