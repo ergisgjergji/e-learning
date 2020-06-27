@@ -5,6 +5,7 @@ export default class TestResultPaper extends Component {
     
     render() {
         const { header, questions, completed_time, total_points, scored_points, passed } = this.props.test;
+        const score_percent = Math.round((scored_points*100/total_points) * 10) / 10;
 
         return (
             <div className="paper mt-4">
@@ -31,7 +32,7 @@ export default class TestResultPaper extends Component {
                             <div className="row">
                                 <div className="col-6 text-center border-right font-weight-bold">Score:</div>
                                 <div className="col-6 text-center">
-                                    {`${scored_points} (${scored_points*100/total_points}%)`}
+                                    {`${scored_points} (${score_percent}%)`}
                                 </div>
                             </div>
                         </div>
@@ -51,7 +52,9 @@ export default class TestResultPaper extends Component {
                     </div>
                                     
                     <div className="col-12 my-1 p-0 text-right">
-                        <b>Note:</b> <i>Minimal passing score is 40%</i>
+                        <small>
+                            * Note: <i>Minimal passing score is 40%</i>
+                        </small>
                     </div>
                 </div>
             </div>

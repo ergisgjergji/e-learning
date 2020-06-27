@@ -20,6 +20,7 @@ public class TestController {
     @Autowired
     private TestService testService;
 
+    // Changed URL
     @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/{course_id}/list")
     public ResponseEntity<?> getStudentTestListByCourse(@PathVariable String course_id, Principal principal) {
@@ -44,11 +45,12 @@ public class TestController {
         return new ResponseEntity<Set<Test>>(studentCourseCompletedTests, HttpStatus.OK);
     }
 
+    // Changed URL
     @PreAuthorize("hasRole('STUDENT')")
-    @PostMapping("/{course_id}/{test_id}")
-    public ResponseEntity<?> evaluateTest(@RequestBody Test test, @PathVariable String course_id, @PathVariable String test_id, Principal principal) {
+    @PostMapping("")
+    public ResponseEntity<?> evaluateTest(@RequestBody Test test, Principal principal) {
 
-        testService.evaluateTest(Long.parseLong(course_id), Long.parseLong(course_id), test, principal.getName());
+        testService.evaluateTest(test, principal.getName());
         return new ResponseEntity<String>("Test was evaluated successfully.", HttpStatus.OK);
     }
 }

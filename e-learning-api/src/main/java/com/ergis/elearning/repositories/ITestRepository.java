@@ -11,6 +11,7 @@ import java.util.Set;
 @Repository
 public interface ITestRepository extends CrudRepository<Test, Long> {
 
+    Test getById(Long id);
     Test findByIdAndUserAndCourse(Long id, User user, Course course);
 
     Set<Test> findAllByCourseAndUser(Course course, User user);

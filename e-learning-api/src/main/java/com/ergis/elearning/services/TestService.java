@@ -125,19 +125,14 @@ public class TestService {
         return studentCourseCompletedTests;
     }
 
-    public void evaluateTest(Long course_id, Long test_id, Test postTest, String username) {
+    public void evaluateTest(Test postTest, String username) {
 
-        // Make sure course exists and belongs to user
-        // Make sure test exists and belongs to course
+        // Make sure test exists
         // Check if existing test is already completed
 
-        User student = userRepository.findByUsername(username);
-        Course studentCourse = courseRepository.findByIdAndUsers(course_id, student);
-        if(studentCourse == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
-
-        Test test = testRepository.findByIdAndUserAndCourse(test_id, student, studentCourse);
-        if(test == null) throw new TestIdException("Test with id '" +test_id+ "' not found");
-        if(test.getCompleted() == true) throw new TestIdException("Test with id '" +test_id+ "' is already completed.");
+        Test test = testRepository.getById(postTest.getId());
+        if(test == null) throw new TestIdException("Test with id '" +postTest.getId()+ "' not found");
+        if(test.getCompleted() == true) throw new TestIdException("Test with id '" +postTest.getId()+ "' is already completed.");
 
         Integer correctAnswers = 0;
 

@@ -102,3 +102,20 @@ export const getTestById = (course_id, test_id, history) => dispatch => {
             history.goBack();
         });
 }
+
+export const submitTest = (test, history) => dispatch => {
+
+    axios.post('/api/test', test)
+        .then(res => {
+            history.push({
+                pathname: '/studentPanel',
+                notification_message: 'Test was submitted successfully.'
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+        });
+}

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Prompt } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+
 import QuestionForm from './QuestionForm';
 
 class TestForm extends Component {
@@ -7,15 +10,38 @@ class TestForm extends Component {
         super();
 
         this.state = {
-            test: {}
+            test: {},
+            isBlocking: true
         }
+        this.onWindowClose.bind(this);
         this.onCompleteQuestion.bind(this);
         this.onTestSubmit.bind(this);
     }
-
+ 
     componentDidMount() {
+        // Submit the test if the windows is closed
+        window.addEventListener("beforeunload", this.onWindowClose);
+        
+        // Submit the test every 5 minutes
+        setInterval(this.submitInterval, 300000);
+
         const { test } = this.props;
         this.setState({ test });
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload", this.onWindowOut);
+        clearInterval(this.submitInterval);
+    }
+
+    onWindowClose = (e) => {
+        const { test } = this.state;
+        // Call action to submit test
+    }
+
+    submitInterval = () => {
+        const { test } = this.state;
+        // Call action to submit test
     }
 
     onCompleteQuestion = (question_index, updatedAlternatives) => {
@@ -29,19 +55,39 @@ class TestForm extends Component {
     }
 
     onTestSubmit = () => {
-        const { test } = this.state;
-        console.log(test);
-        // call action to save test
+        this.setState({ isBlocking: false })
+
+        confirmAlert({
+			title: 'Confirm',
+			message: 'You are about to submit the test. Continue?',
+			buttons: [
+				{
+					label: 'Yes',
+					className: "confirm-yes",
+					onClick: () => {
+                        const { test } = this.state;
+                        this.props.submitTest(test, this.props.history)
+                    }
+				},
+				{
+					label: 'No',
+					className: "confirm-no"
+			  	}
+			]
+		})
     }
 
     render() {
 
-        const { test } = this.state;
+        const { test, isBlocking } = this.state;
+
         return (
             <div className="paper mt-4">
                 <div className="px-4 mb-4 border">
 
                     <div className="text-center h5 m-4"><u>{test.header}</u></div>
+
+                    <Prompt when={isBlocking} message={location => "If you leave, the test will be submited. Continue?" } />
 
                     {
                         Object.keys(test).length ?
