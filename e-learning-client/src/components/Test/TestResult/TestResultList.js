@@ -27,13 +27,13 @@ class TestResultList extends Component {
         const { tests } = this.props;
 
         return (
-            <div className="container mt-4">
+            <div className="container mb-4">
                 <div className="row">
 
                     <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                        <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
-                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
+                        <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Back
                         </button>
 
                         <h1 className="display-4 text-center mb-4">Test Results</h1>

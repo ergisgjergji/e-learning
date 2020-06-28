@@ -70,26 +70,27 @@ class StudentCourseItem extends Component {
         const { tests, isDropdownOpen } = this.state;
 
 		return (
-			<div className="container rounded">
+			<div className="container p-0 rounded">
 				<div className="card card-body bg-light mb-3 border border-secondary">
 
 					<div className="row pb-4">
-						<div className="col-4 col-md-3 border-right">
+
+						<div className="col-12 col-4 col-md-3 border-right mb-2">
 							<h5 className="mx-auto"> #{course.name} </h5>
                             <span className="d-block mt-1">
                                 <small><i> by {course.teacher_name} </i></small>
                             </span>
-                            <span className="d-block mt-3 mb-1 border border rounded text-center py-4 shadow-sm">
+                            <span className="d-block mt-3 mb-1 border border rounded text-center py-2 shadow-sm">
                                 <small> <b>Contact:</b> {course.teacher_email} </small>
                             </span>
 						</div>
 
-						<div className="col-md-4 col-8 border-right">
+						<div className="col-12 col-md-4 col-8 border-right">
 							<h5>Description:</h5>
 							<p>{course.description}</p>
 						</div>
 
-						<div className="col-md-5 d-lg-block">
+						<div className="col-12 col-md-5 d-lg-block">
 							<ul className="list-group shadow-lg">
 
 								<Link to={`/studentPanel/course/${course.id}/details`}>

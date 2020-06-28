@@ -16,7 +16,7 @@ class CompleteTest extends Component {
         const { test } = this.props;
         
         return (
-            <div className="container mt-4">
+            <div className="container my-4">
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 

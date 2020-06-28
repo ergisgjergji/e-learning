@@ -218,7 +218,7 @@ class AddQuestion extends Component {
                                 null
                         }
 
-                        <button type="button" className="btn btn-md btn-outline-success ml-auto mr-4 mt-2 shadow" onClick={this.onQuestionSubmit}>
+                        <button type="button" className="btn btn-md btn-outline-success ml-auto mt-2 shadow" onClick={this.onQuestionSubmit}>
                             <i className="fa fa-floppy-o" aria-hidden="true"/> Save question
                         </button>
 

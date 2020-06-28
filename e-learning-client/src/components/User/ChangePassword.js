@@ -51,12 +51,12 @@ class ChangePassword extends Component {
         const { id, old_password, new_password, errors } = this.state;
 
         return (
-            <div className="container pt-4">
-                <div className="row mb-4">
-                    <div className="col-10 col-md-8 col-lg-7 m-auto">
+            <div className="container mb-4">
+                <div className="row">
+                    <div className="col-11 col-md-9 col-lg-7 m-auto">
                          
-                        <button className="btn btn-secondary btn-sm shadow mb-4" onClick={() => this.props.history.goBack()}> 
-                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
+                        <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Back
                         </button>
 
                         <h5 className="display-4 text-center">Change password</h5>

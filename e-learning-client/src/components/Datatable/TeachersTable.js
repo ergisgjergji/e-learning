@@ -76,7 +76,7 @@ class TeachersTable extends Component {
           ];
 
         return (
-            <div className="col-11 col-md-11 col-lg-10 mx-auto p-4 my-4 border rounded shadow">
+            <div className="col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow">
   
                 <h1 className="display-4 text-center">Teachers</h1>
 

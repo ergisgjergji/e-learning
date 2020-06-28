@@ -28,7 +28,7 @@ class TestBaseItem extends Component {
         const { header, questions, isOpen } = this.state;
 
         return (
-            <div className="col-12 mx-auto">
+            <div className="col-12 p-0 mx-auto">
 
                 <button className="btn btn-md btn-secondary shadow" onClick={this.onToggle}>
                      {isOpen ? <i className="fa fa-caret-up"/> : <i className="fa fa-caret-down"/>} {header}
@@ -38,7 +38,7 @@ class TestBaseItem extends Component {
                 <div className="paper mt-4">
                     <Collapse isOpen={isOpen}>
                         <Fade in={isOpen}>
-                            <div className="px-4 mb-4 border">
+                            <div className="px-2 mb-4 border">
                                 <div className="text-center h5 m-4"><u>{header}</u></div>
                                 {
                                     questions.map((question, index) => {

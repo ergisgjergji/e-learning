@@ -37,21 +37,22 @@ class TeacherCourseItem extends Component {
 		const { course } = this.props;
 
 		return (
-			<div className="container rounded">
+			<div className="rounded">
 				<div className="card card-body bg-light mb-3 border border-secondary">
 
 					<div className="row pb-4">
-						<div className="col-4 col-md-3 border-right">
+						
+						<div className="col-12 col-md-3 border-right mb-3">
                             <h5>Name:</h5>
 							<span className="mx-auto"> #{course.name} </span>
 						</div>
 
-						<div className="col-md-4 col-8 border-right">
+						<div className="col-12 col-md-4 col-8 border-right">
 							<h5>Description:</h5>
 							<p>{course.description}</p>
 						</div>
 
-						<div className="col-md-5 d-lg-block">
+						<div className="col-12 col-md-5">
 							<ul className="list-group shadow-lg">
 
 								<Link to={`/teacherPanel/updateCourse/${course.id}`}>

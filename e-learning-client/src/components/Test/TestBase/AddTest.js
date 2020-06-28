@@ -86,14 +86,14 @@ class AddTest extends Component {
         const { header, questions, toggleForm, toggleTooltip, isBlocking } = this.state;
 
         return (
-            <div className="container my-4">
+            <div className="container mb-4">
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
                         <Prompt when={isBlocking} message={location => "If you leave, changes will not be saved. Continue?" } />
 
-                        <button className="btn btn-secondary btn-sm shadow" onClick={() => this.props.history.goBack()}> 
-                            <i className="fa fa-arrow-left" aria-hidden="true"/> Go back
+                        <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                            <i className="fa fa-arrow-left" aria-hidden="true"/> Back
                         </button>
 
                         <div className="text-center h3">Add test</div>

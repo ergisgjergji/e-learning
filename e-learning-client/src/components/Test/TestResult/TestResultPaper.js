@@ -9,7 +9,7 @@ export default class TestResultPaper extends Component {
 
         return (
             <div className="paper mt-4">
-                <div className="px-4 mb-4 border">
+                <div className="px-2 mb-4 border">
 
                     <div className="text-center h5 m-4"><u>{header}</u></div>
 

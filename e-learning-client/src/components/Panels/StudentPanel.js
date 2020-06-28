@@ -25,10 +25,10 @@ class StudentPanel extends Component {
 			<div className="projects">
 				<div className="container">
 					<div className="row">
-						<div className="col-md-11 mx-auto my-4">
+						<div className="col-md-11 mx-auto mb-4">
 
-							<h1 className="display-4 text-center">Courses</h1>
-							<br/> <hr/>
+							<h1 className="display-4 text-center mt-3">Courses</h1>
+							<hr/>
 
 							{ 
 								courses.map(course => (

@@ -28,7 +28,7 @@ class CourseStudents extends Component {
         const { history } = this.props 
 
 		return (
-			<div className="col-12 col-md-10 col-lg-8 mx-auto my-4">
+			<div className="col-12 col-md-10 col-lg-8 p-0 mx-auto">
                 <RegisteredStudents course_id={id} history={history}/>
                 <NonRegisteredStudents course_id={id} history={history}/>
             </div>

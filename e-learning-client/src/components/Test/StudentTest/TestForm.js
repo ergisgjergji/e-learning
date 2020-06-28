@@ -88,8 +88,8 @@ class TestForm extends Component {
         const { test, isBlocking } = this.state;
 
         return (
-            <div className="paper mt-4">
-                <div className="px-4 mb-4 border">
+            <div className="paper">
+                <div className="px-3 mb-4 border">
 
                     <div className="text-center h5 m-4"><u>{test.header}</u></div>
 

@@ -29,11 +29,11 @@ class QuestionResultItem extends Component {
                     }
                     {
                         (correctAlternatives[0].checked) ?
-                            <label className="mt-2 mb-0 ml-auto text-success">
+                            <label className="ml-auto mr-3 mt-2 mb-0 text-success">
                                 <i className="fa fa-check" aria-hidden="true"/> Correct
                             </label>
                             :
-                            <label className="mt-2 mb-0 ml-auto text-danger">
+                            <label className="ml-auto mr-3 mt-2 mb-0 text-danger">
                                 <i className="fa fa-times" aria-hidden="true"/> Incorrect
                             </label>
                     }
@@ -57,11 +57,11 @@ class QuestionResultItem extends Component {
                     {
                          ((type === 2 && correctAlternatives[0].checked) || (type === 3 && correctAlternatives[0].checked && correctAlternatives[1].checked)) 
                             ?
-                            <label className="mt-2 mb-0 ml-auto text-success">
+                            <label className="ml-auto mr-3 mt-2 mb-0 text-success">
                                 <i className="fa fa-check" aria-hidden="true"/> Correct
                             </label>
                             :
-                            <label className="mt-2 mb-0 ml-auto text-danger">
+                            <label className="ml-auto mr-3 mt-2 mr-3 mb-0 text-danger">
                                 <i className="fa fa-times" aria-hidden="true"/> Incorrect
                             </label>
                     }
@@ -74,7 +74,7 @@ class QuestionResultItem extends Component {
         const { question } = this.props;
 
         return (
-            <div className="col-12 my-2 p-3 border-bottom">
+            <div className="col-12 my-2 p-2 border-bottom">
                 <div className="col-12">
                     <p className="text-left">{ question.description }</p>
                 </div>

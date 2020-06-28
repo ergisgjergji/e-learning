@@ -27,7 +27,7 @@ class TestResultItem extends Component {
         const { test, isOpen } = this.state;
 
         return (
-            <div className="col-12 mx-auto">
+            <div className="col-12 p-0 mx-auto">
 
                 <button className="btn btn-md btn-secondary shadow" onClick={this.onToggle}>{test.header}</button>
                 <hr/>

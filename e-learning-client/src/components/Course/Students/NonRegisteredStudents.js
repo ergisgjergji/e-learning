@@ -55,8 +55,8 @@ class NonRegisteredStudents extends Component {
           ];
 
         return (
-            <div className="my-4 p-4 border border-secondary rounded shadow-lg">
-                <h3 className="text-center">Non-registered students</h3>
+            <div className="my-4 border border-secondary rounded shadow-lg">
+                <h3 className="text-center mt-4">Non-registered students</h3>
                 <br/>
                 <ReactTable
                     columns={columns}

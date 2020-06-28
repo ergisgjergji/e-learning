@@ -196,7 +196,7 @@ class Header extends Component {
         const { user, isAuthenticated } = this.state;
 
         return (
-            <Navbar color="primary" dark expand="md" className="mb-0">
+            <Navbar color="primary" dark expand="md" className="mb-0 border-bottom border-white">
                 <Container>
                     <Link to="/" className="navbar-brand px-3 border rounded"> E-Learning </Link>
                     <NavbarToggler onClick={this.toggle}/>

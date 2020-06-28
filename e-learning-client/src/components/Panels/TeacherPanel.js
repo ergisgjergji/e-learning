@@ -25,14 +25,14 @@ class TeacherPanel extends Component {
 			<div className="projects">
 				<div className="container">
 					<div className="row">
-						<div className="col-md-11 mx-auto my-4">
+						<div className="col-md-11 mx-auto my-2">
 
-							<h1 className="display-4 text-center">Courses</h1>
+							<h5 className="display-4 text-center">Courses</h5>
 
-							<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary">
+							<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary mt-2">
 								<i className="fa fa-plus-circle" aria-hidden="true"/> Add Course
 							</Link>
-							<br/> <hr/>
+							<hr/>
 
 							{ 
 								courses.map(course => (
