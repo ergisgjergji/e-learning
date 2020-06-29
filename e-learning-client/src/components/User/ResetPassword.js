@@ -55,38 +55,40 @@ class ResetPassword extends Component {
         const { id, new_password, errors } = this.state;
 
         return (
-            <div className="container mb-4">
-                <div className="row">
-                    <div className="col-11 col-md-8 col-lg-7 m-auto">
-                         
-                        <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                            <i className="fa fa-arrow-left" aria-hidden="true"/> Back 
-                        </button>
+            <div className="transition-page">
+                <div className="container mb-4">
+                    <div className="row">
+                        <div className="col-11 col-md-8 col-lg-7 m-auto">
+                            
+                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back 
+                            </button>
 
-                        <h5 className="display-4 text-center">Reset password</h5>
-                        <hr />
+                            <h5 className="display-4 text-center">Reset password</h5>
+                            <hr />
 
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-row">
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-row">
 
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="new_password">New password</label>
-                                    <input type="password" id="new_password" name="new_password" required
-                                        className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.new_password})}
-                                        value={new_password} onChange={this.onChange} />
-                                    { 
-                                        errors.new_password ? 
-                                            (<div className="invalid-feedback"> { errors.new_password } </div>) : null 
-                                    }
+                                    <div className="form-group col-md-12">
+                                        <label htmlFor="new_password">New password</label>
+                                        <input type="password" id="new_password" name="new_password" required
+                                            className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.new_password})}
+                                            value={new_password} onChange={this.onChange} />
+                                        { 
+                                            errors.new_password ? 
+                                                (<div className="invalid-feedback"> { errors.new_password } </div>) : null 
+                                        }
+                                    </div>
+
+                                    <button type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save">
+                                        <i className="fa fa-floppy-o" aria-hidden="true"/> Save
+                                    </button>
+
                                 </div>
+                            </form>
 
-                                <button type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save">
-                                    <i className="fa fa-floppy-o" aria-hidden="true"/> Save
-                                </button>
-
-                            </div>
-                        </form>
-
+                        </div>
                     </div>
                 </div>
             </div>

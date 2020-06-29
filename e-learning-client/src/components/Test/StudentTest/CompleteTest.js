@@ -16,16 +16,16 @@ class CompleteTest extends Component {
         const { test } = this.props;
         
         return (
-            <div className="container my-4">
-                <div className="row">
-                    <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
-
-                        {
-                            Object.keys(test).length ?
-                                <TestForm history={this.props.history} test={test} submitTest={this.props.submitTest} asyncSubmit={this.props.asyncSubmit}/>
-                                : null
-                        }
-                        
+            <div className="transition-page">
+                <div className="container my-4">
+                    <div className="row">
+                        <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
+                            {
+                                Object.keys(test).length ?
+                                    <TestForm history={this.props.history} test={test} submitTest={this.props.submitTest} asyncSubmit={this.props.asyncSubmit}/>
+                                    : null
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

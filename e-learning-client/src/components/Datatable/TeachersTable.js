@@ -76,34 +76,36 @@ class TeachersTable extends Component {
           ];
 
         return (
-            <div className="col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow">
-  
-                <h1 className="display-4 text-center">Teachers</h1>
+            <div className="transition-page">
+                <div className="col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow">
+    
+                    <h1 className="display-4 text-center">Teachers</h1>
 
-                <Link to="/adminPanel/addTeacher" className="btn bn-lg btn-primary">
-                    <i class="fa fa-plus-circle" aria-hidden="true"/> Add teacher
-                </Link>
-                <br/><br/>
-  
-                <ReactTable
-                    columns={columns}
-                    data={teachers}
-                    noDataText={"No data"}
-                    filterable
-                    defaultPageSize={10}
-                />
+                    <Link to="/adminPanel/addTeacher" className="btn bn-lg btn-primary">
+                        <i className="fa fa-plus-circle" aria-hidden="true"/> Add teacher
+                    </Link>
+                    <br/><br/>
+    
+                    <ReactTable
+                        columns={columns}
+                        data={teachers}
+                        noDataText={"No data"}
+                        filterable
+                        defaultPageSize={10}
+                    />
 
-                <ToastContainer
-                    position="bottom-right"
-                    autoClose={4000}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover={false}
-                />
+                    <ToastContainer
+                        position="bottom-right"
+                        autoClose={4000}
+                        hideProgressBar
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover={false}
+                    />
+                </div>
             </div>
         );
     }

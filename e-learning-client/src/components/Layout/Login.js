@@ -68,49 +68,51 @@ class Login extends Component {
         const { username, password, errors } = this.state;
 
         return (
-            <div className="login">
-                <div className="container">
-                    <div className="row">
+            <div className="transition-page">
+                <div className="login">
+                    <div className="container">
+                        <div className="row">
 
-                        <div className="col-10 col-md-8 col-lg-6 mx-auto my-4">
+                            <div className="col-10 col-md-8 col-lg-6 mx-auto my-4">
 
-                            <h1 className="display-4 text-center">Login</h1>
-                            <br/>
+                                <h1 className="display-4 text-center">Login</h1>
+                                <br/>
 
-                            <form onSubmit={this.onSubmit}>
-                                <div className="form-row">
+                                <form onSubmit={this.onSubmit}>
+                                    <div className="form-row">
 
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="username">Username/Email</label>
-                                        <input type="email" id="username" name="username"
-                                            className={classnames("form-control form-control-md shadow", {"is-invalid": errors.username})}
-                                            value={username} onChange={this.onChange} />
-                                        { 
-                                            errors.username ? 
-                                                (<div className="invalid-feedback"> { errors.username } </div>) : null 
-                                        }
+                                        <div className="form-group col-md-12">
+                                            <label htmlFor="username">Username/Email</label>
+                                            <input type="email" id="username" name="username"
+                                                className={classnames("form-control form-control-md shadow", {"is-invalid": errors.username})}
+                                                value={username} onChange={this.onChange} />
+                                            { 
+                                                errors.username ? 
+                                                    (<div className="invalid-feedback"> { errors.username } </div>) : null 
+                                            }
+                                        </div>
+
+                                        <div className="form-group col-md-12">
+                                            <label htmlFor="password">Password</label>
+                                            <input type="password" id="password" name="password"
+                                                className={classnames("form-control form-control-md shadow", {"is-invalid": errors.password})}
+                                                value={password} onChange={this.onChange} />
+                                            { 
+                                                errors.password ? 
+                                                    (<div className="invalid-feedback"> { errors.password } </div>) : null 
+                                            }
+                                        </div>
+                                        
+                                        <button type="submit" value="Login" className="btn btn-outline-primary btn-lg mt-4 mx-auto shadow-lg">
+                                            <i className="fa fa-sign-in" aria-hidden="true"/> Login
+                                        </button>
+
                                     </div>
+                                </form>
 
-                                    <div className="form-group col-md-12">
-                                        <label htmlFor="password">Password</label>
-                                        <input type="password" id="password" name="password"
-                                            className={classnames("form-control form-control-md shadow", {"is-invalid": errors.password})}
-                                            value={password} onChange={this.onChange} />
-                                        { 
-                                            errors.password ? 
-                                                (<div className="invalid-feedback"> { errors.password } </div>) : null 
-                                        }
-                                    </div>
-                                    
-                                    <button type="submit" value="Login" className="btn btn-outline-primary btn-lg mt-4 mx-auto shadow-lg">
-                                        <i className="fa fa-sign-in" aria-hidden="true"/> Login
-                                    </button>
-
-                                </div>
-                            </form>
+                            </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>

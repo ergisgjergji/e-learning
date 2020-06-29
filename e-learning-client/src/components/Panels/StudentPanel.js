@@ -22,19 +22,21 @@ class StudentPanel extends Component {
         const { courses } = this.props.courseStore;
 
 		return (
-			<div className="projects">
-				<div className="container">
-					<div className="row">
-						<div className="col-md-11 mx-auto mb-4">
+			<div className="transition-page">
+				<div className="projects">
+					<div className="container">
+						<div className="row">
+							<div className="col-md-11 mx-auto mb-4">
 
-							<h1 className="display-4 text-center mt-3">Courses</h1>
-							<hr/>
+								<h1 className="display-4 text-center mt-3">Courses</h1>
+								<hr/>
 
-							{ 
-								courses.map(course => (
-									<StudentCourseItem key={course.id} course={course} history={this.props.history}/>
-								)
-							)}
+								{ 
+									courses.map(course => (
+										<StudentCourseItem key={course.id} course={course} history={this.props.history}/>
+									)
+								)}
+							</div>
 						</div>
 					</div>
 				</div>

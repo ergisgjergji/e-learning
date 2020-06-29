@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import store from './redux/store';
 import { loadUser } from './redux/actions/authActions';
@@ -46,44 +47,54 @@ class App extends Component {
     return (
       <>
         <Header/>
-        { 
-          // PUBLIC Routes
-        }
-        <PublicRoute exact path="/" component={LandingPage}/>
-        <PublicRoute exact path="/login" component={Login}/>
-        {
-          // PRIVATE Routes
-        }
-        <Switch>
 
-          <AdminRoute exact path="/adminPanel" component={AdminPanel}/>
-          <AdminRoute exact path="/adminPanel/students" component={StudentsTable}/>
-          <AdminRoute exact path="/adminPanel/teachers" component={TeachersTable}/>
-          <AdminRoute exact path="/adminPanel/addStudent" component={AddStudent}/>
-          <AdminRoute exact path="/adminPanel/addTeacher" component={AddTeacher}/>
-          <AdminRoute exact path="/adminPanel/updateUser/:id" component={UpdateUser}/>
-          <AdminRoute exact path="/adminPanel/resetPassword/:id" component={ResetPassword}/>
+        <Route render={props => (
+          <TransitionGroup>
+            <CSSTransition
+              key={props.location.key}
+              timeout={400}
+              classNames="fade">
 
-          <TeacherRoute exact path="/teacherPanel" component={TeacherPanel}/>
-          <TeacherRoute exact path="/teacherPanel/addCourse" component={AddCourse}/>
-          <TeacherRoute exact path="/teacherPanel/updateCourse/:id" component={UpdateCourse}/>
-          <TeacherRoute exact path="/teacherPanel/course/:id/tests" component={TestBaseList}/>
-          <TeacherRoute exact path="/teacherPanel/course/:id/addTest" component={AddTest}/>
-          <TeacherRoute exact path="/teacherPanel/course/:id/students" component={CourseStudents}/>
-          <TeacherRoute exact path="/teacherPanel/course/:course_id/student/:student_id/results" component={TestResultList}/>
+                <Switch location={props.location}>
+                  {
+                    // Public routes
+                  }
+                  <PublicRoute exact path="/" component={LandingPage}/>
+                  <PublicRoute exact path="/login" component={Login}/>
+                  {
+                    // Role-based routes
+                  }
+                  <AdminRoute exact path="/adminPanel" component={AdminPanel}/>
+                  <AdminRoute exact path="/adminPanel/students" component={StudentsTable}/>
+                  <AdminRoute exact path="/adminPanel/teachers" component={TeachersTable}/>
+                  <AdminRoute exact path="/adminPanel/addStudent" component={AddStudent}/>
+                  <AdminRoute exact path="/adminPanel/addTeacher" component={AddTeacher}/>
+                  <AdminRoute exact path="/adminPanel/updateUser/:id" component={UpdateUser}/>
+                  <AdminRoute exact path="/adminPanel/resetPassword/:id" component={ResetPassword}/>
 
-          <StudentRoute exact path="/studentPanel" component={StudentPanel}/>
-          <StudentRoute exact path="/studentPanel/course/:id/details" component={CourseDetails}/>
-          <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/details" component={TestDetails}/>
-          <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/complete" component={CompleteTest}/>
-          {
-            // Common private routes
-          }
-          <PrivateRoute exact path="/logout" component={Logout}/>
-          <PrivateRoute exact path="/profile/edit" component={UpdateProfile}/>
-          <PrivateRoute exact path="/profile/changePassword" component={ChangePassword}/>
+                  <TeacherRoute exact path="/teacherPanel" component={TeacherPanel}/>
+                  <TeacherRoute exact path="/teacherPanel/addCourse" component={AddCourse}/>
+                  <TeacherRoute exact path="/teacherPanel/updateCourse/:id" component={UpdateCourse}/>
+                  <TeacherRoute exact path="/teacherPanel/course/:id/tests" component={TestBaseList}/>
+                  <TeacherRoute exact path="/teacherPanel/course/:id/addTest" component={AddTest}/>
+                  <TeacherRoute exact path="/teacherPanel/course/:id/students" component={CourseStudents}/>
+                  <TeacherRoute exact path="/teacherPanel/course/:course_id/student/:student_id/results" component={TestResultList}/>
 
-        </Switch>
+                  <StudentRoute exact path="/studentPanel" component={StudentPanel}/>
+                  <StudentRoute exact path="/studentPanel/course/:id/details" component={CourseDetails}/>
+                  <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/details" component={TestDetails}/>
+                  <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/complete" component={CompleteTest}/>
+                  {
+                    // Common private routes
+                  }
+                  <PrivateRoute exact path="/logout" component={Logout}/>
+                  <PrivateRoute exact path="/profile/edit" component={UpdateProfile}/>
+                  <PrivateRoute exact path="/profile/changePassword" component={ChangePassword}/>
+                </Switch>
+
+              </CSSTransition>
+            </TransitionGroup>
+        )}/>
 
         <ToastContainer
           position="bottom-right"

@@ -13,23 +13,25 @@ class TestDetails extends Component {
     }
 
     render() {
-
         const { current_test } = this.props.testStore;
+
         return (
-            <div className="container mb-4">
-                <div className="row">
-                    <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
+            <div className="transition-page">
+                <div className="container mb-4">
+                    <div className="row">
+                        <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                        <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                            <i className="fa fa-arrow-left" aria-hidden="true"/> Back
-                        </button>
+                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                            </button>
 
-                        {
-                            Object.keys(current_test).length ?
-                                <TestResultPaper test={current_test}/>
-                                : null
-                        }
-                        
+                            {
+                                Object.keys(current_test).length ?
+                                    <TestResultPaper test={current_test}/>
+                                    : null
+                            }
+                            
+                        </div>
                     </div>
                 </div>
             </div>

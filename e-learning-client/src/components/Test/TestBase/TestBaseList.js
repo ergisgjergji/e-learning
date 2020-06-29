@@ -30,30 +30,30 @@ class TestBaseList extends Component {
         const { tests } = this.props;
 
         return (
-            <div className="container mb-4">
-                <div className="row">
+            <div className="transition-page">
+                <div className="container mb-4">
+                    <div className="row">
+                        <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                    <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
+                            <h1 className="display-4 text-center my-3">Tests</h1>
 
-                        <h1 className="display-4 text-center my-3">Tests</h1>
+                            <Link to={{ pathname: `/teacherPanel/course/${id}/addTest`, fromRoute: `/teacherPanel/course/${id}/tests` }} className="btn btn-md btn-primary shadow mb-4">
+                                <i className="fa fa-plus-circle" aria-hidden="true"/> Add test
+                            </Link>
 
-                        <Link to={{ pathname: `/teacherPanel/course/${id}/addTest`, fromRoute: `/teacherPanel/course/${id}/tests` }} className="btn btn-md btn-primary shadow mb-4">
-                            <i className="fa fa-plus-circle" aria-hidden="true"/> Add test
-                        </Link>
+                            {
+                                (tests.length === 0) ?
+                                    <Alert color="info" className="text-center">
+                                        This course has no tests.
+                                    </Alert>
+                                    :
+                                    tests.map((test, index) => {
+                                        return <TestBaseItem key={index} test={test}/>
+                                    })
+                            }
 
-                        {
-                            (tests.length === 0) ?
-                                <Alert color="info" className="text-center">
-                                    This course has no tests.
-                                </Alert>
-                                :
-                                tests.map((test, index) => {
-                                    return <TestBaseItem key={index} test={test}/>
-                                })
-                        }
-
+                        </div>
                     </div>
-
                 </div>
             </div>
         )

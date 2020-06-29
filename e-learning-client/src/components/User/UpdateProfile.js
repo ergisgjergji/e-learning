@@ -56,55 +56,57 @@ class UpdateProfile extends Component {
         const { id, full_name, role, faculty, registration_date, username, password, errors } = this.state;
 
         return (
-            <div className="container mb-4">
-                <div className="row">
-                    <div className="col-11 col-md-9 col-lg-7 m-auto">
-                         
-                        <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                            <i className="fa fa-arrow-left" aria-hidden="true"/> Back
-                        </button>
+            <div className="transition-page">
+                <div className="container mb-4">
+                    <div className="row">
+                        <div className="col-11 col-md-9 col-lg-7 m-auto">
+                            
+                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                            </button>
 
-                        <h5 className="display-4 text-center">Edit profile</h5>
-                        <hr />
+                            <h5 className="display-4 text-center">Edit profile</h5>
+                            <hr />
 
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-row">
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-row">
 
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="full_name">Full name</label>
-                                    <input type="text" id="full_name" name="full_name"
-                                        className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.full_name})}
-                                        value={full_name} onChange={this.onChange} />
-                                    { 
-                                        errors.full_name ? 
-                                            (<div className="invalid-feedback"> { errors.full_name } </div>) : null 
-                                    }
+                                    <div className="form-group col-md-12">
+                                        <label htmlFor="full_name">Full name</label>
+                                        <input type="text" id="full_name" name="full_name"
+                                            className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.full_name})}
+                                            value={full_name} onChange={this.onChange} />
+                                        { 
+                                            errors.full_name ? 
+                                                (<div className="invalid-feedback"> { errors.full_name } </div>) : null 
+                                        }
+                                    </div>
+
+                                    <div className="form-group col-md-12">
+                                        <label htmlFor="username">Username</label>
+                                        <input type="email" id="username" name="username"
+                                            className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.username})}
+                                            value={username} onChange={this.onChange} />
+                                        { 
+                                            errors.username ? 
+                                                (<div className="invalid-feedback"> { errors.username } </div>) : null 
+                                        }
+                                    </div>
+
+                                    <input type="hidden" id="id" name="id" value={id}/>
+                                    <input type="hidden" id="faculty" name="faculty" value={faculty}/>
+                                    <input type="hidden" id="role" name="role" value={role}/>
+                                    <input type="hidden" id="registration_date" name="registration_date" value={registration_date}/>
+                                    <input type="hidden" id="password" name="password" value={password}/>
+
+                                    <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
+                                        <i className="fa fa-floppy-o" aria-hidden="true"/> Save
+                                    </button>
+
                                 </div>
+                            </form>
 
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="username">Username</label>
-                                    <input type="email" id="username" name="username"
-                                        className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.username})}
-                                        value={username} onChange={this.onChange} />
-                                    { 
-                                        errors.username ? 
-                                            (<div className="invalid-feedback"> { errors.username } </div>) : null 
-                                    }
-                                </div>
-
-                                <input type="hidden" id="id" name="id" value={id}/>
-                                <input type="hidden" id="faculty" name="faculty" value={faculty}/>
-                                <input type="hidden" id="role" name="role" value={role}/>
-                                <input type="hidden" id="registration_date" name="registration_date" value={registration_date}/>
-                                <input type="hidden" id="password" name="password" value={password}/>
-
-                                <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
-                                    <i className="fa fa-floppy-o" aria-hidden="true"/> Save
-                                </button>
-
-                            </div>
-                        </form>
-
+                        </div>
                     </div>
                 </div>
             </div>

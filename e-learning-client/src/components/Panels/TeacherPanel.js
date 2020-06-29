@@ -22,23 +22,25 @@ class TeacherPanel extends Component {
         const { courses } = this.props.courseStore;
 
 		return (
-			<div className="projects">
-				<div className="container">
-					<div className="row">
-						<div className="col-md-11 mx-auto my-2">
+			<div className="transition-page">
+				<div className="projects">
+					<div className="container">
+						<div className="row">
+							<div className="col-md-11 mx-auto my-2">
 
-							<h5 className="display-4 text-center">Courses</h5>
+								<h5 className="display-4 text-center">Courses</h5>
 
-							<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary mt-2">
-								<i className="fa fa-plus-circle" aria-hidden="true"/> Add Course
-							</Link>
-							<hr/>
+								<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary mt-2">
+									<i className="fa fa-plus-circle" aria-hidden="true"/> Add Course
+								</Link>
+								<hr/>
 
-							{ 
-								courses.map(course => (
-									<TeacherCourseItem key={course.id} course={course}/>
-								)
-							)}
+								{ 
+									courses.map(course => (
+										<TeacherCourseItem key={course.id} course={course}/>
+									)
+								)}
+							</div>
 						</div>
 					</div>
 				</div>

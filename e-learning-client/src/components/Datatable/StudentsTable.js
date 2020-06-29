@@ -71,22 +71,24 @@ class StudentsTable extends Component {
           ];
 
         return (
-            <div className="col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow">
-  
-                <h1 className="display-4 text-center">Students</h1>
-                
-                <Link to="/adminPanel/addStudent" className="btn bn-lg btn-primary">
-                    <i class="fa fa-plus-circle" aria-hidden="true"/> Add student
-                </Link>
-                <br/><br/>
-  
-                <ReactTable
-                    columns={columns}
-                    data={students}
-                    noDataText={"No data"}
-                    filterable
-                    defaultPageSize={10}
-                />
+            <div className="transition-page">
+                <div className="page col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow">
+    
+                    <h1 className="display-4 text-center">Students</h1>
+                    
+                    <Link to="/adminPanel/addStudent" className="btn bn-lg btn-primary">
+                        <i className="fa fa-plus-circle" aria-hidden="true"/> Add student
+                    </Link>
+                    <br/><br/>
+    
+                    <ReactTable
+                        columns={columns}
+                        data={students}
+                        noDataText={"No data"}
+                        filterable
+                        defaultPageSize={10}
+                    />
+                </div>
             </div>
         );
     }

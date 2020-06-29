@@ -33,30 +33,32 @@ class LandingPage extends Component {
 
     render() {
         return (
-            <div className="landing">
-                <div className="light-overlay landing-inner text-dark">
+            <div className="transition-page">
+                <div className="landing">
+                    <div className="light-overlay landing-inner text-dark">
 
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 text-center">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-12 text-center">
 
-                                <h1 className="display-4 mb-4">E-Learning</h1>
-                                <p className="lead">
-                                    A platform that helps teachers and students all round the world.
-                                </p>
-                                <hr/>
-                                
-                                <Link to="/login" className="btn btn-lg btn-primary mr-2"> Login </Link>
+                                    <h1 className="display-4 mb-4">E-Learning</h1>
+                                    <p className="lead">
+                                        A platform that helps teachers and students all round the world.
+                                    </p>
+                                    <hr/>
+                                    
+                                    <Link to="/login" className="btn btn-lg btn-primary mr-2"> Login </Link>
 
-                                <label className="d-block text-secondary mt-3">
-                                   <small className="rounded p-2">
-                                        <i className="fa fa-info-circle" aria-hidden="true"/> Use credentials: <u>admin@admin.com</u> & <u>123456</u> for demonstration. 
-                                    </small>
-                                </label>
+                                    <label className="d-block text-secondary mt-3">
+                                    <small className="rounded p-2">
+                                            <i className="fa fa-info-circle" aria-hidden="true"/> Use credentials: <u>admin@admin.com</u> & <u>123456</u> for demonstration. 
+                                        </small>
+                                    </label>
 
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
