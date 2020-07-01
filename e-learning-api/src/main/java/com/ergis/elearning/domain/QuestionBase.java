@@ -18,6 +18,7 @@ public class QuestionBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Question description is required")
+    @Column(name="description", columnDefinition="TEXT")
     private String description;
     @NotNull(message = "Question type is required")
     private Integer type;
