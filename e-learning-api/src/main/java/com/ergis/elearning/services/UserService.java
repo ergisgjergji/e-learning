@@ -56,7 +56,7 @@ public class UserService {
         User principal = userRepository.findByUsername(username);
 
         if (!principal.getRole().equals("ADMIN"))
-            if (principal.getId() != id) throw new UserIdException("You have no access");
+            if (principal.getId().longValue() != id.longValue()) throw new UserIdException("You have no access");
 
         User user = userRepository.getById(id);
         if(user == null) throw new UserIdException("User with id '" +id+ "' not found");
@@ -94,12 +94,12 @@ public class UserService {
 
         User duplicateUsername = userRepository.findByUsername(updatedUser.getUsername());
         if(duplicateUsername != null)
-            if(user.getId() != duplicateUsername.getId())
+            if(user.getId().longValue() != duplicateUsername.getId().longValue())
                 throw new UsernameException("Username '" +updatedUser.getUsername()+ "' already exists");
 
         User principal = userRepository.findByUsername(username);
         if (!principal.getRole().equals("ADMIN")) {
-            if (principal.getId() != updatedUser.getId()) throw new UserIdException("You have no access");
+            if (principal.getId().longValue() != updatedUser.getId().longValue()) throw new UserIdException("You have no access");
 
             user.setUsername(updatedUser.getUsername());
             user.setFull_name(updatedUser.getFull_name());
@@ -125,7 +125,7 @@ public class UserService {
         if(user == null) throw new UserIdException("User with id '" +user_id+ "' not found");
 
         if (!principal.getRole().equals("ADMIN")) {
-            if (principal.getId() != user_id) throw new UserIdException("Invalid user_id");
+            if (principal.getId().longValue() != user_id.longValue()) throw new UserIdException("Invalid user_id");
         }
         
         if (!bCryptPasswordEncoder.matches(changePasswordViewModel.getOld_password(), user.getPassword()))

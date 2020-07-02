@@ -59,7 +59,7 @@ public class CourseService {
 
         Course duplicateName = courseRepository.findByName(updatedCourse.getName());
         if(duplicateName != null)
-            if(duplicateName.getId() != course.getId())
+            if(duplicateName.getId().longValue() != course.getId().longValue())
                 throw new CourseNameException("A course with name '" +updatedCourse.getName()+ "' already exists");
 
         course.setName(updatedCourse.getName());
