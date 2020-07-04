@@ -2,13 +2,19 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import AutoScroll from '../Layout/AutoScroll';
 
 const StudentRoute = ({ component: Component, authStore, ...otherProps }) => (
 
     <Route 
         {...otherProps} 
         render={props => ((authStore.isAuthenticated === true) && (authStore.user.role === "STUDENT")) ? 
-                (<Component {...props}/>) : 
+                (
+                    <>
+                        <AutoScroll/>
+                        <Component {...props}/>
+                    </>
+                ) : 
                 (<Redirect to="/login"/>)
         }/>
 );
