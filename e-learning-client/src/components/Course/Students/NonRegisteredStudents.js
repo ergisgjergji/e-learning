@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,6 +6,7 @@ import { getNonRegisteredStudents, registerStudent } from './../../../redux/acti
 
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
+import { toast } from 'react-toastify';
 
 class NonRegisteredStudents extends Component {
 
@@ -24,7 +24,11 @@ class NonRegisteredStudents extends Component {
 				{
 					label: 'Yes',
 					className: "confirm-yes",
-					onClick: () => this.props.registerStudent(course_id, student_id, this.props.history)
+					onClick: () => { 
+                        this.props.registerStudent(course_id, student_id, this.props.history);
+                        toast.dismiss();
+			            toast.success(`ℹ Student with id '${student_id}' was registered successfully.`)
+                    }
 				},
 				{
 					label: 'No',

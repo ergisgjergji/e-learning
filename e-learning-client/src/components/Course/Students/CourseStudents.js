@@ -1,26 +1,12 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
-
-import { toast } from 'react-toastify';
 
 import RegisteredStudents from "./RegisteredStudents";
 import NonRegisteredStudents from "./NonRegisteredStudents";
 
 class CourseStudents extends Component {
 
-	componentDidMount() {
-
-        if(this.props.location.notification_message) {
-			toast.dismiss();
-			toast.success(`ℹ ${this.props.location.notification_message}`)
-		}
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.location.notification_message) {
-            toast.dismiss();
-			toast.success(`ℹ ${nextProps.location.notification_message}`)
-        }
+	shouldComponentUpdate() {
+        return false;
     }
 
 	render() {
@@ -29,7 +15,7 @@ class CourseStudents extends Component {
 
 		return (
             <div className="transition-page">
-                <div className="col-12 col-md-10 col-lg-8 p-0 mx-auto">
+                <div className="col-12 col-md-11 col-lg-9 p-1 mx-auto">
                     <RegisteredStudents course_id={id} history={history}/>
                     <NonRegisteredStudents course_id={id} history={history}/>
                 </div>
@@ -38,10 +24,4 @@ class CourseStudents extends Component {
 	}
 }
 
-CourseStudents.propTypes = {
-};
-
-const mapStateToProps = state => ({
-});
-
-export default CourseStudents
+export default CourseStudents;

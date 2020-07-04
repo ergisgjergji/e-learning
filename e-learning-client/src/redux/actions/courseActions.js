@@ -112,7 +112,6 @@ export const registerStudent = (course_id, student_id, history) => dispatch => {
     axios.post(`/api/course/${course_id}/students/${student_id}`)
         .then(res => {
             
-            history.push({ ...history, notification_message: `Student with id '${student_id}' was registered successfully.` });
             dispatch(getRegisteredStudents(course_id));
             dispatch(getNonRegisteredStudents(course_id));
             dispatch(clearErrors());
