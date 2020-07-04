@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AutoScroll from './../Layout/AutoScroll';
+import ScrollTopButton from '../Layout/ScrollTopButton';
 
 const TeacherRoute = ({ component: Component, authStore, ...otherProps }) => (
 
@@ -13,6 +14,7 @@ const TeacherRoute = ({ component: Component, authStore, ...otherProps }) => (
                     <>
                         <AutoScroll/>
                         <Component {...props}/>
+                        <ScrollTopButton/>
                     </>
                 ) : 
                 (<Redirect to="/login"/>)

@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import AutoScroll from '../Layout/AutoScroll';
+import ScrollTopButton from '../Layout/ScrollTopButton';
 
 const PublicRoute = ({ component: Component, authStore, ...otherProps }) => (
 
@@ -10,7 +12,13 @@ const PublicRoute = ({ component: Component, authStore, ...otherProps }) => (
         render={props => {
 
             if(authStore.isAuthenticated === false)
-                return <Component {...props}/>;
+                return (
+                    <>
+                        <AutoScroll/>
+                        <Component {...props}/>
+                        <ScrollTopButton/>
+                    </>
+                )
 
             else
                 switch(authStore.user.role) {
