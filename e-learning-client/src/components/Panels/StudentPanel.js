@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCourses } from '../../redux/actions/courseActions';
 
+import { Alert } from "reactstrap";
 import { toast } from 'react-toastify';
 import StudentCourseItem from './../Course/StudentCourseItem';
 
@@ -31,10 +31,15 @@ class StudentPanel extends Component {
 								<h1 className="display-4 text-center mt-3">Courses</h1>
 								<hr/>
 
-								{ 
-									courses.map(course => (
-										<StudentCourseItem key={course.id} course={course} history={this.props.history}/>
-									)
+								{
+									(courses.length === 0) ?
+										<Alert color="info" className="text-center">
+											<i className="fa fa-info-circle" aria-hidden="true"/> You have no courses.
+										</Alert>
+										:
+										courses.map(course => (
+											<StudentCourseItem key={course.id} course={course} history={this.props.history}/>
+										)
 								)}
 							</div>
 						</div>

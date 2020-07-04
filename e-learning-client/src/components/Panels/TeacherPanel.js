@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCourses } from '../../redux/actions/courseActions';
 
+import { Alert } from 'reactstrap';
 import { toast } from 'react-toastify';
 import TeacherCourseItem from './../Course/TeacherCourseItem';
 
@@ -26,19 +27,24 @@ class TeacherPanel extends Component {
 				<div className="projects">
 					<div className="container">
 						<div className="row">
-							<div className="col-md-11 mx-auto my-2">
+							<div className="col-md-11 mx-auto mb-4">
 
-								<h5 className="display-4 text-center">Courses</h5>
+								<h5 className="display-4 text-center mt-3">Courses</h5>
 
 								<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary mt-2">
 									<i className="fa fa-plus-circle" aria-hidden="true"/> Add Course
 								</Link>
 								<hr/>
 
-								{ 
-									courses.map(course => (
-										<TeacherCourseItem key={course.id} course={course}/>
-									)
+								{
+									(courses.length === 0) ?
+										<Alert color="info" className="text-center">
+											<i className="fa fa-info-circle" aria-hidden="true"/> You have no courses.
+										</Alert>
+										:
+										courses.map(course => (
+											<TeacherCourseItem key={course.id} course={course}/>
+										)
 								)}
 							</div>
 						</div>

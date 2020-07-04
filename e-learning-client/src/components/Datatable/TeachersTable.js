@@ -30,7 +30,7 @@ class TeachersTable extends Component {
 					className: "confirm-yes",
 					onClick: () => {
                         this.props.deleteTeacher(id);
-                        toast.info(`[ℹ] Teacher with id ${id} was deleted successfully.`, {
+                        toast.info(`ℹ Teacher with id ${id} was deleted successfully.`, {
                             position: "bottom-right",
                             autoClose: 5000,
                             hideProgressBar: true,

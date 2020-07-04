@@ -61,33 +61,6 @@ class Header extends Component {
                         </Link>
                     </NavItem>
                 </Nav>
-
-                <Nav className="ml-auto" navbar>
-                    <NavItem className="text-left my-auto mx-2">
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
-                            <DropdownMenu right>
-                                <Link to="/profile/edit" className="text-dark">
-                                    <DropdownItem className="bg-light"> 
-                                        <i className="fa fa-user-circle" aria-hidden="true"/> Edit profile 
-                                    </DropdownItem>
-                                </Link>
-                                <DropdownItem divider/>
-                                <Link to="/profile/changePassword" className="text-dark">
-                                    <DropdownItem  className="bg-light"> 
-                                        <i className="fa fa-key" aria-hidden="true"/> Change password 
-                                    </DropdownItem>
-                                </Link>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
-                    </NavItem>
-
-                    <NavItem className="text-left my-auto mx-2">
-                        <Link to="/logout" className="nav-link"> 
-                            Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
-                        </Link>
-                    </NavItem>
-                </Nav>
             </>
         );
         const teacher_menu = (
@@ -99,33 +72,6 @@ class Header extends Component {
                         </Link>
                     </NavItem>
                 </Nav>
-
-                <Nav className="ml-auto" navbar>
-                    <NavItem className="text-left my-auto mx-2">
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
-                            <DropdownMenu right>
-                                <Link to="/profile/edit" className="text-dark">
-                                    <DropdownItem className="bg-light"> 
-                                        <i className="fa fa-user-circle" aria-hidden="true"/> Edit profile 
-                                    </DropdownItem>
-                                </Link>
-                                <DropdownItem divider/>
-                                <Link to="/profile/changePassword" className="text-dark">
-                                    <DropdownItem  className="bg-light"> 
-                                        <i className="fa fa-key" aria-hidden="true"/> Change password 
-                                    </DropdownItem>
-                                </Link>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
-                    </NavItem>
-
-                    <NavItem className="text-left my-auto mx-2">
-                        <Link to="/logout" className="nav-link"> 
-                            Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
-                        </Link>
-                    </NavItem>
-                </Nav>
             </>
         );
         const student_menu = (
@@ -134,33 +80,6 @@ class Header extends Component {
                     <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/studentPanel" className="nav-link">
                             Home
-                        </Link>
-                    </NavItem>
-                </Nav>
-
-                <Nav className="ml-auto" navbar>
-                    <NavItem className="text-left my-auto mx-2">
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
-                            <DropdownMenu right>
-                                <Link to="/profile/edit" className="text-dark">
-                                    <DropdownItem className="bg-light"> 
-                                        <i className="fa fa-user-circle" aria-hidden="true"/> Edit profile 
-                                    </DropdownItem>
-                                </Link>
-                                <DropdownItem divider/>
-                                <Link to="/profile/changePassword" className="text-dark">
-                                    <DropdownItem  className="bg-light"> 
-                                        <i className="fa fa-key" aria-hidden="true"/> Change password 
-                                    </DropdownItem>
-                                </Link>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
-                    </NavItem>
-
-                    <NavItem className="text-left my-auto mx-2">
-                        <Link to="/logout" className="nav-link"> 
-                            Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
                         </Link>
                     </NavItem>
                 </Nav>
@@ -195,6 +114,35 @@ class Header extends Component {
     render() {
         const { user, isAuthenticated } = this.state;
 
+        const profile_menu = (
+            <Nav className="ml-auto" navbar>
+                <NavItem className="text-left my-auto mx-2">
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                        <DropdownMenu right className="p-0">
+                            <Link to="/profile/edit" className="text-dark">
+                                <DropdownItem className="py-2"> 
+                                    <i className="fa fa-user-circle mr-2" aria-hidden="true"/> Edit profile 
+                                </DropdownItem>
+                            </Link>
+                            <DropdownItem divider className="m-0"/>
+                            <Link to="/profile/changePassword" className="text-dark">
+                                <DropdownItem  className="py-2"> 
+                                    <i className="fa fa-key mr-2" aria-hidden="true"/> Change password 
+                                </DropdownItem>
+                            </Link>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                </NavItem>
+
+                <NavItem className="text-left my-auto mx-2">
+                    <Link to="/logout" className="nav-link"> 
+                        Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
+                    </Link>
+                </NavItem>
+            </Nav>
+        );
+
         return (
             <Navbar color="primary" dark expand="md" className="mb-0 border-bottom border-white">
                 <Container>
@@ -204,6 +152,9 @@ class Header extends Component {
 
                         {
                             this.renderLogic(isAuthenticated, user)
+                        }
+                        {
+                            isAuthenticated ? profile_menu : null
                         }
 
                     </Collapse>

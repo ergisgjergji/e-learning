@@ -44,7 +44,7 @@ class TestBaseList extends Component {
                             {
                                 (tests.length === 0) ?
                                     <Alert color="info" className="text-center">
-                                        This course has no tests.
+                                        <i className="fa fa-info-circle" aria-hidden="true"/> This course has no tests.
                                     </Alert>
                                     :
                                     tests.map((test, index) => {
