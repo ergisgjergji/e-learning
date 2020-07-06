@@ -5,7 +5,8 @@ const ScrollTopButton = () => {
 
     const style = {
         zIndex: 100,
-        bottom: 30
+        bottom: 30,
+        right: 25
     }
 
     return (

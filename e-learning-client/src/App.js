@@ -5,6 +5,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import store from './redux/store';
 import { loadUser } from './redux/actions/authActions';
 
+import LanguageSelector from './components/Layout/LanguageSelector';
 import Header from './components/Layout/Header';
 import { ToastContainer } from 'react-toastify';
 import LandingPage from './components/Layout/LandingPage';
@@ -36,16 +37,31 @@ import TeacherRoute from './components/Router/TeacherRoute';
 import StudentRoute from './components/Router/StudentRoute';
 import PrivateRoute from './components/Router/PrivateRoute';
 
+import {I18nProvider, LOCALES } from './i18n';
+import translate from './i18n/translate';
+
 class App extends Component {
 
   constructor() {
     super();
     store.dispatch(loadUser());
+
+    this.state = {
+      locale: ''
+    }
+  }
+
+  changeLanguage = (lang) => {
+    this.setState({ locale: lang });
   }
 
   render() {
+    const { locale } = this.state;
+
     return (
-      <>
+      <I18nProvider locale={locale}>
+
+        <LanguageSelector changeLanguage={this.changeLanguage}/>
         <Header/>
 
         <Route render={props => (
@@ -107,7 +123,7 @@ class App extends Component {
           draggable
           pauseOnHover={false}
         />
-      </>
+      </I18nProvider>
     );
   }
 }
