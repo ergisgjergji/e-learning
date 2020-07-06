@@ -1,8 +1,9 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { SET_USER, LOGOUT_USER, GET_ERRORS, PASSWORD_MISMATCH } from './types';
-// import { clearErrors } from './errorActions';
 import headersConfig from './../securityUtils/headersConfig';
+
+import { toast } from 'react-toastify';
 
 /* 
     COMMENT:
@@ -29,6 +30,8 @@ export const login = (loginRequest) => dispatch => {
             });
         })
         .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

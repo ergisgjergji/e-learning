@@ -4,18 +4,12 @@ import { connect } from 'react-redux';
 import { getCourses } from '../../redux/actions/courseActions';
 
 import { Alert } from "reactstrap";
-import { toast } from 'react-toastify';
 import StudentCourseItem from './../Course/StudentCourseItem';
 
 class StudentPanel extends Component {
 
 	componentDidMount() {
 		this.props.getCourses();
-
-		if(this.props.location.notification_message) {
-			toast.dismiss();
-			toast.success(`ℹ ${this.props.location.notification_message}`)
-		}
 	}
 
 	render() {

@@ -7,17 +7,11 @@ import { getTeachers, deleteTeacher } from './../../redux/actions/userActions';
 
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
-import { ToastContainer, toast } from 'react-toastify';
 
 class TeachersTable extends Component {
 
     componentDidMount() {
         this.props.getTeachers();
-
-        if(this.props.location.notification_message) {
-            toast.dismiss();
-            toast.success(`ℹ ${this.props.location.notification_message}`)
-        }
     }
 
     onDeleteClick = (id) => {
@@ -28,17 +22,7 @@ class TeachersTable extends Component {
 				{
 					label: 'Yes',
 					className: "confirm-yes",
-					onClick: () => {
-                        this.props.deleteTeacher(id);
-                        toast.info(`ℹ Teacher with id ${id} was deleted successfully.`, {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: true,
-                            closeOnClick: true,
-                            pauseOnHover: false,
-                            draggable: true
-                        });
-                    }
+					onClick: () => this.props.deleteTeacher(id)
 				},
 				{
 					label: 'No',
@@ -92,18 +76,6 @@ class TeachersTable extends Component {
                         noDataText={"No data"}
                         filterable
                         defaultPageSize={10}
-                    />
-
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={4000}
-                        hideProgressBar
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover={false}
                     />
                 </div>
             </div>

@@ -1,22 +1,36 @@
 import axios from 'axios';
 import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_TEST, COMPLETE_TEST, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
-import store from './../store';
+
+import { toast } from 'react-toastify';
 
 export const getTestBaseList = (id) => dispatch => {
 
     axios.get(`/api/testbase/${id}/all`)
         .then(res => {
+
+            // Sort tests by 'id'
+            let tests = res.data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+            tests.map(t => {
+                // Sort questions by 'type'
+                t.questions.sort((a,b) => (a.type > b.type) ? 1 : ((b.type > a.type) ? -1 : 0));
+            }) 
+
             dispatch({
                 type: GET_TESTBASE_LIST,
                 payload: res.data
             })
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 };
 
 export const addTest = (id, testBase, fromRoute, history) => dispatch => {
@@ -25,18 +39,19 @@ export const addTest = (id, testBase, fromRoute, history) => dispatch => {
         .then(res => {
 
             if(fromRoute)
-                history.push({
-                    pathname: fromRoute,
-                    notification_message: "Test created successfully."
-                });
+                history.push(fromRoute);
+
             else
-                history.push({
-                    pathname: "/teacherPanel",
-                    notification_message: "Test created successfully."
-                });
+                history.push('/teacherPanel');
+
+            toast.dismiss();
+            toast.success('ℹ Test created successfully.')
             dispatch(clearErrors());
         })
         .catch(err => {
+
+            toast.dismiss();
+            toast.error('An error occurred!');
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -64,6 +79,9 @@ export const getStudentCompletedTests = (course_id, student_id, history) => disp
             dispatch(clearErrors());
         })
         .catch(err => {
+
+            toast.dismiss();
+            toast.error('An error occurred!');
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -95,6 +113,9 @@ export const getTestById = (course_id, test_id, history) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
+
+            toast.dismiss();
+            toast.error('An error occurred!');
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -107,12 +128,15 @@ export const submitTest = (test, history) => dispatch => {
 
     axios.post('/api/test', test)
         .then(res => {
-            history.push({
-                pathname: '/studentPanel',
-                notification_message: 'Test was submitted successfully.'
-            })
+
+            history.push('/studentPanel');
+            toast.dismiss();
+			toast.success('ℹ Test was submitted successfully.');
         })
         .catch(err => {
+
+            toast.dismiss();
+            toast.error('An error occurred!');
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

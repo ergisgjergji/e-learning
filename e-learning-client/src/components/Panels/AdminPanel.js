@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
-
 import admin from '../../img/admin.png';
 
 class AdminPanel extends Component {
-
-    componentDidMount() {
-        if(this.props.location.notification_message) {
-            toast.dismiss();
-            toast.success(`ℹ ${this.props.location.notification_message}`)
-        }
-    }
 
     render() {
         return (
@@ -28,10 +17,4 @@ class AdminPanel extends Component {
     }
 }
 
-AdminPanel.propTypes = {
-};
-
-const mapStateToProps = (state) => ({
-});
-
-export default connect(mapStateToProps, {  })(AdminPanel);
+export default AdminPanel;

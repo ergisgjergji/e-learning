@@ -3,6 +3,8 @@ import { GET_STUDENTS, GET_TEACHERS, GET_USER, DELETE_STUDENT, DELETE_TEACHER, U
 import { clearErrors } from './errorActions';
 import store from './../store';
 
+import { toast } from 'react-toastify';
+
 export const getStudents = () => dispatch => {
 
     axios.get("/api/user/students")
@@ -13,10 +15,14 @@ export const getStudents = () => dispatch => {
             })
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 };
 
 export const getTeachers = () => dispatch => {
@@ -29,10 +35,14 @@ export const getTeachers = () => dispatch => {
             })
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 };
 
 export const getUserById = (id, history) => dispatch => {
@@ -45,49 +55,86 @@ export const getUserById = (id, history) => dispatch => {
             });
             dispatch(clearErrors());
         })
-        .catch(err => history.goBack());
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+            history.goBack();
+        });
 };
 
 export const deleteStudent = (id) => dispatch => {
     
     axios.delete(`/api/user/${id}`)
-        .then(res => dispatch({
-            type: DELETE_STUDENT,
-            payload: id
-        }));
+        .then(res => {
+
+            toast.dismiss();
+            toast.info(`ℹ Student with id '${id}' was deleted successfully.`);
+            dispatch({
+                type: DELETE_STUDENT,
+                payload: id
+            });
+        })
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 };
 
 export const deleteTeacher = (id) => dispatch => {
     
     axios.delete(`/api/user/${id}`)
-        .then(res => dispatch({
-            type: DELETE_TEACHER,
-            payload: id
-        }));
+        .then(res => {
+
+            toast.dismiss();
+            toast.info(`ℹ Teacher with id '${id}' was deleted successfully.`);
+            dispatch({
+                type: DELETE_TEACHER,
+                payload: id
+            })
+        })
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 };
 
 export const addUser = (user, history) => dispatch => {
 
     axios.post("/api/user", user)
         .then(res => {
+
             if(user.role === "STUDENT") {
-                history.push({
-                    pathname: '/adminPanel/students',
-                    notification_message: "Student added successfully."
-                });
+                history.push('/adminPanel/students');
+                toast.dismiss();
+                toast.success('ℹ Student added successfully.');
             }
             else if(user.role === "TEACHER") {
-                history.push({
-                    pathname: '/adminPanel/teachers',
-                    notification_message: "Teacher added successfully."
-                });
+                history.push('/adminPanel/teachers');
+                toast.dismiss();
+                toast.success('ℹ Teacher added successfully.');
             }
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }
 
 export const updateUser = (user, history) => dispatch => {
@@ -95,24 +142,24 @@ export const updateUser = (user, history) => dispatch => {
     axios.put("/api/user", user)
         .then(res => {
             
-            if(user.role === "STUDENT") {
-                history.push({
-                    pathname: '/adminPanel/students',
-                    notification_message: "Changes were saved successfully."
-                });
-            }
-            if(user.role === "TEACHER") {
-                history.push({
-                    pathname: '/adminPanel/teachers',
-                    notification_message: "Changes were saved successfully."
-                });
-            }
+            if(user.role === "STUDENT")
+                history.push('/adminPanel/students');
+
+            if(user.role === "TEACHER")
+                history.push('/adminPanel/teachers');
+            
+            toast.dismiss();
+            toast.success('ℹ Changes were saved successfully.');
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }
 
 export const updateProfile = (user, history) => dispatch => {
@@ -130,10 +177,9 @@ export const updateProfile = (user, history) => dispatch => {
                     route = "/studentPanel"; break;
             }
 
-            history.push({
-                pathname: route,
-                notification_message: "Profile was updated successfully."
-            });
+            history.push(route);
+            toast.dismiss();
+            toast.success('ℹ Profile was updated successfully.');
 
             const updatedUser = { username: user.username, full_name: user.full_name };
             dispatch({
@@ -142,20 +188,23 @@ export const updateProfile = (user, history) => dispatch => {
             });
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }
 
 export const resetPassword = (resetPasswordModel, fromRoute, history) => dispatch => {
     
     axios.post(`/api/user/reset-password`, resetPasswordModel)
         .then(res => {
-            history.push({
-                pathname: fromRoute,
-                notification_message: "Password was reset successfully."
-            });
+            history.push(fromRoute);
+            toast.dismiss();
+            toast.success('ℹ Password was reset successfully.');
             dispatch(clearErrors());
         })
         .catch(err => {
@@ -182,17 +231,18 @@ export const changePassword = (changePasswordModel, history) => dispatch => {
                     route = "/studentPanel"; break;
             }
             
-            history.push({
-                pathname: route,
-                notification_message: "Password was changed successfully."
-            });
+            history.push(route);
+            toast.dismiss();
+            toast.success('ℹ Password was changed successfully.');
             dispatch(clearErrors());
         })
         .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
-            });
+            })
         });
 }
 

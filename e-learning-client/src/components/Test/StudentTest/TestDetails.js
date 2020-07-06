@@ -27,7 +27,9 @@ class TestDetails extends Component {
 
                             {
                                 Object.keys(current_test).length ?
-                                    <TestResultPaper test={current_test}/>
+                                    <div className="paper mt-4">
+                                        <TestResultPaper test={current_test}/>
+                                    </div>
                                     : null
                             }
                             

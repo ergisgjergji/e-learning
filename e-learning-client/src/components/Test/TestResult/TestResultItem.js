@@ -32,16 +32,18 @@ class TestResultItem extends Component {
                 <button className="btn btn-md btn-secondary shadow" onClick={this.onToggle}>{test.header}</button>
                 <hr/>
 
-                <Collapse isOpen={isOpen}>
-                    <Fade in={isOpen}>
-                        {
-                            Object.keys(test).length ?
-                                <TestResultPaper test={test}/>
-                                : null
-                        }
-                            
-                    </Fade>
-                </Collapse>
+                <div className="paper mt-4">
+                    <Collapse isOpen={isOpen}>
+                        <Fade in={isOpen}>
+                            {
+                                Object.keys(test).length ?
+                                    <TestResultPaper test={test}/>
+                                    : null
+                            }
+                                
+                        </Fade>
+                    </Collapse>
+                </div>
                 
             </div>
         )

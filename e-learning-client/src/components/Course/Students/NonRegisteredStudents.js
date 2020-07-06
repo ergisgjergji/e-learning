@@ -6,7 +6,6 @@ import { getNonRegisteredStudents, registerStudent } from './../../../redux/acti
 
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
-import { toast } from 'react-toastify';
 
 class NonRegisteredStudents extends Component {
 
@@ -24,11 +23,7 @@ class NonRegisteredStudents extends Component {
 				{
 					label: 'Yes',
 					className: "confirm-yes",
-					onClick: () => { 
-                        this.props.registerStudent(course_id, student_id, this.props.history);
-                        toast.dismiss();
-			            toast.success(`ℹ Student with id '${student_id}' was registered successfully.`)
-                    }
+					onClick: () => this.props.registerStudent(course_id, student_id)
 				},
 				{
 					label: 'No',

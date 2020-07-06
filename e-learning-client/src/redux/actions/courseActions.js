@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { GET_COURSES, GET_COURSE, DELETE_COURSE, GET_REGISTERED_STUDENTS, GET_NONREGISTERED_STUDENTS, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
-import store from './../store';
+
+import { toast } from 'react-toastify';
 
 export const getCourses = () => dispatch => {
 
@@ -13,19 +14,32 @@ export const getCourses = () => dispatch => {
             })
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 };
 
 export const deleteCourse = (id) => dispatch => {
     
     axios.delete(`/api/course/${id}`)
-        .then(res => dispatch({
-            type: DELETE_COURSE,
-            payload: id
-        }));
+        .then(res => {
+
+            toast.dismiss();
+            toast.info(`Course with id '${id}' was deleted successfully.`);
+            dispatch({
+                type: DELETE_COURSE,
+                payload: id
+            })
+        })
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+        });
 };
 
 export const addCourse = (course, history) => dispatch => {
@@ -33,16 +47,20 @@ export const addCourse = (course, history) => dispatch => {
     axios.post("/api/course", course)
         .then(res => {
 
-            history.push({
-                pathname: '/teacherPanel',
-                notification_message: "Course added successfully."
-            });
+            history.push('/teacherPanel');
+            toast.dismiss();
+            toast.success('Course added successfully.');
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }
 
 export const getCourseById = (id, history) => dispatch => {
@@ -55,7 +73,11 @@ export const getCourseById = (id, history) => dispatch => {
             });
             dispatch(clearErrors());
         })
-        .catch(err => history.goBack());
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            history.goBack();
+        });
 };
 
 export const updateCourse = (course, history) => dispatch => {
@@ -63,16 +85,20 @@ export const updateCourse = (course, history) => dispatch => {
     axios.put("/api/course", course)
         .then(res => {
             
-            history.push({
-                pathname: '/teacherPanel',
-                notification_message: "Changes were saved successfully."
-            });
+            history.push('/teacherPanel');
+            toast.dismiss();
+            toast.success(`Changes were saved successfully.`);
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+        
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }
 
 export const getRegisteredStudents = (id) => dispatch => {
@@ -85,10 +111,14 @@ export const getRegisteredStudents = (id) => dispatch => {
             });
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }
 
 export const getNonRegisteredStudents = (id) => dispatch => {
@@ -101,23 +131,35 @@ export const getNonRegisteredStudents = (id) => dispatch => {
             });
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }
 
-export const registerStudent = (course_id, student_id, history) => dispatch => {
+export const registerStudent = (course_id, student_id) => dispatch => {
 
     axios.post(`/api/course/${course_id}/students/${student_id}`)
         .then(res => {
+
+            toast.dismiss();
+            toast.success(`ℹ Student with id '${student_id}' was registered successfully.`)
             
             dispatch(getRegisteredStudents(course_id));
             dispatch(getNonRegisteredStudents(course_id));
             dispatch(clearErrors());
         })
-        .catch(err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        }));
+        .catch(err => {
+        
+            toast.dismiss();
+            toast.error('An error occurred!');
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
 }

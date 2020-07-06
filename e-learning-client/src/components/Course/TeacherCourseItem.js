@@ -19,11 +19,7 @@ class TeacherCourseItem extends Component {
 				{
 					label: 'Yes',
 					className: "confirm-yes",
-					onClick: () => {
-                        this.props.deleteCourse(id);
-                        toast.dismiss();
-                        toast.info(`ℹ Course with id '${id}' was deleted successfully.`);
-                    }
+					onClick: () => this.props.deleteCourse(id)
 				},
 				{
 					label: 'No',

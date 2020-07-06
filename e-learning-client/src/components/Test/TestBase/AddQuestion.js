@@ -212,7 +212,7 @@ class AddQuestion extends Component {
                         {
                             errors ?
                                 <Alert color="danger" isOpen={toggleAlert} toggle={this.onToggleAlert} className="col-md-12 mt-2 px-4">
-                                    {errors}
+                                    <i className="fa fa-exclamation-circle" aria-hidden="true"/> {errors}
                                 </Alert>
                                 :
                                 null
