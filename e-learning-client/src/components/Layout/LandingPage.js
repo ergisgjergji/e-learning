@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Image } from 'reactstrap';
+import translate from './../../i18n/translate';
 
 class LandingPage extends Component {
 
@@ -43,15 +43,16 @@ class LandingPage extends Component {
 
                                     <h1 className="display-4 mb-4">E-Learning</h1>
                                     <p className="lead">
-                                        A platform that helps teachers and students all round the world.
+                                        {translate('landing-page-header')}
                                     </p>
                                     <hr/>
                                     
-                                    <Link to="/login" className="btn btn-lg btn-primary mr-2"> Login </Link>
+                                    <Link to="/login" className="btn btn-lg btn-primary mr-2"> {translate('login')} </Link>
 
                                     <label className="d-block text-secondary mt-3">
                                     <small className="rounded p-2">
-                                            <i className="fa fa-info-circle" aria-hidden="true"/> Use credentials: <u>admin@admin.com</u> & <u>123456</u> for demonstration. 
+                                            <i className="fa fa-info-circle" aria-hidden="true"/>&nbsp;
+                                            {translate('landing-page-demo', { email: <u>admin@admin.com</u>, password: <u>123456</u> })} 
                                         </small>
                                     </label>
 

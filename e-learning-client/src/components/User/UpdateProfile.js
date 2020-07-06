@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUserById, updateProfile } from './../../redux/actions/userActions';
-
 import classnames from 'classnames';
+
+import translate from '../../i18n/translate';
 
 class UpdateProfile extends Component {
 
@@ -62,17 +63,17 @@ class UpdateProfile extends Component {
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
                             
                             <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
-                            <h5 className="display-4 text-center">Edit profile</h5>
+                            <h5 className="display-4 text-center"> {translate('edit-profile')} </h5>
                             <hr />
 
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-row">
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="full_name">Full name</label>
+                                        <label htmlFor="full_name"> {translate('full-name')} </label>
                                         <input type="text" id="full_name" name="full_name"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.full_name})}
                                             value={full_name} onChange={this.onChange} />
@@ -83,7 +84,7 @@ class UpdateProfile extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="username">Username</label>
+                                        <label htmlFor="username"> {translate('email')} </label>
                                         <input type="email" id="username" name="username"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.username})}
                                             value={username} onChange={this.onChange} />
@@ -100,7 +101,7 @@ class UpdateProfile extends Component {
                                     <input type="hidden" id="password" name="password" value={password}/>
 
                                     <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
-                                        <i className="fa fa-floppy-o" aria-hidden="true"/> Save
+                                        <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 
                                 </div>

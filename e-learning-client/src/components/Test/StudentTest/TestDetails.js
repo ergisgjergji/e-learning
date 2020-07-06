@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { getTestById } from './../../../redux/actions/testActions';
 import TestResultPaper from './../TestResult/TestResultPaper';
 
+import translate from '../../../i18n/translate';
+
 class TestDetails extends Component {
 
     componentDidMount() {
@@ -28,7 +30,7 @@ class TestDetails extends Component {
                             <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
                                 <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                    <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                    <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                                 </button>
 
                                 {

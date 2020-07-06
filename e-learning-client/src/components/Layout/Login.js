@@ -5,6 +5,8 @@ import { login } from './../../redux/actions/authActions';
 import { clearErrors } from './../../redux/actions/errorActions';
 import classnames from 'classnames';
 
+import translate from '../../i18n/translate';
+
 class Login extends Component {
 
     constructor(){
@@ -75,14 +77,14 @@ class Login extends Component {
 
                             <div className="col-10 col-md-8 col-lg-6 mx-auto my-4">
 
-                                <h1 className="display-4 text-center">Login</h1>
+                                <h1 className="display-4 text-center"> {translate('login')} </h1>
                                 <br/>
 
                                 <form onSubmit={this.onSubmit}>
                                     <div className="form-row">
 
                                         <div className="form-group col-md-12">
-                                            <label htmlFor="username">Username/Email</label>
+                                            <label htmlFor="username"> {translate('email')} </label>
                                             <input type="email" id="username" name="username"
                                                 className={classnames("form-control form-control-md shadow", {"is-invalid": errors.username})}
                                                 value={username} onChange={this.onChange} />
@@ -93,7 +95,7 @@ class Login extends Component {
                                         </div>
 
                                         <div className="form-group col-md-12">
-                                            <label htmlFor="password">Password</label>
+                                            <label htmlFor="password"> {translate('password')} </label>
                                             <input type="password" id="password" name="password"
                                                 className={classnames("form-control form-control-md shadow", {"is-invalid": errors.password})}
                                                 value={password} onChange={this.onChange} />
@@ -104,7 +106,7 @@ class Login extends Component {
                                         </div>
                                         
                                         <button type="submit" value="Login" className="btn btn-outline-primary btn-lg mt-4 mx-auto shadow-lg">
-                                            <i className="fa fa-sign-in" aria-hidden="true"/> Login
+                                            <i className="fa fa-sign-in" aria-hidden="true"/> {translate('login')}
                                         </button>
 
                                     </div>

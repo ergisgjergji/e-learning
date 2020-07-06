@@ -3,8 +3,12 @@ import { Prompt } from 'react-router-dom';
 
 import { confirmAlert } from 'react-confirm-alert';
 import Countdown from 'react-countdown';
-
 import QuestionForm from './QuestionForm';
+
+import translate from '../../../i18n/translate';
+
+// ToDo: Pass the CountDown to the parent component and pass it down here as a prop. This way, no matter how many times this component
+// re-renders, the countdown will never be delayed.
 
 class TestForm extends Component {
 
@@ -37,7 +41,7 @@ class TestForm extends Component {
         clearInterval(this.submitInterval);
 
         const { test } = this.state;
-        this.props.submitTest(test, this.props.history);
+        this.props.asyncSubmit(test, this.props.history);
     }
 
     onWindowClose = (e) => {
@@ -72,6 +76,10 @@ class TestForm extends Component {
         }
     };
 
+    onClockTick = (clock) => {
+        this.setState({ duration: clock.total });
+    }
+
     onCountdownComplete = () => {
         window.removeEventListener("beforeunload", this.onWindowClose);
         clearInterval(this.submitInterval);
@@ -101,6 +109,7 @@ class TestForm extends Component {
 					label: 'Yes',
 					className: "confirm-yes",
 					onClick: () => {
+                        this.setState({ isBlocking: false });
                         const { test } = this.state;
                         this.props.submitTest(test, this.props.history)
                     }
@@ -132,6 +141,7 @@ class TestForm extends Component {
                         <Countdown 
                             date={Date.now() + duration} 
                             renderer={this.countdownRender}
+                            onTick={this.onClockTick}
                             onComplete={this.onCountdownComplete}
                         />  
                     </div>             
@@ -146,23 +156,23 @@ class TestForm extends Component {
 
                     <div className="row">
                         <button type="button" className="btn btn-md btn-primary border border-dark text-dark mx-auto mt-5 shadow" onClick={this.onTestSubmit}>
-                            <i className="fa fa-floppy-o" aria-hidden="true"/> Submit test
+                            <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('submit-test')}
                         </button>
                     </div>
 
                     <div className="col-12 ml-4 mt-3 p-0 text-muted text-left font-weight-light small">
                         <span>
-                            * <i>The minimal passing score is 40%</i>
+                            * <i> {translate('minimal-score')} </i>
                         </span>
                     </div>
                     <div className="col-12 ml-4 m-0 p-0 text-muted text-left font-weight-light small">
                         <span>
-                            * <i>Each question takes up to 3 minutes</i>
+                            * <i> {translate('question-duration')} </i>
                         </span>
                     </div> 
                     <div className="col-12 ml-4 mb-2 p-0 text-muted text-left font-weight-light small">
                         <span>
-                            * <i>When the time is over it will be submited automatically</i>
+                            * <i> {translate('countdown-end')} </i>
                         </span>
                     </div> 
 

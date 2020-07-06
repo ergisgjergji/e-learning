@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUserById, changePassword } from './../../redux/actions/userActions';
-
 import classnames from 'classnames';
+
+import translate from '../../i18n/translate';
 
 class ChangePassword extends Component {
 
@@ -57,17 +58,17 @@ class ChangePassword extends Component {
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
                             
                             <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
-                            <h5 className="display-4 text-center">Change password</h5>
+                            <h5 className="display-4 text-center"> {translate('change-password')} </h5>
                             <hr />
 
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-row">
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="new_password">Password</label>
+                                        <label htmlFor="new_password"> {translate('password')} </label>
                                         <input type="password" id="old_password" name="old_password"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.password})}
                                             value={old_password} onChange={this.onChange} />
@@ -78,7 +79,7 @@ class ChangePassword extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="new_password">New password</label>
+                                        <label htmlFor="new_password"> {translate('new-password')} </label>
                                         <input type="password" id="new_password" name="new_password"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.new_password})}
                                             value={new_password} onChange={this.onChange} />
@@ -90,7 +91,7 @@ class ChangePassword extends Component {
 
                                     <input type="hidden" id="id" name="id"/>
                                     <button type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save">
-                                        <i className="fa fa-floppy-o" aria-hidden="true"/> Save
+                                        <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 
                                 </div>

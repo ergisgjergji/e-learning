@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addUser } from './../../redux/actions/userActions';
-
 import classnames from 'classnames';
+
+import translate from '../../i18n/translate';
+import { FormattedMessage } from 'react-intl';
 
 class AddStudent extends Component {
 
@@ -54,17 +55,17 @@ class AddStudent extends Component {
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
                             
                             <button className="btn btn-secondary btn-sm shadow rounded mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
-                            <h5 className="display-4 text-center">New Student</h5>
+                            <h5 className="display-4 text-center"> {translate('new-student')} </h5>
                             <hr />
 
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-row">
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="full_name">Full name</label>
+                                        <label htmlFor="full_name"> {translate('full-name')} </label>
                                         <input type="text" id="full_name" name="full_name"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.full_name})}
                                             value={full_name} onChange={this.onChange} />
@@ -75,13 +76,21 @@ class AddStudent extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="faculty">Faculty</label>
+                                        <label htmlFor="faculty"> {translate('faculty')} </label>
                                         <select name="faculty" className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.faculty})}
                                             value={faculty} onChange={this.onChange}>
-                                            <option value="" disabled>Select Faculty</option>
-                                            <option value="FTI">Fakulteti i Teknologjise se Informacionit</option>
-                                            <option value="FIE">Fakulteti i Inxhinierise Elektrike</option>
-                                            <option value="FIN">Fakulteti i Inxhinierise se Ndertimit</option>
+                                            <FormattedMessage id="select-faculty">
+                                                {(message) => <option value="" disabled> {message} </option>}
+                                            </FormattedMessage>
+                                            <FormattedMessage id="FTI">
+                                                {(message) => <option value="FTI"> {message} </option>}
+                                            </FormattedMessage>
+                                            <FormattedMessage id="FIE">
+                                                {(message) => <option value="FIE"> {message} </option>}
+                                            </FormattedMessage>
+                                            <FormattedMessage id="FIN">
+                                                {(message) => <option value="FIN"> {message} </option>}
+                                            </FormattedMessage>
                                         </select>
                                         { 
                                             errors.faculty ? 
@@ -90,7 +99,7 @@ class AddStudent extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="start_date">Registration Date</label>
+                                        <label htmlFor="start_date"> {translate('registration-date')} </label>
                                         <input type="date" id="registration_date" name="registration_date"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.registration_date})} 
                                             value={registration_date} onChange={this.onChange} />
@@ -101,7 +110,7 @@ class AddStudent extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="username">Username</label>
+                                        <label htmlFor="username"> {translate('email')} </label>
                                         <input type="email" id="username" name="username"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.username})}
                                             value={username} onChange={this.onChange} />
@@ -112,7 +121,7 @@ class AddStudent extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="password">Password</label>
+                                        <label htmlFor="password"> {translate('password')} </label>
                                         <input type="password" id="password" name="password"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.password})}
                                             value={password} onChange={this.onChange} />
@@ -125,7 +134,7 @@ class AddStudent extends Component {
                                     <input type="hidden" id="role" name="role" value={role}/>
 
                                     <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
-                                        <i className="fa fa-floppy-o" aria-hidden="true"/> Save
+                                        <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 
                                 </div>

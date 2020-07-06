@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Alert } from 'reactstrap';
 
+import translate from '../../../i18n/translate';
+import { FormattedMessage } from 'react-intl';
+
 class AddQuestion extends Component {
 
     constructor(){
@@ -85,12 +88,12 @@ class AddQuestion extends Component {
         const { description, type, alternatives } = this.state;
 
         if(description === "") {
-            this.setState({ errors: "Description is required!", toggleAlert: true });
+            this.setState({ errors: translate('description-required'), toggleAlert: true });
             return false;
         }
         
         else if(type === 0) {
-            this.setState({ errors: "Alternatives are required!", toggleAlert: true });
+            this.setState({ errors: translate('alternatives-required'), toggleAlert: true });
             return false;
         }
 
@@ -99,7 +102,7 @@ class AddQuestion extends Component {
 
         for(let i = 0; i < count; i++ ) {
             if(alternatives[i].description === "") {
-                this.setState({ errors: "Alternatives cannot be blank!", toggleAlert: true });
+                this.setState({ errors: translate('alternatives-blank'), toggleAlert: true });
                 return false
             }
 
@@ -108,12 +111,12 @@ class AddQuestion extends Component {
         }
 
         if((type === 1 && correct !== 1) || (type === 2 && correct !== 1)) {
-            this.setState({ errors: "Question must have 1 correct answer!", toggleAlert: true });
+            this.setState({ errors: translate('one-correct-answer-required'), toggleAlert: true });
             return false;
         }
 
         if(type === 3 && correct !== 2) {
-            this.setState({ errors: "Question must have 2 correct answers!", toggleAlert: true });
+            this.setState({ errors: translate('two-correct-answers-required'), toggleAlert: true });
             return false;
         }
         return true;
@@ -189,19 +192,28 @@ class AddQuestion extends Component {
                     <div className="form-row">
 
                         <div className="form-group col-md-12">
-                            <label htmlFor="description"> Description </label>
+                            <label htmlFor="description"> {translate('description')} </label>
                             <textarea id="description" name="description"
                                 className="form-control form-control-sm shadow-sm"
                                 value={description} onChange={this.onChange}/>
                         </div>
 
                         <div className="form-group col-md-12">
-                            <label htmlFor="type">Type</label>
+                            <label htmlFor="type"> {translate('type')} </label>
+
                             <select id="type" name="type" className="form-control form-control-sm shadow-sm" value={type} onChange={this.onChangeType}>
-                                <option value={0} disabled>Select type</option>
-                                <option value={1}>Yes/No</option>
-                                <option value={2}>Single choice</option>
-                                <option value={3}>Multi-choice</option>
+                                <FormattedMessage id="select-type">
+                                    {(message) => <option value={0} disabled> {message} </option>}
+                                </FormattedMessage>
+                                <FormattedMessage id="yes-no">
+                                    {(message) => <option value={1}> {message} </option>}
+                                </FormattedMessage>
+                                <FormattedMessage id="single-choice">
+                                    {(message) => <option value={2}> {message} </option>}
+                                </FormattedMessage>
+                                <FormattedMessage id="multi-choice">
+                                    {(message) => <option value={3}> {message} </option>}
+                                </FormattedMessage>
                             </select>
                         </div>
 
@@ -219,7 +231,7 @@ class AddQuestion extends Component {
                         }
 
                         <button type="button" className="btn btn-md btn-outline-success ml-auto mt-2 shadow" onClick={this.onQuestionSubmit}>
-                            <i className="fa fa-floppy-o" aria-hidden="true"/> Save question
+                            <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save-question')}
                         </button>
 
                     </div>

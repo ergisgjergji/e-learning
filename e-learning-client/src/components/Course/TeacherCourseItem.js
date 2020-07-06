@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-
-import { confirmAlert } from 'react-confirm-alert';
-import { toast } from 'react-toastify';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteCourse } from './../../redux/actions/courseActions';
+import { confirmAlert } from 'react-confirm-alert';
+
+import translate from "../../i18n/translate";
 
 class TeacherCourseItem extends Component {
 
@@ -39,12 +38,12 @@ class TeacherCourseItem extends Component {
 					<div className="row pb-4">
 						
 						<div className="col-12 col-md-3 border-right mb-3">
-                            <h5>Name:</h5>
+                            <h5> {translate('name')}: </h5>
 							<span className="mx-auto"> #{course.name} </span>
 						</div>
 
 						<div className="col-12 col-md-4 col-8 border-right">
-							<h5>Description:</h5>
+							<h5> {translate('description')}: </h5>
 							<p>{course.description}</p>
 						</div>
 
@@ -53,24 +52,24 @@ class TeacherCourseItem extends Component {
 
 								<Link to={`/teacherPanel/updateCourse/${course.id}`}>
 									<li className="list-group-item update">
-										<i className="fa fa-edit pr-1"> Update course </i>
+										<i className="fa fa-edit pr-1"> {translate('update-course')} </i>
 									</li>
 								</Link>
 
 								<Link to={`/teacherPanel/course/${course.id}/students`}>
 									<li className="list-group-item board">
-										<i className="fa fa-users pr-1"> Manage Students </i>
+										<i className="fa fa-users pr-1"> {translate('manage-students')} </i>
 									</li>
 								</Link>
 
                                 <Link to={`/teacherPanel/course/${course.id}/tests`}>
 									<li className="list-group-item board">
-										<i className="fa fa-file-text-o pr-1"> Manage Tests </i>
+										<i className="fa fa-file-text-o pr-1"> {translate('manage-tests')} </i>
 									</li>
 								</Link>
 
 								<li className="list-group-item delete" onClick={this.onDeleteClick.bind(this, course.id)}>
-									<i className="fa fa-trash-o pr-1"> Delete Course</i>
+									<i className="fa fa-trash-o pr-1"> {translate('delete-course')} </i>
 								</li>
 								
 							</ul>
@@ -79,10 +78,10 @@ class TeacherCourseItem extends Component {
 
                     <div className="date-info d-flex flex-column my-2 pr-1 border-dark">
                         <span>
-                            <b>Created:</b> {course.created_date}
+                            <b> {translate('created')}:</b> {course.created_date}
                         </span>
                         <span>
-                            <b>Last updated:</b> {course.updated_date}
+                            <b> {translate('updated')}:</b> {course.updated_date}
                         </span>
                     </div>
 

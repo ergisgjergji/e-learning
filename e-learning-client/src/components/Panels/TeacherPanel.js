@@ -7,6 +7,8 @@ import { getCourses } from '../../redux/actions/courseActions';
 import { Alert } from 'reactstrap';
 import TeacherCourseItem from './../Course/TeacherCourseItem';
 
+import translate from "../../i18n/translate";
+
 class TeacherPanel extends Component {
 
 	componentDidMount() {
@@ -23,17 +25,17 @@ class TeacherPanel extends Component {
 						<div className="row">
 							<div className="col-md-11 mx-auto mb-4">
 
-								<h5 className="display-4 text-center mt-3">Courses</h5>
+								<h5 className="display-4 text-center mt-3"> {translate('courses')} </h5>
 
 								<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary mt-2">
-									<i className="fa fa-plus-circle" aria-hidden="true"/> Add Course
+									<i className="fa fa-plus-circle" aria-hidden="true"/> {translate('add-course')}
 								</Link>
 								<hr/>
 
 								{
 									(courses.length === 0) ?
 										<Alert color="info" className="text-center">
-											<i className="fa fa-info-circle" aria-hidden="true"/> You have no courses.
+											<i className="fa fa-info-circle" aria-hidden="true"/> {translate('no-courses')}
 										</Alert>
 										:
 										courses.map(course => (

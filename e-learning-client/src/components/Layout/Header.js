@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from './../../redux/actions/authActions';
 
+import translate from './../../i18n/translate';
+
 class Header extends Component {
 
     constructor(){
@@ -47,17 +49,17 @@ class Header extends Component {
                 <Nav className="mr-auto" navbar>
                     <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/adminPanel" className="nav-link">
-                            Home
+                            {translate('home')}
                         </Link>
                     </NavItem>
                     <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/adminPanel/students" className="nav-link">
-                            Manage students
+                            {translate('manage-students')}
                         </Link>
                     </NavItem>
                     <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/adminPanel/teachers" className="nav-link">
-                            Manage teachers
+                            {translate('manage-teachers')}
                         </Link>
                     </NavItem>
                 </Nav>
@@ -68,7 +70,7 @@ class Header extends Component {
                 <Nav className="mr-auto" navbar>
                     <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/teacherPanel" className="nav-link">
-                            Home
+                            {translate('home')}
                         </Link>
                     </NavItem>
                 </Nav>
@@ -79,7 +81,7 @@ class Header extends Component {
                 <Nav className="mr-auto" navbar>
                     <NavItem className="text-center my-auto mx-2 border-bottom rounded">
                         <Link to="/studentPanel" className="nav-link">
-                            Home
+                            {translate('home')}
                         </Link>
                     </NavItem>
                 </Nav>
@@ -90,7 +92,7 @@ class Header extends Component {
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                         <Link to="/login" className="nav-link"> 
-                            <i className="fa fa-sign-in" aria-hidden="true"/> Login 
+                            <i className="fa fa-sign-in" aria-hidden="true"/> {translate('login')} 
                         </Link>
                     </NavItem>
                 </Nav>
@@ -118,17 +120,17 @@ class Header extends Component {
             <Nav className="ml-auto" navbar>
                 <NavItem className="text-left my-auto mx-2">
                     <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle nav caret> {`Welcome, ${user.full_name}`} </DropdownToggle>
+                        <DropdownToggle nav caret> { translate('welcome', {name: user.full_name}) } </DropdownToggle>
                         <DropdownMenu right className="p-0">
                             <Link to="/profile/edit" className="text-dark">
                                 <DropdownItem className="py-2"> 
-                                    <i className="fa fa-user-circle mr-2" aria-hidden="true"/> Edit profile 
+                                    <i className="fa fa-user-circle mr-1" aria-hidden="true"/> {translate('edit-profile')} 
                                 </DropdownItem>
                             </Link>
                             <DropdownItem divider className="m-0"/>
                             <Link to="/profile/changePassword" className="text-dark">
                                 <DropdownItem  className="py-2"> 
-                                    <i className="fa fa-key mr-2" aria-hidden="true"/> Change password 
+                                    <i className="fa fa-key mr-1" aria-hidden="true"/> {translate('change-password')}
                                 </DropdownItem>
                             </Link>
                         </DropdownMenu>
@@ -137,7 +139,7 @@ class Header extends Component {
 
                 <NavItem className="text-left my-auto mx-2">
                     <Link to="/logout" className="nav-link"> 
-                        Logout <i className="fa fa-sign-out" aria-hidden="true"/> 
+                        {translate('logout')} <i className="fa fa-sign-out" aria-hidden="true"/> 
                     </Link>
                 </NavItem>
             </Nav>

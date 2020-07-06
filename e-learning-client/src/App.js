@@ -38,7 +38,6 @@ import StudentRoute from './components/Router/StudentRoute';
 import PrivateRoute from './components/Router/PrivateRoute';
 
 import {I18nProvider, LOCALES } from './i18n';
-import translate from './i18n/translate';
 
 class App extends Component {
 
@@ -47,7 +46,7 @@ class App extends Component {
     store.dispatch(loadUser());
 
     this.state = {
-      locale: ''
+      locale: LOCALES.ENGLISH
     }
   }
 

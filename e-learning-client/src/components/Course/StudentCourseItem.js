@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import { Collapse, Fade, Badge, Tooltip } from 'reactstrap';
 import axios from 'axios';
 import classnames from 'classnames';
-
 import { confirmAlert } from 'react-confirm-alert';
-import { toast } from 'react-toastify';
 
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import translate from "../../i18n/translate";
+
 
 class StudentCourseItem extends Component {
 
@@ -78,15 +78,15 @@ class StudentCourseItem extends Component {
 						<div className="col-12 col-4 col-md-3 border-right mb-2">
 							<h5 className="mx-auto"> #{course.name} </h5>
                             <span className="d-block mt-1">
-                                <small><i> by {course.teacher_name} </i></small>
+                                <small><i> {translate('by')} {course.teacher_name} </i></small>
                             </span>
                             <span className="d-block mt-3 mb-1 border border rounded text-center py-2 shadow-sm">
-                                <small> <b>Contact:</b> {course.teacher_email} </small>
+                                <small> <b> {translate('contact')}:</b> {course.teacher_email} </small>
                             </span>
 						</div>
 
 						<div className="col-12 col-md-4 col-8 border-right">
-							<h5>Description:</h5>
+							<h5> {translate('description')}:</h5>
 							<p>{course.description}</p>
 						</div>
 
@@ -95,12 +95,12 @@ class StudentCourseItem extends Component {
 
 								<Link to={`/studentPanel/course/${course.id}/details`}>
 									<li className="list-group-item update">
-										<i className="fa fa-info-circle pr-1"> View Details </i>
+										<i className="fa fa-info-circle pr-1"> {translate('view-details')} </i>
 									</li>
 								</Link>
 
 								<li className="list-group-item board" onClick={this.toggleDropdown}>
-									<i className="fa fa-file-text pr-1"> Manage Tests </i>
+									<i className="fa fa-file-text pr-1"> {translate('manage-tests')} </i>
                                     <i className={`fa ${!isDropdownOpen ? 'fa-chevron-down' : 'fa-chevron-up'} icon-position-right`} aria-hidden="true"/>
 								</li>
 
@@ -117,16 +117,14 @@ class StudentCourseItem extends Component {
                                                                     className="ml-3 mr-1" 
                                                                     color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
                                                                 >
-                                                                { test.completed ?
-                                                                        (test.passed ? "Pass" : "Fail")
-                                                                        : "Take" }
+                                                                { test.passed ? translate('pass') : translate('fail') }
                                                                 </Badge>
                                                                 { test.header }
                                                                 <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
                                                             </li>
 
                                                             <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
-                                                                { test.completed ? "View details" : "Take the test" }
+                                                                {translate('view-details')}
                                                             </Tooltip>
                                                         </Link>
                                                     )
@@ -138,16 +136,14 @@ class StudentCourseItem extends Component {
                                                                     className="ml-3 mr-1" 
                                                                     color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
                                                                 >
-                                                                { test.completed ?
-                                                                        (test.passed ? "Pass" : "Fail")
-                                                                        : "Take" }
+                                                                { translate('take') }
                                                                 </Badge>
                                                                 { test.header }
                                                                 <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
                                                             </li>
 
                                                             <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
-                                                                { test.completed ? "View details" : "Take the test" }
+                                                                { translate('take-test') }
                                                             </Tooltip>
                                                         </div>
                                                     )
@@ -162,10 +158,10 @@ class StudentCourseItem extends Component {
 
                     <div className="date-info d-flex flex-column my-2 pr-1 border-dark">
                         <span>
-                            <b>Created:</b> {course.created_date}
+                            <b> {translate('created')}:</b> {course.created_date}
                         </span>
                         <span>
-                            <b>Last updated:</b> {course.updated_date}
+                            <b> {translate('updated')}:</b> {course.updated_date}
                         </span>
                     </div>
 

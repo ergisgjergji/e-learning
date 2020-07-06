@@ -141,15 +141,16 @@ export const updateUser = (user, history) => dispatch => {
 
     axios.put("/api/user", user)
         .then(res => {
-            
+
+            toast.dismiss();
+            toast.success('ℹ Changes were saved successfully.');
+
             if(user.role === "STUDENT")
                 history.push('/adminPanel/students');
 
             if(user.role === "TEACHER")
                 history.push('/adminPanel/teachers');
-            
-            toast.dismiss();
-            toast.success('ℹ Changes were saved successfully.');
+
             dispatch(clearErrors());
         })
         .catch(err => {

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCourseById, updateCourse } from './../../redux/actions/courseActions';
-
 import classnames from 'classnames';
+
+import translate from '../../i18n/translate';
 
 class UpdateCourse extends Component {
 
@@ -58,17 +59,17 @@ class UpdateCourse extends Component {
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
                             
                             <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
-                            <h5 className="display-4 text-center">Update Course</h5>
+                            <h5 className="display-4 text-center"> {translate('update-course')} </h5>
                             <hr />
 
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-row">
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="name">Course Name</label>
+                                        <label htmlFor="name"> {translate('name')} </label>
                                         <input type="text" id="name" name="name"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.name})}
                                             value={name} onChange={this.onChange} />
@@ -79,7 +80,7 @@ class UpdateCourse extends Component {
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="description">Description</label>
+                                        <label htmlFor="description"> {translate('description')} </label>
                                         <textarea type="date" id="description" name="description"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.description})}
                                             value={description} onChange={this.onChange} />
@@ -92,7 +93,7 @@ class UpdateCourse extends Component {
                                     <input type="hidden" id="id" name="id" value={id}/>
 
                                     <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
-                                        <i className="fa fa-floppy-o" aria-hidden="true"/> Save
+                                        <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 
                                 </div>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCourseById, updateCourse } from './../../redux/actions/courseActions';
+import { getCourseById } from './../../redux/actions/courseActions';
 
-import classnames from 'classnames';
+import translate from '../../i18n/translate';
 
 class UpdateCourse extends Component {
 
@@ -49,52 +49,52 @@ class UpdateCourse extends Component {
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
                             
                             <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
-                            <h5 className="display-4 text-center">Course details</h5>
+                            <h5 className="display-4 text-center"> {translate('course-details')} </h5>
                             <hr/>
 
                             {/* <form onSubmit={this.onSubmit}> */}
                                 <div className="form-row">
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="name">Name</label>
+                                        <label htmlFor="name"> {translate('name')} </label>
                                         <input disabled type="text" id="name" name="name"
                                             className="form-control form-control-md shadow"
                                             value={name}/>
                                     </div>
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="description">Description</label>
+                                        <label htmlFor="description"> {translate('description')} </label>
                                         <textarea disabled type="date" id="description" name="description"
                                             className="form-control form-control-md shadow"
                                             value={description}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="name">Teacher name</label>
+                                        <label htmlFor="name"> {translate('teacher-name')} </label>
                                         <input disabled type="text" id="name" name="name"
                                             className="form-control form-control-md shadow"
                                             value={teacher_name}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="teacher_email">Teacher email</label>
+                                        <label htmlFor="teacher_email"> {translate('teacher-email')} </label>
                                         <input disabled type="text" id="teacher_email" name="teacher_email"
                                             className="form-control form-control-md shadow"
                                             value={teacher_email}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="created_date">Date created</label>
+                                        <label htmlFor="created_date"> {translate('created')} </label>
                                         <input disabled type="text" id="created_date" name="created_date"
                                             className="form-control form-control-md shadow"
                                             value={created_date}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="updated_date">Last updated</label>
+                                        <label htmlFor="updated_date"> {translate('updated')} </label>
                                         <input disabled type="text" id="updated_date" name="updated_date"
                                             className="form-control form-control-md shadow"
                                             value={updated_date}/>

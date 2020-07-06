@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getNonRegisteredStudents, registerStudent } from './../../../redux/actions/courseActions';
-
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
+
+import translate from '../../../i18n/translate';
 
 class NonRegisteredStudents extends Component {
 
@@ -38,15 +38,15 @@ class NonRegisteredStudents extends Component {
         
         const columns = [
             { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
-            { Header: "Full name", accessor: "full_name", sortable: true, style: { textAlign: "center" } },
-            { Header: "Username", accessor: "username", sortable: true, style: { textAlign: "center" } },
-            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
-            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
-            { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, width: 150, Cell: props => {
+            { Header: translate('full-name'), accessor: "full_name", sortable: true, style: { textAlign: "center" } },
+            { Header: translate('email'), accessor: "username", sortable: true, style: { textAlign: "center" } },
+            { Header: translate('faculty'), accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
+            { Header: translate('registration-date'), accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
+            { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, width: 150, Cell: props => {
               return (
                 <>
                     <button className="btn btn-sm btn-primary shadow" onClick={this.onRegisterStudent.bind(this, course_id, props.original.id, props.original.full_name)}>
-                        Register <i className="fa fa-registered" aria-hidden="true"/> 
+                        {translate('register')} <i className="fa fa-registered" aria-hidden="true"/> 
                     </button>
                 </>
               )
@@ -55,12 +55,12 @@ class NonRegisteredStudents extends Component {
 
         return (
             <div className="my-4 border border-secondary rounded shadow-lg">
-                <h3 className="text-center mt-4">Non-registered students</h3>
+                <h3 className="text-center mt-4"> {translate('non-registered-students')} </h3>
                 <br/>
                 <ReactTable
                     columns={columns}
                     data={students}
-                    noDataText={"No data"}
+                    noDataText={translate('no-data')}
                     filterable
                     defaultPageSize={10}
                 />

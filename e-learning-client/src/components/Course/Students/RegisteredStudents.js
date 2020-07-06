@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getRegisteredStudents } from './../../../redux/actions/courseActions';
-
 import ReactTable from 'react-table-v6';
+
+import translate from '../../../i18n/translate';
 
 
 class RegisteredStudents extends Component {
@@ -20,15 +20,15 @@ class RegisteredStudents extends Component {
         
         const columns = [
             { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
-            { Header: "Full name", accessor: "full_name", sortable: true, style: { textAlign: "center" } },
-            { Header: "Username", accessor: "username", sortable: true, style: { textAlign: "center" } },
-            { Header: "Faculty", accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
-            { Header: "Registration Date", accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
-            { Header: "Action", sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
+            { Header: translate('full-name'), accessor: "full_name", sortable: true, style: { textAlign: "center" } },
+            { Header: translate('email'), accessor: "username", sortable: true, style: { textAlign: "center" } },
+            { Header: translate('faculty'), accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
+            { Header: translate('registration-date'), accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
+            { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>
                     <Link to={`/teacherPanel/course/${course_id}/student/${props.original.id}/results`} className="btn btn-sm btn-success shadow">
-                        View results <i className="fa fa-chevron-circle-right" aria-hidden="true"/>
+                        {translate('view-results')} <i className="fa fa-chevron-circle-right" aria-hidden="true"/>
                     </Link>
                 </>
               )
@@ -37,12 +37,12 @@ class RegisteredStudents extends Component {
 
         return (
             <div className="my-4 border border-secondary rounded shadow-lg">
-                <h3 className="text-center mt-4">Registered students</h3>
+                <h3 className="text-center mt-4"> {translate('registered-students')} </h3>
                 <br/>
                 <ReactTable
                     columns={columns}
                     data={students}
-                    noDataText={"No data"}
+                    noDataText={translate('no-data')}
                     filterable
                     defaultPageSize={10}
                 />

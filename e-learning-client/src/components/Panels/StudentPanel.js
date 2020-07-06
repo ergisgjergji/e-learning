@@ -6,6 +6,8 @@ import { getCourses } from '../../redux/actions/courseActions';
 import { Alert } from "reactstrap";
 import StudentCourseItem from './../Course/StudentCourseItem';
 
+import translate from "../../i18n/translate";
+
 class StudentPanel extends Component {
 
 	componentDidMount() {
@@ -22,13 +24,13 @@ class StudentPanel extends Component {
 						<div className="row">
 							<div className="col-md-11 mx-auto mb-4">
 
-								<h1 className="display-4 text-center mt-3">Courses</h1>
+								<h1 className="display-4 text-center mt-3"> {translate('courses')} </h1>
 								<hr/>
 
 								{
 									(courses.length === 0) ?
 										<Alert color="info" className="text-center">
-											<i className="fa fa-info-circle" aria-hidden="true"/> You have no courses.
+											<i className="fa fa-info-circle" aria-hidden="true"/> {translate('no-courses')}
 										</Alert>
 										:
 										courses.map(course => (

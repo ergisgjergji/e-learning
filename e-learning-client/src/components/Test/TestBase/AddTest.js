@@ -9,6 +9,9 @@ import { Tooltip } from 'reactstrap';
 import QuestionBaseItem from './QuestionBaseItem';
 import AddQuestion from './AddQuestion';
 
+import translate from '../../../i18n/translate';
+import { FormattedMessage } from 'react-intl';
+
 
 class AddTest extends Component {
 
@@ -91,27 +94,30 @@ class AddTest extends Component {
                     <div className="row">
                         <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                            <Prompt when={isBlocking} message={location => "If you leave, changes will not be saved. Continue?" } />
+                        <FormattedMessage id="AddTest-leave">
+                            { (msg) => <Prompt when={isBlocking} message={location => msg.toString()}/> }
+                        </FormattedMessage>
+                            
 
                             <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
-                            <div className="text-center h3">Add test</div>
+                            <div className="text-center h3"> {translate('new-test')} </div>
                             <hr/>
 
                             <form onSubmit={this.onTestSubmit}>
                                 <div className="form-row">
 
                                     <div className="form-group col-md-12">
-                                        <label htmlFor="header"> Header </label>
+                                        <label htmlFor="header"> {translate('header')} </label>
                                         <input id="header" name="header" required 
                                             className="form-control form-control-sm shadow-sm"
                                             value={header} onChange={this.onChange}/>
                                     </div>
 
                                     <div className="w-100 text-center h5 mx-auto mt-4">
-                                        Questions
+                                        {translate('questions')}
                                     </div>
 
                                     {
@@ -130,24 +136,22 @@ class AddTest extends Component {
                                                 (<>
                                                     <button type="button" id="tooltip" className="btn btn-sm btn-outline-danger mt-3 mb-4 ml-auto shadow" onClick={this.onToggleForm}>X</button>
                                                     <Tooltip placement="right" isOpen={toggleTooltip} target="tooltip" toggle={this.onToggleTooltip}>
-                                                        Cancel
+                                                        {translate('cancel')}
                                                     </Tooltip>
                                                 </>)
                                                 :
                                                 (<>
                                                     <button type="button" id="tooltip" className="btn btn-sm btn-outline-dark mt-3 mb-4 mx-auto shadow" onClick={this.onToggleForm}>+</button>
                                                     <Tooltip placement="right" isOpen={toggleTooltip} target="tooltip" toggle={this.onToggleTooltip}>
-                                                        Add question
+                                                        {translate('add-question')}
                                                     </Tooltip>
                                                 </>)
 
                                         }
-                                        
-                                        
                                     </div>
                                     
                                     <button type="submit" className="btn btn-lg btn-outline-success mt-0 mx-auto shadow" value="Save test">
-                                        <i className="fa fa-floppy-o" aria-hidden="true"/> Save
+                                        <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 
                                 </div>
