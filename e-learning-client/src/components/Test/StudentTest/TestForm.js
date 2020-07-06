@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Prompt } from 'react-router-dom';
+
 import { confirmAlert } from 'react-confirm-alert';
+import Countdown from 'react-countdown';
 
 import QuestionForm from './QuestionForm';
 
@@ -11,6 +13,7 @@ class TestForm extends Component {
 
         this.state = {
             test: {},
+            duration: 10000,
             isBlocking: true
         }
         this.onWindowClose.bind(this);
@@ -25,7 +28,8 @@ class TestForm extends Component {
         setInterval(this.submitInterval, 120000);
 
         const { test } = this.props;
-        this.setState({ test });
+        const duration = test.questions.length * 3 * 60 * 1000; // 3 minutes for each question
+        this.setState({ test, duration });
     }
 
     componentWillUnmount() {
@@ -33,7 +37,7 @@ class TestForm extends Component {
         clearInterval(this.submitInterval);
 
         const { test } = this.state;
-        this.props.asyncSubmit(test);
+        this.props.submitTest(test, this.props.history);
     }
 
     onWindowClose = (e) => {
@@ -50,6 +54,33 @@ class TestForm extends Component {
         this.props.asyncSubmit(test)
     }
 
+    countdownRender = ({ hours, minutes, seconds, completed }) => {
+
+        if (completed) {
+            return (
+                <div className="countdown-area d-inline-block font-weight-bold">
+                    <span> Time is over </span>
+                </div>  
+            )
+        } 
+        else {
+            return (
+                <div className="countdown-area d-inline-block font-weight-bold">
+                    <span> {hours}:{minutes}:{seconds} </span>
+                </div>      
+            )
+        }
+    };
+
+    onCountdownComplete = () => {
+        window.removeEventListener("beforeunload", this.onWindowClose);
+        clearInterval(this.submitInterval);
+        this.setState({ isBlocking: false });
+
+        const { test } = this.state;
+        this.props.submitTest(test, this.props.history);
+    }
+
     onCompleteQuestion = (question_index, updatedAlternatives) => {
         
         const { test } = this.state;
@@ -61,7 +92,6 @@ class TestForm extends Component {
     }
 
     onTestSubmit = () => {
-        this.setState({ isBlocking: false })
 
         confirmAlert({
 			title: 'Confirm',
@@ -85,19 +115,26 @@ class TestForm extends Component {
 
     render() {
 
-        const { test, isBlocking } = this.state;
+        const { test, duration, isBlocking } = this.state;
 
         return (
             <div className="paper">
                 <div className="px-3 mb-4 border">
 
-                    <div className="text-center h5 m-4"><u>{test.header}</u></div>
-
                     <Prompt when={isBlocking} message={location => {
-                            location.notification_message = "Test was submitted successfully.";
-                            return "If you leave, the test will be submited. Continue?"
-                        } 
-                    } />
+                                    return "If you leave, the test will be submited. Continue?"
+                                }
+                    }/>  
+
+                    <div className="text-center h5 m-4"> {test.header} </div>
+                    <div className="text-center text-muted font-weight-light font-italic small">
+                        Time remaining: &nbsp;
+                        <Countdown 
+                            date={Date.now() + duration} 
+                            renderer={this.countdownRender}
+                            onComplete={this.onCountdownComplete}
+                        />  
+                    </div>             
 
                     {
                         Object.keys(test).length ?
@@ -113,11 +150,21 @@ class TestForm extends Component {
                         </button>
                     </div>
 
-                    <div className="col-12 my-2 p-0 text-secondary text-center">
-                        <small>
-                            * Note: <i>The minimal passing score is 40%</i>
-                        </small>
-                    </div>   
+                    <div className="col-12 ml-4 mt-3 p-0 text-muted text-left font-weight-light small">
+                        <span>
+                            * <i>The minimal passing score is 40%</i>
+                        </span>
+                    </div>
+                    <div className="col-12 ml-4 m-0 p-0 text-muted text-left font-weight-light small">
+                        <span>
+                            * <i>Each question takes up to 3 minutes</i>
+                        </span>
+                    </div> 
+                    <div className="col-12 ml-4 mb-2 p-0 text-muted text-left font-weight-light small">
+                        <span>
+                            * <i>When the time is over it will be submited automatically</i>
+                        </span>
+                    </div> 
 
                 </div>
             </div>

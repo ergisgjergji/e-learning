@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_TEST, COMPLETE_TEST, GET_ERRORS } from './types';
+import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_TEST, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 
 import { toast } from 'react-toastify';
@@ -99,16 +99,10 @@ export const getTestById = (course_id, test_id, history) => dispatch => {
             let test = res.data;
             test.questions.sort((a,b) => (a.type > b.type) ? 1 : ((b.type > a.type) ? -1 : 0));
 
-            if(test.completed)
-                dispatch({
-                    type: GET_TEST,
-                    payload: test
-                });
-            else
-                dispatch({
-                    type: COMPLETE_TEST,
-                    payload: test
-                });
+            dispatch({
+                type: GET_TEST,
+                payload: test
+            });
                 
             dispatch(clearErrors());
         })
@@ -131,7 +125,11 @@ export const submitTest = (test, history) => dispatch => {
 
             history.push('/studentPanel');
             toast.dismiss();
-			toast.success('ℹ Test was submitted successfully.');
+            toast.success('ℹ Test was submitted successfully.');
+            dispatch({
+                type: GET_TEST,
+                payload: {}
+            });
         })
         .catch(err => {
 

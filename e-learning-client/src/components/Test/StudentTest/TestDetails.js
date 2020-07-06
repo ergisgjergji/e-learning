@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTestById } from './../../../redux/actions/testActions';
@@ -14,30 +15,35 @@ class TestDetails extends Component {
 
     render() {
         const { current_test } = this.props.testStore;
+        const { course_id, test_id } = this.props.match.params;
 
-        return (
-            <div className="transition-page">
-                <div className="container mb-4">
-                    <div className="row">
-                        <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
+        if(current_test.completed === false)
+            return <Redirect to={`/studentPanel/course/${course_id}/test/${test_id}/complete`}/>
 
-                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
-                                <i className="fa fa-arrow-left" aria-hidden="true"/> Back
-                            </button>
+        else
+            return (
+                <div className="transition-page">
+                    <div className="container mb-4">
+                        <div className="row">
+                            <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                            {
-                                Object.keys(current_test).length ?
-                                    <div className="paper mt-4">
-                                        <TestResultPaper test={current_test}/>
-                                    </div>
-                                    : null
-                            }
-                            
+                                <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                                    <i className="fa fa-arrow-left" aria-hidden="true"/> Back
+                                </button>
+
+                                {
+                                    Object.keys(current_test).length ?
+                                        <div className="paper mt-4">
+                                            <TestResultPaper test={current_test}/>
+                                        </div>
+                                        : null
+                                }
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
     }
 }
 
