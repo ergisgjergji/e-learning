@@ -3,6 +3,7 @@ import { GET_COURSES, GET_COURSE, DELETE_COURSE, GET_REGISTERED_STUDENTS, GET_NO
 import { clearErrors } from './errorActions';
 
 import { toast } from 'react-toastify';
+import validateError from './serverError';
 
 export const getCourses = () => dispatch => {
 
@@ -15,8 +16,7 @@ export const getCourses = () => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -30,15 +30,14 @@ export const deleteCourse = (id) => dispatch => {
         .then(res => {
 
             toast.dismiss();
-            toast.info(`Course with id '${id}' was deleted successfully.`);
+            toast.info(`ℹ Course with id '${id}' was deleted successfully.`);
             dispatch({
                 type: DELETE_COURSE,
                 payload: id
             })
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
         });
 };
 
@@ -49,13 +48,11 @@ export const addCourse = (course, history) => dispatch => {
 
             history.push('/teacherPanel');
             toast.dismiss();
-            toast.success('Course added successfully.');
+            toast.success('✔ Course added successfully.');
             dispatch(clearErrors());
         })
         .catch(err => {
-
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -74,8 +71,7 @@ export const getCourseById = (id, history) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             history.goBack();
         });
 };
@@ -87,13 +83,11 @@ export const updateCourse = (course, history) => dispatch => {
             
             history.push('/teacherPanel');
             toast.dismiss();
-            toast.success(`Changes were saved successfully.`);
+            toast.success(`✔ Changes were saved successfully.`);
             dispatch(clearErrors());
         })
         .catch(err => {
-        
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -112,8 +106,7 @@ export const getRegisteredStudents = (id) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -132,8 +125,7 @@ export const getNonRegisteredStudents = (id) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -147,16 +139,14 @@ export const registerStudent = (course_id, student_id) => dispatch => {
         .then(res => {
 
             toast.dismiss();
-            toast.success(`ℹ Student with id '${student_id}' was registered successfully.`)
+            toast.info(`ℹ Student with id '${student_id}' was registered successfully.`)
             
             dispatch(getRegisteredStudents(course_id));
             dispatch(getNonRegisteredStudents(course_id));
             dispatch(clearErrors());
         })
         .catch(err => {
-        
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

@@ -7,8 +7,10 @@
   }
   
   .navbar {
-    background-color: #e3f2fd;
     z-index: 100;
+  }
+  .dropdown-item:active {
+    background-color: #185cc5 !important;
   }
   
   .list-group-item.delete:hover {
@@ -42,9 +44,6 @@
     /* background: url("../img/showcase.jpg") no-repeat; */
     background-size: cover;
     background-position: center;
-    height: 100vh;
-    margin-top: -24px;
-    margin-bottom: -50px;
   }
   
   .landing-inner {
@@ -117,6 +116,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -80%);
+  background: linear-gradient(135deg, rgba(17,49,99,1) 0%, rgba(25,95,205,1) 50%, rgba(17,49,99,1) 100%);
 }
 /* end of AdminPanel */

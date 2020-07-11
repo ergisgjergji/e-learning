@@ -47,7 +47,7 @@ class LandingPage extends Component {
                                     </p>
                                     <hr/>
                                     
-                                    <Link to="/login" className="btn btn-lg btn-primary mr-2"> {translate('login')} </Link>
+                                    <Link to="/login" className="btn btn-lg my-btn-primary mr-2"> {translate('login')} </Link>
 
                                     <label className="d-block text-secondary mt-3">
                                     <small className="rounded p-2">

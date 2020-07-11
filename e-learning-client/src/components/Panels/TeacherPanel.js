@@ -27,7 +27,7 @@ class TeacherPanel extends Component {
 
 								<h5 className="display-4 text-center mt-3"> {translate('courses')} </h5>
 
-								<Link to="/teacherPanel/addCourse" className="btn btn-md btn-primary mt-2">
+								<Link to="/teacherPanel/addCourse" className="btn btn-md my-btn-primary mt-2">
 									<i className="fa fa-plus-circle" aria-hidden="true"/> {translate('add-course')}
 								</Link>
 								<hr/>

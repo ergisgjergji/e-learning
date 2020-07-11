@@ -1,0 +1,47 @@
+.gray-text {
+    color: #ffffffa3; 
+}
+
+/* ============ BUTTONS  ===============*/
+
+/* Primary */
+.my-bg-primary {
+    color: #fff !important;
+    background: rgb(17,49,99);
+    background: linear-gradient(135deg, rgba(17,49,99,1) 0%, rgba(25,95,205,1) 50%, rgba(17,49,99,1) 100%);
+}
+.my-btn-primary {
+    color: #fff !important;
+    position: relative;
+    background: rgb(17,49,99);
+    background: linear-gradient(180deg, rgba(25,95,205,1), rgba(17,49,99,1) 100%);
+    z-index: 1;
+}
+.my-btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(17,49,99);
+    background: linear-gradient(180deg, rgb(31, 59, 162), rgba(17,49,99,1) 100%);
+    opacity: 0;
+    transition: opacity .2s linear;
+    z-index: -1;
+}
+.my-btn-primary:hover::before {
+    opacity: 1;
+}
+
+.my-btn-outline-primary {
+      color: #1858be !important;
+      border-color: #1858be !important;
+      transition: all .2s linear;
+}
+.my-btn-outline-primary:hover {
+    color: #fff !important;
+    border-color: #1858be !important;
+    background: rgb(17,49,99) !important;
+    background: linear-gradient(135deg, rgba(17,49,99,1) 0%, rgba(25,95,205,1) 50%, rgba(17,49,99,1) 100%) !important;
+}

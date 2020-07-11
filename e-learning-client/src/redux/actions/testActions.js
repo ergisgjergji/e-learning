@@ -3,6 +3,7 @@ import { GET_TESTBASE_LIST, GET_STUDENT_COMPLETED_TESTS, GET_TEST, GET_ERRORS } 
 import { clearErrors } from './errorActions';
 
 import { toast } from 'react-toastify';
+import validateError from './serverError';
 
 export const getTestBaseList = (id) => dispatch => {
 
@@ -23,9 +24,7 @@ export const getTestBaseList = (id) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -45,13 +44,11 @@ export const addTest = (id, testBase, fromRoute, history) => dispatch => {
                 history.push('/teacherPanel');
 
             toast.dismiss();
-            toast.success('ℹ Test created successfully.')
+            toast.success('✔ Test created successfully.')
             dispatch(clearErrors());
         })
         .catch(err => {
-
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -79,9 +76,7 @@ export const getStudentCompletedTests = (course_id, student_id, history) => disp
             dispatch(clearErrors());
         })
         .catch(err => {
-
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -107,9 +102,7 @@ export const getTestById = (course_id, test_id, history) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -125,16 +118,14 @@ export const submitTest = (test, history) => dispatch => {
 
             history.push('/studentPanel');
             toast.dismiss();
-            toast.success('ℹ Test was submitted successfully.');
+            toast.success('✔ Test was submitted successfully.');
             dispatch({
                 type: GET_TEST,
                 payload: {}
             });
         })
         .catch(err => {
-
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

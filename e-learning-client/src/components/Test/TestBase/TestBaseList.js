@@ -38,7 +38,7 @@ class TestBaseList extends Component {
 
                             <h1 className="display-4 text-center my-3"> {translate('tests')} </h1>
 
-                            <Link to={{ pathname: `/teacherPanel/course/${id}/addTest`, fromRoute: `/teacherPanel/course/${id}/tests` }} className="btn btn-md btn-primary shadow mb-4">
+                            <Link to={{ pathname: `/teacherPanel/course/${id}/addTest`, fromRoute: `/teacherPanel/course/${id}/tests` }} className="btn btn-md my-btn-primary shadow mb-4">
                                 <i className="fa fa-plus-circle" aria-hidden="true"/> {translate('add-test')}
                             </Link>
 

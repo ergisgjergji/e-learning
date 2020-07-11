@@ -66,7 +66,7 @@ class StudentsTable extends Component {
     
                     <h1 className="display-4 text-center"> {translate('students')} </h1>
                     
-                    <Link to="/adminPanel/addStudent" className="btn bn-lg btn-primary">
+                    <Link to="/adminPanel/addStudent" className="btn bn-lg my-btn-primary">
                         <i className="fa fa-plus-circle" aria-hidden="true"/> {translate('add-student')}
                     </Link>
                     <br/><br/>

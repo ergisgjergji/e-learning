@@ -4,6 +4,7 @@ import { SET_USER, LOGOUT_USER, GET_ERRORS, PASSWORD_MISMATCH } from './types';
 import headersConfig from './../securityUtils/headersConfig';
 
 import { toast } from 'react-toastify';
+import validateError from './serverError';
 
 /* 
     COMMENT:
@@ -30,8 +31,7 @@ export const login = (loginRequest) => dispatch => {
             });
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

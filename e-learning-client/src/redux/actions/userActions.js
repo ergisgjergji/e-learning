@@ -4,6 +4,7 @@ import { clearErrors } from './errorActions';
 import store from './../store';
 
 import { toast } from 'react-toastify';
+import validateError from './serverError';
 
 export const getStudents = () => dispatch => {
 
@@ -16,8 +17,7 @@ export const getStudents = () => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -36,8 +36,7 @@ export const getTeachers = () => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -56,8 +55,7 @@ export const getUserById = (id, history) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -79,8 +77,7 @@ export const deleteStudent = (id) => dispatch => {
             });
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -101,8 +98,7 @@ export const deleteTeacher = (id) => dispatch => {
             })
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -118,18 +114,17 @@ export const addUser = (user, history) => dispatch => {
             if(user.role === "STUDENT") {
                 history.push('/adminPanel/students');
                 toast.dismiss();
-                toast.success('ℹ Student added successfully.');
+                toast.success('✔ Student added successfully.');
             }
             else if(user.role === "TEACHER") {
                 history.push('/adminPanel/teachers');
                 toast.dismiss();
-                toast.success('ℹ Teacher added successfully.');
+                toast.success('✔ Teacher added successfully.');
             }
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -143,7 +138,7 @@ export const updateUser = (user, history) => dispatch => {
         .then(res => {
 
             toast.dismiss();
-            toast.success('ℹ Changes were saved successfully.');
+            toast.success('✔ Changes were saved successfully.');
 
             if(user.role === "STUDENT")
                 history.push('/adminPanel/students');
@@ -154,8 +149,7 @@ export const updateUser = (user, history) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -180,7 +174,7 @@ export const updateProfile = (user, history) => dispatch => {
 
             history.push(route);
             toast.dismiss();
-            toast.success('ℹ Profile was updated successfully.');
+            toast.success('✔ Profile was updated successfully.');
 
             const updatedUser = { username: user.username, full_name: user.full_name };
             dispatch({
@@ -190,8 +184,7 @@ export const updateProfile = (user, history) => dispatch => {
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -205,10 +198,11 @@ export const resetPassword = (resetPasswordModel, fromRoute, history) => dispatc
         .then(res => {
             history.push(fromRoute);
             toast.dismiss();
-            toast.success('ℹ Password was reset successfully.');
+            toast.success('✔ Password was reset successfully.');
             dispatch(clearErrors());
         })
         .catch(err => {
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -234,12 +228,11 @@ export const changePassword = (changePasswordModel, history) => dispatch => {
             
             history.push(route);
             toast.dismiss();
-            toast.success('ℹ Password was changed successfully.');
+            toast.success('✔ Password was changed successfully.');
             dispatch(clearErrors());
         })
         .catch(err => {
-            toast.dismiss();
-            toast.error('An error occurred!');
+            validateError(err);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

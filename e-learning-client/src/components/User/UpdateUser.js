@@ -132,7 +132,7 @@ class UpdateUser extends Component {
                                     <input type="hidden" id="id" name="id" value={id}/>
                                     <input type="hidden" id="role" name="role" value={role}/>
 
-                                    <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
+                                    <button type="submit" className="btn my-btn-primary btn-lg mt-4 mx-auto shadow-lg">
                                         <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 

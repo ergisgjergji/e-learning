@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './css/index.css';
 import './css/App.css';
+import './css/colors.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'react-table-v6/react-table.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';

@@ -47,17 +47,17 @@ class Header extends Component {
         const admin_menu = (
             <>
                 <Nav className="mr-auto" navbar>
-                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
+                    <NavItem className="text-center my-auto mx-2 border-bottom">
                         <Link to="/adminPanel" className="nav-link">
                             {translate('home')}
                         </Link>
                     </NavItem>
-                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
+                    <NavItem className="text-center my-auto mx-2 border-bottom">
                         <Link to="/adminPanel/students" className="nav-link">
                             {translate('manage-students')}
                         </Link>
                     </NavItem>
-                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
+                    <NavItem className="text-center my-auto mx-2 border-bottom">
                         <Link to="/adminPanel/teachers" className="nav-link">
                             {translate('manage-teachers')}
                         </Link>
@@ -68,7 +68,7 @@ class Header extends Component {
         const teacher_menu = (
             <>
                 <Nav className="mr-auto" navbar>
-                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
+                    <NavItem className="text-center my-auto mx-2 border-bottom">
                         <Link to="/teacherPanel" className="nav-link">
                             {translate('home')}
                         </Link>
@@ -79,7 +79,7 @@ class Header extends Component {
         const student_menu = (
             <>
                 <Nav className="mr-auto" navbar>
-                    <NavItem className="text-center my-auto mx-2 border-bottom rounded">
+                    <NavItem className="text-center my-auto mx-2 border-bottom">
                         <Link to="/studentPanel" className="nav-link">
                             {translate('home')}
                         </Link>
@@ -146,10 +146,10 @@ class Header extends Component {
         );
 
         return (
-            <Navbar color="primary" dark expand="md" className="mb-0 border-bottom border-white">
+            <Navbar dark expand="md" className="my-bg-primary mb-0">
                 <Container>
                     <Link to="/" className="navbar-brand px-3 border rounded"> E-Learning </Link>
-                    <NavbarToggler onClick={this.toggle}/>
+                    <NavbarToggler className="" onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
 
                         {

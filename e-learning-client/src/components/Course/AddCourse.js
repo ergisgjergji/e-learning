@@ -81,7 +81,7 @@ class AddCourse extends Component {
                                         }
                                     </div>
 
-                                    <button type="submit" className="btn btn-primary btn-lg mt-4 mx-auto shadow-lg">
+                                    <button type="submit" className="btn my-btn-primary btn-lg mt-4 mx-auto shadow-lg">
                                         <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 

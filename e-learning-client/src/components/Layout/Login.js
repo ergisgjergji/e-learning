@@ -105,7 +105,7 @@ class Login extends Component {
                                             }
                                         </div>
                                         
-                                        <button type="submit" value="Login" className="btn btn-outline-primary btn-lg mt-4 mx-auto shadow-lg">
+                                        <button type="submit" value="Login" className="btn my-btn-outline-primary btn-lg mt-4 mx-auto shadow-lg">
                                             <i className="fa fa-sign-in" aria-hidden="true"/> {translate('login')}
                                         </button>
 
