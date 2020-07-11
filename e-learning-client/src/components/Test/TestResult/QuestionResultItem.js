@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
+import translate from '../../../i18n/translate';
+
 class QuestionResultItem extends Component {
 
     constructor(){
@@ -30,11 +32,11 @@ class QuestionResultItem extends Component {
                     {
                         (correctAlternatives[0].checked) ?
                             <label className="ml-auto mr-3 mt-2 mb-0 text-success">
-                                <i className="fa fa-check" aria-hidden="true"/> Correct
+                                <i className="fa fa-check" aria-hidden="true"/> {translate('correct')}
                             </label>
                             :
                             <label className="ml-auto mr-3 mt-2 mb-0 text-danger">
-                                <i className="fa fa-times" aria-hidden="true"/> Incorrect
+                                <i className="fa fa-times" aria-hidden="true"/> {translate('incorrect')}
                             </label>
                     }
                 </div>
@@ -58,11 +60,11 @@ class QuestionResultItem extends Component {
                          ((type === 2 && correctAlternatives[0].checked) || (type === 3 && correctAlternatives[0].checked && correctAlternatives[1].checked)) 
                             ?
                             <label className="ml-auto mr-3 mt-2 mb-0 text-success">
-                                <i className="fa fa-check" aria-hidden="true"/> Correct
+                                <i className="fa fa-check" aria-hidden="true"/> {translate('correct')}
                             </label>
                             :
                             <label className="ml-auto mr-3 mt-2 mr-3 mb-0 text-danger">
-                                <i className="fa fa-times" aria-hidden="true"/> Incorrect
+                                <i className="fa fa-times" aria-hidden="true"/> {translate('incorrect')}
                             </label>
                     }
                 </div>

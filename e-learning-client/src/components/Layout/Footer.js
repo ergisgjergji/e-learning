@@ -3,6 +3,7 @@ import english from '../../img/england_flag.png';
 import albanian from '../../img/albanian_flag.png'
 
 import { LOCALES } from '../../i18n';
+import translate from '../../i18n/translate';
 
 class Footer extends Component {
 
@@ -58,7 +59,7 @@ class Footer extends Component {
                         </div>
 
                         <div className="copyright gray-text mt-0">
-                            <i className="fa fa-copyright" aria-hidden="true"/> Copyright {year}: 
+                            <i className="fa fa-copyright" aria-hidden="true"/> {translate('copyright')} {year}: 
                             <span> {author} </span>
                         </div>
 

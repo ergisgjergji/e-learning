@@ -2,6 +2,7 @@ import { LOCALES } from './../locales';
 
 export default {
     [LOCALES.ALBANIAN]: {
+        'copyright': 'E drejta e autorit',
         'login': 'Hyr',
         'logout': 'Dil',
         'back': 'Kthehu',
@@ -87,6 +88,8 @@ export default {
         'result': 'Rezultati',
         'fail': 'NGELËS',
         'pass': 'KALUES',
+        'correct': 'Saktë',
+        'incorrect': 'Pasaktë',
         'minimal-score': 'Rezultati minimal kalues është 40%',
         'question-duration': 'Kohëzgjatja e testit llogaritet si: 3 minuta x pyetje',
         'countdown-end': 'Testi do të dërgohet automatikisht në mbarimin e kohës',

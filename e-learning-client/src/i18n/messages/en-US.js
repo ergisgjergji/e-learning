@@ -2,6 +2,7 @@ import { LOCALES } from './../locales';
 
 export default {
     [LOCALES.ENGLISH]: {
+        'copyright': 'Copyright',
         'login': 'Login',
         'logout': 'Logout',
         'back': 'Back',
@@ -87,6 +88,8 @@ export default {
         'result': 'Result',
         'fail': 'FAIL',
         'pass': 'PASS',
+        'correct': 'Correct',
+        'incorrect': 'Incorrect',
         'minimal-score': 'Minimal passing score is 40%',
         'question-duration': 'Each question takes up to 3 minutes',
         'countdown-end': 'When the time is over it will be submited automatically',
