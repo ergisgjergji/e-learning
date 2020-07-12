@@ -48,7 +48,7 @@ class UpdateCourse extends Component {
                     <div className="row ">
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
                             
-                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                            <button className="btn my-btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
                                 <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
@@ -61,42 +61,42 @@ class UpdateCourse extends Component {
                                     <div className="form-group col-md-12">
                                         <label htmlFor="name"> {translate('name')} </label>
                                         <input disabled type="text" id="name" name="name"
-                                            className="form-control form-control-md shadow"
+                                            className="form-control form-control-md shadow-sm"
                                             value={name}/>
                                     </div>
 
                                     <div className="form-group col-md-12">
                                         <label htmlFor="description"> {translate('description')} </label>
                                         <textarea disabled type="date" id="description" name="description"
-                                            className="form-control form-control-md shadow"
+                                            className="form-control form-control-md shadow-sm"
                                             value={description}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
                                         <label htmlFor="name"> {translate('teacher-name')} </label>
                                         <input disabled type="text" id="name" name="name"
-                                            className="form-control form-control-md shadow"
+                                            className="form-control form-control-md shadow-sm"
                                             value={teacher_name}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
                                         <label htmlFor="teacher_email"> {translate('teacher-email')} </label>
                                         <input disabled type="text" id="teacher_email" name="teacher_email"
-                                            className="form-control form-control-md shadow"
+                                            className="form-control form-control-md shadow-sm"
                                             value={teacher_email}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
                                         <label htmlFor="created_date"> {translate('created')} </label>
                                         <input disabled type="text" id="created_date" name="created_date"
-                                            className="form-control form-control-md shadow"
+                                            className="form-control form-control-md shadow-sm"
                                             value={created_date}/>
                                     </div>
 
                                     <div className="form-group col-md-6">
                                         <label htmlFor="updated_date"> {translate('updated')} </label>
                                         <input disabled type="text" id="updated_date" name="updated_date"
-                                            className="form-control form-control-md shadow"
+                                            className="form-control form-control-md shadow-sm"
                                             value={updated_date}/>
                                     </div>
 

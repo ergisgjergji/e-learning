@@ -27,7 +27,7 @@ class RegisteredStudents extends Component {
             { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>
-                    <Link to={`/teacherPanel/course/${course_id}/student/${props.original.id}/results`} className="btn btn-sm btn-success shadow">
+                    <Link to={`/teacherPanel/course/${course_id}/student/${props.original.id}/results`} className="btn btn-sm my-btn-success shadow">
                         {translate('view-results')} <i className="fa fa-chevron-circle-right" aria-hidden="true"/>
                     </Link>
                 </>

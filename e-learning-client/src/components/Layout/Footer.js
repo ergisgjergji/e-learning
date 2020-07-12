@@ -36,44 +36,45 @@ class Footer extends Component {
 
         return (
             <footer>
+
                 <div className="row">
 
                     <div className="col-12 mx-auto text-center py-2">
 
-                        <div className="col-12 mt-2 social-media">
+                        <div className="col-12 my-1 social-media">
                             <div className="d-inline-block mx-2">
                                 <a href={facebook} target="_blank">
-                                    <i className="fa fa-facebook-square fa-2x" aria-hidden="true"/>
+                                    <i className="fa fa-facebook-square fa-lg" aria-hidden="true"/>
                                 </a>
                             </div>
                             <div className="d-inline-block mx-2">
                                 <a href={linkedin} target="_blank">
-                                    <i className="fa fa-linkedin-square fa-2x" aria-hidden="true"/>
+                                    <i className="fa fa-linkedin-square fa-lg" aria-hidden="true"/>
                                 </a>
                             </div>
                             <div className="d-inline-block mx-2">
                                 <a href={github} target="_blank">
-                                    <i className="fa fa-github fa-2x" aria-hidden="true"/>
+                                    <i className="fa fa-github fa-lg" aria-hidden="true"/>
                                 </a>
                             </div>
                         </div>
 
-                        <div className="copyright gray-text mt-0">
+                        <div className="copyright gray-text">
                             <i className="fa fa-copyright" aria-hidden="true"/> {translate('copyright')} {year}: 
                             <span> {author} </span>
                         </div>
 
                     </div>
 
-                    <div className="col-12 language-container border-top border-secondary text-white">
-                        <div className="py-1 pl-2 d-flex flex-row justify-content-start">
+                    <div className="col-12 pb-1 language-container border-top border-secondary text-white">
+                        <div className="d-flex flex-row justify-content-start">
 
-                            <div className="d-inline-block language-item mx-2" onClick={(e) => this.props.changeLanguage(LOCALES.ALBANIAN)}>
-                                <img src={albanian} style={{ width: "15px", height: "12px" }}/> Shqip
+                            <div className="d-inline-block language-item ml-2" onClick={(e) => this.props.changeLanguage(LOCALES.ALBANIAN)}>
+                                <img src={albanian} style={{ width: "13px", height: "10px" }}/> Shqip
                             </div>
                                 
-                            <div className="d-inline-block language-item mx-2" onClick={(e) => this.props.changeLanguage(LOCALES.ENGLISH)}>
-                                <img src={english}  style={{ width: "15px", height: "12px" }}/> English
+                            <div className="d-inline-block language-item ml-2" onClick={(e) => this.props.changeLanguage(LOCALES.ENGLISH)}>
+                                <img src={english}  style={{ width: "13px", height: "10px" }}/> English
                             </div>
 
                         </div>

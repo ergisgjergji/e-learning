@@ -29,7 +29,7 @@ class TestDetails extends Component {
                         <div className="row">
                             <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                                <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                                <button className="btn my-btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
                                     <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                                 </button>
 

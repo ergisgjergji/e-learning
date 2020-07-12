@@ -99,7 +99,7 @@ class AddTest extends Component {
                         </FormattedMessage>
                             
 
-                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                            <button className="btn my-btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
                                 <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
@@ -150,7 +150,7 @@ class AddTest extends Component {
                                         }
                                     </div>
                                     
-                                    <button type="submit" className="btn btn-lg btn-outline-success mt-0 mx-auto shadow" value="Save test">
+                                    <button type="submit" className="btn btn-lg my-btn-outline-success mt-0 mx-auto shadow" value="Save test">
                                         <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 

@@ -28,7 +28,7 @@ class TestBaseItem extends Component {
         const { header, questions, isOpen } = this.state;
 
         return (
-            <div className="col-12 p-0 mx-auto">
+            <div className="col-12 mt-1 p-0 mx-auto">
 
                 <button className="btn btn-md btn-secondary shadow" onClick={this.onToggle}>
                      {isOpen ? <i className="fa fa-caret-up"/> : <i className="fa fa-caret-down"/>} {header}

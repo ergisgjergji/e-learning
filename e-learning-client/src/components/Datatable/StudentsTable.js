@@ -46,13 +46,13 @@ class StudentsTable extends Component {
             { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, width: 300, Cell: props => {
               return (
                 <>
-                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-dark shadow-sm mr-1 my-1">
+                    <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-secondary shadow-sm mr-1 my-1">
                         <i className="fa fa-pencil-square-o" aria-hidden="true"/> {translate('edit')}
                     </Link>
-                    <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/students" }} className="btn btn-sm btn-secondary shadow-sm mr-1 my-1">
+                    <Link to={{ pathname: `/adminPanel/resetPassword/${props.original.id}`, fromRoute: "/adminPanel/students" }} className="btn btn-sm my-btn-secondary shadow-sm mr-1 my-1">
                         <i className="fa fa-key" aria-hidden="true"/> {translate('reset-password')}
                     </Link>
-                    <button className="btn btn-sm btn-danger shadow-sm my-1" onClick={this.onDeleteClick.bind(this, props.original.id)}>
+                    <button className="btn btn-sm my-btn-danger shadow-sm my-1" onClick={this.onDeleteClick.bind(this, props.original.id)}>
                         <i className="fa fa-trash" aria-hidden="true"/> {translate('delete')}
                     </button>
                 </>

@@ -60,7 +60,7 @@ class ResetPassword extends Component {
                     <div className="row">
                         <div className="col-11 col-md-8 col-lg-7 m-auto">
                             
-                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                            <button className="btn my-btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
                                 <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')} 
                             </button>
 
@@ -80,7 +80,7 @@ class ResetPassword extends Component {
                                         }
                                     </div>
 
-                                    <button type="submit" className="btn btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save">
+                                    <button type="submit" className="btn my-btn-success btn-lg mt-4 mx-auto shadow-lg" value="Save">
                                         <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('save')}
                                     </button>
 

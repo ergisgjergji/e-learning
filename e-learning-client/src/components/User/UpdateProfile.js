@@ -62,7 +62,7 @@ class UpdateProfile extends Component {
                     <div className="row">
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
                             
-                            <button className="btn btn-secondary btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
+                            <button className="btn my-btn-secondary mx-auto btn-sm shadow mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
                                 <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
