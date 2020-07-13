@@ -78,7 +78,7 @@ class StudentCourseItem extends Component {
 
 		return (
 			<div className="container p-0 rounded">
-				<div className="card card-body bg-light mb-3 border border-secondary">
+				<div className="card card-body bg-cloud mb-3 border border-secondary">
 
 					<div className="row pb-4">
 
@@ -98,7 +98,7 @@ class StudentCourseItem extends Component {
 						</div>
 
 						<div className="col-12 col-md-5 d-lg-block">
-							<ul className="list-group shadow-lg">
+							<ul className="list-group shadow">
 
 								<Link to={`/studentPanel/course/${course.id}/details`}>
 									<li className="list-group-item update">
@@ -119,7 +119,7 @@ class StudentCourseItem extends Component {
                                                 if(test.completed)
                                                     return (
                                                         <Link to={`/studentPanel/course/${course.id}/test/${test.id}/details`} key={index}>
-                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-light">
+                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-cloud">
                                                                 <Badge 
                                                                     className="ml-3 mr-1" 
                                                                     color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
@@ -138,7 +138,7 @@ class StudentCourseItem extends Component {
                                                 else
                                                     return (
                                                         <div key={index}>
-                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-light" onClick={this.onTakeTest.bind(this,course.id, test.id)}>
+                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-cloud" onClick={this.onTakeTest.bind(this,course.id, test.id)}>
                                                                 <Badge 
                                                                     className="ml-3 mr-1" 
                                                                     color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}

@@ -76,7 +76,8 @@ class AddTest extends Component {
 
         if(toggleForm) 
             toast.warn(questionFormMessage, {
-                position: toast.POSITION.TOP_CENTER
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000
             });
 
         else {
@@ -84,7 +85,8 @@ class AddTest extends Component {
 
             if(questions.length < minimal_question_number)
                 toast.warn(questionNumberMessage, {
-                position: toast.POSITION.TOP_CENTER
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000
             });
 
             else {

@@ -41,7 +41,7 @@ class TeacherCourseItem extends Component {
 
 		return (
 			<div className="rounded">
-				<div className="card card-body bg-light mb-3 border border-secondary">
+				<div className="card card-body bg-cloud mb-3 border border-secondary">
 
 					<div className="row pb-4">
 						
@@ -56,7 +56,7 @@ class TeacherCourseItem extends Component {
 						</div>
 
 						<div className="col-12 col-md-5">
-							<ul className="list-group shadow-lg">
+							<ul className="list-group shadow">
 
 								<Link to={`/teacherPanel/updateCourse/${course.id}`}>
 									<li className="list-group-item update">

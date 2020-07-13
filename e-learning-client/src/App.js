@@ -59,7 +59,7 @@ class App extends Component {
 
     return (
       <I18nProvider locale={locale}>
-        <div className="main-container">
+        <div className="main-container bg-cloud">
 
           <Header/>
 
