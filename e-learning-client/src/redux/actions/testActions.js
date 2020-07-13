@@ -32,19 +32,17 @@ export const getTestBaseList = (id) => dispatch => {
         });
 };
 
-export const addTest = (id, testBase, fromRoute, history) => dispatch => {
+export const addTest = (id, testBase, fromRoute, history, notificationMessage) => dispatch => {
     
     axios.post(`/api/testbase/${id}`, testBase)
         .then(res => {
 
             if(fromRoute)
                 history.push(fromRoute);
-
             else
                 history.push('/teacherPanel');
-
-            toast.dismiss();
-            toast.success('✔ Test created successfully.')
+                
+            toast.success(notificationMessage)
             dispatch(clearErrors());
         })
         .catch(err => {
@@ -111,14 +109,14 @@ export const getTestById = (course_id, test_id, history) => dispatch => {
         });
 }
 
-export const submitTest = (test, history) => dispatch => {
+export const submitTest = (test, history, notificationMessage) => dispatch => {
 
     axios.post('/api/test', test)
         .then(res => {
 
             history.push('/studentPanel');
             toast.dismiss();
-            toast.success('✔ Test was submitted successfully.');
+            toast.success(notificationMessage);
             dispatch({
                 type: GET_TEST,
                 payload: {}

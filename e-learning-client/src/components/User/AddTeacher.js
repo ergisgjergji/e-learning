@@ -5,7 +5,7 @@ import { addUser } from '../../redux/actions/userActions';
 import classnames from 'classnames';
 
 import translate from '../../i18n/translate';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 class AddTeacher extends Component {
 
@@ -40,8 +40,11 @@ class AddTeacher extends Component {
 
         const { full_name, role, faculty, registration_date, username, password } = this.state;
         const user = { full_name, role, faculty, registration_date, username, password };
+
+        const { intl } = this.props;
+        const message = intl.formatMessage({ id: 'add-teacher-toast' });
         
-        this.props.addUser(user, this.props.history);
+        this.props.addUser(user, this.props.history, message);
     }
 
     render() {
@@ -158,4 +161,4 @@ const mapStateToProps = state => ({
     errorStore: state.errorStore
 });
 
-export default connect(mapStateToProps, { addUser })(AddTeacher);
+export default connect(mapStateToProps, { addUser })(injectIntl(AddTeacher));

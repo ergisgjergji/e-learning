@@ -30,7 +30,7 @@ class TestBaseItem extends Component {
         return (
             <div className="col-12 mt-1 p-0 mx-auto">
 
-                <button className="btn btn-md btn-secondary shadow" onClick={this.onToggle}>
+                <button className="btn btn-md my-btn-secondary shadow" onClick={this.onToggle}>
                      {isOpen ? <i className="fa fa-caret-up"/> : <i className="fa fa-caret-down"/>} {header}
                 </button>
                 <hr/>

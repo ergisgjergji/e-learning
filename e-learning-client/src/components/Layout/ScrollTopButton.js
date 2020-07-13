@@ -4,7 +4,7 @@ import ScrollToTop from 'react-scroll-up';
 const ScrollTopButton = () => {
 
     const style = {
-        zIndex: 100,
+        zIndex: 50,
         bottom: 38,
         right: 15,
         color: '#164da3'

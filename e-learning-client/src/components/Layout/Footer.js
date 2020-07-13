@@ -71,8 +71,7 @@ class Footer extends Component {
 
                             <div className="d-inline-block language-item ml-2" onClick={(e) => this.props.changeLanguage(LOCALES.ALBANIAN)}>
                                 <img src={albanian} style={{ width: "13px", height: "10px" }}/> Shqip
-                            </div>
-                                
+                            </div>    
                             <div className="d-inline-block language-item ml-2" onClick={(e) => this.props.changeLanguage(LOCALES.ENGLISH)}>
                                 <img src={english}  style={{ width: "13px", height: "10px" }}/> English
                             </div>

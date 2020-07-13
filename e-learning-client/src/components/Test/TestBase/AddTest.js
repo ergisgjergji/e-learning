@@ -9,9 +9,10 @@ import { Tooltip } from 'reactstrap';
 import QuestionBaseItem from './QuestionBaseItem';
 import AddQuestion from './AddQuestion';
 
-import translate from '../../../i18n/translate';
-import { FormattedMessage } from 'react-intl';
+import { toast } from 'react-toastify';
 
+import translate from '../../../i18n/translate';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 class AddTest extends Component {
 
@@ -25,7 +26,8 @@ class AddTest extends Component {
             header: "",
             questions: [],
             toggleForm: false,
-            toggleTooltip: false
+            toggleTooltip: false,
+            minimal_question_number: 4
         }
         this.onChange.bind(this);
         this.addQuestion.bind(this);
@@ -64,22 +66,30 @@ class AddTest extends Component {
 
     onTestSubmit = (e) => {
         e.preventDefault();
-        
-        // TODO 
-        const { id, fromRoute, header, questions, toggleForm } = this.state;
+        toast.configure();
 
-        if(toggleForm)
-            alert("Complete/Close the question form first!");
+        const { id, fromRoute, header, questions, toggleForm, minimal_question_number } = this.state;
+        const { intl } = this.props;
+        const questionFormMessage = intl.formatMessage({ id: 'question-form-toast' });
+        const questionNumberMessage = intl.formatMessage({id: 'question-number-toast'}, { number: minimal_question_number});
+        const notificationMessage = intl.formatMessage({ id: 'add-test-toast' });
+
+        if(toggleForm) 
+            toast.warn(questionFormMessage, {
+                position: toast.POSITION.TOP_CENTER
+            });
 
         else {
             const test = { header, questions };
 
-            if(questions.length < 1)
-                alert("Test must contain at least 1 questions!")
+            if(questions.length < minimal_question_number)
+                toast.warn(questionNumberMessage, {
+                position: toast.POSITION.TOP_CENTER
+            });
 
             else {
                 this.setState({ isBlocking: false })
-                this.props.addTest(id, test, fromRoute, this.props.history);
+                this.props.addTest(id, test, fromRoute, this.props.history, notificationMessage);
             }
         }
     }
@@ -90,11 +100,11 @@ class AddTest extends Component {
 
         return (
             <div className="transition-page">
-                <div className="container mb-4">
+                <div className="container">
                     <div className="row">
                         <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 
-                        <FormattedMessage id="AddTest-leave">
+                        <FormattedMessage id="add-test-leaving">
                             { (msg) => <Prompt when={isBlocking} message={location => msg.toString()}/> }
                         </FormattedMessage>
                             
@@ -174,4 +184,4 @@ AddTest.propTypes = {
 const mapStateToProps = state => ({
 });
 
-export default connect(null, { getCourseById, addTest })(AddTest);
+export default connect(null, { getCourseById, addTest })(injectIntl(AddTest));

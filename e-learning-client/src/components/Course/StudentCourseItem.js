@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import { confirmAlert } from 'react-confirm-alert';
 
 import translate from "../../i18n/translate";
+import { injectIntl } from 'react-intl';
 
 
 class StudentCourseItem extends Component {
@@ -48,17 +49,23 @@ class StudentCourseItem extends Component {
 
     onTakeTest = (course_id, test_id) => {
 
+        const { intl } = this.props;
+        const confirm = intl.formatMessage({ id: 'confirm' });
+        const confirmMessage = intl.formatMessage({ id: 'take-test-confirm' });
+        const yes = intl.formatMessage({ id: 'yes' });
+        const no = intl.formatMessage({ id: 'no' });
+
         confirmAlert({
-			title: 'Confirm',
-			message: 'You are about to start this test. Once you start, you cannot go back. \nContinue?',
+			title: confirm,
+			message: confirmMessage,
 			buttons: [
 				{
-					label: 'Yes',
+					label: yes,
 					className: "confirm-yes",
 					onClick: () => this.props.history.push(`/studentPanel/course/${course_id}/test/${test_id}/complete`)
 				},
 				{
-					label: 'No',
+					label: no,
 					className: "confirm-no"
 			  	}
 			]
@@ -174,7 +181,4 @@ class StudentCourseItem extends Component {
 StudentCourseItem.propTypes = {
 };
 
-const mapStateToProps = state => ({
-});
-
-export default connect(null, {  })(StudentCourseItem);
+export default connect(null, {  })(injectIntl(StudentCourseItem));

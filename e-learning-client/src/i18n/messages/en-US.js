@@ -81,8 +81,6 @@ export default {
         'alternatives-blank': 'Alternatives cannot be blank!',
         'one-correct-answer-required': 'Question must have 1 correct answer!',
         'two-correct-answers-required': 'Question must have 2 correct answers!',
-        'AddTest-leave': 'If you leave, changes will not be saved. Continue?',
-        'close-question-form-alert': 'Complete/Close the question form first!',
         'total': 'Total',
         'score': 'Score',
         'result': 'Result',
@@ -93,6 +91,7 @@ export default {
         'minimal-score': 'Minimal passing score is 40%',
         'question-duration': 'Each question takes up to 3 minutes',
         'countdown-end': 'When the time is over it will be submited automatically',
+        'time-remaining': 'Time remaining',
 
         'by': 'by',
         'contact': 'Contact',
@@ -102,6 +101,41 @@ export default {
         'teacher-email': 'Teacher email',
         'take': 'Take',
         'take-test': 'Take the test',
-        'submit-test': 'Submit test'
+        'submit-test': 'Submit test',
+
+        //##################################### notifications ############################################
+        // confirm-alert
+        'confirm': 'Confirm',
+        'yes': 'Yes',
+        'no': 'No',
+
+        // profile
+        'change-password-toast': '✔ Password was changed successfully.',
+        'update-profile-toast': '✔ Profile was updated successfully.',
+
+        // admin
+        'add-student-toast': '✔ Student added successfully.',
+        'add-teacher-toast': '✔ Teacher added successfully.',
+        'delete-user-confirm': 'Are you sure you want to delete this user?',
+        'delete-student-toast': 'ℹ Student with id {id} was deleted successfully.',
+        'delete-teacher-toast': 'ℹ Teacher with id {id} was deleted successfully.',
+        'update-user-toast': '✔ Changes were saved successfully.',
+        'reset-password-toast': '✔ Password was reset successfully.',
+        
+        // teacher
+        'delete-course-confirm': 'Are you sure you want to delete this course?',
+        'delete-course-toast': 'ℹ Course with id {id} was deleted successfully.',
+        'add-course-toast': '✔ Course added successfully.',
+        'update-course-toast': '✔ Changes were saved successfully.',
+        'register-student-confirm': 'You are about to register student "{name}" in this course. Continue?',
+        'register-student-toast': 'ℹ Student "{name}" was registered successfully.',
+        'question-form-toast': '⚠️ Complete/Close the question form first!',
+        'question-number-toast': '⚠️ Test must contain at least {number} questions!',
+        'add-test-toast': '✔ Test created successfully.',
+        'add-test-leaving': 'If you leave, changes will not be saved. Continue?',
+        'take-test-confirm': 'You are about to start this test. Once you start, you cannot go back. Continue?',
+        'blocking-route-toast': '⚠️ You cannot leave while taking the test.',
+        'submit-test-confirm': 'You are about to submit the test. Continue?',
+        'submit-test-toast': '✔ Test was submitted successfully.'
     }
 }

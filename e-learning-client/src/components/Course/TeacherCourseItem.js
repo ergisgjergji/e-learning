@@ -6,22 +6,30 @@ import { deleteCourse } from './../../redux/actions/courseActions';
 import { confirmAlert } from 'react-confirm-alert';
 
 import translate from "../../i18n/translate";
+import { injectIntl } from 'react-intl';
 
 class TeacherCourseItem extends Component {
 
 	onDeleteClick = (id) => {
+
+		const { intl } = this.props;
+		const confirm = intl.formatMessage({ id: 'confirm' });
+		const yes = intl.formatMessage({ id: 'yes' });
+		const no = intl.formatMessage({ id: 'no' });
+		const confirmMessage = intl.formatMessage({ id: 'delete-course-confirm' });
+		const notificationMessage = intl.formatMessage({ id: 'delete-course-toast' }, { id });
         
 		confirmAlert({
-			title: 'Confirm',
-			message: 'Are u sure u want to delete this course?',
+			title: confirm,
+			message: confirmMessage,
 			buttons: [
 				{
-					label: 'Yes',
+					label: yes,
 					className: "confirm-yes",
-					onClick: () => this.props.deleteCourse(id)
+					onClick: () => this.props.deleteCourse(id, notificationMessage)
 				},
 				{
-					label: 'No',
+					label: no,
 					className: "confirm-no"
 			  	}
 			]
@@ -98,4 +106,4 @@ TeacherCourseItem.propTypes = {
 const mapStateToProps = state => ({
 });
 
-export default connect(null, { deleteCourse })(TeacherCourseItem);
+export default connect(null, { deleteCourse })(injectIntl(TeacherCourseItem));

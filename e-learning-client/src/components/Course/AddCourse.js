@@ -5,6 +5,7 @@ import { addCourse } from './../../redux/actions/courseActions';
 import classnames from 'classnames';
 
 import translate from '../../i18n/translate';
+import { injectIntl } from 'react-intl';
 
 class AddCourse extends Component {
 
@@ -36,7 +37,10 @@ class AddCourse extends Component {
         const { name, description } = this.state;
         const course = { name, description };
 
-        this.props.addCourse(course, this.props.history);
+        const { intl } = this.props;
+        const notificationMessage = intl.formatMessage({ id: 'add-course-toast' });
+
+        this.props.addCourse(course, this.props.history, notificationMessage);
     }
 
     render() {
@@ -105,4 +109,4 @@ const mapStateToProps = state => ({
     errorStore: state.errorStore
 });
 
-export default connect(mapStateToProps, { addCourse })(AddCourse);
+export default connect(mapStateToProps, { addCourse })(injectIntl(AddCourse));

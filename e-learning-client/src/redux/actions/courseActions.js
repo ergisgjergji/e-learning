@@ -24,13 +24,12 @@ export const getCourses = () => dispatch => {
         });
 };
 
-export const deleteCourse = (id) => dispatch => {
+export const deleteCourse = (id, notificationMessage) => dispatch => {
     
     axios.delete(`/api/course/${id}`)
         .then(res => {
 
-            toast.dismiss();
-            toast.info(`ℹ Course with id '${id}' was deleted successfully.`);
+            toast.info(notificationMessage);
             dispatch({
                 type: DELETE_COURSE,
                 payload: id
@@ -41,14 +40,13 @@ export const deleteCourse = (id) => dispatch => {
         });
 };
 
-export const addCourse = (course, history) => dispatch => {
+export const addCourse = (course, history, notificationMessage) => dispatch => {
 
     axios.post("/api/course", course)
         .then(res => {
 
             history.push('/teacherPanel');
-            toast.dismiss();
-            toast.success('✔ Course added successfully.');
+            toast.success(notificationMessage);
             dispatch(clearErrors());
         })
         .catch(err => {
@@ -76,14 +74,13 @@ export const getCourseById = (id, history) => dispatch => {
         });
 };
 
-export const updateCourse = (course, history) => dispatch => {
+export const updateCourse = (course, history, notificationMessage) => dispatch => {
 
     axios.put("/api/course", course)
         .then(res => {
             
             history.push('/teacherPanel');
-            toast.dismiss();
-            toast.success(`✔ Changes were saved successfully.`);
+            toast.success(notificationMessage);
             dispatch(clearErrors());
         })
         .catch(err => {
@@ -133,13 +130,13 @@ export const getNonRegisteredStudents = (id) => dispatch => {
         });
 }
 
-export const registerStudent = (course_id, student_id) => dispatch => {
+export const registerStudent = (course_id, student_id, notificationMessage) => dispatch => {
 
     axios.post(`/api/course/${course_id}/students/${student_id}`)
         .then(res => {
 
             toast.dismiss();
-            toast.info(`ℹ Student with id '${student_id}' was registered successfully.`)
+            toast.info(notificationMessage)
             
             dispatch(getRegisteredStudents(course_id));
             dispatch(getNonRegisteredStudents(course_id));

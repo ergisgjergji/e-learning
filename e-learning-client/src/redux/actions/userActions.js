@@ -64,13 +64,13 @@ export const getUserById = (id, history) => dispatch => {
         });
 };
 
-export const deleteStudent = (id) => dispatch => {
+export const deleteStudent = (id, notificationMessage) => dispatch => {
     
     axios.delete(`/api/user/${id}`)
         .then(res => {
 
             toast.dismiss();
-            toast.info(`ℹ Student with id '${id}' was deleted successfully.`);
+            toast.info(notificationMessage);
             dispatch({
                 type: DELETE_STUDENT,
                 payload: id
@@ -85,13 +85,13 @@ export const deleteStudent = (id) => dispatch => {
         });
 };
 
-export const deleteTeacher = (id) => dispatch => {
+export const deleteTeacher = (id, notificationMessage) => dispatch => {
     
     axios.delete(`/api/user/${id}`)
         .then(res => {
 
             toast.dismiss();
-            toast.info(`ℹ Teacher with id '${id}' was deleted successfully.`);
+            toast.info(notificationMessage);
             dispatch({
                 type: DELETE_TEACHER,
                 payload: id
@@ -106,7 +106,7 @@ export const deleteTeacher = (id) => dispatch => {
         });
 };
 
-export const addUser = (user, history) => dispatch => {
+export const addUser = (user, history, notificationMessage) => dispatch => {
 
     axios.post("/api/user", user)
         .then(res => {
@@ -114,12 +114,12 @@ export const addUser = (user, history) => dispatch => {
             if(user.role === "STUDENT") {
                 history.push('/adminPanel/students');
                 toast.dismiss();
-                toast.success('✔ Student added successfully.');
+                toast.success(notificationMessage);
             }
             else if(user.role === "TEACHER") {
                 history.push('/adminPanel/teachers');
                 toast.dismiss();
-                toast.success('✔ Teacher added successfully.');
+                toast.success(notificationMessage);
             }
             dispatch(clearErrors());
         })
@@ -132,13 +132,13 @@ export const addUser = (user, history) => dispatch => {
         });
 }
 
-export const updateUser = (user, history) => dispatch => {
+export const updateUser = (user, history, notificationMessage) => dispatch => {
 
     axios.put("/api/user", user)
         .then(res => {
 
             toast.dismiss();
-            toast.success('✔ Changes were saved successfully.');
+            toast.success(notificationMessage);
 
             if(user.role === "STUDENT")
                 history.push('/adminPanel/students');
@@ -157,7 +157,7 @@ export const updateUser = (user, history) => dispatch => {
         });
 }
 
-export const updateProfile = (user, history) => dispatch => {
+export const updateProfile = (user, history, notificationMessage) => dispatch => {
 
     axios.put("/api/user", user)
         .then(res => {
@@ -173,8 +173,7 @@ export const updateProfile = (user, history) => dispatch => {
             }
 
             history.push(route);
-            toast.dismiss();
-            toast.success('✔ Profile was updated successfully.');
+            toast.success(notificationMessage);
 
             const updatedUser = { username: user.username, full_name: user.full_name };
             dispatch({
@@ -192,13 +191,13 @@ export const updateProfile = (user, history) => dispatch => {
         });
 }
 
-export const resetPassword = (resetPasswordModel, fromRoute, history) => dispatch => {
+export const resetPassword = (resetPasswordModel, fromRoute, history, notificationMessage) => dispatch => {
     
     axios.post(`/api/user/reset-password`, resetPasswordModel)
         .then(res => {
             history.push(fromRoute);
             toast.dismiss();
-            toast.success('✔ Password was reset successfully.');
+            toast.success(notificationMessage);
             dispatch(clearErrors());
         })
         .catch(err => {
@@ -211,7 +210,7 @@ export const resetPassword = (resetPasswordModel, fromRoute, history) => dispatc
         });
 }
 
-export const changePassword = (changePasswordModel, history) => dispatch => {
+export const changePassword = (changePasswordModel, history, notificationMessage) => dispatch => {
 
     axios.post(`/api/user/change-password`, changePasswordModel)
         .then(res => {
@@ -227,8 +226,7 @@ export const changePassword = (changePasswordModel, history) => dispatch => {
             }
             
             history.push(route);
-            toast.dismiss();
-            toast.success('✔ Password was changed successfully.');
+            toast.success(notificationMessage);
             dispatch(clearErrors());
         })
         .catch(err => {

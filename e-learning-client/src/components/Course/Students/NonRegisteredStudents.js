@@ -6,6 +6,7 @@ import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
 
 import translate from '../../../i18n/translate';
+import { injectIntl } from 'react-intl';
 
 class NonRegisteredStudents extends Component {
 
@@ -16,17 +17,24 @@ class NonRegisteredStudents extends Component {
 
     onRegisterStudent = (course_id, student_id, name) => {
 
+        const { intl } = this.props;
+        const confirm = intl.formatMessage({ id: 'confirm' });
+        const yes = intl.formatMessage({ id: 'yes' });
+        const no = intl.formatMessage({ id: 'no' });
+        const confirmMessage = intl.formatMessage({ id: 'register-student-confirm' }, { name });
+        const notificationMessage = intl.formatMessage({ id: 'register-student-toast' }, { name });
+
         confirmAlert({
-			title: 'Confirm',
-			message: `You are about to register '${name}' in the course. Continue?`,
+			title: confirm,
+			message: confirmMessage,
 			buttons: [
 				{
-					label: 'Yes',
+					label: yes,
 					className: "confirm-yes",
-					onClick: () => this.props.registerStudent(course_id, student_id)
+					onClick: () => this.props.registerStudent(course_id, student_id, notificationMessage)
 				},
 				{
-					label: 'No',
+					label: no,
 					className: "confirm-no"
 			  	}
 			]
@@ -79,4 +87,4 @@ const mapStateToProps = state => ({
     students: state.courseStore.nonregistered_students
 });
 
-export default connect(mapStateToProps, { getNonRegisteredStudents, registerStudent })(NonRegisteredStudents);
+export default connect(mapStateToProps, { getNonRegisteredStudents, registerStudent })(injectIntl(NonRegisteredStudents));

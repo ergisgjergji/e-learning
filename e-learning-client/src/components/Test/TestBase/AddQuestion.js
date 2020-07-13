@@ -77,7 +77,7 @@ class AddQuestion extends Component {
         let alternatives = [];
         
         if(type === 1)
-            alternatives = [ {description: "True", correct: false}, {description: "False", correct: false} ];
+            alternatives = [ {description: "Yes", correct: false}, {description: "No", correct: false} ];
         else
             alternatives = [ {description: "", correct: false}, {description: "", correct: false}, {description: "", correct: false}, {description: "", correct: false} ];
         

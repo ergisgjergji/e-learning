@@ -5,6 +5,7 @@ import { getUserById, updateProfile } from './../../redux/actions/userActions';
 import classnames from 'classnames';
 
 import translate from '../../i18n/translate';
+import { injectIntl } from 'react-intl';
 
 class UpdateProfile extends Component {
 
@@ -48,8 +49,11 @@ class UpdateProfile extends Component {
 
         const { id, full_name, role, faculty, registration_date, username, password } = this.state;
         const user = { id, full_name, role, faculty, registration_date, username, password };
+
+        const { intl } = this.props;
+        const notificationMessage = intl.formatMessage({ id: 'update-profile-toast' }); 
         
-        this.props.updateProfile(user, this.props.history);
+        this.props.updateProfile(user, this.props.history, notificationMessage);
     }
 
     render() {
@@ -129,4 +133,4 @@ const mapStateToProps = state => ({
     errorStore: state.errorStore
 });
 
-export default connect(mapStateToProps, { getUserById, updateProfile })(UpdateProfile);
+export default connect(mapStateToProps, { getUserById, updateProfile })(injectIntl(UpdateProfile));

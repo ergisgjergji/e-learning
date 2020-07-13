@@ -7,6 +7,7 @@ import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
 
 import translate from '../../i18n/translate';
+import { injectIntl } from 'react-intl';
 
 class TeachersTable extends Component {
 
@@ -15,17 +16,25 @@ class TeachersTable extends Component {
     }
 
     onDeleteClick = (id) => {
+
+        const { intl } = this.props;
+        const confirm = intl.formatMessage({ id: 'confirm' });
+        const confirmMessage = intl.formatMessage({ id: 'delete-user-confirm' });
+        const yes = intl.formatMessage({ id: 'yes' });
+        const no = intl.formatMessage({ id: 'no' });
+        const notificationMessage = intl.formatMessage({ id: 'delete-teacher-toast'}, { id });
+
         confirmAlert({
-			title: 'Confirm',
-			message: 'Are u sure u want to delete this teacher?',
+			title: confirm,
+			message: confirmMessage,
 			buttons: [
 				{
-					label: 'Yes',
+					label: yes,
 					className: "confirm-yes",
-					onClick: () => this.props.deleteTeacher(id)
+					onClick: () => this.props.deleteTeacher(id, notificationMessage)
 				},
 				{
-					label: 'No',
+					label: no,
 					className: "confirm-no"
 			  	}
 			]
@@ -92,4 +101,4 @@ const mapStateToProps = state => ({
     userStore: state.userStore
 });
 
-export default connect(mapStateToProps, { getTeachers, deleteTeacher })(TeachersTable);
+export default connect(mapStateToProps, { getTeachers, deleteTeacher })(injectIntl(TeachersTable));

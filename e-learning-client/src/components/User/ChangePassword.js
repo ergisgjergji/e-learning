@@ -6,6 +6,7 @@ import { getUserById, changePassword } from './../../redux/actions/userActions';
 import classnames from 'classnames';
 
 import translate from '../../i18n/translate';
+import { injectIntl } from 'react-intl';
 
 class ChangePassword extends Component {
 
@@ -43,8 +44,10 @@ class ChangePassword extends Component {
         const { id, old_password, new_password, errors } = this.state;
         const changePasswordModel = { id, old_password, new_password };
 
-        // console.log(changePasswordModel);
-        this.props.changePassword(changePasswordModel, this.props.history);
+        const { intl } = this.props;
+        const notificationMessage = intl.formatMessage({ id: 'change-password-toast' }); 
+
+        this.props.changePassword(changePasswordModel, this.props.history, notificationMessage);
     }
 
     render() {
@@ -117,4 +120,4 @@ const mapStateToProps = (state) => ({
     errorStore: state.errorStore
 });
 
-export default connect(mapStateToProps, { getUserById, changePassword })(ChangePassword);
+export default connect(mapStateToProps, { getUserById, changePassword })(injectIntl(ChangePassword));

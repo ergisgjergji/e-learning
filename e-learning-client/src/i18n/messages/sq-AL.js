@@ -81,8 +81,6 @@ export default {
         'alternatives-blank': 'Alternativat nuk mund të jenë bosh!',
         'one-correct-answer-required': 'Pyetja duhet të ketë 1 alternativë të saktë!',
         'two-correct-answers-required': 'Pyetja duhet të ketë 2 alternativa të sakta!',
-        'AddTest-leave': 'Nëse largoheni, testi nuk do të ruhet. Vazhdoni?',
-        'close-question-form-alert': 'Ju lutem ruani/anuloni pyetjen e hapur',
         'total': 'Totali',
         'score': 'Pikët',
         'result': 'Rezultati',
@@ -93,6 +91,7 @@ export default {
         'minimal-score': 'Rezultati minimal kalues është 40%',
         'question-duration': 'Kohëzgjatja e testit llogaritet si: 3 minuta x pyetje',
         'countdown-end': 'Testi do të dërgohet automatikisht në mbarimin e kohës',
+        'time-remaining': 'Koha e mbetur',
 
         'by': 'nga',
         'contact': 'Kontakt',
@@ -102,6 +101,41 @@ export default {
         'teacher-email': 'Emaili i pedagogut',
         'take': 'Merr',
         'take-test': 'Plotëso tani',
-        'submit-test': 'Ruaj & dërgo'
+        'submit-test': 'Ruaj & dërgo',
+
+        //##################################### notifications ############################################
+        // confirm-alert
+        'confirm': 'Konfirmo',
+        'yes': 'Po',
+        'no': 'Jo',
+
+        // profile
+        'change-password-toast': '✔ Fjalëkalimi u ndryshua me sukses.',
+        'update-profile-toast': '✔ Të dhënat u ndryshuan me sukses.',
+
+        // admin
+        'add-student-toast': '✔ Studenti u shtua me sukses.',
+        'add-teacher-toast': '✔ Pedagogu u shtua me sukses.',
+        'delete-user-confirm': 'Jeni i sigurtë që dëshironi ta fshini këtë përdorues?',
+        'delete-student-toast': 'ℹ Studenti me id {id} u fshi me sukses.',
+        'delete-teacher-toast': 'ℹ Pedagogu me id {id} u fshi me sukses.',
+        'update-user-toast': '✔ Ndryshimet u ruajtën me sukses.',
+        'reset-password-toast': '✔ Fjalëkalimi u rivendos me sukses.',
+
+        // teacher
+        'delete-course-confirm': 'Jeni i sigurtë që doni ta fshini këtë kurs?',
+        'delete-course-toast': 'ℹ Kursi me id {id} u fshi me sukses.',
+        'add-course-toast': '✔ Kursi u krijua me sukses.',
+        'update-course-toast': '✔ Ndryshimet u ruajtën me sukses.',
+        'register-student-confirm': 'Jeni i sigurtë që doni të regjistroni studentin  "{name}" në këtë kurs?',
+        'register-student-toast': 'ℹ Studenti "{name}" u regjistrua me sukses.',
+        'question-form-toast': '⚠️ Ju lutem ruani/mbyllni formularin e pyetjes!',
+        'question-number-toast': '⚠️ Testi duhet të përmbajë minimalisht {number} pyetje!',
+        'add-test-toast': '✔ Testi u krijua me sukses.',
+        'add-test-leaving': 'Nëse largoheni, testi nuk do të ruhet. Vazhdoni?',
+        'take-test-confirm': 'Jeni gati për të filluar testimin. Jeni i sigurtë që doni të vazhdoni?',
+        'blocking-route-toast': '⚠️ Nuk mund të largoheni gjatë testit.',
+        'submit-test-confirm': 'Jeni i sigurtë që doni ta dorëzoni testin?',
+        'submit-test-toast': '✔ Testi u dorëzua me sukses.'
     }
 }

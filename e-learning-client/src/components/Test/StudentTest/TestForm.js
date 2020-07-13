@@ -6,6 +6,8 @@ import Countdown from 'react-countdown';
 import QuestionForm from './QuestionForm';
 
 import translate from '../../../i18n/translate';
+import { toast } from 'react-toastify';
+import { injectIntl } from 'react-intl';
 
 // ToDo: Pass the CountDown to the parent component and pass it down here as a prop. This way, no matter how many times this component
 // re-renders, the countdown will never be delayed.
@@ -28,7 +30,7 @@ class TestForm extends Component {
     componentDidMount() {
         // Submit the test if the windows is closed
         window.addEventListener("beforeunload", this.onWindowClose);
-        // Submit the test every 5 minutes
+        // Submit the test every 2 minutes
         setInterval(this.submitInterval, 120000);
 
         const { test } = this.props;
@@ -50,7 +52,19 @@ class TestForm extends Component {
         const { test } = this.state;
         this.props.asyncSubmit(test);
         
-        return e.returnValue = "If you close the window, the test will be submitted.\nAre you sure you want to continue?"; 
+        return e.returnValue = "If you close the window, the test will be submitted. Are you sure you want to continue?"; 
+    }
+
+    onRouteChange = () => {
+
+        const { intl } = this.props;
+        const blockingMessage = intl.formatMessage({ id: 'blocking-route-toast' });
+
+        toast.configure();
+        toast.warn(blockingMessage, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000
+        });
     }
 
     submitInterval = () => {
@@ -101,21 +115,28 @@ class TestForm extends Component {
 
     onTestSubmit = () => {
 
+        const { intl } = this.props;
+        const confirm = intl.formatMessage({ id: 'confirm' });
+        const confirmMessage = intl.formatMessage({ id: 'submit-test-confirm' });
+        const yes = intl.formatMessage({ id: 'yes' });
+        const no = intl.formatMessage({ id: 'no' });
+        const notificationMessage = intl.formatMessage({ id: 'submit-test-toast' });
+
         confirmAlert({
-			title: 'Confirm',
-			message: 'You are about to submit the test. Continue?',
+			title: confirm,
+			message: confirmMessage,
 			buttons: [
 				{
-					label: 'Yes',
+					label: yes,
 					className: "confirm-yes",
 					onClick: () => {
                         this.setState({ isBlocking: false });
                         const { test } = this.state;
-                        this.props.submitTest(test, this.props.history)
+                        this.props.submitTest(test, this.props.history, notificationMessage)
                     }
 				},
 				{
-					label: 'No',
+					label: no,
 					className: "confirm-no"
 			  	}
 			]
@@ -125,19 +146,21 @@ class TestForm extends Component {
     render() {
 
         const { test, duration, isBlocking } = this.state;
+        const { intl } = this.props;
 
         return (
             <div className="paper">
                 <div className="px-3 mb-4 border">
 
                     <Prompt when={isBlocking} message={location => {
-                                    return "If you leave, the test will be submited. Continue?"
+                                    this.onRouteChange();
+                                    return false;
                                 }
                     }/>  
 
                     <div className="text-center h5 m-4"> {test.header} </div>
                     <div className="text-center text-muted font-weight-light font-italic small">
-                        Time remaining: &nbsp;
+                        {translate('time-remaining')}: &nbsp;
                         <Countdown 
                             date={Date.now() + duration} 
                             renderer={this.countdownRender}
@@ -182,4 +205,4 @@ class TestForm extends Component {
     }
 }
 
-export default TestForm;
+export default injectIntl(TestForm);

@@ -5,6 +5,7 @@ import { getUserById, resetPassword } from './../../redux/actions/userActions';
 import classnames from 'classnames';
 
 import translate from './../../i18n/translate';
+import { injectIntl } from 'react-intl';
 
 class ResetPassword extends Component {
 
@@ -45,9 +46,12 @@ class ResetPassword extends Component {
 
         const { id, new_password, fromRoute, errors } = this.state;
         const resetPasswordModel = { id, new_password };
+
+        const { intl } = this.props;
+        const notificationMessage = intl.formatMessage({ id: 'reset-password-toast' });
         
         if(!errors.new_password && new_password.length >= 6)
-            this.props.resetPassword(resetPasswordModel, fromRoute, this.props.history);
+            this.props.resetPassword(resetPasswordModel, fromRoute, this.props.history, notificationMessage);
     }
 
     render() {
@@ -100,4 +104,4 @@ ResetPassword.propTypes = {
     resetPassword: PropTypes.func.isRequired
 };
 
-export default connect(null, { getUserById, resetPassword })(ResetPassword);
+export default connect(null, { getUserById, resetPassword })(injectIntl(ResetPassword));

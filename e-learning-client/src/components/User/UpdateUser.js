@@ -5,7 +5,7 @@ import { getUserById, updateUser } from './../../redux/actions/userActions';
 import classnames from 'classnames';
 
 import translate from '../../i18n/translate';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 class UpdateUser extends Component {
 
@@ -49,8 +49,11 @@ class UpdateUser extends Component {
 
         const { id, full_name, role, faculty, registration_date, username, password } = this.state;
         const user = { id, full_name, role, faculty, registration_date, username, password };
+
+        const { intl } = this.props;
+        const notificationMessage = intl.formatMessage({ id: 'update-user-toast' });
         
-        this.props.updateUser(user, this.props.history);
+        this.props.updateUser(user, this.props.history, notificationMessage);
     }
 
     render() {
@@ -159,4 +162,4 @@ const mapStateToProps = state => ({
     errorStore: state.errorStore
 });
 
-export default connect(mapStateToProps, { getUserById, updateUser })(UpdateUser);
+export default connect(mapStateToProps, { getUserById, updateUser })(injectIntl(UpdateUser));
