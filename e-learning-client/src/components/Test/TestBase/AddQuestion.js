@@ -186,7 +186,7 @@ class AddQuestion extends Component {
         const { description, type, alternatives, errors, toggleAlert } = this.state;
 
         return (
-            <div className="col-md-12 my-2 p-4 border shadow-sm">
+            <div className="col-md-12 my-2 p-4 border rounded shadow">
 
                 <div>
                     <div className="form-row">

@@ -42,7 +42,6 @@ class StudentsTable extends Component {
     }
 
     render() {
-
         const { students } = this.props.userStore;
         
         const columns = [
@@ -70,7 +69,7 @@ class StudentsTable extends Component {
 
         return (
             <div className="transition-page">
-                <div className="page col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow">
+                <div className="page col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow bg-white">
     
                     <h1 className="display-4 text-center"> {translate('students')} </h1>
                     

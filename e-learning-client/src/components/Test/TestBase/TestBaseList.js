@@ -32,7 +32,7 @@ class TestBaseList extends Component {
 
         return (
             <div className="transition-page">
-                <div className="container mb-4">
+                <div className="container">
                     <div className="row">
                         <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
 

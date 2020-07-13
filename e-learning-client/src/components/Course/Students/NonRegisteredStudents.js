@@ -62,7 +62,7 @@ class NonRegisteredStudents extends Component {
           ];
 
         return (
-            <div className="my-4 border border-secondary rounded shadow-lg">
+            <div className="my-4 border border-secondary rounded shadow-lg bg-white">
                 <h3 className="text-center mt-4"> {translate('non-registered-students')} </h3>
                 <br/>
                 <ReactTable
