@@ -158,8 +158,8 @@ class TestForm extends Component {
                                 }
                     }/>  
 
-                    <div className="text-center h5 m-4"> {test.header} </div>
-                    <div className="text-center text-muted font-weight-light font-italic small">
+                    <div className="text-center h5 m-4 pt-2"> {test.header} </div>
+                    <div className="mb-2 text-center text-muted font-weight-light font-italic small">
                         {translate('time-remaining')}: &nbsp;
                         <Countdown 
                             date={Date.now() + duration} 

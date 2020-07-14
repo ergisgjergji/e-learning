@@ -82,7 +82,7 @@ class QuestionForm extends Component {
         const { alternatives } = this.state;
         
         return (
-            <div className="col-12 my-2 p-3 border-bottom">
+            <div className="col-12 col-lg-11 mx-auto my-2 p-3 border-bottom">
                 <div className="col-12">
                     <p className="text-left mb-0">
                         { question.description }

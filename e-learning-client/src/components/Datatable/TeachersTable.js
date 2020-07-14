@@ -50,7 +50,7 @@ class TeachersTable extends Component {
             { Header: translate('email'), accessor: "username", sortable: true, style: { textAlign: "center" } },
             { Header: translate('faculty'), accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 140 },
             { Header: translate('registration-date'), accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 140 },
-            { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, width: 300, Cell: props => {
+            { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, width: 250, Cell: props => {
               return (
                 <>
                     <Link to={`/adminPanel/updateUser/${props.original.id}`} className="btn btn-sm btn-outline-secondary shadow-sm mr-1 my-1">

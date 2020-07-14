@@ -12,7 +12,7 @@ export default class TestResultPaper extends Component {
         return (
             <div className="px-2 mb-4 border">
 
-                <div className="text-center h5 m-4"><u>{header}</u></div>
+                <div className="text-center h5 m-4 pt-2"><u>{header}</u></div>
 
                 {
                     questions.map((question, index) => {
@@ -20,7 +20,7 @@ export default class TestResultPaper extends Component {
                     })
                 }
 
-                <div className="col-12 col-md-8 col-lg-5 mt-4 shadow p-0 ml-auto">
+                <div className="col-12 col-md-8 col-lg-5 mt-4 mr-4 shadow p-0 ml-auto">
 
                     <div className="col-12 border rounded">
                         <div className="row">
@@ -52,8 +52,8 @@ export default class TestResultPaper extends Component {
 
                 </div>
                                     
-                <div className="col-12 my-1 p-0 text-right">
-                    <small>
+                <div className="col-12 col-md-11 mx-auto my-1 p-0 text-right">
+                    <small >
                         * <i>{translate('minimal-score')}</i>
                     </small>
                 </div>

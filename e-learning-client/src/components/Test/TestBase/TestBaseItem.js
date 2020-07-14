@@ -26,6 +26,7 @@ class TestBaseItem extends Component {
 
     render() {
         const { header, questions, isOpen } = this.state;
+        const length = questions.length;
 
         return (
             <div className="col-12 mt-1 p-0 mx-auto">
@@ -39,10 +40,10 @@ class TestBaseItem extends Component {
                     <Collapse isOpen={isOpen}>
                         <Fade in={isOpen}>
                             <div className="px-2 mb-4 border">
-                                <div className="text-center h5 m-4"><u>{header}</u></div>
+                                <div className="text-center h5 m-4 pt-2"><u>{header}</u></div>
                                 {
                                     questions.map((question, index) => {
-                                        return <QuestionBaseItem key={index} question={question}/>
+                                        return <QuestionBaseItem key={index} question={question} last={(index === length-1) ? true : false} />
                                     })
                                 }
                             </div>

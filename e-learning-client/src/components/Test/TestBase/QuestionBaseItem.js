@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import classnames from 'classnames';
 
 class QuestionBaseItem extends Component {
 
@@ -46,10 +47,10 @@ class QuestionBaseItem extends Component {
     }
 
     render() {
-        const { question } = this.props;
+        const { question, last } = this.props;
 
         return (
-            <div className="col-12 my-2 p-3 border-bottom">
+            <div className={classnames("col-12 col-md-11 mx-auto my-2 p-3 ", {"border-bottom": !last})}>
                 <div className="col-12">
                     <p className="text-left">{ question.description }</p>
                 </div>

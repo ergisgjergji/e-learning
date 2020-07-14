@@ -106,7 +106,7 @@
     bottom:0;
     left: 15px;
     display: flex;
-    font-size: 10px;
+    font-size: .7rem;
   }
 
   .paper {

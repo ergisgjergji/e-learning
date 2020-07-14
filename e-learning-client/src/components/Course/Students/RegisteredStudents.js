@@ -22,8 +22,8 @@ class RegisteredStudents extends Component {
             { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
             { Header: translate('full-name'), accessor: "full_name", sortable: true, style: { textAlign: "center" } },
             { Header: translate('email'), accessor: "username", sortable: true, style: { textAlign: "center" } },
-            { Header: translate('faculty'), accessor: "faculty", sortable: true, style: { textAlign: "center" }, width: 150 },
-            { Header: translate('registration-date'), accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" }, width: 150 },
+            { Header: translate('faculty'), accessor: "faculty", sortable: true, style: { textAlign: "center" } },
+            { Header: translate('registration-date'), accessor: "registration_date", sortable: true, filterable: false, style: { textAlign: "center" } },
             { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
               return (
                 <>

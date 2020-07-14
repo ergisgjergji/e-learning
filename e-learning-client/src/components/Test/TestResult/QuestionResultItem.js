@@ -76,7 +76,7 @@ class QuestionResultItem extends Component {
         const { question } = this.props;
 
         return (
-            <div className="col-12 my-2 p-2 border-bottom">
+            <div className="col-12 col-md-11 mx-auto my-2 p-3 border-bottom">
                 <div className="col-12">
                     <p className="text-left">{ question.description }</p>
                 </div>

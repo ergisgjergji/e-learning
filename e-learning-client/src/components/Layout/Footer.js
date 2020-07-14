@@ -44,17 +44,17 @@ class Footer extends Component {
                         <div className="col-12 my-1 social-media">
                             <div className="d-inline-block mx-2">
                                 <a href={facebook} target="_blank">
-                                    <i className="fa fa-facebook-square fa-lg" aria-hidden="true"/>
+                                    <i className="fa fa-facebook-square fa-2x" aria-hidden="true"/>
                                 </a>
                             </div>
                             <div className="d-inline-block mx-2">
                                 <a href={linkedin} target="_blank">
-                                    <i className="fa fa-linkedin-square fa-lg" aria-hidden="true"/>
+                                    <i className="fa fa-linkedin-square fa-2x" aria-hidden="true"/>
                                 </a>
                             </div>
                             <div className="d-inline-block mx-2">
                                 <a href={github} target="_blank">
-                                    <i className="fa fa-github fa-lg" aria-hidden="true"/>
+                                    <i className="fa fa-github fa-2x" aria-hidden="true"/>
                                 </a>
                             </div>
                         </div>
