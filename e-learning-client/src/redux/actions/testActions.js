@@ -115,7 +115,6 @@ export const submitTest = (test, history, notificationMessage) => dispatch => {
         .then(res => {
 
             history.push('/studentPanel');
-            toast.dismiss();
             toast.success(notificationMessage);
             dispatch({
                 type: GET_TEST,

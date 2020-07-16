@@ -59,10 +59,10 @@ class Footer extends Component {
                             </div>
                         </div>
 
-                        <div className="copyright gray-text">
+                        <small className="gray-text">
                             <i className="fa fa-copyright" aria-hidden="true"/> {translate('copyright')} {year}: 
                             <span> {author} </span>
-                        </div>
+                        </small>
 
                     </div>
 

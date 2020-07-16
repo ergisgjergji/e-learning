@@ -88,7 +88,7 @@ class StudentCourseItem extends Component {
                                 <small><i> {translate('by')} {course.teacher_name} </i></small>
                             </span>
                             <span className="d-block mt-3 mb-1 border border rounded text-center py-2 shadow-sm">
-                                <small> <b> {translate('contact')}:</b> {course.teacher_email} </small>
+                                <small> <b> Email:</b> {course.teacher_email} </small>
                             </span>
 						</div>
 

@@ -135,7 +135,6 @@ export const registerStudent = (course_id, student_id, notificationMessage) => d
     axios.post(`/api/course/${course_id}/students/${student_id}`)
         .then(res => {
 
-            toast.dismiss();
             toast.info(notificationMessage)
             
             dispatch(getRegisteredStudents(course_id));

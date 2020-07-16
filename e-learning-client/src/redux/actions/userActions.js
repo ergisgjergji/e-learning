@@ -69,7 +69,6 @@ export const deleteStudent = (id, notificationMessage) => dispatch => {
     axios.delete(`/api/user/${id}`)
         .then(res => {
 
-            toast.dismiss();
             toast.info(notificationMessage);
             dispatch({
                 type: DELETE_STUDENT,
@@ -90,7 +89,6 @@ export const deleteTeacher = (id, notificationMessage) => dispatch => {
     axios.delete(`/api/user/${id}`)
         .then(res => {
 
-            toast.dismiss();
             toast.info(notificationMessage);
             dispatch({
                 type: DELETE_TEACHER,
@@ -113,12 +111,10 @@ export const addUser = (user, history, notificationMessage) => dispatch => {
 
             if(user.role === "STUDENT") {
                 history.push('/adminPanel/students');
-                toast.dismiss();
                 toast.success(notificationMessage);
             }
             else if(user.role === "TEACHER") {
                 history.push('/adminPanel/teachers');
-                toast.dismiss();
                 toast.success(notificationMessage);
             }
             dispatch(clearErrors());
@@ -137,7 +133,6 @@ export const updateUser = (user, history, notificationMessage) => dispatch => {
     axios.put("/api/user", user)
         .then(res => {
 
-            toast.dismiss();
             toast.success(notificationMessage);
 
             if(user.role === "STUDENT")
@@ -196,7 +191,6 @@ export const resetPassword = (resetPasswordModel, fromRoute, history, notificati
     axios.post(`/api/user/reset-password`, resetPasswordModel)
         .then(res => {
             history.push(fromRoute);
-            toast.dismiss();
             toast.success(notificationMessage);
             dispatch(clearErrors());
         })
