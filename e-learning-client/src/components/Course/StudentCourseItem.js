@@ -114,47 +114,52 @@ class StudentCourseItem extends Component {
                                 <Collapse isOpen={isDropdownOpen}>
                                     <Fade in={isDropdownOpen}>
                                         {
-                                            tests.map((test, index) => {
+                                            (tests.length === 0) ? 
+                                                <li className="list-group-item board bg-cloud text-secondary">
+                                                    <i className="fa fa-info-circle" aria-hidden="true"/> {translate('TestBaseList-empty')}
+                                                </li>
+                                                :
+                                                tests.map((test, index) => {
 
-                                                if(test.completed)
-                                                    return (
-                                                        <Link to={`/studentPanel/course/${course.id}/test/${test.id}/details`} key={index}>
-                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-cloud">
-                                                                <Badge 
-                                                                    className="ml-3 mr-1" 
-                                                                    color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
-                                                                >
-                                                                { test.passed ? translate('pass') : translate('fail') }
-                                                                </Badge>
-                                                                { test.header }
-                                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                                            </li>
+                                                    if(test.completed)
+                                                        return (
+                                                            <Link to={`/studentPanel/course/${course.id}/test/${test.id}/details`} key={index}>
+                                                                <li id={`tooltip-${index}`} className="list-group-item board bg-cloud">
+                                                                    <Badge 
+                                                                        className="ml-3 mr-1" 
+                                                                        color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
+                                                                    >
+                                                                    { test.passed ? translate('pass') : translate('fail') }
+                                                                    </Badge>
+                                                                    { test.header }
+                                                                    <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                                                </li>
 
-                                                            <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
-                                                                {translate('view-details')}
-                                                            </Tooltip>
-                                                        </Link>
-                                                    )
-                                                else
-                                                    return (
-                                                        <div key={index}>
-                                                            <li id={`tooltip-${index}`} className="list-group-item board bg-cloud" onClick={this.onTakeTest.bind(this,course.id, test.id)}>
-                                                                <Badge 
-                                                                    className="ml-3 mr-1" 
-                                                                    color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
-                                                                >
-                                                                { translate('take') }
-                                                                </Badge>
-                                                                { test.header }
-                                                                <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
-                                                            </li>
+                                                                <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
+                                                                    {translate('view-details')}
+                                                                </Tooltip>
+                                                            </Link>
+                                                        )
+                                                    else
+                                                        return (
+                                                            <div key={index}>
+                                                                <li id={`tooltip-${index}`} className="list-group-item board bg-cloud" onClick={this.onTakeTest.bind(this,course.id, test.id)}>
+                                                                    <Badge 
+                                                                        className="ml-3 mr-1" 
+                                                                        color={classnames({"secondary": !test.completed}, {"success": test.passed}, {"danger": (test.completed && !test.passed)})}
+                                                                    >
+                                                                    { translate('take') }
+                                                                    </Badge>
+                                                                    { test.header }
+                                                                    <i className="fa fa-chevron-right icon-position-right" aria-hidden="true"/>
+                                                                </li>
 
-                                                            <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
-                                                                { translate('take-test') }
-                                                            </Tooltip>
-                                                        </div>
-                                                    )
-                                            })
+                                                                <Tooltip placement="right" target={`tooltip-${index}`} isOpen={this.state[`tooltip-${index}`]} toggle={() => this.toggleTooltip(`tooltip-${index}`)}>
+                                                                    { translate('take-test') }
+                                                                </Tooltip>
+                                                            </div>
+                                                        )
+                                                })
                                         }
                                     </Fade>
                                 </Collapse>
