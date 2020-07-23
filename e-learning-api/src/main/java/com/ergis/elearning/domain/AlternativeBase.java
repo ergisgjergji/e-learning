@@ -26,6 +26,11 @@ public class AlternativeBase {
 
     public AlternativeBase() {}
 
+    public AlternativeBase(@NotBlank(message = "Question description is required") String description, @NotNull Boolean correct) {
+        this.description = description;
+        this.correct = correct;
+    }
+
     public Long getId() {
         return id;
     }

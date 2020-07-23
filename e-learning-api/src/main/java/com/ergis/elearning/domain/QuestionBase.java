@@ -33,6 +33,11 @@ public class QuestionBase {
 
     public QuestionBase() {}
 
+    public QuestionBase(@NotBlank(message = "Question description is required") String description, @NotNull(message = "Question type is required") Integer type) {
+        this.description = description;
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }

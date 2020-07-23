@@ -5,10 +5,7 @@ import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlterna
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesExceptionResponse;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeException;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeExceptionResponse;
-import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdException;
-import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdExceptionResponse;
-import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseQuestionsException;
-import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseQuestionsExceptionResponse;
+import com.ergis.elearning.exceptions.TestBaseExceptions.*;
 import com.ergis.elearning.exceptions.TestExceptions.TestIdException;
 import com.ergis.elearning.exceptions.TestExceptions.TestIdExceptionResponse;
 import com.ergis.elearning.exceptions.UserExceptions.*;
@@ -86,6 +83,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleTestBaseIdException(TestBaseIdException ex, WebRequest request) {
         TestBaseIdExceptionResponse exceptionResponse = new TestBaseIdExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleTestBaseHeaderException(TestBaseHeaderException ex, WebRequest request) {
+        TestBaseHeaderExceptionResponse exceptionResponse = new TestBaseHeaderExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 

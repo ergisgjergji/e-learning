@@ -4,6 +4,7 @@ import com.ergis.elearning.domain.*;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseIdException;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesException;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeException;
+import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseHeaderException;
 import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdException;
 import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseQuestionsException;
 import com.ergis.elearning.repositories.*;
@@ -65,6 +66,9 @@ public class TestBaseService {
         User user = userRepository.findByUsername(username);
         Course course = courseRepository.findByIdAndUsers(course_id, user);
         if(course == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
+
+        TestBase duplicateHeader = testBaseRepository.findByHeader(testBase.getHeader());
+        if(duplicateHeader != null) throw new TestBaseHeaderException("Test with header '" +testBase.getHeader()+ "' already exists");
 
         if(this.isTestValid(testBase)) {
 

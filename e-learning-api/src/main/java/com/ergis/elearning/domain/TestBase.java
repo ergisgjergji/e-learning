@@ -27,6 +27,10 @@ public class TestBase {
 
     public TestBase() {}
 
+    public TestBase(@NotBlank(message = "Test header is required") String header) {
+        this.header = header;
+    }
+
     public Long getId() {
         return id;
     }
