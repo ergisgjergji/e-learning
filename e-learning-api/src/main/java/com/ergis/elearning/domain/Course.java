@@ -43,6 +43,11 @@ public class Course {
 
     public Course() {}
 
+    public Course(@NotBlank(message = "Course name is required") String name, @NotBlank(message = "Course description is required") String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     @PrePersist
     private void onCreate() {
         this.created_date = new Date();

@@ -14,8 +14,10 @@ import com.ergis.elearning.ViewModel.ChangePasswordViewModel;
 import com.ergis.elearning.domain.User;
 import com.ergis.elearning.repositories.IUserRepository;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -30,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserApiTests {
 
 	/*
@@ -57,7 +60,7 @@ public class UserApiTests {
 	// This test is only for demonstrating that the role-based Authorization works.
 	@Test
 	@WithMockUser(username = "teacher1@test.com", roles = "TEACHER")
-	public void test_getAllUsers_thenForbidden() throws Exception {
+	public void test1_getAllUsers_thenForbidden() throws Exception {
 
 		MvcResult result = mockMvc
 				.perform(get("/api/user/all").contentType(MediaType.APPLICATION_JSON))
@@ -69,7 +72,7 @@ public class UserApiTests {
 
 	// This test is only for demonstrating that the Authentication works (you need to be logged-in to use most APIs)
 	@Test
-	public void test_getAllUsers_thenUnauthorized() throws Exception {
+	public void test2_getAllUsers_thenUnauthorized() throws Exception {
 
 		MvcResult result = mockMvc
 				.perform(get("/api/user/all").contentType(MediaType.APPLICATION_JSON))
@@ -81,7 +84,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_getAllUsers() throws Exception {
+	public void test3_getAllUsers() throws Exception {
 
 		MvcResult result = mockMvc
 				.perform(get("/api/user/all").contentType(MediaType.APPLICATION_JSON))
@@ -93,7 +96,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_getAllStudents() throws Exception {
+	public void test4_getAllStudents() throws Exception {
 
 		MvcResult result = mockMvc
 				.perform(get("/api/user/students").contentType(MediaType.APPLICATION_JSON))
@@ -105,7 +108,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_getAllTeachers() throws Exception {
+	public void test5_getAllTeachers() throws Exception {
 
 		MvcResult result = mockMvc
 				.perform(get("/api/user/teachers").contentType(MediaType.APPLICATION_JSON))
@@ -117,7 +120,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_getUserById_thenOk() throws Exception {
+	public void test6_getUserById_thenOk() throws Exception {
 
 		// Admin id = 1
 		MvcResult result1 = mockMvc
@@ -137,7 +140,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "teacher1@test.com", roles = "TEACHER")
-	public void test_getUserById_thenBadRequest() throws Exception {
+	public void test7_getUserById_thenBadRequest() throws Exception {
 
 		// User doesn't exists return status: 400
 		MvcResult result1 = mockMvc
@@ -157,7 +160,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_createUser() throws Exception {
+	public void test8_createUser() throws Exception {
 		Date now = new Date();
 
 		User existingUser = new User("teacher1@test.com", "Mock 1","111111", "FTI", "TEACHER", now);
@@ -206,7 +209,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_deleteUser() throws Exception {
+	public void test9_deleteUser() throws Exception {
 
 		User user = userRepository.findByUsername("mock@test.com");
 
@@ -226,7 +229,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "teacher1@test.com", roles = "TEACHER")
-	public void test_updateUser() throws Exception {
+	public void test10_updateUser() throws Exception {
 
 		// A non-admin user can only update his info (`id` must belong to him, otherwise throw `Bad request`)
 
@@ -254,7 +257,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_updateUser_asAdmin() throws Exception {
+	public void test11_updateUser_asAdmin() throws Exception {
 
 		// An admin can update every user, not only himself
 
@@ -290,7 +293,7 @@ public class UserApiTests {
 
 	@Test
 	@WithMockUser(username = "admin@admin.com", roles = "ADMIN")
-	public void test_changePassword() throws Exception {
+	public void test12_changePassword() throws Exception {
 
 		ChangePasswordViewModel invalidId = new ChangePasswordViewModel(0, "111111", "111111");
 		ChangePasswordViewModel invalidOldPassword = new ChangePasswordViewModel(1, "dfsdfsd", "111111");

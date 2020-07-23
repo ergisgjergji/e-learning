@@ -105,7 +105,7 @@ public class CourseController {
 
     @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{course_id}/students/{student_id}")
-    public ResponseEntity<?> deleteStudent(@PathVariable String course_id, @PathVariable String student_id, Principal principal) {
+    public ResponseEntity<?> removeStudent(@PathVariable String course_id, @PathVariable String student_id, Principal principal) {
 
         Set<User> courseStudents = userService.removeFromCourse(Long.parseLong(course_id), Long.parseLong(student_id), principal.getName());
         return new ResponseEntity<Set<User>>(courseStudents, HttpStatus.OK);
