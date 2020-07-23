@@ -7,10 +7,7 @@ import com.ergis.elearning.domain.TestBase;
 import com.ergis.elearning.domain.User;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseIdException;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseNotFoundException;
-import com.ergis.elearning.exceptions.UserExceptions.PasswordException;
-import com.ergis.elearning.exceptions.UserExceptions.UserIdException;
-import com.ergis.elearning.exceptions.UserExceptions.RegistrationDateException;
-import com.ergis.elearning.exceptions.UserExceptions.UsernameException;
+import com.ergis.elearning.exceptions.UserExceptions.*;
 import com.ergis.elearning.repositories.ICourseRepository;
 import com.ergis.elearning.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,44 @@ import java.util.Set;
 
 @Service
 public class UserService {
+
+    // Hard-coded faculties
+    enum Faculty {
+        FTI,
+        FIE,
+        FIN
+    }
+
+    // Hard-coded roles
+    enum Role {
+        ADMIN,
+        TEACHER,
+        STUDENT
+    }
+
+    private boolean isFacultyValid(String faculty) {
+
+        // Return true if there is a match
+        for (Faculty f : Faculty.values()) {
+            if (f.name().equals(faculty)) {
+                return true;
+            }
+        }
+        // Otherwise return false
+        return false;
+    }
+
+    private boolean isRoleValid(String role) {
+
+        // Return true if there is a match
+        for (Role r : Role.values()) {
+            if (r.name().equals(role)) {
+                return true;
+            }
+        }
+        // Otherwise return false
+        return false;
+    }
 
     @Autowired
     private ICourseRepository courseRepository;
@@ -41,6 +76,14 @@ public class UserService {
 
         User existingUser = userRepository.findByUsername(user.getUsername());
         if(existingUser != null) throw new UsernameException("Username '" + user.getUsername() + "' already exists");
+
+        // Perform a check on 'faculty' (only if new user is not an admin)
+        if(!user.getRole().toUpperCase().equals("ADMIN"))
+            if(!isFacultyValid(user.getFaculty()))
+                throw new FacultyException("Faculty '" + user.getFaculty() + "' is invalid");
+
+        // Perform a check on 'role'
+        if(!isRoleValid(user.getRole().toUpperCase())) throw new RoleException("Role '" + user.getRole().toUpperCase() + "' is invalid");
 
         user.setRole(user.getRole().toUpperCase());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

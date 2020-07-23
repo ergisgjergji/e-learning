@@ -44,6 +44,18 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @ExceptionHandler
+    public final ResponseEntity<Object> handleFacultyException(FacultyException ex, WebRequest request) {
+        FacultyExceptionResponse exceptionResponse = new FacultyExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleRoleException(RoleException ex, WebRequest request) {
+        RoleExceptionResponse exceptionResponse = new RoleExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
     public final ResponseEntity<Object> handleRegistrationDateException(RegistrationDateException ex, WebRequest request) {
         RegistrationDateExceptionResponse exceptionResponse = new RegistrationDateExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);

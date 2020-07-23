@@ -55,6 +55,39 @@ public class User implements UserDetails {
 
     public User() {}
 
+    public User(int id, @Email(message = "Username needs to be an email") @NotBlank(message = "Username field is required") String username, @NotBlank(message = "Name field is required") String full_name) {
+        this.id = new Long(id);
+        this.username = username;
+        this.full_name = full_name;
+    }
+
+    public User(int id, @Email(message = "Username needs to be an email") @NotBlank(message = "Username field is required") String username, @NotBlank(message = "Name field is required") String full_name, @NotBlank(message = "Faculty is required") String faculty, Date registration_date) {
+        this.id = new Long(id);
+        this.username = username;
+        this.full_name = full_name;
+        this.faculty = faculty;
+        this.registration_date = registration_date;
+    }
+
+    public User(@Email(message = "Username needs to be an email") @NotBlank(message = "Username field is required") String username, @NotBlank(message = "Name field is required") String full_name, @NotBlank(message = "Password field is required") @Length(min = 6, message = "Password must include at least 6 characters") String password, @NotBlank(message = "Faculty is required") String faculty, @NotBlank(message = "Role is required") String role, Date registration_date) {
+        this.username = username;
+        this.full_name = full_name;
+        this.password = password;
+        this.faculty = faculty;
+        this.role = role;
+        this.registration_date = registration_date;
+    }
+
+    public User(int id, @Email(message = "Username needs to be an email") @NotBlank(message = "Username field is required") String username, @NotBlank(message = "Name field is required") String full_name, @NotBlank(message = "Password field is required") @Length(min = 6, message = "Password must include at least 6 characters") String password, @NotBlank(message = "Faculty is required") String faculty, @NotBlank(message = "Role is required") String role, Date registration_date) {
+        this.id = new Long(id);
+        this.username = username;
+        this.full_name = full_name;
+        this.password = password;
+        this.faculty = faculty;
+        this.role = role;
+        this.registration_date = registration_date;
+    }
+
     @PrePersist
     private void onCreate() {
         this.created_time = new Date();

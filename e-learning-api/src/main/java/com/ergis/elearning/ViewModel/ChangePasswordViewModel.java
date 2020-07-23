@@ -12,6 +12,12 @@ public class ChangePasswordViewModel {
 
     public ChangePasswordViewModel() {}
 
+    public ChangePasswordViewModel(int id, String old_password, @Length(min = 6, message = "Password must include at least 6 characters") String new_password) {
+        this.id = new Long(id);
+        this.old_password = old_password;
+        this.new_password = new_password;
+    }
+
     public Long getId() {
         return id;
     }
