@@ -11,6 +11,7 @@ import java.util.Set;
 public interface ITestBaseRepository extends CrudRepository<TestBase, Long> {
 
     TestBase findByHeader(String header);
+    TestBase findByCourseAndHeader(Course course, String header);
     TestBase findByIdAndCourse(Long id, Course course);
 
     Set<TestBase> findAllByCourse(Course course);

@@ -67,7 +67,7 @@ public class TestBaseService {
         Course course = courseRepository.findByIdAndUsers(course_id, user);
         if(course == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
 
-        TestBase duplicateHeader = testBaseRepository.findByHeader(testBase.getHeader());
+        TestBase duplicateHeader = testBaseRepository.findByCourseAndHeader(course, testBase.getHeader());
         if(duplicateHeader != null) throw new TestBaseHeaderException("Test with header '" +testBase.getHeader()+ "' already exists");
 
         if(this.isTestValid(testBase)) {
