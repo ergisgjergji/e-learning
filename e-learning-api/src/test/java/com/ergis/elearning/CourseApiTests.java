@@ -211,13 +211,13 @@ public class CourseApiTests {
 
         // There is no course with id: 0
         MvcResult result1 = mockMvc
-                .perform(post("/api/course/0/students/4").contentType(MediaType.APPLICATION_JSON))
+                .perform(post("/api/course/0/students/5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
         // Course with id: 2 does not belong to this user
         MvcResult result2 = mockMvc
-                .perform(post("/api/course/2/students/4").contentType(MediaType.APPLICATION_JSON))
+                .perform(post("/api/course/2/students/5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
@@ -229,7 +229,7 @@ public class CourseApiTests {
 
         // Good request
         MvcResult result4 = mockMvc
-                .perform(post("/api/course/1/students/4").contentType(MediaType.APPLICATION_JSON))
+                .perform(post("/api/course/1/students/5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -245,13 +245,13 @@ public class CourseApiTests {
 
         // There is no course with id: 0
         MvcResult result1 = mockMvc
-                .perform(delete("/api/course/0/students/4").contentType(MediaType.APPLICATION_JSON))
+                .perform(delete("/api/course/0/students/5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
         // Course with id: 2 does not belong to this user
         MvcResult result2 = mockMvc
-                .perform(delete("/api/course/2/students/4").contentType(MediaType.APPLICATION_JSON))
+                .perform(delete("/api/course/2/students/5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
@@ -263,13 +263,13 @@ public class CourseApiTests {
 
         // There is no registered student with id: 5 in this course
         MvcResult result4 = mockMvc
-                .perform(delete("/api/course/1/students/5").contentType(MediaType.APPLICATION_JSON))
+                .perform(delete("/api/course/1/students/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
         // Good request
         MvcResult result5 = mockMvc
-                .perform(delete("/api/course/1/students/4").contentType(MediaType.APPLICATION_JSON))
+                .perform(delete("/api/course/1/students/5").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
 
