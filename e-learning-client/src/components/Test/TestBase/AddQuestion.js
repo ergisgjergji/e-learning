@@ -160,7 +160,7 @@ class AddQuestion extends Component {
             );
           default:
               return (
-                <div className="row">
+                <div className="row" id="alternatives">
                     {
                         alternatives.map((alt, index) => {
                             return (
@@ -189,7 +189,7 @@ class AddQuestion extends Component {
             <div className="col-md-12 my-2 p-4 border rounded shadow">
 
                 <div>
-                    <div className="form-row">
+                    <div className="form-row" id="questionForm">
 
                         <div className="form-group col-md-12">
                             <label htmlFor="description"> {translate('description')} </label>

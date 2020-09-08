@@ -49,7 +49,7 @@ class QuestionForm extends Component {
                     {
                         alternatives.map((alt, index) => {
                             return (
-                                <div key={index} className="col-6 col-lg-3 text-center mx-auto mt-2">
+                                <div key={index} id={`alternative-${index+1}`} className="col-6 col-lg-3 text-center mx-auto mt-2">
                                     <input className="form-check-input" type="radio" id={index} checked={alt.checked} onChange={this.onMarkCorrect.bind(this, index)}/>
                                     <label className="form-check-label" htmlFor={index}>{alt.description}</label>
                                 </div>
@@ -65,7 +65,7 @@ class QuestionForm extends Component {
                     {
                         alternatives.map((alt, index) => {
                             return (
-                                <div key={index} className="col-6 col-md-6 col-lg-6 text-center mx-auto mt-2">
+                                <div key={index} id={`alternative-${index+1}`} className="col-6 col-md-6 col-lg-6 text-center mx-auto mt-2">
                                     <input className="form-check-input" type="checkbox" id={index} checked={alt.checked} onChange={this.onMarkCorrect.bind(this, index)}/>
                                     <label className="form-check-label" htmlFor={index}>{alt.description}</label>
                                 </div>
@@ -79,10 +79,10 @@ class QuestionForm extends Component {
 
     render() {
         const { question } = this.props;
-        const { alternatives } = this.state;
+        const { index, alternatives } = this.state;
         
         return (
-            <div className="col-12 col-lg-11 mx-auto my-2 p-3 border-bottom">
+            <div role="question" id={`question-${index+1}`} question-type={question.type} className="col-12 col-lg-11 mx-auto my-2 p-3 border-bottom">
                 <div className="col-12">
                     <p className="text-left mb-0">
                         { question.description }

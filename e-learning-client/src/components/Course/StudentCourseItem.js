@@ -106,7 +106,7 @@ class StudentCourseItem extends Component {
 									</li>
 								</Link>
 
-								<li className="list-group-item board" onClick={this.toggleDropdown}>
+								<li id="manageTestsBtn" className="list-group-item board" onClick={this.toggleDropdown}>
 									<i className="fa fa-file-text pr-1"> {translate('manage-tests')} </i>
                                     <i className={`fa ${!isDropdownOpen ? 'fa-chevron-down' : 'fa-chevron-up'} icon-position-right`} aria-hidden="true"/>
 								</li>

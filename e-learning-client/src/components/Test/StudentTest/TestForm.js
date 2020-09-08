@@ -178,7 +178,7 @@ class TestForm extends Component {
                     }
 
                     <div className="row">
-                        <button type="button" className="btn btn-md btn-primary border border-dark text-dark mx-auto mt-5 shadow" onClick={this.onTestSubmit}>
+                        <button id="submitTestBtn" type="button" className="btn btn-md btn-primary border border-dark text-dark mx-auto mt-5 shadow" onClick={this.onTestSubmit}>
                             <i className="fa fa-floppy-o" aria-hidden="true"/> {translate('submit-test')}
                         </button>
                     </div>
