@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import translate from './../../i18n/translate';
+import Services from './Services';
+import Demo from './Demo';
+import Jumbotron from './Jumbotron';
+import { FormattedMessage } from 'react-intl';
 
 class LandingPage extends Component {
 
@@ -32,34 +34,29 @@ class LandingPage extends Component {
     }
 
     render() {
+        const { locale } = this.props;
+
         return (
             <div className="transition-page">
-                <div className="landing">
-                    <div className="light-overlay landing-inner text-dark">
+                <div className="text-dark">
 
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-12 text-center">
+                    <div className="container">
+                        <div className="row">
 
-                                    <h1 className="display-4 mb-4">E-Learning</h1>
-                                    <p className="lead">
-                                        {translate('landing-page-header')}
-                                    </p>
-                                    <hr/>
-                                    
-                                    <Link to="/login" className="btn btn-lg my-btn-primary mr-2"> {translate('login')} </Link>
+                            <div className="col-md-12 text-center border rounded shadow-sm mt-3">
+                                <Jumbotron/>
+                            </div>
 
-                                    <label className="d-block text-secondary mt-3">
-                                    <small className="rounded p-2">
-                                            <i className="fa fa-info-circle" aria-hidden="true"/>&nbsp;
-                                            {translate('landing-page-demo', { email: <u>admin@admin.com</u>, password: <u>123456</u> })} 
-                                        </small>
-                                    </label>
+                            <div className="col-md-12 text-center border rounded shadow-sm my-3">
+                                <Services locale={locale}/>
+                            </div>
 
-                                </div>
+                            <div className="col-md-12 text-center border rounded shadow-sm">
+                                <Demo/>
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>

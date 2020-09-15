@@ -74,7 +74,7 @@ class App extends Component {
                     {
                       // Public routes
                     }
-                    <PublicRoute exact path="/" component={LandingPage}/>
+                    <PublicRoute exact path="/" component={LandingPage} locale={locale}/>
                     <PublicRoute exact path="/login" component={Login}/>
                     {
                       // Role-based routes

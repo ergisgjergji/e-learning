@@ -12,7 +12,7 @@ export default {
         'cancel': 'Cancel',
 
         'landing-page-header': 'A platform that helps teachers and students all round the world.',
-        'landing-page-demo': 'Use credentials: {email} & {password} for demonstration.',
+        'landing-page-demo': 'Use these credentials for a demo',
 
         'edit-profile': 'Edit profile',
         'change-password': 'Change password',
@@ -136,6 +136,11 @@ export default {
         'take-test-confirm': 'You are about to start this test. Once you start, you cannot go back. Continue?',
         'blocking-route-toast': '⚠️ You cannot leave while taking the test.',
         'submit-test-confirm': 'You are about to submit the test. Continue?',
-        'submit-test-toast': '✔ Test was submitted successfully.'
+        'submit-test-toast': '✔ Test was submitted successfully.',
+        
+        // Roles
+        'admin': 'Admin',
+        'teacher': 'Teacher',
+        'student': 'Student'
     }
 }

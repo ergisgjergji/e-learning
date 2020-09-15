@@ -10,12 +10,11 @@ const PublicRoute = ({ component: Component, authStore, ...otherProps }) => (
     <Route 
         {...otherProps}
         render={props => {
-
             if(authStore.isAuthenticated === false)
                 return (
                     <>
                         <AutoScroll/>
-                        <Component {...props}/>
+                        <Component {...props} {...otherProps}/>
                         <ScrollTopButton/>
                     </>
                 )

@@ -12,7 +12,7 @@ export default {
         'cancel': 'Anulo',
 
         'landing-page-header': 'Një platformë që ndihmon mësuesit dhe studentët në të gjithë botën.',
-        'landing-page-demo': 'Përdorni kredencialet: {email} & {password} për demonstrim.',
+        'landing-page-demo': 'Përdorni këto kredenciale për demonstrim',
 
         'edit-profile': 'Modifiko profilin',
         'change-password': 'Ndrysho fjalëkalimin',
@@ -31,6 +31,7 @@ export default {
         'students': 'Studentët',
         'add-student': 'Shto student',
         'new-student': 'Student i ri',
+        'teacher': 'Mësues',
         'teachers': 'Pedagogët',
         'add-teacher': 'Shto pedagog',
         'new-teacher': 'Pedagog i ri',
@@ -136,6 +137,11 @@ export default {
         'take-test-confirm': 'Jeni gati për të filluar testimin. Jeni i sigurtë që doni të vazhdoni?',
         'blocking-route-toast': '⚠️ Nuk mund të largoheni gjatë testit.',
         'submit-test-confirm': 'Jeni i sigurtë që doni ta dorëzoni testin?',
-        'submit-test-toast': '✔ Testi u dorëzua me sukses.'
+        'submit-test-toast': '✔ Testi u dorëzua me sukses.',
+
+        // Roles
+        'admin': 'Admin',
+        'teacher': 'Mësues',
+        'student': 'Student'
     }
 }
