@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import translate from '../../i18n/translate';
+import translate from '../../../i18n/translate';
 
 const Jumbotron = () => {
     return (

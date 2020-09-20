@@ -2,14 +2,15 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AutoScroll from '../Layout/AutoScroll';
-import ScrollTopButton from '../Layout/ScrollTopButton';
+import AutoScroll from '../Layout/Helpers/AutoScroll';
+import ScrollTopButton from '../Layout/Helpers/ScrollTopButton';
+import { roles } from '../../utils/constants';
 
 const StudentRoute = ({ component: Component, authStore, ...otherProps }) => (
 
     <Route 
         {...otherProps} 
-        render={props => ((authStore.isAuthenticated === true) && (authStore.user.role === "STUDENT")) ? 
+        render={props => ((authStore.isAuthenticated === true) && (authStore.user.role === roles.student)) ? 
                 (
                     <>
                         <AutoScroll/>

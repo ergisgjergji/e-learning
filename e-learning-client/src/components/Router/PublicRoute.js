@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AutoScroll from '../Layout/AutoScroll';
-import ScrollTopButton from '../Layout/ScrollTopButton';
+import AutoScroll from '../Layout/Helpers/AutoScroll';
+import ScrollTopButton from '../Layout/Helpers/ScrollTopButton';
+import { roles } from '../../utils/constants';
 
 const PublicRoute = ({ component: Component, authStore, ...otherProps }) => (
 
@@ -21,13 +22,13 @@ const PublicRoute = ({ component: Component, authStore, ...otherProps }) => (
 
             else
                 switch(authStore.user.role) {
-                    case "ADMIN":
+                    case roles.admin:
                         return <Redirect to="/adminPanel"/>; 
                         break;
-                    case "TEACHER":
+                    case roles.teacher:
                         return <Redirect to="/teacherPanel"/>;
                         break;
-                    case "STUDENT":
+                    case roles.student:
                         return <Redirect to="/studentPanel"/>;
                         break;
                 }

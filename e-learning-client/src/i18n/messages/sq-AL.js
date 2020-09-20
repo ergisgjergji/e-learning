@@ -31,7 +31,6 @@ export default {
         'students': 'Studentët',
         'add-student': 'Shto student',
         'new-student': 'Student i ri',
-        'teacher': 'Mësues',
         'teachers': 'Pedagogët',
         'add-teacher': 'Shto pedagog',
         'new-teacher': 'Pedagog i ri',

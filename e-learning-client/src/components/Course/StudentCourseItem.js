@@ -82,6 +82,7 @@ class StudentCourseItem extends Component {
 
 					<div className="row pb-4">
 
+                        {/* 1st section */}
 						<div className="col-12 col-4 col-md-3 border-right mb-2">
 							<h5 className="mx-auto"> #{course.name} </h5>
                             <span className="d-block mt-1">
@@ -92,11 +93,13 @@ class StudentCourseItem extends Component {
                             </span>
 						</div>
 
+                        {/* 2nd section */}
 						<div className="col-12 col-md-4 col-8 border-right">
 							<h5> {translate('description')}:</h5>
 							<p>{course.description}</p>
 						</div>
 
+                        {/* 3rd section */}
 						<div className="col-12 col-md-5 d-lg-block">
 							<ul className="list-group shadow">
 

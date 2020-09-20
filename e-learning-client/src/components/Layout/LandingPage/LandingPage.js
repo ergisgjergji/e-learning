@@ -2,36 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Services from './Services';
+import Services from './Services/Services';
 import Demo from './Demo';
 import Jumbotron from './Jumbotron';
 import { FormattedMessage } from 'react-intl';
 
 class LandingPage extends Component {
-
-    componentDidMount() {   
-        if(this.props.authStore.isAuthenticated)
-            switch(this.props.authStore.user.role) {
-                case "ADMIN":
-                    this.props.history.push("/adminPanel"); break;
-                case "TEACHER":
-                    this.props.history.push("/teacherPanel"); break;
-                case "STUDENT":
-                    this.props.history.push("/studentPanel"); break;
-            }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.authStore.isAuthenticated)
-            switch(nextProps.authStore.user.role) {
-                case "ADMIN":
-                    this.props.history.push("/adminPanel"); break;
-                case "TEACHER":
-                    this.props.history.push("/teacherPanel"); break;
-                case "STUDENT":
-                    this.props.history.push("/studentPanel"); break;
-            }
-    }
 
     render() {
         const { locale } = this.props;

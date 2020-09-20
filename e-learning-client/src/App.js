@@ -6,9 +6,9 @@ import store from './redux/store';
 import { loadUser } from './redux/actions/authActions';
 
 import Footer from './components/Layout/Footer';
-import Header from './components/Layout/Header';
+import Header from './components/Layout/Header/Header';
 import { ToastContainer } from 'react-toastify';
-import LandingPage from './components/Layout/LandingPage';
+import LandingPage from './components/Layout/LandingPage/LandingPage';
 import Login from './components/Layout/Login';
 import Logout from './components/Layout/Logout';
 import AdminPanel from './components/Panels/AdminPanel';
