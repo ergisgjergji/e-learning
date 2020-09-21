@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getRegisteredStudents } from './../../../redux/actions/courseActions';
+import { getRegisteredStudents } from '../../../../redux/actions/courseActions';
 import ReactTable from 'react-table-v6';
 
-import translate from '../../../i18n/translate';
+import translate from '../../../../i18n/translate';
 
 
 class RegisteredStudents extends Component {

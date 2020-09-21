@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { getCourses } from '../../redux/actions/courseActions';
 
 import { Alert } from "reactstrap";
-import StudentCourseItem from './../Course/StudentCourseItem';
 
 import translate from "../../i18n/translate";
+import StudentCourseCard from './../Course/StudentCourseCard/StudentCourseCard';
 
 class StudentPanel extends Component {
 
@@ -34,7 +34,7 @@ class StudentPanel extends Component {
 										</Alert>
 										:
 										courses.map(course => (
-											<StudentCourseItem key={course.id} course={course} history={this.props.history}/>
+											<StudentCourseCard key={course.id} course={course} history={this.props.history}/>
 										)
 								)}
 							</div>

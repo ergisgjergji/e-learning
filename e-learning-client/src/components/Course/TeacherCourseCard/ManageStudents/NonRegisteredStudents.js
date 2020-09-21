@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getNonRegisteredStudents, registerStudent } from './../../../redux/actions/courseActions';
+import { getNonRegisteredStudents, registerStudent } from './../../../../redux/actions/courseActions';
 import ReactTable from 'react-table-v6';
 import { confirmAlert } from 'react-confirm-alert';
 
-import translate from '../../../i18n/translate';
 import { injectIntl } from 'react-intl';
+import translate from './../../../../i18n/translate';
 
 class NonRegisteredStudents extends Component {
 

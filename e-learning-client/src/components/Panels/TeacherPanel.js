@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { getCourses } from '../../redux/actions/courseActions';
 
 import { Alert } from 'reactstrap';
-import TeacherCourseItem from './../Course/TeacherCourseItem';
 
 import translate from "../../i18n/translate";
+import TeacherCourseCard from './../Course/TeacherCourseCard/TeacherCourseCard';
 
 class TeacherPanel extends Component {
 
@@ -39,7 +39,7 @@ class TeacherPanel extends Component {
 										</Alert>
 										:
 										courses.map(course => (
-											<TeacherCourseItem key={course.id} course={course}/>
+											<TeacherCourseCard key={course.id} course={course}/>
 										)
 								)}
 							</div>
