@@ -1,6 +1,6 @@
 package com.ergis.elearning.web;
 
-import com.ergis.elearning.ViewModel.TestViewModel;
+import com.ergis.elearning.ViewModel.ITestProjection;
 import com.ergis.elearning.domain.Test;
 import com.ergis.elearning.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class TestController {
     @GetMapping("/{course_id}/list")
     public ResponseEntity<?> getStudentTestListByCourse(@PathVariable String course_id, Principal principal) {
 
-        Set<TestViewModel> testList = testService.getStudentTestListByCourse(Long.parseLong(course_id), principal.getName());
-        return new ResponseEntity<Set<TestViewModel>>(testList, HttpStatus.OK);
+        Set<ITestProjection> testList = testService.getStudentTestListByCourse(Long.parseLong(course_id), principal.getName());
+        return new ResponseEntity<Set<ITestProjection>>(testList, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('STUDENT')")

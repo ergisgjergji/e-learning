@@ -1,18 +1,15 @@
 package com.ergis.elearning.services;
 
-import com.ergis.elearning.ViewModel.TestViewModel;
+import com.ergis.elearning.ViewModel.ITestProjection;
 import com.ergis.elearning.domain.*;
 import com.ergis.elearning.exceptions.CourseExceptions.CourseIdException;
-import com.ergis.elearning.exceptions.TestBaseExceptions.TestBaseIdException;
 import com.ergis.elearning.exceptions.TestExceptions.TestIdException;
 import com.ergis.elearning.exceptions.UserExceptions.UserIdException;
 import com.ergis.elearning.repositories.*;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -83,30 +80,17 @@ public class TestService {
         return test;
     }
 
-    public Set<TestViewModel> getStudentTestListByCourse(Long course_id, String username) {
+    public Set<ITestProjection> getStudentTestListByCourse(Long course_id, String username) {
 
         // Make sure student has a course with course_id
-        // Map Set<Test> to Set<TestViewModel>
 
         User currentStudent = userRepository.findByUsername(username);
 
         Course studentCourse = courseRepository.findByIdAndUsers(course_id, currentStudent);
         if(studentCourse == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
 
-        Set<Test> studentCourseTests = testRepository.findAllByCourseAndUser(studentCourse, currentStudent);
-        Set<TestViewModel> studentCourseTestList = new HashSet<>();
-
-        for(Test test: studentCourseTests) {
-            TestViewModel testViewModel = new TestViewModel();
-            testViewModel.setId(test.getId());
-            testViewModel.setHeader(test.getHeader());
-            testViewModel.setCompleted(test.getCompleted());
-            testViewModel.setPassed(test.getPassed());
-
-            studentCourseTestList.add(testViewModel);
-        }
-
-        return studentCourseTestList;
+        Set<ITestProjection> studentCourseTests = testRepository.getStudentTestListByCourse(studentCourse.getId(), currentStudent.getId());
+        return studentCourseTests;
     }
 
     public Set<Test> getStudentCompletedTestListByCourse(Long course_id, Long student_id, String username) {
