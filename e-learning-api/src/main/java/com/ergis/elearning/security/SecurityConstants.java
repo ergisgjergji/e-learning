@@ -10,5 +10,6 @@ public class SecurityConstants {
     public static final String HEADER_STRING = "Authorization";
     public static final long EXPIRATION_TIME = 86_400_000;  // 1 day
 
-    public static final String UPLOADS_DIR = String.join(new File("").getAbsolutePath(), "\\src\\main\\resources\\static\\uploads");
+    public static final String UPLOADS_DIR = "C:\\e-learning\\uploads";
+    public static final String PHOTOS_DIR = "C:\\e-learning\\uploads\\photos";
 }
