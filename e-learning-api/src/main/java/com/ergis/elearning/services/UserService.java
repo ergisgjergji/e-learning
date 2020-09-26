@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -141,7 +142,9 @@ public class UserService {
                 throw new UsernameException("Username '" +updatedUser.getUsername()+ "' already exists");
 
         User principal = userRepository.findByUsername(username);
-        if (!principal.getRole().equals("ADMIN")) {
+        String role = principal.getRole();
+
+        if (!role.equals("ADMIN")) {
             if (principal.getId().longValue() != updatedUser.getId().longValue()) throw new UserIdException("You have no access");
 
             user.setUsername(updatedUser.getUsername());
@@ -153,8 +156,16 @@ public class UserService {
             user.setFaculty(updatedUser.getFaculty());
             user.setRole(updatedUser.getRole());
         }
-        
-        // Update
+
+        // If user is a Teacher, modify corresponding columns in his courses
+        if(role.equals("TEACHER")) {
+            Set<Course> courses = courseService.findAllByUser(username);
+            courses.forEach(c -> {
+                c.setTeacher_name(updatedUser.getFull_name());
+                c.setTeacher_email(updatedUser.getUsername());
+            });
+            courseRepository.saveAll(courses);
+        }
         return userRepository.save(user);
     }
 
