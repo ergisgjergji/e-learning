@@ -1,8 +1,6 @@
 package com.ergis.elearning.exceptions;
 
 import com.ergis.elearning.exceptions.CourseExceptions.*;
-import com.ergis.elearning.exceptions.FileUploadExceptions.FileUploadException;
-import com.ergis.elearning.exceptions.FileUploadExceptions.FileUploadExceptionResponse;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesException;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesExceptionResponse;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeException;
@@ -119,14 +117,6 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleTestIdException(TestIdException ex, WebRequest request) {
         TestIdExceptionResponse exceptionResponse = new TestIdExceptionResponse(ex.getMessage());
-        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
-    }
-    //#endregion
-
-    //#region - File Upload Exceptions -
-    @ExceptionHandler
-    public final ResponseEntity<Object> handleFileUploadException(FileUploadException ex, WebRequest request) {
-        FileUploadExceptionResponse exceptionResponse = new FileUploadExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
     //#endregion

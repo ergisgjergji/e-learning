@@ -13,16 +13,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletContext;
 import javax.validation.Valid;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Set;
-
-import static com.ergis.elearning.security.SecurityConstants.UPLOADS_DIR;
 
 @RestController
 @RequestMapping("/api/course")
@@ -35,8 +28,6 @@ public class CourseController {
     private UserService userService;
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
-    @Autowired
-    ServletContext context;
 
     @PreAuthorize("hasRole('TEACHER')")
     @PostMapping("")
@@ -46,11 +37,6 @@ public class CourseController {
         if(errors != null) return errors;
 
         Course course1 = courseService.create(course, principal.getName());
-
-        // Create a directory with the name of the course
-        File courseDir = new File(UPLOADS_DIR,  course.getName());
-        courseDir.mkdir();
-
         return new ResponseEntity<Course>(course1, HttpStatus.CREATED);
     }
 

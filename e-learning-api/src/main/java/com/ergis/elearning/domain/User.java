@@ -39,8 +39,6 @@ public class User implements UserDetails {
     private Date registration_date;
     private Date created_time;
     private Date updated_time;
-    @Column(unique = true)
-    private String photo;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -88,17 +86,6 @@ public class User implements UserDetails {
         this.faculty = faculty;
         this.role = role;
         this.registration_date = registration_date;
-    }
-
-    public User(int id, @Email(message = "Username needs to be an email") @NotBlank(message = "Username field is required") String username, @NotBlank(message = "Name field is required") String full_name, @NotBlank(message = "Password field is required") @Length(min = 6, message = "Password must include at least 6 characters") String password, @NotBlank(message = "Faculty is required") String faculty, @NotBlank(message = "Role is required") String role, Date registration_date, String photo) {
-        this.id = new Long(id);
-        this.username = username;
-        this.full_name = full_name;
-        this.password = password;
-        this.faculty = faculty;
-        this.role = role;
-        this.registration_date = registration_date;
-        this.photo = photo;
     }
 
     @PrePersist
@@ -162,14 +149,6 @@ public class User implements UserDetails {
 
     public Date getRegistration_date() {
         return registration_date;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public void setRegistration_date(Date registration_date) {
