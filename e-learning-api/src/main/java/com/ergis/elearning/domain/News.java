@@ -1,11 +1,14 @@
 package com.ergis.elearning.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class News {
@@ -23,6 +26,10 @@ public class News {
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date updated_time;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "news", orphanRemoval = true)
+    @JsonIgnore
+    private Set<NewsAttachment> attachments = new HashSet<>();
 
     public News() {
     }
@@ -74,5 +81,13 @@ public class News {
 
     public void setUpdated_time(Date updated_time) {
         this.updated_time = updated_time;
+    }
+
+    public Set<NewsAttachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<NewsAttachment> attachments) {
+        this.attachments = attachments;
     }
 }

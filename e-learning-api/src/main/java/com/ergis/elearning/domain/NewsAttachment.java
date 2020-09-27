@@ -1,5 +1,7 @@
 package com.ergis.elearning.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,6 +23,11 @@ public class NewsAttachment {
     @NotBlank(message = "Download url cannot be blank")
     @Column(unique = true)
     private String downloadUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_news", updatable = false, nullable = false)
+    @JsonIgnore
+    private News news;
 
     public NewsAttachment() {
     }
@@ -71,5 +78,13 @@ public class NewsAttachment {
 
     public void setDownloadUrl(String downloadUrl) {
         this.downloadUrl = downloadUrl;
+    }
+
+    public News getNews() {
+        return news;
+    }
+
+    public void setNews(News news) {
+        this.news = news;
     }
 }
