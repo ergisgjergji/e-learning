@@ -1,44 +1,26 @@
-package com.ergis.elearning.domain;
+package com.ergis.elearning.ViewModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "news_attachment")
-public class NewsAttachment {
+public class FileUploadResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true)
-    @NotBlank(message = "File name cannot be blank")
     private String fileName;
-    @NotBlank(message = "Content type cannot be blank")
     private String contentType;
-    @NotNull
     private Boolean isPreviewEnabled;
     private String previewUrl;
-    @NotBlank(message = "Download url cannot be blank")
-    @Column(unique = true)
     private String downloadUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_news", updatable = false, nullable = false)
-    @JsonIgnore
-    private News news;
-
-    public NewsAttachment() {
+    public FileUploadResponse() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public FileUploadResponse(String fileName, String contentType, Boolean isPreviewEnabled, String previewUrl, String downloadUrl) {
+        this.fileName = fileName;
+        this.contentType = contentType;
+        this.isPreviewEnabled = isPreviewEnabled;
+        this.previewUrl = previewUrl;
+        this.downloadUrl = downloadUrl;
     }
 
     public String getFileName() {
@@ -79,13 +61,5 @@ public class NewsAttachment {
 
     public void setDownloadUrl(String downloadUrl) {
         this.downloadUrl = downloadUrl;
-    }
-
-    public News getNews() {
-        return news;
-    }
-
-    public void setNews(News news) {
-        this.news = news;
     }
 }

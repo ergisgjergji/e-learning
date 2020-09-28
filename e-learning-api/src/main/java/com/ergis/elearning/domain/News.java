@@ -16,19 +16,19 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     @NotBlank(message = "News header is required")
     private String header;
     @NotBlank(message = "News body is required")
     private String body;
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date created_time;
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    private Date createdTime;
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date updated_time;
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    private Date updatedTime;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "news", orphanRemoval = true)
-    @JsonIgnore
     private Set<NewsAttachment> attachments = new HashSet<>();
 
     public News() {
@@ -36,12 +36,12 @@ public class News {
 
     @PrePersist
     private void onCreate() {
-        this.created_time = new Date();
-        this.updated_time = this.created_time;
+        this.createdTime = new Date();
+        this.updatedTime = this.createdTime;
     }
 
     @PreUpdate
-    private void onUpdate() { this.updated_time = new Date(); }
+    private void onUpdate() { this.updatedTime = new Date(); }
 
     public Long getId() {
         return id;
@@ -67,20 +67,20 @@ public class News {
         this.body = body;
     }
 
-    public Date getCreated_time() {
-        return created_time;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreated_time(Date created_time) {
-        this.created_time = created_time;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public Date getUpdated_time() {
-        return updated_time;
+    public Date getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setUpdated_time(Date updated_time) {
-        this.updated_time = updated_time;
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public Set<NewsAttachment> getAttachments() {
