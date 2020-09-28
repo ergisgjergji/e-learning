@@ -50,14 +50,14 @@ public class FileStorageService {
 
         try {
             Files.copy(file.getInputStream(), url, StandardCopyOption.REPLACE_EXISTING);
-            return getResource(file, attachmentsPath);
+            return getFileInfo(file, "attachment");
         }
         catch (IOException e) {
             throw new RuntimeException("Issue in storing the file");
         }
     }
 
-    private FileUploadResponse getResource(MultipartFile file, Path folder) {
+    private FileUploadResponse getFileInfo(MultipartFile file, String fileType) {
 
         String fileName = null;
         String contentType = null;
@@ -68,13 +68,7 @@ public class FileStorageService {
         fileName =  StringUtils.cleanPath(file.getOriginalFilename());
         contentType = file.getContentType();
 
-        Path path = folder.resolve(fileName);
-        Resource resource;
-        try {
-            resource = new UrlResource(path.toUri());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Issue in reading the file", e);
-        }
+        Resource resource = this.getFileResource(fileName, fileType);
 
         if(resource.exists()) {
             isPreviewEnabled = resource.isReadable();
@@ -94,5 +88,37 @@ public class FileStorageService {
                 .toUriString();
 
         return new FileUploadResponse(fileName, contentType, isPreviewEnabled, previewUrl, downloadUrl);
+    }
+
+    public Resource getFileResource(String fileName, String fileType) {
+
+        Path path = this.getFilePath(fileName, fileType);
+        Resource resource;
+        try {
+            resource = new UrlResource(path.toUri());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Issue in reading the file", e);
+        }
+
+        if(resource.exists())
+            return resource;
+        else
+            throw new RuntimeException("File doesn't exist or is not readable");
+    }
+
+    private Path getFilePath(String fileName, String fileType) {
+
+        Path path;
+        switch(fileType) {
+            case "attachment":
+                path =attachmentsPath; break;
+            case "material":
+                path = materialsPath; break;
+            case "assignment":
+                path = assignmentsPath; break;
+            default:
+                path = storagePath; break;
+        }
+        return Paths.get(path + "\\" + fileName);
     }
 }
