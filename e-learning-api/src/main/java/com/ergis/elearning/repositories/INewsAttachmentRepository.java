@@ -11,4 +11,8 @@ import java.util.Set;
 public interface INewsAttachmentRepository extends CrudRepository<NewsAttachment, Long> {
 
     Set<NewsAttachment> findAllByNews(News news);
+
+    NewsAttachment getById(Long id);
+
+    NewsAttachment findByFileName(String fileName);
 }

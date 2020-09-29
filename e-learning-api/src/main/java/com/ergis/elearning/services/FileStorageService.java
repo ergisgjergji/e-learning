@@ -50,13 +50,45 @@ public class FileStorageService {
 
         try {
             Files.copy(file.getInputStream(), url, StandardCopyOption.REPLACE_EXISTING);
-            return getFileInfo(file, "attachment");
+            FileUploadResponse response = getFileInfo(file, "attachment");
+
+            response = this.addFileTypeExtension(response, "attachment");
+            return response;
         }
         catch (IOException e) {
-            throw new RuntimeException("Issue in storing the file");
+            throw new RuntimeException("Issue in storing the attachment");
+        }
+    }
+    
+    public void removeAttachment(String fileName) {
+
+        fileName = StringUtils.cleanPath(fileName);
+        Path url = Paths.get(attachmentsPath + "\\" + fileName);
+        try {
+            Files.delete(url);
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Issue in removing the attachment");
         }
     }
 
+    public Resource getFileResource(String fileName, String fileType) {
+
+        Path path = this.getFilePath(fileName, fileType);
+        Resource resource;
+        try {
+            resource = new UrlResource(path.toUri());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Issue in reading the file", e);
+        }
+
+        if(resource.exists())
+            return resource;
+        else
+            throw new RuntimeException("File doesn't exist or is not readable");
+    }
+
+    // Helpers
     private FileUploadResponse getFileInfo(MultipartFile file, String fileType) {
 
         String fileName = null;
@@ -89,23 +121,6 @@ public class FileStorageService {
 
         return new FileUploadResponse(fileName, contentType, isPreviewEnabled, previewUrl, downloadUrl);
     }
-
-    public Resource getFileResource(String fileName, String fileType) {
-
-        Path path = this.getFilePath(fileName, fileType);
-        Resource resource;
-        try {
-            resource = new UrlResource(path.toUri());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Issue in reading the file", e);
-        }
-
-        if(resource.exists())
-            return resource;
-        else
-            throw new RuntimeException("File doesn't exist or is not readable");
-    }
-
     private Path getFilePath(String fileName, String fileType) {
 
         Path path;
@@ -120,5 +135,13 @@ public class FileStorageService {
                 path = storagePath; break;
         }
         return Paths.get(path + "\\" + fileName);
+    }
+    private FileUploadResponse addFileTypeExtension(FileUploadResponse response, String fileType) {
+
+        if(response.getPreviewEnabled())
+            response.setPreviewUrl(response.getPreviewUrl() + "?fileType=" + fileType);
+        response.setDownloadUrl(response.getDownloadUrl() + "?fileType=" + fileType);
+
+        return response;
     }
 }
