@@ -161,3 +161,7 @@
 .my-btn-danger:hover::before {
     opacity: 1;
 }
+.page-item.active .page-link{
+    background-color: #154897 !important;
+    border-color: #154897 !important;
+}

@@ -83,7 +83,7 @@ class StudentsTable extends Component {
                         data={students}
                         noDataText={translate('no-data')}
                         filterable
-                        defaultPageSize={10}
+                        defaultPageSize={5}
                     />
                 </div>
             </div>
