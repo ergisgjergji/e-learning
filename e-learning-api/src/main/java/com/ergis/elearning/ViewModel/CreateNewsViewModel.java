@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
+import java.util.Optional;
 
 public class CreateNewsViewModel {
 
@@ -11,12 +12,12 @@ public class CreateNewsViewModel {
     private String header;
     @NotBlank(message = "News body is required")
     private String body;
-    private HashSet<MultipartFile> attachments = new HashSet<MultipartFile>();
+    private MultipartFile[] attachments;
 
     public CreateNewsViewModel() {
     }
 
-    public CreateNewsViewModel(@NotBlank(message = "News header is required") String header, @NotBlank(message = "News body is required") String body, HashSet<MultipartFile> attachments) {
+    public CreateNewsViewModel(@NotBlank(message = "News header is required") String header, @NotBlank(message = "News body is required") String body, MultipartFile[] attachments) {
         this.header = header;
         this.body = body;
         this.attachments = attachments;
@@ -38,11 +39,11 @@ public class CreateNewsViewModel {
         this.body = body;
     }
 
-    public HashSet<MultipartFile> getAttachments() {
+    public MultipartFile[] getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(HashSet<MultipartFile> attachments) {
+    public void setAttachments(MultipartFile[] attachments) {
         this.attachments = attachments;
     }
 }

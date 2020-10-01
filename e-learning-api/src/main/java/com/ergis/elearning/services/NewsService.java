@@ -17,10 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class NewsService {
@@ -53,11 +50,12 @@ public class NewsService {
         news.setBody(model.getBody());
         news = newsRepository.save(news);
 
-        if(!model.getAttachments().isEmpty())
+        if(model.getAttachments() != null && model.getAttachments().length > 0)
             for (MultipartFile file : model.getAttachments()) {
 
-                checkForDuplicateFile(file);
-                FileUploadResponse response = fileStorageService.storeAttachment(file);
+                String formatedFileName = this.formatFileName(news, file);
+                checkForDuplicateFile(formatedFileName);
+                FileUploadResponse response = fileStorageService.storeAttachment(file, formatedFileName);
 
                 NewsAttachment attachment = new NewsAttachment();
                 attachment.setFileName(response.getFileName());
@@ -107,9 +105,11 @@ public class NewsService {
         if(now.compareTo(due_date) > 0)
             throw new Exception("The news can only be updated within 1 day of its creation time");
     }
-    private void checkForDuplicateFile(MultipartFile file) throws Exception {
+    private String formatFileName(News news, MultipartFile file) {
+        return StringUtils.cleanPath(news.getId() + "_" + file.getOriginalFilename());
+    }
+    private void checkForDuplicateFile(String fileName) throws Exception {
 
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         NewsAttachment attachment = newsAttachmentRepository.findByFileName(fileName);
         if(attachment != null) throw new Exception("An attachment with name '" + fileName + "' already exists");
     }
@@ -125,8 +125,9 @@ public class NewsService {
 
         for (MultipartFile file : files) {
 
-            checkForDuplicateFile(file);
-            FileUploadResponse response = fileStorageService.storeAttachment(file);
+            String formatedFileName = this.formatFileName(news, file);
+            checkForDuplicateFile(formatedFileName);
+            FileUploadResponse response = fileStorageService.storeAttachment(file, formatedFileName);
 
             NewsAttachment attachment = new NewsAttachment();
             attachment.setFileName(response.getFileName());

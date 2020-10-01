@@ -43,14 +43,13 @@ public class FileStorageService {
         }
     }
 
-    public FileUploadResponse storeAttachment(MultipartFile file) {
+    public FileUploadResponse storeAttachment(MultipartFile file, String fileName) {
 
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path url = Paths.get(attachmentsPath + "\\" + fileName);
 
         try {
             Files.copy(file.getInputStream(), url, StandardCopyOption.REPLACE_EXISTING);
-            FileUploadResponse response = getFileInfo(file, "attachment");
+            FileUploadResponse response = getFileInfo(file, fileName, "attachment");
 
             response = this.addFileTypeExtension(response, "attachment");
             return response;
@@ -89,15 +88,13 @@ public class FileStorageService {
     }
 
     // Helpers
-    private FileUploadResponse getFileInfo(MultipartFile file, String fileType) {
+    private FileUploadResponse getFileInfo(MultipartFile file, String fileName, String fileType) {
 
-        String fileName = null;
         String contentType = null;
         boolean isPreviewEnabled;
         String previewUrl = null;
         String downloadUrl = null;
 
-        fileName =  StringUtils.cleanPath(file.getOriginalFilename());
         contentType = file.getContentType();
 
         Resource resource = this.getFileResource(fileName, fileType);

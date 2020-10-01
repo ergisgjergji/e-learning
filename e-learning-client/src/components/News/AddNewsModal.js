@@ -47,11 +47,12 @@ class AddNewsModal extends Component {
         const formData = new FormData();
         formData.append('header', header);
         formData.append('body', body);
-        formData.append('attachments', attachments);
+        attachments.forEach(a => {
+            formData.append('attachments', a);
+        })
 
-        const notification_message = "News added successfully."; // Will be replaced with 'translate()'
+        const notification_message = "News added successfully"; // used for translation later
         this.props.addNews(formData, notification_message);
-        this.props.refreshNews();
         this.toggle();
     }
 
@@ -84,19 +85,19 @@ class AddNewsModal extends Component {
 
                                 <div className="form-group col-md-12">
                                     <label htmlFor="header"> Title </label>
-                                    <input type="text" required id="header" name="header" className="form-control form-control-md shadow-sm"
+                                    <input type="text" required id="header" name="header" className="form-control form-control-md"
                                         value={header} onChange={this.onChange} />
                                 </div>
 
                                 <div className="form-group col-md-12">
                                     <label htmlFor="body"> Message </label>
-                                    <textarea type="text" required rows="5" id="body" name="body" className="form-control form-control-md shadow-sm"
+                                    <textarea type="text" required rows="5" id="body" name="body" className="form-control form-control-md"
                                         value={body} onChange={this.onChange} />
                                 </div>
 
                                 <div className="form-group col-md-12">
                                     <label htmlFor="files"> Attachment(s) </label>
-                                    <div class="custom-file shadow-sm">
+                                    <div class="custom-file">
                                         <input type="file" multiple id="files" name="files" class="custom-file-input" id="customFile" onChange={this.onSelectAttachment}/>
                                         <label class="custom-file-label text-muted" for="customFile"> {attachments.length} files selected </label>
                                     </div>
@@ -109,7 +110,8 @@ class AddNewsModal extends Component {
                                                 return (
                                                     <li key={index} class="list-group-item"> 
                                                         {file.name}
-                                                        <button type="button"
+                                                        <button
+                                                            type="button"
                                                             className="btn btn-sm btn-danger border-bottom shadow-sm icon-position-right" 
                                                             onClick={this.onRemoveAttachment.bind(this, file.name)}> 
                                                             X 

@@ -14,6 +14,7 @@ import javax.annotation.security.PermitAll;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/news")
@@ -42,8 +43,12 @@ public class NewsController {
     }
 
     @PostMapping("")
-    public ResponseEntity<News> create(@Valid @RequestBody CreateNewsViewModel model) throws Exception {
-
+    public ResponseEntity<News> create(
+            @RequestParam("header") String header,
+            @RequestParam("body") String body,
+            @RequestParam("attachments") MultipartFile[] attachments) throws Exception
+    {
+        CreateNewsViewModel model = new CreateNewsViewModel(header, body, attachments);
         News news = newsService.create(model);
         return new ResponseEntity<News>(news, HttpStatus.OK);
     }
