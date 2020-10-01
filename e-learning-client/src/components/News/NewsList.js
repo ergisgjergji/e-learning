@@ -8,6 +8,7 @@ import translate from "../../i18n/translate";
 import NewsListItem from './NewsListItem';
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
+import AddNewsModal from "./AddNewsModal";
 
 class NewsList extends Component {
 
@@ -38,13 +39,19 @@ class NewsList extends Component {
             pageCount,
             news,
             loading
-        } 
+        }
+        this.refreshNews.bind(this);
     }
 
     handlePageClick = (data) => {
         const page = data.selected;
         const { size } = this.state;
         this.props.getNewsList(page, size);
+    }
+
+    refreshNews = () => {
+        const { size } = this.state;
+        this.props.getNewsList(0, size);
     }
 
 	render() {
@@ -54,7 +61,10 @@ class NewsList extends Component {
 			<div className="transition-page">
                 <div className="page col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow bg-white">
 
-                    <h3 className="display-4 text-center border-bottom rounded"> News archive </h3>
+                    <h3 className="display-4 text-center rounded"> News archive </h3>
+                    <AddNewsModal refreshNews={this.refreshNews} />
+                    <hr/>
+
                     <div className="my-3">
                     {
                         loading ? 

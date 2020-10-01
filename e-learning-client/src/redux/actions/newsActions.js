@@ -44,3 +44,18 @@ export const getNewsList = (page, size) => dispatch => {
             })
         });
 };
+
+export const addNews = (formData, notification_message) => dispatch => {
+
+    axios.post('/api/news', formData, { "Content-Type": "multipart/form-data" })
+        .then(res => {
+            toast.success(notification_message);
+        })
+        .catch(err => {
+            validateError(err);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
+}
