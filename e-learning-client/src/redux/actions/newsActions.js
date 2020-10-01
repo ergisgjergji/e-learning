@@ -45,11 +45,13 @@ export const getNewsList = (page, size) => dispatch => {
         });
 };
 
-export const addNews = (formData, notification_message) => dispatch => {
+export const addNews = (formData, size, notification_message) => dispatch => {
 
     axios.post('/api/news', formData, { "Content-Type": "multipart/form-data" })
         .then(res => {
+            
             toast.success(notification_message);
+            dispatch(getNewsList(0, size));
         })
         .catch(err => {
             validateError(err);

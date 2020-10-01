@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
 import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { addNews } from './../../redux/actions/newsActions';
+
+import translate from './../../i18n/translate';
+import { injectIntl } from 'react-intl';
 
 class AddNewsModal extends Component {
 
@@ -43,6 +46,7 @@ class AddNewsModal extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { header, body, attachments } = this.state;
+        const { size, intl } = this.props; 
 
         const formData = new FormData();
         formData.append('header', header);
@@ -51,8 +55,9 @@ class AddNewsModal extends Component {
             formData.append('attachments', a);
         })
 
-        const notification_message = "News added successfully"; // used for translation later
-        this.props.addNews(formData, notification_message);
+        const notification_message = intl.formatMessage({ id: 'news.add-notification' });
+        // size: needed in order to do a 'getNewsList' on a successfull 'addNews'
+        this.props.addNews(formData, size, notification_message);
         this.toggle();
     }
 
@@ -70,12 +75,12 @@ class AddNewsModal extends Component {
         return (
             <div>
                 <button className="btn btn-md my-btn-primary" onClick={this.toggle}>
-                    <i className="fa fa-plus-circle" aria-hidden="true"/> Add news
+                    <i className="fa fa-plus-circle" aria-hidden="true"/> {translate('add-news')}
                 </button>
 
                 <Modal isOpen={isOpen} toggle={this.toggle} onClosed={this.clearData} backdrop="static">
                     <ModalHeader toggle={this.toggle}>
-                        New announcement
+                        <h3 className="font-weight-normal"> {translate('new-announcement')} </h3>
                     </ModalHeader>
 
                     <form onSubmit={this.onSubmit}>
@@ -84,22 +89,22 @@ class AddNewsModal extends Component {
                             <div className="form-row">
 
                                 <div className="form-group col-md-12">
-                                    <label htmlFor="header"> Title </label>
-                                    <input type="text" required id="header" name="header" className="form-control form-control-md"
+                                    <label htmlFor="header"> {translate('news.header')} </label>
+                                    <input type="text" required id="header" name="header" className="form-control form-control-md shadow-sm"
                                         value={header} onChange={this.onChange} />
                                 </div>
 
                                 <div className="form-group col-md-12">
-                                    <label htmlFor="body"> Message </label>
-                                    <textarea type="text" required rows="5" id="body" name="body" className="form-control form-control-md"
+                                    <label htmlFor="body"> {translate('news.body')} </label>
+                                    <textarea type="text" required rows="5" id="body" name="body" className="form-control form-control-md shadow-sm"
                                         value={body} onChange={this.onChange} />
                                 </div>
 
                                 <div className="form-group col-md-12">
-                                    <label htmlFor="files"> Attachment(s) </label>
+                                    <label htmlFor="files"> {translate('news.attachments')} </label>
                                     <div class="custom-file">
-                                        <input type="file" multiple id="files" name="files" class="custom-file-input" id="customFile" onChange={this.onSelectAttachment}/>
-                                        <label class="custom-file-label text-muted" for="customFile"> {attachments.length} files selected </label>
+                                        <input type="file" multiple id="files" name="files" class="custom-file-input shadow-sm" id="customFile" onChange={this.onSelectAttachment}/>
+                                        <label class="custom-file-label text-muted" for="customFile"> {attachments.length} {translate('files-selected')} </label>
                                     </div>
                                 </div>
 
@@ -108,7 +113,7 @@ class AddNewsModal extends Component {
                                         {
                                             attachments.map( (file, index) => {
                                                 return (
-                                                    <li key={index} class="list-group-item"> 
+                                                    <li key={index} class="list-group-item text-muted"> 
                                                         {file.name}
                                                         <button
                                                             type="button"
@@ -127,8 +132,8 @@ class AddNewsModal extends Component {
                         </ModalBody>
 
                         <ModalFooter>
-                            <button type="submit" className="btn my-btn-success"> Save </button>
-                            <button type="button" className="btn my-btn-secondary" onClick={this.toggle}> Cancel </button>
+                            <button type="submit" className="btn my-btn-success shadow"> {translate('save')} </button>
+                            <button type="button" className="btn my-btn-secondary shadow" onClick={this.toggle}> {translate('cancel')} </button>
                         </ModalFooter>
 
                     </form>
@@ -143,4 +148,4 @@ AddNewsModal.propTypes = {
 };
 
 
-export default connect(null, { addNews })(AddNewsModal);
+export default connect(null, { addNews })(injectIntl(AddNewsModal));

@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getNewsList, getCount } from './../../redux/actions/newsActions';
 
-import translate from "../../i18n/translate";
-
 import NewsListItem from './NewsListItem';
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
 import AddNewsModal from "./AddNewsModal";
+import translate from './../../i18n/translate';
 
 class NewsList extends Component {
 
@@ -40,7 +39,6 @@ class NewsList extends Component {
             news,
             loading
         }
-        this.refreshNews.bind(this);
     }
 
     handlePageClick = (data) => {
@@ -49,20 +47,15 @@ class NewsList extends Component {
         this.props.getNewsList(page, size);
     }
 
-    refreshNews = () => {
-        const { size } = this.state;
-        this.props.getNewsList(0, size);
-    }
-
 	render() {
-        const { pageCount, news, loading } = this.state;
+        const { pageCount, size, news, loading } = this.state;
 
 		return (
 			<div className="transition-page">
                 <div className="page col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow bg-white">
 
-                    <h3 className="display-4 text-center rounded"> News archive </h3>
-                    <AddNewsModal refreshNews={this.refreshNews} />
+                    <h3 className="display-4 text-center rounded"> {translate('news-archive')} </h3>
+                    <AddNewsModal size={size} />
                     <hr/>
 
                     <div className="my-3">

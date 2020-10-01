@@ -10,6 +10,7 @@ export default {
         'home': 'Home',
         'welcome': 'Welcome, {name}',
         'cancel': 'Cancel',
+        'read-more': 'Read more',
 
         'landing-page-header': 'A platform that helps teachers and students all round the world.',
         'landing-page-demo': 'Use these credentials for a demo',
@@ -102,6 +103,20 @@ export default {
         'take': 'Take',
         'take-test': 'Take the test',
         'submit-test': 'Submit test',
+
+        ////#region News
+        'news-archive': 'News Archive',
+        'add-news': 'Add news',
+        'new-announcement': 'New announcement',
+        'news.header': 'Title',
+        'news.body': 'Message',
+        'news.attachments': 'Attachment(s)',
+        'news.createdTime': 'Time published',
+        'files-selected': 'files selected',
+        'contains-x-attachments': 'Contains {x} attachment(s)',
+
+        'news.add-notification': '✔ News was posted successfully.',
+        ////#endregion
 
         //##################################### notifications ############################################
         // confirm-alert

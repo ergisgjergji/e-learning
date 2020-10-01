@@ -10,6 +10,7 @@ export default {
         'home': 'Kryefaqja',
         'welcome': 'Mirësevini, {name}',
         'cancel': 'Anulo',
+        'read-more': 'Lexo më shumë',
 
         'landing-page-header': 'Një platformë që ndihmon mësuesit dhe studentët në të gjithë botën.',
         'landing-page-demo': 'Përdorni këto kredenciale për demonstrim',
@@ -102,6 +103,20 @@ export default {
         'take': 'Merr',
         'take-test': 'Plotëso tani',
         'submit-test': 'Ruaj & dërgo',
+
+        ////#region News
+        'news-archive': 'Arkiva e lajmeve',
+        'add-news': 'Krijo lajm',
+        'new-announcement': 'Lajm i ri',
+        'news.header': 'Titulli',
+        'news.body': 'Mesazhi',
+        'news.attachments': 'Bashkëngjitje',
+        'news.createdTime': 'Koha e publikimit',
+        'files-selected': 'bashkëngjitje',
+        'contains-x-attachments': 'Përmban {x} bashkëngjitje',
+
+        'news.add-notification': '✔ Lajmi u krijua me sukses.',
+        ////#endregion
 
         //##################################### notifications ############################################
         // confirm-alert

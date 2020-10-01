@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import translate from '../../i18n/translate';
 
 class NewsListItem extends Component {
 
@@ -12,6 +13,12 @@ class NewsListItem extends Component {
         return (str.length > 255) ? str.substr(0, 254) + "..." : str;
     }
 
+    renderBody = (news) => {
+        const { id, body } = news;
+        const length = body.length;
+        
+    }
+
     render() {
         const { header, body, createdTime, attachments } = this.props.news;
         const formatedTime = this.formatDateTime(createdTime);
@@ -23,16 +30,15 @@ class NewsListItem extends Component {
                 <div className="my-text-primary"> {header} </div>
 
                 <p className="my-2"> 
-                    {formatedBody}
-                    <a href="#"> 
-                        <u className="my-text-primary"> Read more </u> 
-                    </a> 
+                    {
+                        
+                    }
                 </p>
 
-                {attachments.length > 0 ? <small className="text-muted"> <u> Contains {attachments.length} attachment/s </u> </small> : null}
+                {attachments.length > 0 ? <small className="text-muted"> <u> {translate('contains-x-attachments', {x: attachments.length})} </u> </small> : null}
                 
                 <div>
-                    <small> <b> Time published: {formatedTime} </b> </small>
+                    <small> <b> {translate('news.createdTime')}: <u> {formatedTime} </u> </b> </small>
                 </div>
             </div>
         )
