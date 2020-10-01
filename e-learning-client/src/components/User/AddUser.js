@@ -7,14 +7,14 @@ import classnames from 'classnames';
 import translate from '../../i18n/translate';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
-class AddTeacher extends Component {
+class AddUser extends Component {
 
     constructor() {
         super();
 
         this.state = {
             full_name: "",
-            role: "TEACHER",
+            role: "",
             faculty: "",
             registration_date: "",
             username: "",
@@ -25,6 +25,11 @@ class AddTeacher extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+
+    componentDidMount() {
+        const { role } = this.props;
+        this.setState({ role })
+    } 
     
     componentWillReceiveProps (nextProps) {
         if(this.state.errors != nextProps.errorStore)
@@ -42,7 +47,7 @@ class AddTeacher extends Component {
         const user = { full_name, role, faculty, registration_date, username, password };
 
         const { intl } = this.props;
-        const message = intl.formatMessage({ id: 'add-teacher-toast' });
+        const message = intl.formatMessage({ id: 'add-student-toast' });
         
         this.props.addUser(user, this.props.history, message);
     }
@@ -56,12 +61,12 @@ class AddTeacher extends Component {
                 <div className="container mb-4">
                     <div className="row">
                         <div className="col-11 col-md-9 col-lg-7 m-auto">
-                                
+                            
                             <button className="btn my-btn-secondary btn-sm shadow rounded mt-3 mb-1" onClick={() => this.props.history.goBack()}> 
                                 <i className="fa fa-arrow-left" aria-hidden="true"/> {translate('back')}
                             </button>
 
-                            <h5 className="display-4 text-center"> {translate('new-teacher')} </h5>
+                            <h5 className="display-4 text-center"> {translate('new-student')} </h5>
                             <hr />
 
                             <form onSubmit={this.onSubmit}>
@@ -80,8 +85,7 @@ class AddTeacher extends Component {
 
                                     <div className="form-group col-md-12">
                                         <label htmlFor="faculty"> {translate('faculty')} </label>
-                                        <select name="faculty" 
-                                            className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.faculty})}
+                                        <select name="faculty" className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.faculty})}
                                             value={faculty} onChange={this.onChange}>
                                             <FormattedMessage id="select-faculty">
                                                 {(message) => <option value="" disabled> {message} </option>}
@@ -105,7 +109,7 @@ class AddTeacher extends Component {
                                     <div className="form-group col-md-12">
                                         <label htmlFor="start_date"> {translate('registration-date')} </label>
                                         <input type="date" id="registration_date" name="registration_date"
-                                            className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.registration_date})}
+                                            className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.registration_date})} 
                                             value={registration_date} onChange={this.onChange} />
                                         { 
                                             errors.registration_date ? 
@@ -143,7 +147,7 @@ class AddTeacher extends Component {
 
                                 </div>
                             </form>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -152,7 +156,7 @@ class AddTeacher extends Component {
     }
 }
 
-AddTeacher.propTypes = {
+AddUser.propTypes = {
     errorStore: PropTypes.object.isRequired,
     addUser: PropTypes.func.isRequired
 };
@@ -161,4 +165,4 @@ const mapStateToProps = state => ({
     errorStore: state.errorStore
 });
 
-export default connect(mapStateToProps, { addUser })(injectIntl(AddTeacher));
+export default connect(mapStateToProps, { addUser })(injectIntl(AddUser));

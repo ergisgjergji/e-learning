@@ -8,8 +8,6 @@ import Logout from './components/Layout/Logout';
 import AdminPanel from './components/Panels/AdminPanel';
 import StudentsTable from './components/Datatable/StudentsTable';
 import TeachersTable from './components/Datatable/TeachersTable';
-import AddStudent from './components/User/AddStudent';
-import AddTeacher from './components/User/AddTeacher';
 import UpdateUser from './components/User/UpdateUser';
 import ResetPassword from './components/User/ResetPassword';
 import UpdateProfile from './components/User/UpdateProfile';
@@ -30,6 +28,7 @@ import AdminRoute from './components/Router/AdminRoute';
 import TeacherRoute from './components/Router/TeacherRoute';
 import StudentRoute from './components/Router/StudentRoute';
 import PrivateRoute from './components/Router/PrivateRoute';
+import AddUser from './components/User/AddUser';
 
 function AnimatedRouter({ locale }) {
     return (
@@ -52,8 +51,8 @@ function AnimatedRouter({ locale }) {
                     <AdminRoute exact path="/adminPanel" component={AdminPanel}/>
                     <AdminRoute exact path="/adminPanel/students" component={StudentsTable}/>
                     <AdminRoute exact path="/adminPanel/teachers" component={TeachersTable}/>
-                    <AdminRoute exact path="/adminPanel/addStudent" component={AddStudent}/>
-                    <AdminRoute exact path="/adminPanel/addTeacher" component={AddTeacher}/>
+                    <AdminRoute exact path="/adminPanel/addStudent" component={AddUser} role="STUDENT"/>
+                    <AdminRoute exact path="/adminPanel/addTeacher" component={AddUser} role="TEACHER"/>
                     <AdminRoute exact path="/adminPanel/updateUser/:id" component={UpdateUser}/>
                     <AdminRoute exact path="/adminPanel/resetPassword/:id" component={ResetPassword}/>
 

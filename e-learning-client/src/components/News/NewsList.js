@@ -48,7 +48,6 @@ class NewsList extends Component {
     }
 
 	render() {
-        console.log(this.state.news);
         const { pageCount, news, loading } = this.state;
 
 		return (

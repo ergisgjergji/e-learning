@@ -14,7 +14,7 @@ const AdminRoute = ({ component: Component, authStore, ...otherProps }) => (
                 (
                     <>
                         <AutoScroll/>
-                        <Component {...props}/>
+                        <Component {...props} {...otherProps}/>
                         <ScrollTopButton/>
                     </>
                 ) : 
