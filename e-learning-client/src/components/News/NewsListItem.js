@@ -26,19 +26,18 @@ class NewsListItem extends Component {
         return formated;
     }
 
-    renderBody = (news) => {
-        const { id, body } = news;
+    renderBody = (body) => {
         const length = body.length;
 
         return (length > 255) ? (
-                <p>
-                    {body.substr(0, 254)}...  <a href="#" className="my-text-primary"> <u>Read more</u> </a>
-                </p>
-            ) : body
+                <>
+                    {body.substr(0, 254)}...
+                </>
+            ) : body;
     }
 
     render() {
-        const { header, body, createdTime, attachments } = this.props.news;
+        const { id, header, body, createdTime, attachments } = this.props.news;
         const { isTooltipOpen } = this.state;
         const formatedTime = this.formatDateTime(createdTime);
 
@@ -47,21 +46,24 @@ class NewsListItem extends Component {
 
                 <div className="card-header my-text-primary"> 
                     {header}
-                    <i id="delete-tooltip" className="fa fa-trash fa-lg text-danger position-top-right" aria-hidden="true"></i>
+                    <i 
+                        id="delete-tooltip" className="fa fa-trash fa-lg text-danger position-top-right" aria-hidden="true" 
+                        onClick={() => this.props.deleteNews(id)}
+                    ></i>
                     <Tooltip placement="right" isOpen={isTooltipOpen} target="delete-tooltip" toggle={this.toggleTooltip}>
                         {translate('delete')}
                     </Tooltip>
                 </div>
 
                 <div className="card-body m-0"> 
-                    {
-                        this.renderBody(this.props.news)
-                    }
+                    <p className="mb-1">
+                        { this.renderBody(body) }
+                    </p>
+                    {attachments.length > 0 ? <small className="text-muted"> <u> {translate('contains-x-attachments', {x: attachments.length})} </u> </small> : null}
+                    <button className="btn btn-sm my-btn-primary float-right"> View </button>
                 </div>
-
-                {attachments.length > 0 ? <small className="text-muted"> <u> {translate('contains-x-attachments', {x: attachments.length})} </u> </small> : null}
                 
-                <div className="card-footer ">
+                <div className="card-footer py-1">
                     <small> <b> {translate('news.createdTime')}: <u> {formatedTime} </u> </b> </small>
                 </div>
             </div>

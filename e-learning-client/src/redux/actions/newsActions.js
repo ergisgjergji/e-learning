@@ -51,6 +51,25 @@ export const addNews = (formData, size, notification_message) => dispatch => {
         .then(res => {
             
             toast.success(notification_message);
+            dispatch(getCount());
+            dispatch(getNewsList(0, size));
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            validateError(err);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
+}
+
+export const deleteNews = (id, size, notification_message) => dispatch => {
+
+    axios.delete(`/api/news/${id}`)
+        .then(res => {
+            toast.info(notification_message);
+            dispatch(getCount());
             dispatch(getNewsList(0, size));
             dispatch(clearErrors());
         })

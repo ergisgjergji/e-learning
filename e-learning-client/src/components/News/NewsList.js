@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { Tooltip } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getNewsList, getCount } from './../../redux/actions/newsActions';
+import { getNewsList, getCount, deleteNews } from './../../redux/actions/newsActions';
 
 import NewsListItem from './NewsListItem';
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
 import AddNewsModal from "./AddNewsModal";
 import translate from './../../i18n/translate';
+import { injectIntl } from 'react-intl';
+import { confirmAlert } from 'react-confirm-alert';
 
 class NewsList extends Component {
 
@@ -23,6 +25,7 @@ class NewsList extends Component {
             isTooltipOpen: false,
         }
         this.refresh.bind(this);
+        this.deleteNews.bind(this);
     }
 
     componentDidMount() {
@@ -44,13 +47,40 @@ class NewsList extends Component {
         }
     }
 
+    toggleTooltip = () => {
+        this.setState({ isTooltipOpen: !this.state.isTooltipOpen });
+    }
+
     refresh = () => {
         const { page, size } = this.state;
         this.props.getNewsList(page, size);
     }
 
-    toggleTooltip = () => {
-        this.setState({ isTooltipOpen: !this.state.isTooltipOpen });
+    deleteNews = (id) => {
+        const { size } = this.state;
+        const { intl } = this.props; 
+
+        const confirm = intl.formatMessage({ id: 'confirm' });
+        const yes = intl.formatMessage({ id: 'yes' });
+        const no = intl.formatMessage({ id: 'no' });
+        const confirm_message = intl.formatMessage({ id: 'news.delete-confirm' });
+        const notification_message = intl.formatMessage({ id: 'news.delete-notification' }, { id });
+
+        confirmAlert({
+			title: confirm,
+			message: confirm_message,
+			buttons: [
+				{
+					label: yes,
+					className: "confirm-yes",
+					onClick: () => this.props.deleteNews(id, size, notification_message)
+				},
+				{
+					label: no,
+					className: "confirm-no"
+			  	}
+			]
+		})
     }
 
     handlePageClick = (data) => {
@@ -88,7 +118,7 @@ class NewsList extends Component {
                                 />
                             </div>
                             :
-                            news.map((n, index) => <NewsListItem key={index} news={n} />)
+                            news.map((n, index) => <NewsListItem key={index} news={n} deleteNews={this.deleteNews} />)
                     }
                     </div>
 
@@ -124,7 +154,9 @@ NewsList.propTypes = {
     news: PropTypes.array.isRequired,
     count: PropTypes.number.isRequired,
     loading: PropTypes.bool.isRequired,
-    getNewsList: PropTypes.func.isRequired
+    getNewsList: PropTypes.func.isRequired,
+    getCount: PropTypes.func.isRequired,
+    deleteNews: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -133,4 +165,4 @@ const mapStateToProps = state => ({
     loading: state.newsStore.loading
 });
 
-export default connect(mapStateToProps, { getNewsList, getCount })(NewsList);
+export default connect(mapStateToProps, { getNewsList, getCount, deleteNews })(injectIntl(NewsList));

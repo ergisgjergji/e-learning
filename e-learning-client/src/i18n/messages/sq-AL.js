@@ -13,6 +13,7 @@ export default {
         'cancel': 'Anulo',
         'read-more': 'Lexo më shumë',
         'refresh': 'Rifresko',
+        'optional': 'opsionale',
 
         'landing-page-header': 'Një platformë që ndihmon mësuesit dhe studentët në të gjithë botën.',
         'landing-page-demo': 'Përdorni këto kredenciale për demonstrim',
@@ -117,6 +118,8 @@ export default {
         'contains-x-attachments': 'Përmban {x} bashkëngjitje',
 
         'news.add-notification': '✔ Lajmi u krijua me sukses.',
+        'news.delete-confirm': 'Jeni i sigurtë që doni ta fshini këtë lajmërim?',
+        'news.delete-notification': 'ℹ Lajmi me id {id} u fshi me sukses.',
         ////#endregion
 
         //##################################### notifications ############################################
@@ -132,7 +135,7 @@ export default {
         // admin
         'add-student-toast': '✔ Studenti u shtua me sukses.',
         'add-teacher-toast': '✔ Pedagogu u shtua me sukses.',
-        'delete-user-confirm': 'Jeni i sigurtë që dëshironi ta fshini këtë përdorues?',
+        'delete-user-confirm': 'Jeni i sigurtë që doni ta fshini këtë përdorues?',
         'delete-student-toast': 'ℹ Studenti me id {id} u fshi me sukses.',
         'delete-teacher-toast': 'ℹ Pedagogu me id {id} u fshi me sukses.',
         'update-user-toast': '✔ Ndryshimet u ruajtën me sukses.',

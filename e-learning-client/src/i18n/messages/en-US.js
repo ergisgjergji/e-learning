@@ -13,6 +13,7 @@ export default {
         'cancel': 'Cancel',
         'read-more': 'Read more',
         'refresh': 'Refresh',
+        'optional': 'optional',
 
         'landing-page-header': 'A platform that helps teachers and students all round the world.',
         'landing-page-demo': 'Use these credentials for a demo',
@@ -117,6 +118,8 @@ export default {
         'contains-x-attachments': 'Contains {x} attachment(s)',
 
         'news.add-notification': '✔ News was posted successfully.',
+        'news.delete-confirm': 'Are you sure you want to delete this news?',
+        'news.delete-notification': 'ℹ News with id {id} was deleted successfully.',
         ////#endregion
 
         //##################################### notifications ############################################

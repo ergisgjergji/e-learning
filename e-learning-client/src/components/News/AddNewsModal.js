@@ -20,6 +20,7 @@ class AddNewsModal extends Component {
             isOpen: false,
             errors: {}
         }
+        this.close.bind(this);
         this.toggle.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -31,7 +32,12 @@ class AddNewsModal extends Component {
             this.setState({ errors: nextProps.errorStore });
         else {
             this.clearData();
+            this.close();
         }
+    }
+
+    close = () => {
+        this.setState({ isOpen: false });
     }
 
     toggle = () => {
@@ -116,7 +122,10 @@ class AddNewsModal extends Component {
                                 </div>
 
                                 <div className="form-group col-md-12">
-                                    <label htmlFor="files"> {translate('news.attachments')} </label>
+                                    <label htmlFor="files"> 
+                                        {translate('news.attachments')} 
+                                        <small className="text-muted"> ({translate('optional')}) </small> 
+                                    </label>
                                     <div class="custom-file">
                                         <input type="file" multiple id="files" name="files" class="custom-file-input shadow-sm" id="customFile" onChange={this.onSelectAttachment}/>
                                         <label class="custom-file-label text-muted" for="customFile"> {attachments.length} {translate('files-selected')} </label>
