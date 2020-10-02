@@ -118,6 +118,13 @@
     transform: translate(0, -50%);
   }
 
+  .position-top-right {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+  }
+
 /*  AdminPanel */
 .admin-container {
   width: 100%;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Tooltip } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getNewsList, getCount } from './../../redux/actions/newsActions';
@@ -18,8 +19,10 @@ class NewsList extends Component {
             pageCount: 0,
             size: 2,
             news: [],
-            loading: false
+            loading: false,
+            isTooltipOpen: false,
         }
+        this.refresh.bind(this);
     }
 
     componentDidMount() {
@@ -41,18 +44,33 @@ class NewsList extends Component {
         }
     }
 
+    refresh = () => {
+        const { page, size } = this.state;
+        this.props.getNewsList(page, size);
+    }
+
+    toggleTooltip = () => {
+        this.setState({ isTooltipOpen: !this.state.isTooltipOpen });
+    }
+
     handlePageClick = (data) => {
         const page = data.selected;
         const { size } = this.state;
+        this.setState({ page });
         this.props.getNewsList(page, size);
     }
 
 	render() {
-        const { pageCount, size, news, loading } = this.state;
+        const { pageCount, size, news, loading, isTooltipOpen } = this.state;
 
 		return (
 			<div className="transition-page">
                 <div className="page col-12 col-md-11 col-lg-10 mx-auto p-3 my-4 border rounded shadow bg-white">
+
+                    <i id="refresh-tooltip" className="fa fa-refresh fa-lg position-top-right my-text-primary" aria-hidden="true" onClick={this.refresh}></i>
+                    <Tooltip placement="right" isOpen={isTooltipOpen} target="refresh-tooltip" toggle={this.toggleTooltip}>
+                        Refresh
+                    </Tooltip>
 
                     <h3 className="display-4 text-center rounded"> {translate('news-archive')} </h3>
                     <AddNewsModal size={size} />

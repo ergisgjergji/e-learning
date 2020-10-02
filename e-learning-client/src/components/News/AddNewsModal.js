@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import { connect } from 'react-redux';
 import { addNews } from './../../redux/actions/newsActions';
@@ -16,7 +17,8 @@ class AddNewsModal extends Component {
             header: "",
             body: "",
             attachments: [],
-            isOpen: false
+            isOpen: false,
+            errors: {}
         }
         this.toggle.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -24,8 +26,16 @@ class AddNewsModal extends Component {
         this.onSelectAttachment = this.onSelectAttachment.bind(this);
     }
 
+    componentWillReceiveProps (nextProps) {
+        if(Object.keys(nextProps.errorStore).length > 0)
+            this.setState({ errors: nextProps.errorStore });
+        else {
+            this.clearData();
+        }
+    }
+
     toggle = () => {
-        this.setState({ isOpen: !this.state.isOpen });
+        this.setState({ isOpen: !this.state.isOpen, errors: {} });
     }
 
     onChange = (e) => {
@@ -58,19 +68,19 @@ class AddNewsModal extends Component {
         const notification_message = intl.formatMessage({ id: 'news.add-notification' });
         // size: needed in order to do a 'getNewsList' on a successfull 'addNews'
         this.props.addNews(formData, size, notification_message);
-        this.toggle();
     }
 
     clearData = () => {
         this.setState({
             header: "",
             body: "",
-            attachments: []
+            attachments: [],
+            errors: {}
         });
     }
 
     render() {
-        const { header,body, attachments, isOpen } = this.state;
+        const { header,body, attachments, isOpen, errors } = this.state;
 
         return (
             <div>
@@ -90,8 +100,13 @@ class AddNewsModal extends Component {
 
                                 <div className="form-group col-md-12">
                                     <label htmlFor="header"> {translate('news.header')} </label>
-                                    <input type="text" required id="header" name="header" className="form-control form-control-md shadow-sm"
+                                    <input type="text" required id="header" name="header" 
+                                        className={classnames("form-control form-control-md shadow-sm ", {"is-invalid": errors.header})}
                                         value={header} onChange={this.onChange} />
+                                        { 
+                                            errors.header ? 
+                                                (<div className="invalid-feedback"> { errors.header } </div>) : null 
+                                        }
                                 </div>
 
                                 <div className="form-group col-md-12">
@@ -127,7 +142,6 @@ class AddNewsModal extends Component {
                                         }
                                     </ul>
                                 </div>
-
                             </div>
                         </ModalBody>
 
@@ -144,8 +158,12 @@ class AddNewsModal extends Component {
 }
 
 AddNewsModal.propTypes = {
+    errorStore: PropTypes.object.isRequired,
     addNews: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+    errorStore: state.errorStore
+});
 
-export default connect(null, { addNews })(injectIntl(AddNewsModal));
+export default connect(mapStateToProps, { addNews })(injectIntl(AddNewsModal));

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface INewsRepository extends PagingAndSortingRepository<News, Long> {
 
     News getById(Long id);
+    News findByHeader(String header);
 
     @Query(value = "SELECT count(1) FROM news", nativeQuery = true)
     int getCount();

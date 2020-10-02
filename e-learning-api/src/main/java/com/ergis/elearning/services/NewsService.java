@@ -4,6 +4,7 @@ import com.ergis.elearning.ViewModel.CreateNewsViewModel;
 import com.ergis.elearning.ViewModel.FileUploadResponse;
 import com.ergis.elearning.domain.News;
 import com.ergis.elearning.domain.NewsAttachment;
+import com.ergis.elearning.exceptions.NewsExceptions.NewsHeaderException;
 import com.ergis.elearning.exceptions.NewsExceptions.NewsIdException;
 import com.ergis.elearning.repositories.INewsAttachmentRepository;
 import com.ergis.elearning.repositories.INewsRepository;
@@ -44,6 +45,9 @@ public class NewsService {
     }
 
     public News create(CreateNewsViewModel model) throws Exception {
+
+        News duplicateHeader = newsRepository.findByHeader(model.getHeader());
+        if(duplicateHeader != null) throw new NewsHeaderException("News with this header already exists");
 
         News news = new News();
         news.setHeader(model.getHeader());

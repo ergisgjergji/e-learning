@@ -16,7 +16,7 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+    @Column(unique = true, columnDefinition = "TEXT")
     @NotBlank(message = "News header is required")
     private String header;
     @NotBlank(message = "News body is required")

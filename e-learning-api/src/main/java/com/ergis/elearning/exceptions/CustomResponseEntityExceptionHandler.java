@@ -1,6 +1,10 @@
 package com.ergis.elearning.exceptions;
 
 import com.ergis.elearning.exceptions.CourseExceptions.*;
+import com.ergis.elearning.exceptions.NewsExceptions.NewsHeaderException;
+import com.ergis.elearning.exceptions.NewsExceptions.NewsHeaderExceptionResponse;
+import com.ergis.elearning.exceptions.NewsExceptions.NewsIdException;
+import com.ergis.elearning.exceptions.NewsExceptions.NewsIdExceptionResponse;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesException;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesExceptionResponse;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeException;
@@ -117,6 +121,20 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleTestIdException(TestIdException ex, WebRequest request) {
         TestIdExceptionResponse exceptionResponse = new TestIdExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    //#endregion
+
+    //#region - News Exceptions -
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleNewsIdException(NewsIdException ex, WebRequest request) {
+        NewsIdExceptionResponse exceptionResponse = new NewsIdExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleNewsHeaderException(NewsHeaderException ex, WebRequest request) {
+        NewsHeaderExceptionResponse exceptionResponse = new NewsHeaderExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
     //#endregion
