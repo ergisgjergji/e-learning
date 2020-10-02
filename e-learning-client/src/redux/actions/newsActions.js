@@ -52,6 +52,7 @@ export const addNews = (formData, size, notification_message) => dispatch => {
             
             toast.success(notification_message);
             dispatch(getNewsList(0, size));
+            dispatch(clearErrors());
         })
         .catch(err => {
             validateError(err);

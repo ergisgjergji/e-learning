@@ -69,7 +69,7 @@ class NewsList extends Component {
 
                     <i id="refresh-tooltip" className="fa fa-refresh fa-lg position-top-right my-text-primary" aria-hidden="true" onClick={this.refresh}></i>
                     <Tooltip placement="right" isOpen={isTooltipOpen} target="refresh-tooltip" toggle={this.toggleTooltip}>
-                        Refresh
+                        {translate('refresh')}
                     </Tooltip>
 
                     <h3 className="display-4 text-center rounded"> {translate('news-archive')} </h3>

@@ -26,7 +26,7 @@ public class ElearningApplication {
 	@PostConstruct
 	public void init(){
 		// Setting Spring Boot SetTimeZone
-		TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"));
+		 TimeZone.setDefault(TimeZone.getTimeZone("Europe/Tirane"));
 	}
 
 }
