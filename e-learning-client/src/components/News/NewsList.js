@@ -22,7 +22,7 @@ class NewsList extends Component {
             size: 2,
             news: [],
             loading: false,
-            isTooltipOpen: false,
+            isTooltipOpen: false
         }
         this.refresh.bind(this);
         this.deleteNews.bind(this);
@@ -118,7 +118,7 @@ class NewsList extends Component {
                                 />
                             </div>
                             :
-                            news.map((n, index) => <NewsListItem key={index} news={n} deleteNews={this.deleteNews} />)
+                            news.map((n, index) => <NewsListItem key={index} news={n} deleteNews={this.deleteNews} /> )
                     }
                     </div>
 

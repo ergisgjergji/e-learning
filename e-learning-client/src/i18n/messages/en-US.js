@@ -11,9 +11,11 @@ export default {
         'home': 'Home',
         'welcome': 'Welcome, {name}',
         'cancel': 'Cancel',
+        'close': 'Close',
         'read-more': 'Read more',
         'refresh': 'Refresh',
         'optional': 'optional',
+        'view': 'View',
 
         'landing-page-header': 'A platform that helps teachers and students all round the world.',
         'landing-page-demo': 'Use these credentials for a demo',

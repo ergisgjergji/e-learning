@@ -39,7 +39,7 @@ public class FileStorageService {
             Files.createDirectories(materialsPath);
             Files.createDirectories(assignmentsPath);
         } catch (IOException e) {
-            throw new RuntimeException("Issue in creating file storage directory");
+            throw new RuntimeException("Issue in creating file storage directories");
         }
     }
 

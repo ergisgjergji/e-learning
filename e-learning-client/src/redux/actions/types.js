@@ -30,5 +30,6 @@ export const GET_TEST = "GET_TEST";
 // News
 export const GET_NEWS_LIST = "GET_NEWS_LIST";
 export const GET_NEWS_COUNT = "GET_NEWS_COUNT";
+export const GET_NEWS_SINGLE = "GET_NEWS_SINGLE";
 export const SET_NEWS_LOADING = "SET_NEWS_LOADING";
 export const SET_NEWS_LOADED = "SET_NEWS_LOADED";

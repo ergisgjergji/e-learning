@@ -29,6 +29,7 @@ import TeacherRoute from './components/Router/TeacherRoute';
 import StudentRoute from './components/Router/StudentRoute';
 import PrivateRoute from './components/Router/PrivateRoute';
 import AddUser from './components/User/AddUser';
+import NewsDetails from './components/News/NewsDetails';
 
 function AnimatedRouter({ locale }) {
     return (
@@ -74,6 +75,7 @@ function AnimatedRouter({ locale }) {
                     <PrivateRoute exact path="/logout" component={Logout}/>
                     <PrivateRoute exact path="/profile/edit" component={UpdateProfile}/>
                     <PrivateRoute exact path="/profile/changePassword" component={ChangePassword}/>
+                    <PrivateRoute exact path="/newsList/:id" component={NewsDetails}/>
                   </Switch>
 
                 </CSSTransition>

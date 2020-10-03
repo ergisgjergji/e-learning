@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_NEWS_LIST, GET_NEWS_COUNT, SET_NEWS_LOADING, SET_NEWS_LOADED, GET_ERRORS } from './types';
+import { GET_NEWS_LIST, GET_NEWS_COUNT, GET_NEWS_SINGLE, SET_NEWS_LOADING, SET_NEWS_LOADED, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 
 import { toast } from 'react-toastify';
@@ -43,7 +43,26 @@ export const getNewsList = (page, size) => dispatch => {
                 payload: err.response.data
             })
         });
-};
+}
+
+export const getNewsById = (id) => dispatch => {
+    
+    axios.get(`/api/news/${id}`)
+        .then(res => {
+            dispatch({
+                type: GET_NEWS_SINGLE,
+                payload: res.data
+            })
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            validateError(err);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
+}
 
 export const addNews = (formData, size, notification_message) => dispatch => {
 

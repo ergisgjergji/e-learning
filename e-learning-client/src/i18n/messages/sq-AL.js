@@ -11,9 +11,11 @@ export default {
         'home': 'Kryefaqja',
         'welcome': 'Mirësevini, {name}',
         'cancel': 'Anulo',
+        'close': 'Mbyll',
         'read-more': 'Lexo më shumë',
         'refresh': 'Rifresko',
         'optional': 'opsionale',
+        'view': 'Shiko',
 
         'landing-page-header': 'Një platformë që ndihmon mësuesit dhe studentët në të gjithë botën.',
         'landing-page-demo': 'Përdorni këto kredenciale për demonstrim',

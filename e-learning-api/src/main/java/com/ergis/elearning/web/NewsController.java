@@ -42,6 +42,14 @@ public class NewsController {
         return new ResponseEntity<List<News>>(news, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    @PermitAll
+    public ResponseEntity<News> getById(@PathVariable String id) {
+
+        News news = newsService.getById(Long.parseLong(id));
+        return new ResponseEntity<News>(news, HttpStatus.OK);
+    }
+
     @PostMapping("")
     public ResponseEntity<News> create(
             @RequestParam("header") String header,

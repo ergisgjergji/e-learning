@@ -44,6 +44,14 @@ public class NewsService {
         return news.toList();
     }
 
+    public News getById(Long id) {
+
+        News news = newsRepository.getById(id);
+        if(news == null) throw new NewsIdException("News with id '" + id + "' not found");
+
+        return news;
+    }
+
     public News create(CreateNewsViewModel model) throws Exception {
 
         News duplicateHeader = newsRepository.findByHeader(model.getHeader());
@@ -92,6 +100,13 @@ public class NewsService {
 
         News news = newsRepository.getById(id);
         if(news == null) throw new NewsIdException("News with id '" + id + "' not found");
+
+        Set<NewsAttachment> attachments = news.getAttachments();
+
+        if(attachments.size() > 0)
+            attachments.forEach(a -> {
+                fileStorageService.removeAttachment(a.getFileName());
+            });
 
         newsRepository.delete(news);
     }

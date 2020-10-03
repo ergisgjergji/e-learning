@@ -1,4 +1,4 @@
-import { GET_NEWS_LIST, GET_NEWS_COUNT, SET_NEWS_LOADING, SET_NEWS_LOADED } from '../actions/types';
+import { GET_NEWS_LIST, GET_NEWS_COUNT, GET_NEWS_SINGLE, SET_NEWS_LOADING, SET_NEWS_LOADED } from '../actions/types';
 
 const initialState = {
     news_list: [],
@@ -21,6 +21,12 @@ export default function( state = initialState, action ) {
             return {
                 ...state,
                 count: action.payload
+            }
+
+        case GET_NEWS_SINGLE:
+            return {
+                ...state,
+                news: action.payload
             }
 
         case SET_NEWS_LOADING:
