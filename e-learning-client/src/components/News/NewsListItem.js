@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'reactstrap';
 import translate from '../../i18n/translate';
+import { formatDateTime } from './../../utils/helpers';
 
 class NewsListItem extends Component {
 
@@ -17,17 +18,6 @@ class NewsListItem extends Component {
         this.setState({ isTooltipOpen: !this.state.isTooltipOpen });
     }
 
-    formatDateTime = (dateTime) => {
-        // Convert to Europe/Tirana timezone
-        const date = new Date(dateTime);
-
-        let hours =  date.getHours();
-        hours = hours + 2;
-
-        const formated = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear() + " " + hours + ":" + date.getMinutes();
-        return formated;
-    }
-
     renderBody = (body) => {
         const length = body.length;
 
@@ -41,7 +31,7 @@ class NewsListItem extends Component {
     render() {
         const { id, header, body, createdTime, attachments } = this.props.news;
         const { isTooltipOpen } = this.state;
-        const formatedTime = this.formatDateTime(createdTime);
+        const formatedTime = formatDateTime(createdTime);
 
         return (
             <div className="card border-bottom my-3">

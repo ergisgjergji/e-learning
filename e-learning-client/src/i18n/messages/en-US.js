@@ -124,6 +124,11 @@ export default {
         'news.delete-notification': 'ℹ News with id {id} was deleted successfully.',
         ////#endregion
 
+        ////#region Attachments
+        'attachment.fileName': 'File name',
+        'attachment.contentType': 'Content type',
+        ////#endregion
+
         //##################################### notifications ############################################
         // confirm-alert
         'confirm': 'Confirm',

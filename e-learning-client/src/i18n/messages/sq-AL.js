@@ -124,6 +124,11 @@ export default {
         'news.delete-notification': 'ℹ Lajmi me id {id} u fshi me sukses.',
         ////#endregion
 
+        ////#region Attachments
+        'attachment.fileName': 'Emri i dokumentit',
+        'attachment.contentType': 'Lloji i dokumentit',
+        ////#endregion
+
         //##################################### notifications ############################################
         // confirm-alert
         'confirm': 'Konfirmo',
