@@ -61,7 +61,9 @@ class NewsListItem extends Component {
                 </div>
                 
                 <div className="card-footer py-1">
-                    <small> {translate('news.createdTime')}: {formatedTime} </small>
+                    <small> 
+                        <i className="fa fa-clock-o" aria-hidden="true"/> {translate('news.createdTime')}: {formatedTime} 
+                    </small>
                 </div>
             </div>
         )

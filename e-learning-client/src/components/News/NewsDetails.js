@@ -8,6 +8,7 @@ import { getNewsById } from '../../redux/actions/newsActions';
 import translate from '../../i18n/translate';
 import { injectIntl } from 'react-intl';
 import { formatDateTime } from './../../utils/helpers';
+import AttachmentsTable from './AttachmentsTable';
 
 class NewsDetails extends Component {
 
@@ -51,66 +52,17 @@ class NewsDetails extends Component {
                     <h5 className="display-4 text-center my-text-primary"> {header} </h5>
 
                     <p className="mt-3 mb-0 p-3 border rounded shadow-sm"> {body} </p>
+
                     <div className="text-right pr-3"> 
-                        <small> <u> {translate('news.createdTime')}: {formatedTime} </u> </small>
+                        <small> 
+                            <i className="fa fa-clock-o" aria-hidden="true"/> {translate('news.createdTime')}: {formatedTime} 
+                        </small>
                     </div>
 
-                    {
-                        (attachments && attachments.length > 0)
-                            ?
-                            <div className="mt-5">
-                                 <small> <b> {translate('news.attachments')}:  </b> </small>
-                                <div className="table-responsive mt-2 shadow-sm">
-                                    <table class="table table-sm">
-                                        <tr>
-                                            <th className="text-center"> 
-                                                <small> <b> {translate('attachment.fileName')}:  </b> </small> 
-                                            </th>
-                                            <th className="text-center"> 
-                                                <small> <b> {translate('attachment.contentType')}:  </b> </small> 
-                                            </th>
-                                            <th className="text-center text-capitalize"> 
-                                                <small> <b> {translate('action')}:  </b> </small> 
-                                            </th>
-                                        </tr>
-                                        {
-                                            attachments.map((a, index) => {
-
-                                                return (
-                                                    <tr key={index}>
-                                                        <td className="text-center"> 
-                                                            <small> {a.fileName} </small> 
-                                                        </td>
-                                                        <td className="text-center"> 
-                                                            <small> <i> {a.contentType} </i> </small> 
-                                                        </td>
-                                                        <td className="text-center">
-                                                        {
-                                                            a.previewEnabled ?
-                                                                <a href={a.previewUrl} target="_blank" className="btn btn-sm btn-info shadow-sm m-1">
-                                                                    <i className="fa fa-eye text-white" aria-hidden="true" />
-                                                                </a> 
-                                                                :
-                                                                <button className="btn btn-sm btn-info disabled shadow-sm m-1">
-                                                                    <i className="fa fa-eye-slash text-white" aria-hidden="true" />
-                                                                </button>
-                                                        }
-                                                            <a href={a.downloadUrl} className="btn btn-sm btn-primary shadow-sm m-1">
-                                                                <i className="fa fa-download text-white" aria-hidden="true" />
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })
-
-                                        }
-                                    </table>
-                                </div>
-                            </div>
-                            : null
-                    }
+                    <div className="mt-5">
+                        <AttachmentsTable attachments={attachments} />
+                    </div>
                     
-
                 </div>
             </div>
         )
