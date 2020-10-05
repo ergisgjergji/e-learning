@@ -2,7 +2,6 @@ package com.ergis.elearning.security;
 
 public class SecurityConstants {
 
-    public static final String SIGN_UP_URLS = "/api/auth/**";
     public static final String[] ALLOWED_URLS = {
             "/api/auth/**",
             "/preview/**",

@@ -6,10 +6,10 @@ class AttachmentsTable extends Component {
     constructor() {
         super();
         this.state = {
-            attachments: [],
-            zipUrl: ''
+            attachments: []
         }
         this.renderContentTypeIcon.bind(this);
+        this.buildZipUrl.bind(this);
     }
 
     componentDidMount() {
@@ -18,21 +18,16 @@ class AttachmentsTable extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.state.attachments !== nextProps.attachments) {
+        if(this.state.attachments !== nextProps.attachments) 
+            this.setState({ attachments: nextProps.attachments });
+    }
 
-            let zipUrl = '';
-            let { attachments } = nextProps;
+    buildZipUrl = (attachments) => {
+        let token = localStorage.getItem('token');
+        let zipUrl = `http://localhost:8080/zipDownload?fileType=attachment&token=${token}`;
 
-            if(attachments && attachments.length > 0) {
-                zipUrl = 'http://localhost:8080/zipDownload?fileType=attachment';
-                attachments.map(a => zipUrl = zipUrl + `&fileNames=${a.fileName}`);
-            }
-            
-            this.setState({ 
-                attachments: nextProps.attachments,
-                zipUrl
-            });
-        }
+        attachments.map(a => zipUrl = zipUrl + `&fileNames=${a.fileName}`);
+        return zipUrl;
     }
     
     renderContentTypeIcon = (contentType) => {
@@ -64,7 +59,7 @@ class AttachmentsTable extends Component {
     }
 
     render() {
-        const { attachments, zipUrl } = this.state;
+        const { attachments } = this.state;
 
         return (attachments && attachments.length > 0) ?
         (
@@ -73,7 +68,7 @@ class AttachmentsTable extends Component {
                     <b> <i className="fa fa-paperclip" aria-hidden="true"></i> {translate('news.attachments')}: </b> 
                 </small>
 
-                <a href={zipUrl}>
+                <a href={this.buildZipUrl(attachments)}>
                     <button className=" btn btn-sm btn-outline-primary float-right">
                         <i className="fa fa-download" aria-hidden="true" /> Dowload all
                     </button>
@@ -94,6 +89,10 @@ class AttachmentsTable extends Component {
                         <tbody>
                         {
                             attachments.map((a, index) => {
+                                
+                                let token = localStorage.getItem('token');
+                                let previewUrl = a.previewUrl + `&token=${token}`;
+                                let downloadUrl = a.downloadUrl + `&token=${token}`;
 
                                 return (
                                     <tr key={index}>
@@ -105,7 +104,7 @@ class AttachmentsTable extends Component {
                                         <td className="text-center">
                                         {
                                             a.previewEnabled ?
-                                                <a href={a.previewUrl} target="_blank">
+                                                <a href={previewUrl} target="_blank">
                                                     <button className="btn btn-sm btn-outline-info shadow-sm m-1">
                                                         <i className="fa fa-eye" aria-hidden="true" />
                                                     </button>
@@ -115,7 +114,7 @@ class AttachmentsTable extends Component {
                                                     <i className="fa fa-eye-slash text-white" aria-hidden="true" />
                                                 </button>
                                         }
-                                            <a href={a.downloadUrl}>
+                                            <a href={downloadUrl}>
                                                 <button className="btn btn-sm btn-outline-primary shadow-sm m-1">
                                                     <i className="fa fa-download" aria-hidden="true" />
                                                 </button>
