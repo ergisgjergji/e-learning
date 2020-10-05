@@ -12,6 +12,11 @@ const TeacherMenu = () => {
                         {translate('home')}
                     </Link>
                 </NavItem>
+                <NavItem className="text-center my-auto mx-2 border-bottom">
+                    <Link to="/newsList" className="nav-link">
+                        {translate('news')}
+                    </Link>
+                </NavItem>
             </Nav>
         </>
     )

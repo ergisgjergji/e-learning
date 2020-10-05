@@ -7,6 +7,7 @@ import com.ergis.elearning.services.errors.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,6 +51,7 @@ public class NewsController {
         return new ResponseEntity<News>(news, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
     public ResponseEntity<News> create(
             @RequestParam("header") String header,
@@ -61,6 +63,7 @@ public class NewsController {
         return new ResponseEntity<News>(news, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("")
     public ResponseEntity<News> update(@Valid @RequestBody News updatedNews) throws Exception {
 
@@ -68,6 +71,7 @@ public class NewsController {
         return new ResponseEntity<News>(news, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable String id) {
 
@@ -77,6 +81,7 @@ public class NewsController {
 
     //#region ------------------------------------------ NEWS-ATTACHMENT -----------------------------------------------
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{id}")
     public ResponseEntity<News> addAttachments(@PathVariable String id, @RequestParam("files") MultipartFile[] files) throws Exception {
 
@@ -84,6 +89,7 @@ public class NewsController {
         return new ResponseEntity<News>(news, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{news_id}/attachment/{attachment_id}")
     public ResponseEntity<News> removeAttachment(@PathVariable String news_id, @PathVariable String attachment_id) throws Exception {
 
@@ -91,6 +97,7 @@ public class NewsController {
         return new ResponseEntity<News>(news, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}/attachment")
     public ResponseEntity<News> removeAttachments(@PathVariable String id, @RequestBody String[] ids) throws Exception {
 

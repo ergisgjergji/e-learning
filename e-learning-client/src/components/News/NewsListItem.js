@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Tooltip } from 'reactstrap';
 import translate from '../../i18n/translate';
 import { formatDateTime } from './../../utils/helpers';
+import { connect } from 'react-redux';
+import { roles } from './../../utils/constants';
 
 class NewsListItem extends Component {
 
@@ -30,6 +32,7 @@ class NewsListItem extends Component {
 
     render() {
         const { id, header, body, createdTime, attachments } = this.props.news;
+        const { role } = this.props;
         const { isTooltipOpen } = this.state;
         const formatedTime = formatDateTime(createdTime);
 
@@ -38,13 +41,18 @@ class NewsListItem extends Component {
 
                 <div className="card-header my-text-primary"> 
                     <h5 className="p-0 m-0"> {header} </h5>
-                    <i 
-                        id="delete-tooltip" className="fa fa-trash fa-lg text-danger position-top-right" aria-hidden="true" 
-                        onClick={() => this.props.deleteNews(id)}
-                    ></i>
-                    <Tooltip placement="right" isOpen={isTooltipOpen} target="delete-tooltip" toggle={this.toggleTooltip}>
-                        {translate('delete')}
-                    </Tooltip>
+                    {
+                        (role === roles.admin) ? 
+                            <>
+                                <i id="delete-tooltip" className="fa fa-trash fa-lg text-danger position-top-right" aria-hidden="true" 
+                                    onClick={() => this.props.deleteNews(id)}
+                                ></i>
+                                <Tooltip placement="right" isOpen={isTooltipOpen} target="delete-tooltip" toggle={this.toggleTooltip}>
+                                    {translate('delete')}
+                                </Tooltip>
+                            </>
+                            : null 
+                    }
                 </div>
 
                 <div className="card-body m-0"> 
@@ -70,4 +78,8 @@ class NewsListItem extends Component {
     }
 }
 
-export default NewsListItem;
+const mapStateToProps = state => ({
+    role: state.authStore.user.role
+});
+
+export default connect(mapStateToProps, null)(NewsListItem);

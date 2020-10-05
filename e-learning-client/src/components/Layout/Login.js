@@ -25,7 +25,7 @@ class Login extends Component {
         if(this.props.authStore.isAuthenticated)
             switch(this.props.authStore.user.role) {
                 case "ADMIN":
-                    this.props.history.push("/adminPanel"); break;
+                    this.props.history.push("/newsList"); break;
                 case "TEACHER":
                     this.props.history.push("/teacherPanel"); break;
                 case "STUDENT":
@@ -41,7 +41,7 @@ class Login extends Component {
         if(nextProps.authStore.isAuthenticated)
             switch(nextProps.authStore.user.role) {
                 case "ADMIN":
-                    this.props.history.push("/adminPanel"); break;
+                    this.props.history.push("/newsList"); break;
                 case "TEACHER":
                     this.props.history.push("/teacherPanel"); break;
                 case "STUDENT":

@@ -16,6 +16,7 @@ export default {
         'refresh': 'Refresh',
         'optional': 'optional',
         'view': 'View',
+        'download-all': 'Download all',
 
         'landing-page-header': 'A platform that helps teachers and students all round the world.',
         'landing-page-demo': 'Use these credentials for a demo',
@@ -109,6 +110,7 @@ export default {
         'submit-test': 'Submit test',
 
         ////#region News
+        'news': 'News',
         'news-archive': 'News Archive',
         'add-news': 'Add news',
         'new-announcement': 'New announcement',

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import translate from './../../i18n/translate';
+import { contentTypeIcon } from '../../utils/helpers';
 
 class AttachmentsTable extends Component {
 
@@ -8,7 +9,6 @@ class AttachmentsTable extends Component {
         this.state = {
             attachments: []
         }
-        this.renderContentTypeIcon.bind(this);
         this.buildZipUrl.bind(this);
     }
 
@@ -29,34 +29,6 @@ class AttachmentsTable extends Component {
         attachments.map(a => zipUrl = zipUrl + `&fileNames=${a.fileName}`);
         return zipUrl;
     }
-    
-    renderContentTypeIcon = (contentType) => {
-        switch(contentType) 
-        {
-            case "text/plain":
-                return <i className="fa fa-file-text-o" aria-hidden="true" />; break;
-
-            case "application/pdf":
-                return <i className="fa fa-file-pdf-o" aria-hidden="true" />; break;
-
-            case "image/png":
-            case "image/jpg":
-            case "image/jpeg":
-                return <i className="fa fa-file-image-o" aria-hidden="true" />; break;
-
-            case "application/vnd.ms-powerpoint":
-            case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
-                return <i className="fa fa-file-powerpoint-o" aria-hidden="true" />; break;
-
-            case "application/vnd.rar":
-            case "application/zip":
-            case "application/x-7z-compressed":
-                return <i className="fa fa-file-archive-o" aria-hidden="true" />; break;
-                
-            default:
-                return <i className="fa fa-file-o" aria-hidden="true" />; break;
-        }
-    }
 
     render() {
         const { attachments } = this.state;
@@ -70,7 +42,7 @@ class AttachmentsTable extends Component {
 
                 <a href={this.buildZipUrl(attachments)}>
                     <button className=" btn btn-sm btn-outline-primary float-right">
-                        <i className="fa fa-download" aria-hidden="true" /> Dowload all
+                        <i className="fa fa-download" aria-hidden="true" /> {translate('download-all')}
                     </button>
                 </a>
 
@@ -98,7 +70,7 @@ class AttachmentsTable extends Component {
                                     <tr key={index}>
                                         <td className="text-center"> 
                                             <small> 
-                                                {this.renderContentTypeIcon(a.contentType)} {a.fileName} 
+                                                <i className={`fa ${contentTypeIcon(a.contentType)} fa-lg`} /> {a.fileName} 
                                             </small> 
                                         </td>
                                         <td className="text-center">

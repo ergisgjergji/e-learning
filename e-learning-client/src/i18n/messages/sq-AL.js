@@ -16,6 +16,7 @@ export default {
         'refresh': 'Rifresko',
         'optional': 'opsionale',
         'view': 'Shiko',
+        'download-all': 'Shkarko të gjitha',
 
         'landing-page-header': 'Një platformë që ndihmon mësuesit dhe studentët në të gjithë botën.',
         'landing-page-demo': 'Përdorni këto kredenciale për demonstrim',
@@ -109,6 +110,7 @@ export default {
         'submit-test': 'Ruaj & dërgo',
 
         ////#region News
+        'news': 'Njoftime',
         'news-archive': 'Arkiva e lajmeve',
         'add-news': 'Krijo lajm',
         'new-announcement': 'Lajm i ri',

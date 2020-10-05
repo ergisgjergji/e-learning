@@ -8,7 +8,7 @@ const AdminMenu = () => {
         <>
             <Nav className="mr-auto" navbar>
                 <NavItem className="text-center my-auto mx-2 border-bottom">
-                    <Link to="/adminPanel" className="nav-link">
+                    <Link to="/newsList" className="nav-link">
                         {translate('home')}
                     </Link>
                 </NavItem>

@@ -23,7 +23,7 @@ const PublicRoute = ({ component: Component, authStore, ...otherProps }) => (
             else
                 switch(authStore.user.role) {
                     case roles.admin:
-                        return <Redirect to="/adminPanel"/>; 
+                        return <Redirect to="/newsList"/>; 
                         break;
                     case roles.teacher:
                         return <Redirect to="/teacherPanel"/>;

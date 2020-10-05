@@ -11,6 +11,7 @@ import AddNewsModal from "./AddNewsModal";
 import translate from './../../i18n/translate';
 import { injectIntl } from 'react-intl';
 import { confirmAlert } from 'react-confirm-alert';
+import { roles } from './../../utils/constants';
 
 class NewsList extends Component {
 
@@ -92,6 +93,7 @@ class NewsList extends Component {
 
 	render() {
         const { pageCount, size, news, loading, isTooltipOpen } = this.state;
+        const { role } = this.props;
 
 		return (
 			<div className="transition-page">
@@ -103,7 +105,7 @@ class NewsList extends Component {
                     </Tooltip>
 
                     <h3 className="display-4 text-center rounded"> {translate('news-archive')} </h3>
-                    <AddNewsModal size={size} />
+                    { (role === roles.admin) ? <AddNewsModal size={size} /> : null }
                     <hr/>
 
                     <div className="my-3">
@@ -162,7 +164,8 @@ NewsList.propTypes = {
 const mapStateToProps = state => ({
     news: state.newsStore.news_list,
     count: state.newsStore.count,
-    loading: state.newsStore.loading
+    loading: state.newsStore.loading,
+    role: state.authStore.user.role
 });
 
 export default connect(mapStateToProps, { getNewsList, getCount, deleteNews })(injectIntl(NewsList));
