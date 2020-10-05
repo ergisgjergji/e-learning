@@ -72,6 +72,10 @@ public class FileStorageController {
                             @RequestParam("fileNames") String[] files,
                             HttpServletResponse response) throws Exception {
 
+        response.setStatus(200);
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=attachments.zip");
+
         try(ZipOutputStream zos = new ZipOutputStream(response.getOutputStream()))
         {
             Arrays.asList(files)
@@ -93,8 +97,5 @@ public class FileStorageController {
                     });
             zos.finish();
         }
-
-        response.setStatus(200);
-        response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=zipfile");
     }
 }

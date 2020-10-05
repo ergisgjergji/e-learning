@@ -131,7 +131,7 @@ public class FileStorageService {
             default:
                 path = storagePath; break;
         }
-        return Paths.get(path + "\\" + fileName);
+        return path.toAbsolutePath().resolve(fileName);
     }
     private FileUploadResponse addFileTypeExtension(FileUploadResponse response, String fileType) {
 

@@ -7,7 +7,7 @@ public class SecurityConstants {
             "/api/auth/**",
             "/preview/**",
             "/download/**",
-            "/zipDownload"
+            "/zipDownload/**"
     };
     public static final String SECRET_KEY = "ergis-e-learning-secret-jwt-key";
     public static final String TOKEN_PREFIX = "Bearer ";
