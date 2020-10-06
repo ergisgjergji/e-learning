@@ -19,6 +19,7 @@ public class Course {
     @Column(unique = true)
     private String name;
     @NotBlank(message = "Course description is required")
+    @Column(columnDefinition = "TEXT")
     private String description;
     private String teacher_name;
     private String teacher_email;

@@ -67,7 +67,7 @@ class UpdateCourse extends Component {
 
                                     <div className="form-group col-md-12">
                                         <label htmlFor="description"> {translate('description')} </label>
-                                        <textarea disabled type="date" id="description" name="description"
+                                        <textarea disabled type="date" id="description" name="description" rows="5"
                                             className="form-control form-control-md shadow-sm"
                                             value={description}/>
                                     </div>

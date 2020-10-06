@@ -193,7 +193,7 @@ class AddQuestion extends Component {
 
                         <div className="form-group col-md-12">
                             <label htmlFor="description"> {translate('description')} </label>
-                            <textarea id="description" name="description"
+                            <textarea id="description" name="description" rows="3"
                                 className="form-control form-control-sm shadow-sm"
                                 value={description} onChange={this.onChange}/>
                         </div>
