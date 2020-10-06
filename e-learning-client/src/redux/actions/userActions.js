@@ -160,7 +160,7 @@ export const updateProfile = (user, history, notificationMessage) => dispatch =>
             let route = "/";
             switch(user.role) {
                 case "ADMIN":
-                    route = "/adminPanel"; break;
+                    route = "/newsList"; break;
                 case "TEACHER":
                     route = "/teacherPanel"; break;
                 case "STUDENT":
@@ -200,7 +200,7 @@ export const resetPassword = (resetPasswordModel, fromRoute, history, notificati
                 type: GET_ERRORS,
                 payload: err.response.data
             });
-            history.push("/adminPanel");
+            history.push("/newsList");
         });
 }
 
@@ -212,7 +212,7 @@ export const changePassword = (changePasswordModel, history, notificationMessage
             let route = "/";
             switch(store.getState().authStore.user.role) {
                 case "ADMIN":
-                    route = "/adminPanel"; break;
+                    route = "/newsList"; break;
                 case "TEACHER":
                     route = "/teacherPanel"; break;
                 case "STUDENT":
