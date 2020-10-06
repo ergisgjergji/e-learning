@@ -41,6 +41,10 @@ public class Course {
     @JsonIgnore
     private Set<Test> students_tests = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
+    @JsonIgnore
+    private Set<Material> materials = new HashSet<>();
+
     public Course() {}
 
     public Course(@NotBlank(message = "Course name is required") String name, @NotBlank(message = "Course description is required") String description) {
@@ -135,6 +139,14 @@ public class Course {
 
     public void setStudents_tests(Set<Test> students_tests) {
         this.students_tests = students_tests;
+    }
+
+    public Set<Material> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(Set<Material> materials) {
+        this.materials = materials;
     }
 
     /*

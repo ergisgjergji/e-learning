@@ -58,6 +58,22 @@ public class FileStorageService {
             throw new RuntimeException("Issue in storing the attachment");
         }
     }
+
+    public FileUploadResponse storeMaterial(MultipartFile file, String fileName) {
+
+        Path url = Paths.get(materialsPath + "\\" + fileName);
+
+        try {
+            Files.copy(file.getInputStream(), url, StandardCopyOption.REPLACE_EXISTING);
+            FileUploadResponse response = getFileInfo(file, fileName, "material");
+
+            response = this.addFileTypeExtension(response, "material");
+            return response;
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Issue in storing the material");
+        }
+    }
     
     public void removeAttachment(String fileName) {
 
@@ -68,6 +84,18 @@ public class FileStorageService {
         }
         catch (IOException e) {
             throw new RuntimeException("Issue in removing the attachment");
+        }
+    }
+
+    public void removeMaterial(String fileName) {
+
+        fileName = StringUtils.cleanPath(fileName);
+        Path url = Paths.get(materialsPath + "\\" + fileName);
+        try {
+            Files.delete(url);
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Issue in removing the material");
         }
     }
 

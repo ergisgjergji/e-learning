@@ -19,6 +19,7 @@ public class News {
     @Column(unique = true, columnDefinition = "TEXT")
     @NotBlank(message = "News header is required")
     private String header;
+    @Column(columnDefinition = "TEXT")
     @NotBlank(message = "News body is required")
     private String body;
     @Temporal(TemporalType.TIMESTAMP)

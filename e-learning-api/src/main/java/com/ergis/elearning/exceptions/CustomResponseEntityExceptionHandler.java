@@ -1,6 +1,10 @@
 package com.ergis.elearning.exceptions;
 
 import com.ergis.elearning.exceptions.CourseExceptions.*;
+import com.ergis.elearning.exceptions.MaterialExceptions.MaterialDescriptionException;
+import com.ergis.elearning.exceptions.MaterialExceptions.MaterialDescriptionExceptionResponse;
+import com.ergis.elearning.exceptions.MaterialExceptions.MaterialIdException;
+import com.ergis.elearning.exceptions.MaterialExceptions.MaterialIdExceptionResponse;
 import com.ergis.elearning.exceptions.NewsExceptions.NewsHeaderException;
 import com.ergis.elearning.exceptions.NewsExceptions.NewsHeaderExceptionResponse;
 import com.ergis.elearning.exceptions.NewsExceptions.NewsIdException;
@@ -135,6 +139,20 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleNewsHeaderException(NewsHeaderException ex, WebRequest request) {
         NewsHeaderExceptionResponse exceptionResponse = new NewsHeaderExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    //#endregion
+
+    //#region - Materials Exceptions -
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleMaterialDescriptionException(MaterialDescriptionException ex, WebRequest request) {
+        MaterialDescriptionExceptionResponse exceptionResponse = new MaterialDescriptionExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleMaterialIdException(MaterialIdException ex, WebRequest request) {
+        MaterialIdExceptionResponse exceptionResponse = new MaterialIdExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
     //#endregion

@@ -37,9 +37,19 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-    public Course findById(Long id) { return courseRepository.getById(id); }
+    public Course findById(Long id) {
 
-    public Course findByIdAndUser(Long id, User user) { return courseRepository.findByIdAndUsers(id, user); }
+        Course course = courseRepository.getById(id);
+        if(course == null) throw new CourseIdException("Course with id '" + id + "' not found");
+        return course;
+    }
+
+    public Course findByIdAndUser(Long id, User user) {
+
+        Course course = courseRepository.findByIdAndUsers(id, user);
+        if(course == null) throw new CourseIdException("Course with id '" + id + "' not found");
+        return course;
+    }
 
     public Set<Course> findAll() { return courseRepository.findAll(); }
 

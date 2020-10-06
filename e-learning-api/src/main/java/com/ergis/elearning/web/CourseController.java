@@ -56,7 +56,6 @@ public class CourseController {
 
         User user = userService.findByUsername(principal.getName());
         Course course = courseService.findByIdAndUser(Long.parseLong(course_id), user);
-        if(course == null) throw new CourseIdException("Course with id '" +course_id+ "' not found");
 
         return new ResponseEntity<Course>(course, HttpStatus.OK);
     }
