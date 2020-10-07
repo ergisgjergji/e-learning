@@ -43,9 +43,10 @@ public class LectureService {
         return lectureRepository.findAll();
     }
 
-    public Set<Lecture> findAllByCourse(Long course_id) {
+    public Set<Lecture> findAllByCourse(String course_name, String username) {
 
-        Course course = courseService.findById(course_id);
+        User user = userService.findByUsername(username);
+        Course course = courseService.findByNameAndUser(course_name, user);
         Set<Lecture> lectures = lectureRepository.findAllByCourse(course);
         return lectures;
     }

@@ -13,6 +13,7 @@ public interface ICourseRepository extends CrudRepository<Course, Long> {
     Course getById(Long id);
     Course findByName(String name);
     Course findByIdAndUsers(Long id, User user);
+    Course findByNameAndUsers(String name, User user);
 
     Set<Course> findAll();
     Set<Course> findAllByUsers(User user);

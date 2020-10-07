@@ -25,10 +25,10 @@ public class LectureController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @GetMapping("/{course_id}/all")
-    public ResponseEntity<Set<Lecture>> getAllByCourseId(@PathVariable String course_id) {
+    @GetMapping("/{course_name}/all")
+    public ResponseEntity<Set<Lecture>> getAllByCourse(@PathVariable String course_name, Principal principal) {
 
-        Set<Lecture> lectures = lectureService.findAllByCourse(Long.parseLong(course_id));
+        Set<Lecture> lectures = lectureService.findAllByCourse(course_name, principal.getName());
         return new ResponseEntity<Set<Lecture>>(lectures, HttpStatus.OK);
     }
 

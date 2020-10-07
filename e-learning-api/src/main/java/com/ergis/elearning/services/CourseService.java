@@ -44,6 +44,13 @@ public class CourseService {
         return course;
     }
 
+    public Course findByNameAndUser(String name, User user) {
+
+        Course course = courseRepository.findByNameAndUsers(name, user);
+        if(course == null) throw new CourseNameException("Course '" + name + "' doesn't exist or doesn't belong to you.");
+        return course;
+    }
+
     public Course findByIdAndUser(Long id, User user) {
 
         Course course = courseRepository.findByIdAndUsers(id, user);
