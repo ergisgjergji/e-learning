@@ -51,10 +51,10 @@ class CourseCard extends Component {
 
                     <div className="date-info d-flex flex-column my-2 pr-1 border-dark">
                         <span>
-                            <b> {translate('created')}:</b> {course.created_date}
+                            <i className="fa fa-clock-o" aria-hidden="true"/> <b> {translate('created')}:</b> {course.created_date}
                         </span>
                         <span>
-                            <b> {translate('updated')}:</b> {course.updated_date}
+                            <i className="fa fa-info-circle" aria-hidden="true"/> <b> {translate('updated')}:</b> {course.updated_date}
                         </span>
                     </div>
 

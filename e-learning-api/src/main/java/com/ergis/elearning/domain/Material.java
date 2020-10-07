@@ -15,9 +15,6 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "TEXT")
-    @NotBlank(message = "Material description is required")
-    private String description;
 
     @Column(unique = true)
     @NotBlank(message = "File name cannot be blank")
@@ -32,31 +29,30 @@ public class Material {
     @Column(unique = true, columnDefinition = "TEXT")
     private String downloadUrl;
 
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date uploadDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    private Date uploadTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_course", updatable = false, nullable = false)
+    @JoinColumn(name = "id_lecture", updatable = false, nullable = false)
     @JsonIgnore
-    private Course course;
+    private Lecture lecture;
 
     @PrePersist
     private void onCreate() {
-        this.uploadDate = new Date();
+        this.uploadTime = new Date();
     }
 
     public Material() {
     }
 
-    public Material(@NotBlank(message = "Material description is required") String description, FileUploadResponse response, Course course) {
-        this.description = description;
+    public Material(FileUploadResponse response, Lecture lecture) {
         this.fileName = response.getFileName();
         this.contentType = response.getContentType();
         this.isPreviewEnabled = response.getPreviewEnabled();
         this.previewUrl = response.getPreviewUrl();
         this.downloadUrl = response.getDownloadUrl();
-        this.course = course;
+        this.lecture = lecture;
     }
 
     public Long getId() {
@@ -65,14 +61,6 @@ public class Material {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getFileName() {
@@ -115,19 +103,19 @@ public class Material {
         this.downloadUrl = downloadUrl;
     }
 
-    public Date getUploadDate() {
-        return uploadDate;
+    public Date getUploadTime() {
+        return uploadTime;
     }
 
-    public void setUploadDate(Date uploadDate) {
-        this.uploadDate = uploadDate;
+    public void setUploadTime(Date uploadTime) {
+        this.uploadTime = uploadTime;
     }
 
-    public Course getCourse() {
-        return course;
+    public Lecture getLecture() {
+        return lecture;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setLecture(Lecture lecture) {
+        this.lecture = lecture;
     }
 }

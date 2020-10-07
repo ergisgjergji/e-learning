@@ -44,7 +44,7 @@ public class Course {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
     @JsonIgnore
-    private Set<Material> materials = new HashSet<>();
+    private Set<Lecture> lectures = new HashSet<>();
 
     public Course() {}
 
@@ -142,12 +142,12 @@ public class Course {
         this.students_tests = students_tests;
     }
 
-    public Set<Material> getMaterials() {
-        return materials;
+    public Set<Lecture> getLectures() {
+        return lectures;
     }
 
-    public void setMaterials(Set<Material> materials) {
-        this.materials = materials;
+    public void setLectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
     }
 
     /*

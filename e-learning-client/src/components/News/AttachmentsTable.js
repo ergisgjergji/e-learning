@@ -4,24 +4,6 @@ import { contentTypeIcon } from '../../utils/helpers';
 
 class AttachmentsTable extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            attachments: []
-        }
-        this.buildZipUrl.bind(this);
-    }
-
-    componentDidMount() {
-        const { attachments } = this.props;
-        this.setState({ attachments });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(this.state.attachments !== nextProps.attachments) 
-            this.setState({ attachments: nextProps.attachments });
-    }
-
     buildZipUrl = (attachments) => {
         let token = localStorage.getItem('token');
         let zipUrl = `http://localhost:8080/zipDownload?fileType=attachment&token=${token}`;
@@ -31,7 +13,7 @@ class AttachmentsTable extends Component {
     }
 
     render() {
-        const { attachments } = this.state;
+        const { attachments } = this.props;
 
         return (attachments && attachments.length > 0) ?
         (

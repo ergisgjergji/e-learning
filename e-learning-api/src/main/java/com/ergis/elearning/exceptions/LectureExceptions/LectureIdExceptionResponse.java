@@ -1,10 +1,10 @@
-package com.ergis.elearning.exceptions.MaterialExceptions;
+package com.ergis.elearning.exceptions.LectureExceptions;
 
-public class MaterialIdExceptionResponse {
+public class LectureIdExceptionResponse {
 
     private String id;
 
-    public MaterialIdExceptionResponse(String id) {
+    public LectureIdExceptionResponse(String id) {
         this.id = id;
     }
 

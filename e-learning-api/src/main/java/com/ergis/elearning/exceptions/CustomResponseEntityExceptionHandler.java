@@ -1,10 +1,10 @@
 package com.ergis.elearning.exceptions;
 
 import com.ergis.elearning.exceptions.CourseExceptions.*;
-import com.ergis.elearning.exceptions.MaterialExceptions.MaterialDescriptionException;
-import com.ergis.elearning.exceptions.MaterialExceptions.MaterialDescriptionExceptionResponse;
-import com.ergis.elearning.exceptions.MaterialExceptions.MaterialIdException;
-import com.ergis.elearning.exceptions.MaterialExceptions.MaterialIdExceptionResponse;
+import com.ergis.elearning.exceptions.LectureExceptions.LectureNameException;
+import com.ergis.elearning.exceptions.LectureExceptions.LectureNameExceptionResponse;
+import com.ergis.elearning.exceptions.LectureExceptions.LecturelIdException;
+import com.ergis.elearning.exceptions.LectureExceptions.LectureIdExceptionResponse;
 import com.ergis.elearning.exceptions.NewsExceptions.NewsHeaderException;
 import com.ergis.elearning.exceptions.NewsExceptions.NewsHeaderExceptionResponse;
 import com.ergis.elearning.exceptions.NewsExceptions.NewsIdException;
@@ -143,16 +143,16 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
     //#endregion
 
-    //#region - Materials Exceptions -
+    //#region - Lecture Exceptions -
     @ExceptionHandler
-    public final ResponseEntity<Object> handleMaterialDescriptionException(MaterialDescriptionException ex, WebRequest request) {
-        MaterialDescriptionExceptionResponse exceptionResponse = new MaterialDescriptionExceptionResponse(ex.getMessage());
+    public final ResponseEntity<Object> handleLectureDescriptionException(LectureNameException ex, WebRequest request) {
+        LectureNameExceptionResponse exceptionResponse = new LectureNameExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleMaterialIdException(MaterialIdException ex, WebRequest request) {
-        MaterialIdExceptionResponse exceptionResponse = new MaterialIdExceptionResponse(ex.getMessage());
+    public final ResponseEntity<Object> handleLectureIdException(LecturelIdException ex, WebRequest request) {
+        LectureIdExceptionResponse exceptionResponse = new LectureIdExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
     //#endregion
