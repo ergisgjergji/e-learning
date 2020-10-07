@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getCourseById } from './../../redux/actions/courseActions';
 
 import translate from '../../i18n/translate';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class UpdateCourse extends Component {
 
@@ -67,7 +68,7 @@ class UpdateCourse extends Component {
 
                                     <div className="form-group col-md-12">
                                         <label htmlFor="description"> {translate('description')} </label>
-                                        <textarea disabled type="date" id="description" name="description" rows="5"
+                                        <TextareaAutosize disabled rows="3" type="date" id="description" name="description"
                                             className="form-control form-control-md shadow-sm"
                                             value={description}/>
                                     </div>

@@ -3,6 +3,7 @@ import { Alert } from 'reactstrap';
 
 import translate from '../../../i18n/translate';
 import { FormattedMessage } from 'react-intl';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class AddQuestion extends Component {
 
@@ -193,7 +194,7 @@ class AddQuestion extends Component {
 
                         <div className="form-group col-md-12">
                             <label htmlFor="description"> {translate('description')} </label>
-                            <textarea id="description" name="description" rows="3"
+                            <TextareaAutosize minRows="3" id="description" name="description"
                                 className="form-control form-control-sm shadow-sm"
                                 value={description} onChange={this.onChange}/>
                         </div>

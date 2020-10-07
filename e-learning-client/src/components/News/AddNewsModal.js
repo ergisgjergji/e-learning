@@ -8,6 +8,7 @@ import { addNews } from './../../redux/actions/newsActions';
 
 import translate from './../../i18n/translate';
 import { injectIntl } from 'react-intl';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class AddNewsModal extends Component {
 
@@ -117,7 +118,7 @@ class AddNewsModal extends Component {
 
                                 <div className="form-group col-md-12">
                                     <label htmlFor="body"> {translate('news.body')} </label>
-                                    <textarea type="text" required rows="5" id="body" name="body" className="form-control form-control-md shadow-sm"
+                                    <TextareaAutosize minRows="3" type="text" required id="body" name="body" className="form-control form-control-md shadow-sm"
                                         value={body} onChange={this.onChange} />
                                 </div>
 

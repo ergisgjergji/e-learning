@@ -6,6 +6,7 @@ import classnames from 'classnames';
 
 import translate from '../../i18n/translate';
 import { injectIntl } from 'react-intl';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class UpdateCourse extends Component {
 
@@ -85,7 +86,7 @@ class UpdateCourse extends Component {
 
                                     <div className="form-group col-md-12">
                                         <label htmlFor="description"> {translate('description')} </label>
-                                        <textarea type="date" id="description" name="description" rows="5"
+                                        <TextareaAutosize minRows="3" type="date" id="description" name="description"
                                             className={classnames("form-control form-control-md shadow ", {"is-invalid": errors.description})}
                                             value={description} onChange={this.onChange} />
                                         { 
