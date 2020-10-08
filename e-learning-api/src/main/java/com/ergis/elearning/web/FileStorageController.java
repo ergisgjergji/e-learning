@@ -61,12 +61,10 @@ public class FileStorageController {
         if(jwtTokenProvider.validateToken(jwt))
         {
             Resource resource = fileStorageService.getFileResource(fileName, fileType);
-            String mimeType;
-            try {
-                mimeType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-            } catch (IOException e) {
-                mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE; // a fallback value
-            }
+            String mimeType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+            if(mimeType == null)
+                mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(mimeType))

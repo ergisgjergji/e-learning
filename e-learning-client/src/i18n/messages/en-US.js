@@ -139,6 +139,7 @@ export default {
         'lecture.add-notification': '✔ Lecture was added successfully',
         'lecture.delete-confirm': 'Are you sure you want to delete this lecture?',
         'lecture.delete-notification': 'ℹ Lecture with id {id} was deleted successfully.',
+        'lecture.add-material': 'Add material',
         //#endregion 
 
         // Files

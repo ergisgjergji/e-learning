@@ -1,14 +1,17 @@
 package com.ergis.elearning.services;
 
 import com.ergis.elearning.ViewModel.FileUploadResponse;
+import com.sun.org.apache.bcel.internal.generic.FADD;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.activation.MimetypesFileTypeMap;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -125,12 +128,13 @@ public class FileStorageService {
 
         contentType = file.getContentType();
 
-        Resource resource = this.getFileResource(fileName, fileType);
-
-        if(resource.exists()) {
-            isPreviewEnabled = resource.isReadable();
-        }
+        if(contentType.equals(MediaType.APPLICATION_OCTET_STREAM_VALUE))
+            isPreviewEnabled = false;
         else
+            isPreviewEnabled = true;
+
+        Resource resource = this.getFileResource(fileName, fileType);
+        if(!resource.exists())
             throw new RuntimeException("File doesn't exist or is not readable");
 
         if(isPreviewEnabled)

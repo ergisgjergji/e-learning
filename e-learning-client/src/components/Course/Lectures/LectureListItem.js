@@ -7,29 +7,26 @@ class LectureListItem extends Component {
 
     constructor() {
         super();
-
         this.state = {
-            id: 0,
-            name: "",
-            materials: [],
             isOpen: false,
-            isTooltipOpen: false
+            isAddTooltipOpen: false,
+            isDeleteTooltipOpen: false
         };
         this.onToggle.bind(this);
-        this.toggleTooltip.bind(this);
-    }
-
-    componentDidMount() {
-        const { id, name, materials } = this.props.lecture;
-        this.setState({ id, name, materials });
+        this.toggleAddTooltip.bind(this);
+        this.toggleDeleteTooltip.bind(this);
     }
 
     onToggle = () => {
         this.setState({ isOpen: !this.state.isOpen });
     }
 
-    toggleTooltip = () => {
-        this.setState({ isTooltipOpen: !this.state.isTooltipOpen });
+    toggleAddTooltip = () => {
+        this.setState({ isAddTooltipOpen: !this.state.isAddTooltipOpen });
+    }
+
+    toggleDeleteTooltip = () => {
+        this.setState({ isDeleteTooltipOpen: !this.state.isDeleteTooltipOpen });
     }
 
     deleteLecture = (id) => {
@@ -37,7 +34,8 @@ class LectureListItem extends Component {
     }
 
     render() {
-        const { id, name, materials, isOpen, isTooltipOpen } = this.state;
+        const { id, name, materials } = this.props.lecture;
+        const { isOpen, isAddTooltipOpen, isDeleteTooltipOpen } = this.state;
 
         return (
             <div className="col-12 mt-4 p-0 mx-auto border-bottom">
@@ -46,11 +44,18 @@ class LectureListItem extends Component {
                      {isOpen ? <i className="fa fa-caret-up"/> : <i className="fa fa-caret-down"/>} {name}
                 </button>
 
-                <button id="delete-tooltip" className="btn btn-sm my-btn-danger shadow float-right" onClick={this.deleteLecture.bind(this, id)}> 
-                    <i className="fa fa-trash-o text-white" aria-hidden="true" />
+                <button id="delete-tooltip" className="btn btn-sm btn-outline-danger shadow float-right" onClick={this.deleteLecture.bind(this, id)}> 
+                    <i className="fa fa-trash" aria-hidden="true" />
                 </button>
-                <Tooltip placement="right" isOpen={isTooltipOpen} target="delete-tooltip" toggle={this.toggleTooltip}>
+                <Tooltip placement="top" isOpen={isDeleteTooltipOpen} target="delete-tooltip" toggle={this.toggleDeleteTooltip}>
                     {translate('delete')}
+                </Tooltip>
+
+                <button id="add-tooltip" className="btn btn-sm btn-outline-primary shadow float-right mr-1" onClick={this.deleteLecture.bind(this, id)}> 
+                    <i className="fa fa-plus-circle" aria-hidden="true" />
+                </button>
+                <Tooltip placement="top" isOpen={isAddTooltipOpen} target="add-tooltip" toggle={this.toggleAddTooltip}>
+                    {translate('lecture.add-material')}
                 </Tooltip>
 
                 <Collapse isOpen={isOpen} className="mt-3">

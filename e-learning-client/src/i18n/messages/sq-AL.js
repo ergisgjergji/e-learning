@@ -139,6 +139,7 @@ export default {
         'lecture.add-notification': '✔ Leksioni u shtua me sukses.',
         'lecture.delete-confirm': 'Jeni i sigurtë që doni ta fshini këtë leksion?',
         'lecture.delete-notification': 'ℹ Leksioni me id {id} u fshi me sukses.',
+        'lecture.add-material': 'Shto material',
         //#endregion 
 
         // Files
