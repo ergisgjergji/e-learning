@@ -31,6 +31,7 @@ import PrivateRoute from './components/Router/PrivateRoute';
 import AddUser from './components/User/AddUser';
 import NewsDetails from './components/News/NewsDetails';
 import NewsList from './components/News/NewsList';
+import LectureList from './components/Course/Lectures/LectureList';
 
 function AnimatedRouter({ locale }) {
     return (
@@ -60,6 +61,7 @@ function AnimatedRouter({ locale }) {
                     <TeacherRoute exact path="/teacherPanel" component={TeacherPanel} />
                     <TeacherRoute exact path="/teacherPanel/addCourse" component={AddCourse} />
                     <TeacherRoute exact path="/teacherPanel/updateCourse/:id" component={UpdateCourse} />
+                    <TeacherRoute exact path="/teacherPanel/course/:course_name/lectures" component={LectureList} />
                     <TeacherRoute exact path="/teacherPanel/course/:id/tests" component={TestBaseList} />
                     <TeacherRoute exact path="/teacherPanel/course/:id/addTest" component={AddTest} />
                     <TeacherRoute exact path="/teacherPanel/course/:id/students" component={CourseStudents} />

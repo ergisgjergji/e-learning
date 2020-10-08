@@ -33,15 +33,15 @@ public class LectureController {
     }
 
     @PreAuthorize("hasRole('TEACHER')")
-    @PostMapping("/{course_id}")
+    @PostMapping("/{course_name}")
     public ResponseEntity<Lecture> create(
-            @PathVariable String course_id,
+            @PathVariable String course_name,
             @RequestParam("name") String name,
             @RequestParam("materials") MultipartFile[] materials,
             Principal principal) throws Exception
     {
         CreateLectureViewModel model = new CreateLectureViewModel(name, materials);
-        Lecture lecture = lectureService.create(model, Long.parseLong(course_id), principal.getName());
+        Lecture lecture = lectureService.create(model, course_name, principal.getName());
         return new ResponseEntity<Lecture>(lecture, HttpStatus.OK);
     }
 

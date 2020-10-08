@@ -5,6 +5,7 @@ import userReducer from './userReducer';
 import courseReducer from './courseReducer';
 import testReducer from './testReducer';
 import newsReducer from './newsReducer';
+import lectureReducer from './lectureReducer';
 
 export default combineReducers ({
     authStore: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers ({
     userStore: userReducer,
     courseStore: courseReducer,
     testStore: testReducer,
-    newsStore: newsReducer
+    newsStore: newsReducer,
+    lectureStore: lectureReducer
 });

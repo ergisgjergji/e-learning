@@ -10,10 +10,6 @@ import translate from '../../../i18n/translate';
 
 class TeacherCourseMenu extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     onDeleteClick = (id) => {
 
 		const { intl } = this.props;
@@ -41,12 +37,18 @@ class TeacherCourseMenu extends Component {
     }
     
     render() {
-        const { id } = this.props;
+        const { id, course_name } = this.props;
         return (
             <>
                 <Link to={`/teacherPanel/updateCourse/${id}`}>
                     <li className="list-group-item update">
                         <i className="fa fa-edit pr-1"> {translate('update-course')} </i>
+                    </li>
+                </Link>
+
+                <Link to={`/teacherPanel/course/${course_name}/lectures`}>
+                    <li className="list-group-item update">
+                        <i className="fa fa-folder-open-o pr-1"> {translate('manage-lectures')} </i>
                     </li>
                 </Link>
 

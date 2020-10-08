@@ -15,6 +15,7 @@ export default {
         'read-more': 'Lexo më shumë',
         'refresh': 'Rifresko',
         'optional': 'opsionale',
+        'minimal-required-1': 'minimalisht 1',
         'view': 'Shiko',
         'download-all': 'Shkarko të gjitha',
 
@@ -55,6 +56,7 @@ export default {
         'name': 'Emri',
         'description': 'Përshkrimi',
         'update-course': 'Modifiko kursin',
+        'manage-lectures': 'Menaxho leksionet',
         'manage-tests': 'Menaxho testet',
         'delete-course': 'Fshi kursin',
         'created': 'Krijuar',
@@ -68,6 +70,8 @@ export default {
         'register': 'Regjistro',
         'test-results': 'Rezultatet e testeve',
         'TestResultList-empty': 'Ky student nuk ka asnjë test të plotësuar.',
+
+        'LectureList.empty': 'Ky kurs aktualisht nuk ka asnjë leksion.',
 
         'tests': 'Testet',
         'add-test': 'Shto test',
@@ -109,7 +113,7 @@ export default {
         'take-test': 'Plotëso tani',
         'submit-test': 'Ruaj & dërgo',
 
-        ////#region News
+        //#region News
         'news': 'Njoftime',
         'news-archive': 'Arkiva e lajmeve',
         'add-news': 'Krijo lajm',
@@ -124,12 +128,22 @@ export default {
         'news.add-notification': '✔ Lajmi u krijua me sukses.',
         'news.delete-confirm': 'Jeni i sigurtë që doni ta fshini këtë lajmërim?',
         'news.delete-notification': 'ℹ Lajmi me id {id} u fshi me sukses.',
-        ////#endregion
+        //#endregion
 
-        ////#region Attachments
-        'attachment.fileName': 'Emri i dokumentit',
-        'attachment.contentType': 'Lloji i dokumentit',
-        ////#endregion
+        //#region Lectures
+        'add-lecture': 'Shto leksion',
+        'new-lecture': 'Leksion i ri',
+        'lecture.name': 'Emri i leksionit',
+        'lecture.add-notification': '✔ Leksioni u shtua me sukses.',
+        //#endregion 
+
+        // Files
+        'attachments': 'Bashkëngjitje',
+        'materials': 'Materiale',
+        'assignments': 'Detyra',
+        'fileName': 'Emri i dokumentit',
+        'contentType': 'Tipi i dokumentit',
+        'materials.empty': 'Asnjë material',
 
         //##################################### notifications ############################################
         // confirm-alert

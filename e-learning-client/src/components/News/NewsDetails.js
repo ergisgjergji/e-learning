@@ -8,7 +8,7 @@ import { getNewsById } from '../../redux/actions/newsActions';
 import translate from '../../i18n/translate';
 import { injectIntl } from 'react-intl';
 import { formatDateTime } from './../../utils/helpers';
-import AttachmentsTable from './AttachmentsTable';
+import FilesTable from '../FilesTable/FilesTable';
 
 class NewsDetails extends Component {
 
@@ -60,7 +60,7 @@ class NewsDetails extends Component {
                     </div>
 
                     <div className="mt-5">
-                        <AttachmentsTable attachments={attachments} />
+                        <FilesTable fileType="attachment" files={attachments} />
                     </div>
                     
                 </div>

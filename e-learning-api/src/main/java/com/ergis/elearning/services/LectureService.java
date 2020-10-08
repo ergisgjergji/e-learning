@@ -51,7 +51,7 @@ public class LectureService {
         return lectures;
     }
 
-    public Lecture create(CreateLectureViewModel model, Long course_id, String username) throws Exception {
+    public Lecture create(CreateLectureViewModel model, String course_name, String username) throws Exception {
 
         /*
             1. Check if user exists (principal, which is a TEACHER)
@@ -64,7 +64,7 @@ public class LectureService {
             8. Return the lecture
          */
         User user = userService.findByUsername(username);
-        Course course = courseService.findByIdAndUser(course_id, user);
+        Course course = courseService.findByNameAndUser(course_name, user);
 
         Lecture duplicateDescription = lectureRepository.findByNameAndCourse(model.getName(), course);
         if(duplicateDescription != null) throw new LectureNameException("Lecture with name '" + model.getName() + "' already exists");

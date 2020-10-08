@@ -15,6 +15,7 @@ export default {
         'read-more': 'Read more',
         'refresh': 'Refresh',
         'optional': 'optional',
+        'minimal-required-1': 'minimaly required: 1',
         'view': 'View',
         'download-all': 'Download all',
 
@@ -55,6 +56,7 @@ export default {
         'name': 'Name',
         'description': 'Description',
         'update-course': 'Update course',
+        'manage-lectures': 'Manage lectures',
         'manage-tests': 'Manage tests',
         'delete-course': 'Delete course',
         'created': 'Created',
@@ -63,11 +65,13 @@ export default {
         'registered-students': 'Registered students',
         'non-registered-students': 'Non-registered students',
         'no-data': 'No data',
-        'action': 'Action',
+        'action': 'Actions',
         'view-results': 'View results',
         'register': 'Register',
         'test-results': 'Test Results',
         'TestResultList-empty': 'This student has no completed tests.',
+
+        'LectureList.empty': 'This course currently has no lectures.',
 
         'tests': 'Tests',
         'add-test': 'Add test',
@@ -109,7 +113,7 @@ export default {
         'take-test': 'Take the test',
         'submit-test': 'Submit test',
 
-        ////#region News
+        //#region News
         'news': 'News',
         'news-archive': 'News Archive',
         'add-news': 'Add news',
@@ -124,24 +128,33 @@ export default {
         'news.add-notification': '✔ News was posted successfully.',
         'news.delete-confirm': 'Are you sure you want to delete this news?',
         'news.delete-notification': 'ℹ News with id {id} was deleted successfully.',
-        ////#endregion
+        //#endregion
 
-        ////#region Attachments
-        'attachment.fileName': 'File name',
-        'attachment.contentType': 'Content type',
-        ////#endregion
+        //#region Lectures
+        'add-lecture': 'Add lecture',
+        'new-lecture': 'New lecture',
+        'lecture.name': 'Lecture name',
+        'lecture.add-notification': '✔ Lecture was added successfully',
+        //#endregion 
 
-        //##################################### notifications ############################################
+        // Files
+        'attachments': 'Attachments',
+        'materials': 'Materials',
+        'assignments': 'Assignments',
+        'fileName': 'Filename',
+        'contentType': 'Content type',
+        'materials.empty': 'No materials',
+
         // confirm-alert
         'confirm': 'Confirm',
         'yes': 'Yes',
         'no': 'No',
 
-        // profile
+        // profile NOTIFICATIONS
         'change-password-toast': '✔ Password was changed successfully.',
         'update-profile-toast': '✔ Profile was updated successfully.',
 
-        // admin
+        // admin NOTIFICATIONS
         'add-student-toast': '✔ Student added successfully.',
         'add-teacher-toast': '✔ Teacher added successfully.',
         'delete-user-confirm': 'Are you sure you want to delete this user?',
@@ -150,7 +163,7 @@ export default {
         'update-user-toast': '✔ Changes were saved successfully.',
         'reset-password-toast': '✔ Password was reset successfully.',
         
-        // teacher
+        // teacher NOTIFICATIONS
         'delete-course-confirm': 'Are you sure you want to delete this course?',
         'delete-course-toast': 'ℹ Course with id {id} was deleted successfully.',
         'add-course-toast': '✔ Course added successfully.',

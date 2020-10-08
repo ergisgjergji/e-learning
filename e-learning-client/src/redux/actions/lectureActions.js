@@ -26,3 +26,20 @@ export const getLectures = (course_name) => dispatch => {
             })
         });
 };
+
+export const addLecture = (course_name, formData, notification_message) => dispatch => {
+
+    axios.post(`/api/lectures/${course_name}`, formData)
+        .then(res => {
+            toast.success(notification_message);
+            dispatch(getLectures(course_name));
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            validateError(err);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
+}
