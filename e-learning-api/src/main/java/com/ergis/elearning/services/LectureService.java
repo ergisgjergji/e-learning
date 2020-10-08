@@ -94,10 +94,10 @@ public class LectureService {
         return lecture;
     }
 
-    public void delete(Long lecture_id, Long course_id, String username) {
+    public void delete(Long lecture_id, String course_name, String username) {
 
         User user = userService.findByUsername(username);
-        Course course = courseService.findByIdAndUser(course_id, user);
+        Course course = courseService.findByNameAndUser(course_name, user);
 
         Lecture lecture = lectureRepository.findByIdAndCourse(lecture_id, course);
         if(lecture == null) throw new LecturelIdException("Lecture with id '" + lecture_id + "' not found");

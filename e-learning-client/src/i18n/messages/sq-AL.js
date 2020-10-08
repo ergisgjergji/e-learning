@@ -134,7 +134,11 @@ export default {
         'add-lecture': 'Shto leksion',
         'new-lecture': 'Leksion i ri',
         'lecture.name': 'Emri i leksionit',
+        'lecture.name.example': 'shembull: Leksion 1',
+
         'lecture.add-notification': '✔ Leksioni u shtua me sukses.',
+        'lecture.delete-confirm': 'Jeni i sigurtë që doni ta fshini këtë leksion?',
+        'lecture.delete-notification': 'ℹ Leksioni me id {id} u fshi me sukses.',
         //#endregion 
 
         // Files

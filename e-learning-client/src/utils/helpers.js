@@ -35,3 +35,19 @@ export const contentTypeIcon = (contentType) => {
             break;
     }
 }
+
+export const sortById = (data, direction) => {
+    
+    switch(direction)
+    {
+        case "ASC":
+            data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+            break;
+        case "DESC":
+            data.sort((a,b) => (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0));
+            break;
+        default:
+            break;
+    }
+    return data;
+}

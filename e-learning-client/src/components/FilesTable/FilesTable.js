@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import translate from '../../i18n/translate';
 import { contentTypeIcon, capitalizeWord } from '../../utils/helpers';
+import { formatDateTime } from './../../utils/helpers';
 
 class FilesTable extends Component {
 
@@ -49,10 +50,16 @@ class FilesTable extends Component {
                     <table className="table table-sm m-0">
                         <thead>
                             <tr>
-                                <th className="text-center"> 
+                                <th className="w-33 text-center"> 
                                     <small> <b> {translate('fileName')}:  </b> </small> 
                                 </th>
-                                <th className="text-center text-capitalize"> 
+                                {
+                                    (files[0].uploadTime) ?
+                                        <th className="w-33 text-center"> 
+                                            <small> <b> Upload time:  </b> </small> 
+                                        </th> : null
+                                }
+                                <th className="w-33 text-center text-capitalize"> 
                                     <small> <b> {translate('action')}:  </b> </small> 
                                 </th>
                             </tr>
@@ -64,15 +71,24 @@ class FilesTable extends Component {
                                 let token = localStorage.getItem('token');
                                 let previewUrl = file.previewUrl + `&token=${token}`;
                                 let downloadUrl = file.downloadUrl + `&token=${token}`;
+                                let uploadTime = file.uploadTime;
 
                                 return (
                                     <tr key={index}>
-                                        <td className="text-center"> 
+                                        <td className="w-33 text-center"> 
                                             <small> 
                                                 <i className={`fa ${contentTypeIcon(file.contentType)} fa-lg`} /> {file.fileName} 
                                             </small> 
                                         </td>
-                                        <td className="text-center">
+                                        {
+                                            uploadTime ?
+                                                <td className="w-33 text-center"> 
+                                                    <small> 
+                                                        <i className="fa fa-clock-o fa-lg" /> {formatDateTime(uploadTime)}
+                                                    </small> 
+                                                </td> : null
+                                        }
+                                        <td className="w-33 text-center">
                                         {
                                             file.previewEnabled ?
                                                 <a href={previewUrl} target="_blank">

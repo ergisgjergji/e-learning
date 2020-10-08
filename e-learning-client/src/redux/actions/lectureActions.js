@@ -11,9 +11,14 @@ export const getLectures = (course_name) => dispatch => {
 
     axios.get(`/api/lectures/${course_name}/all`)
         .then(res => {
+
+            const lectures = res.data;
+            // Sort by 'id' ASC
+            lectures.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+
             dispatch({
                 type: GET_LECTURES,
-                payload: res.data
+                payload: lectures
             });
             dispatch({ type: SET_LECTURES_LOADED });
             dispatch(clearErrors());
@@ -32,6 +37,23 @@ export const addLecture = (course_name, formData, notification_message) => dispa
     axios.post(`/api/lectures/${course_name}`, formData)
         .then(res => {
             toast.success(notification_message);
+            dispatch(getLectures(course_name));
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            validateError(err);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
+}
+
+export const deleteLecture = (course_name, lecture_id, notification_message) => dispatch => {
+
+    axios.delete(`/api/lectures/${course_name}/${lecture_id}`)
+        .then(res => {
+            toast.info(notification_message);
             dispatch(getLectures(course_name));
             dispatch(clearErrors());
         })

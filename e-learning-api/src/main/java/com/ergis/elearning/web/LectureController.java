@@ -46,10 +46,10 @@ public class LectureController {
     }
 
     @PreAuthorize("hasRole('TEACHER')")
-    @DeleteMapping("/{course_id}/{lecture_id}")
-    public ResponseEntity<String> delete(@PathVariable String course_id,  @PathVariable String lecture_id, Principal principal)
+    @DeleteMapping("/{course_name}/{lecture_id}")
+    public ResponseEntity<String> delete(@PathVariable String course_name,  @PathVariable String lecture_id, Principal principal)
     {
-        lectureService.delete(Long.parseLong(lecture_id), Long.parseLong(course_id), principal.getName());
+        lectureService.delete(Long.parseLong(lecture_id), course_name, principal.getName());
         return new ResponseEntity<String>("Lecture with id '" + lecture_id + "' deleted successfully.", HttpStatus.OK);
     }
 }

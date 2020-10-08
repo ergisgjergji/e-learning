@@ -122,6 +122,7 @@ class AddLectureModal extends Component {
 
                                 <div className="form-group col-md-12">
                                     <label htmlFor="header"> {translate('lecture.name')} </label>
+                                    <small className="text-muted"> ({translate('lecture.name.example')}) </small>
                                     <input type="text" required id="name" name="name" 
                                         className={classnames("form-control form-control-md shadow-sm ", {"is-invalid": errors.name})}
                                         value={name} onChange={this.onChange} />

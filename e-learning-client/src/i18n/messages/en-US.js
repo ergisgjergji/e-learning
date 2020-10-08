@@ -134,7 +134,11 @@ export default {
         'add-lecture': 'Add lecture',
         'new-lecture': 'New lecture',
         'lecture.name': 'Lecture name',
+        'lecture.name.example': 'example: Lecture 1',
+
         'lecture.add-notification': '✔ Lecture was added successfully',
+        'lecture.delete-confirm': 'Are you sure you want to delete this lecture?',
+        'lecture.delete-notification': 'ℹ Lecture with id {id} was deleted successfully.',
         //#endregion 
 
         // Files
