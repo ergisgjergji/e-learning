@@ -78,7 +78,7 @@ class LectureList extends Component {
                                         </Alert>
                                         :
                                         lectures.map((lecture, index) => {
-                                            return <LectureListItem key={index} lecture={lecture} deleteLecture={this.onDeleteLecture.bind(this)} />
+                                            return <LectureListItem key={index} course_name={course_name} lecture={lecture} deleteLecture={this.onDeleteLecture.bind(this)} />
                                         })
                             }
 

@@ -1,4 +1,4 @@
-import { GET_LECTURES, SET_LECTURES_LOADING, SET_LECTURES_LOADED } from '../actions/types';
+import { GET_LECTURES, SET_LECTURES_LOADING, SET_LECTURES_LOADED, ADD_LECTURE_MATERIALS } from '../actions/types';
 
 const initialState = {
     lectures: [],
@@ -25,6 +25,16 @@ export default function( state = initialState, action ) {
             return {
                 ...state,
                 loading: false
+            }
+
+        case ADD_LECTURE_MATERIALS:
+            let lectures = [...state.lectures];
+            let modified_lecture = action.payload;
+            let index = lectures.findIndex((lect => lect.id === modified_lecture.id));
+            lectures[index] = modified_lecture;
+            return {
+                ...state,
+                lectures
             }
 
         default:

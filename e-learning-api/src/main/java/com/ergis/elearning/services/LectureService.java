@@ -113,4 +113,34 @@ public class LectureService {
 
         lectureRepository.delete(lecture);
     }
+
+    public Lecture addMaterial(Long lecture_id, String course_name, MultipartFile[] files, String username) throws Exception {
+
+        User user = userService.findByUsername(username);
+        Course course = courseService.findByNameAndUser(course_name, user);
+
+        Lecture lecture = lectureRepository.findByIdAndCourse(lecture_id, course);
+        if(lecture == null) throw new LecturelIdException("Lecture with id '" + lecture_id + "' not found");
+
+        if(files.length > 0)
+            for (MultipartFile file: files)
+            {
+                String formatedFileName = this.formatFileName(lecture, file);
+                this.checkForDuplicateFile(formatedFileName, lecture);
+                FileUploadResponse response = fileStorageService.storeMaterial(file, formatedFileName);
+
+                Material material = new Material();
+                material.setFileName(response.getFileName());
+                material.setContentType(response.getContentType());
+                material.setPreviewEnabled(response.getPreviewEnabled());
+                material.setPreviewUrl(response.getPreviewUrl());
+                material.setDownloadUrl(response.getDownloadUrl());
+                material.setLecture(lecture);
+
+                material = materialRepository.save(material);
+                lecture.getMaterials().add(material);
+            }
+
+        return lecture;
+    }
 }

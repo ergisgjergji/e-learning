@@ -144,7 +144,7 @@ class AddNewsModal extends Component {
                                                             type="button"
                                                             className="btn btn-sm btn-danger border-bottom shadow-sm icon-position-right" 
                                                             onClick={this.onRemoveAttachment.bind(this, file.name)}> 
-                                                            X 
+                                                            <i className="fa fa-trash-o text-white" aria-hidden="true" />
                                                         </button> 
                                                     </li>
                                                 )
