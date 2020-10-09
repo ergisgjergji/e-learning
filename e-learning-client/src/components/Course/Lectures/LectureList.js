@@ -3,7 +3,7 @@ import { Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { getLectures, deleteLecture } from './../../../redux/actions/lectureActions';
+import { getLectures, deleteLecture, deleteMaterial } from './../../../redux/actions/lectureActions';
 
 import translate from './../../../i18n/translate';
 import LectureListItem from './LectureListItem';
@@ -11,6 +11,7 @@ import AddLectureModal from './AddLectureModal';
 import { BeatLoader } from 'react-spinners';
 import { injectIntl } from 'react-intl';
 import { confirmAlert } from 'react-confirm-alert';
+import { roles } from './../../../utils/constants';
 
 class LectureList extends Component {
 
@@ -47,9 +48,37 @@ class LectureList extends Component {
 		})
     }
 
+    onDeleteMaterial = (lecture_id, material_id) => {
+
+        const { course_name } = this.props.match.params;
+        
+        const { intl } = this.props; 
+        const confirm = intl.formatMessage({ id: 'confirm' });
+        const yes = intl.formatMessage({ id: 'yes' });
+        const no = intl.formatMessage({ id: 'no' });
+        const confirm_message = intl.formatMessage({ id: 'material.delete-confirm' });
+        const notification_message = intl.formatMessage({ id: 'material.delete-notification' }, { id: material_id });
+
+        confirmAlert({
+			title: confirm,
+			message: confirm_message,
+			buttons: [
+				{
+					label: yes,
+					className: "confirm-yes",
+					onClick: () => this.props.deleteMaterial(course_name, lecture_id, material_id, notification_message)
+				},
+				{
+					label: no,
+					className: "confirm-no"
+			  	}
+			]
+		})
+    }
+
     render() {
         const { course_name } = this.props.match.params;
-        const { lectures, loading } = this.props;
+        const { lectures, loading, role } = this.props;
 
         return (
             <div className="transition-page">
@@ -59,7 +88,7 @@ class LectureList extends Component {
 
                             <h1 className="display-4 text-center mt-3"> {course_name} </h1>
 
-                            <AddLectureModal course_name={course_name} />
+                            { role === roles.teacher ? <AddLectureModal course_name={course_name} /> : <hr/> }
 
                             {
                                 loading ? 
@@ -78,7 +107,13 @@ class LectureList extends Component {
                                         </Alert>
                                         :
                                         lectures.map((lecture, index) => {
-                                            return <LectureListItem key={index} course_name={course_name} lecture={lecture} deleteLecture={this.onDeleteLecture.bind(this)} />
+                                            return <LectureListItem 
+                                                        key={index}
+                                                        course_name={course_name}
+                                                        role={role}
+                                                        lecture={lecture} 
+                                                        deleteLecture={this.onDeleteLecture.bind(this)} 
+                                                        deleteMaterial={this.onDeleteMaterial.bind(this)}/>
                                         })
                             }
 
@@ -95,7 +130,8 @@ LectureList.propTypes = {
     loading: PropTypes.bool.isRequired,
     role: PropTypes.string.isRequired,
     getLectures: PropTypes.func.isRequired,
-    deleteLecture: PropTypes.func.isRequired
+    deleteLecture: PropTypes.func.isRequired,
+    deleteMaterial: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -104,4 +140,4 @@ const mapStateToProps = state => ({
     role: state.authStore.user.role
 });
 
-export default connect(mapStateToProps, { getLectures, deleteLecture })(injectIntl(LectureList));
+export default connect(mapStateToProps, { getLectures, deleteLecture, deleteMaterial })(injectIntl(LectureList));

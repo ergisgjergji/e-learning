@@ -30,8 +30,12 @@ class FilesTable extends Component {
         }
     }
 
+    onDeleteClick = (file_id) => {
+        this.props.onDeleteClick(file_id);
+    }
+
     render() {
-        const { fileType, files } = this.props;
+        const { fileType, files, showDeleteButton } = this.props;
 
         return (files && files.length > 0) ?
         (
@@ -106,6 +110,12 @@ class FilesTable extends Component {
                                                     <i className="fa fa-download" aria-hidden="true" />
                                                 </button>
                                             </a>
+                                        {
+                                            showDeleteButton ?
+                                                <button className="btn btn-sm btn-outline-danger m-1" onClick={this.onDeleteClick.bind(this, file.id)}>
+                                                    <i className="fa fa-trash" aria-hidden="true" />
+                                                </button> : null
+                                        }
                                         </td>
                                     </tr>
                                 )

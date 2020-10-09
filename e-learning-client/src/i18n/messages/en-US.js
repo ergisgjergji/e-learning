@@ -140,7 +140,10 @@ export default {
         'lecture.delete-confirm': 'Are you sure you want to delete this lecture?',
         'lecture.delete-notification': 'ℹ Lecture with id {id} was deleted successfully.',
         'lecture.add-material': 'Add material',
-        'lecture.materials.add-notification': '✔ Material(s) were added successfully.',
+
+        'material.add-notification': '✔ Material(s) were added successfully.',
+        'material.delete-confirm': 'Are you sure you want to delete this material?',
+        'material.delete-notification': 'ℹ Material with id {id} was deleted successfully.',
         //#endregion 
 
         // Files

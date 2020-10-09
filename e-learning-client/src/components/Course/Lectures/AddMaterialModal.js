@@ -88,7 +88,7 @@ class AddMaterialModal extends Component {
                 formData.append('materials', file);
             })
 
-            const notification_message = intl.formatMessage({ id: 'lecture.materials.add-notification' });
+            const notification_message = intl.formatMessage({ id: 'material.add-notification' });
             this.props.addLectureMaterials(course_name, lecture_id, formData, notification_message);
         }
         else {

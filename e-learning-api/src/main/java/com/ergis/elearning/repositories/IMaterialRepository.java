@@ -11,4 +11,5 @@ import java.util.Set;
 public interface IMaterialRepository extends CrudRepository<Material, Long> {
 
     Material findByFileNameAndLecture(String fileName, Lecture lecture);
+    Material findByIdAndLecture(Long id, Lecture lecture);
 }

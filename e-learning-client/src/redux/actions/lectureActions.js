@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_LECTURES, SET_LECTURES_LOADING, SET_LECTURES_LOADED, ADD_LECTURE_MATERIALS, GET_ERRORS } from './types';
+import { GET_LECTURES, SET_LECTURES_LOADING, SET_LECTURES_LOADED, ADD_LECTURE_MATERIALS, REMOVE_MATERIAL, GET_ERRORS } from './types';
 import { clearErrors } from './errorActions';
 
 import { toast } from 'react-toastify';
@@ -76,6 +76,26 @@ export const addLectureMaterials = (course_name, lecture_id, formData, notificat
                 type: ADD_LECTURE_MATERIALS,
                 payload: res.data
             })
+            dispatch(clearErrors());
+        })
+        .catch(err => {
+            validateError(err);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        });
+}
+
+export const deleteMaterial = (course_name, lecture_id, material_id, notification_message) => dispatch => {
+
+    axios.post(`/api/lectures/${course_name}/${lecture_id}/${material_id}`)
+        .then(res => {
+            toast.info(notification_message);
+            dispatch({
+                type: REMOVE_MATERIAL,
+                payload: res.data
+            });
             dispatch(clearErrors());
         })
         .catch(err => {

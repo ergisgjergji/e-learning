@@ -3,6 +3,7 @@ import { Collapse, Fade, Alert, Tooltip } from 'reactstrap';
 import translate from './../../../i18n/translate';
 import FilesTable from './../../FilesTable/FilesTable';
 import AddMaterialModal from './AddMaterialModal';
+import { roles } from './../../../utils/constants';
 
 class LectureListItem extends Component {
 
@@ -14,6 +15,7 @@ class LectureListItem extends Component {
         };
         this.onToggle.bind(this);
         this.toggleDeleteTooltip.bind(this);
+        this.onDeleteClick.bind(this);
     }
 
     onToggle = () => {
@@ -28,9 +30,14 @@ class LectureListItem extends Component {
         this.props.deleteLecture(id);
     }
 
+    onDeleteClick = (file_id) => {
+        const { id } = this.props.lecture;
+        this.props.deleteMaterial(id, file_id);
+    }
+
     render() {
         const { id, name, materials } = this.props.lecture;
-        const { course_name } = this.props;
+        const { course_name, role } = this.props;
         const { isOpen, isDeleteTooltipOpen } = this.state;
 
         return (
@@ -41,14 +48,19 @@ class LectureListItem extends Component {
                         {isOpen ? <i className="fa fa-caret-up"/> : <i className="fa fa-caret-down"/>} {name}
                     </button>
 
-                    <button id="delete-tooltip" className="btn btn-sm btn-outline-danger shadow float-right" onClick={this.deleteLecture.bind(this, id)}> 
-                        <i className="fa fa-trash" aria-hidden="true" />
-                    </button>
-                    <Tooltip placement="top" isOpen={isDeleteTooltipOpen} target="delete-tooltip" toggle={this.toggleDeleteTooltip}>
-                        {translate('delete')}
-                    </Tooltip>
+                    {
+                        role === roles.teacher ?
+                            <>
+                                <button id="delete-tooltip" className="btn btn-sm btn-outline-danger shadow float-right" onClick={this.deleteLecture.bind(this, id)}> 
+                                    <i className="fa fa-trash" aria-hidden="true" />
+                                </button>
+                                <Tooltip placement="top" isOpen={isDeleteTooltipOpen} target="delete-tooltip" toggle={this.toggleDeleteTooltip}>
+                                    {translate('delete')}
+                                </Tooltip>
 
-                    <AddMaterialModal course_name={course_name} lecture_id={id} />
+                                <AddMaterialModal course_name={course_name} lecture_id={id} />
+                            </> : null
+                    }
                     
                 </div>
 
@@ -57,7 +69,12 @@ class LectureListItem extends Component {
                         <div>
                         {
                             (materials.length > 0) ?
-                                <FilesTable fileType="material" files={materials} />
+                                <FilesTable 
+                                    fileType="material" 
+                                    files={materials}
+                                    showDeleteButton={role === roles.teacher ? true : false}
+                                    onDeleteClick={this.onDeleteClick}
+                                />
                                 :
                                 <Alert color="info" className="text-center">
                                     <i className="fa fa-info-circle" aria-hidden="true"/> {translate('materials.empty')}

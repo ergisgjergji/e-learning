@@ -64,4 +64,16 @@ public class LectureController {
         Lecture lecture = lectureService.addMaterial(Long.parseLong(lecture_id), course_name, materials, principal.getName());
         return new ResponseEntity<Lecture>(lecture, HttpStatus.OK);
     }
+
+    @PreAuthorize("hasRole('TEACHER')")
+    @PostMapping("/{course_name}/{lecture_id}/{material_id}")
+    public ResponseEntity<Lecture> deleteMaterial(
+            @PathVariable String course_name,
+            @PathVariable String lecture_id,
+            @PathVariable String material_id,
+            Principal principal) throws Exception
+    {
+        Lecture lecture = lectureService.deleteMaterial(course_name, Long.parseLong(lecture_id), Long.parseLong(material_id), principal.getName());
+        return new ResponseEntity<Lecture>(lecture, HttpStatus.OK);
+    }
 }

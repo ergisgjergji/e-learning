@@ -5,6 +5,7 @@ import com.ergis.elearning.ViewModel.FileUploadResponse;
 import com.ergis.elearning.domain.*;
 import com.ergis.elearning.exceptions.LectureExceptions.LectureNameException;
 import com.ergis.elearning.exceptions.LectureExceptions.LecturelIdException;
+import com.ergis.elearning.exceptions.MaterialExceptions.MaterialIdException;
 import com.ergis.elearning.repositories.ILectureRepository;
 import com.ergis.elearning.repositories.IMaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,6 +117,9 @@ public class LectureService {
 
     public Lecture addMaterial(Long lecture_id, String course_name, MultipartFile[] files, String username) throws Exception {
 
+        // 1. Make sure 'course' belongs to the current user
+        // 2. Make sure 'lecture' belongs to the current course
+
         User user = userService.findByUsername(username);
         Course course = courseService.findByNameAndUser(course_name, user);
 
@@ -140,6 +144,28 @@ public class LectureService {
                 material = materialRepository.save(material);
                 lecture.getMaterials().add(material);
             }
+
+        return lecture;
+    }
+
+    public Lecture deleteMaterial(String course_name, Long lecture_id, Long material_id, String username) {
+
+        // 1. Make sure 'course' belongs to the current user
+        // 2. Make sure 'lecture' belongs to the current course
+        // 3. Make sure 'material' belongs to the current lecture
+
+        User user = userService.findByUsername(username);
+        Course course = courseService.findByNameAndUser(course_name, user);
+
+        Lecture lecture = lectureRepository.findByIdAndCourse(lecture_id, course);
+        if(lecture == null) throw new LecturelIdException("Lecture with id '" + lecture_id + "' not found");
+
+        Material material = materialRepository.findByIdAndLecture(material_id, lecture);
+        if(material == null) throw new MaterialIdException("Material with id '" + material_id + "' not found");
+
+        lecture.getMaterials().remove(material);
+        fileStorageService.removeMaterial(material.getFileName());
+        materialRepository.delete(material);
 
         return lecture;
     }
