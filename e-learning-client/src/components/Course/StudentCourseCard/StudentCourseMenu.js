@@ -71,7 +71,7 @@ class StudentCourseMenu extends Component {
     }
 
     render() {
-        const { id } = this.props;
+        const { id, course_name } = this.props;
         const { tests, isDropdownOpen } = this.state;
         return (
             <>
@@ -81,8 +81,14 @@ class StudentCourseMenu extends Component {
 					</li>
 				</Link>
 
+                <Link to={`/studentPanel/course/${course_name}/lectures`}>
+                    <li className="list-group-item board">
+                        <i className="fa fa-folder-open-o pr-1"> {translate('lectures')} </i>
+                    </li>
+                </Link>
+
 				<li id="manageTestsBtn" className="list-group-item board" onClick={this.toggleDropdown}>
-					<i className="fa fa-file-text pr-1"> {translate('manage-tests')} </i>
+					<i className="fa fa-file-text pr-1"> {translate('tests')} </i>
                     <i className={`fa ${!isDropdownOpen ? 'fa-chevron-down' : 'fa-chevron-up'} icon-position-right`} aria-hidden="true"/>
 				</li>
 

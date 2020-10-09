@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Collapse, Fade } from 'reactstrap';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,6 +10,14 @@ import { injectIntl } from 'react-intl';
 import translate from '../../../i18n/translate';
 
 class TeacherCourseMenu extends Component {
+
+    state = {
+        isDropdownOpen: false
+    };
+
+    toggleDropdown = () => {
+        this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
+    }
 
     onDeleteClick = (id) => {
 
@@ -38,6 +47,8 @@ class TeacherCourseMenu extends Component {
     
     render() {
         const { id, course_name } = this.props;
+        const { isDropdownOpen } = this.state;
+
         return (
             <>
                 <Link to={`/teacherPanel/updateCourse/${id}`}>
@@ -46,23 +57,32 @@ class TeacherCourseMenu extends Component {
                     </li>
                 </Link>
 
-                <Link to={`/teacherPanel/course/${course_name}/lectures`}>
-                    <li className="list-group-item update">
-                        <i className="fa fa-folder-open-o pr-1"> {translate('manage-lectures')} </i>
-                    </li>
-                </Link>
+                <li className="list-group-item board" onClick={this.toggleDropdown}>
+                    <i className="fa fa-bars" aria-hidden="true"> {translate('manage')} </i>
+                    <i className={`fa ${!isDropdownOpen ? 'fa-chevron-down' : 'fa-chevron-up'} icon-position-right`} aria-hidden="true"/>
+                </li>
 
-                <Link to={`/teacherPanel/course/${id}/students`}>
-                    <li className="list-group-item board">
-                        <i className="fa fa-users pr-1"> {translate('manage-students')} </i>
-                    </li>
-                </Link>
+                <Collapse isOpen={isDropdownOpen}>
+                    <Fade in={isDropdownOpen}>
+                        <Link to={`/teacherPanel/course/${course_name}/lectures`}>
+                            <li className="list-group-item board">
+                                <i className="fa fa-folder-open-o pr-1 ml-3"> {translate('lectures')} </i>
+                            </li>
+                        </Link>
 
-                <Link to={`/teacherPanel/course/${id}/tests`}>
-                    <li className="list-group-item board">
-                        <i className="fa fa-file-text-o pr-1"> {translate('manage-tests')} </i>
-                    </li>
-                </Link>
+                        <Link to={`/teacherPanel/course/${id}/students`}>
+                            <li className="list-group-item board">
+                                <i className="fa fa-users pr-1 ml-3"> {translate('students')} </i>
+                            </li>
+                        </Link>
+
+                        <Link to={`/teacherPanel/course/${id}/tests`}>
+                            <li className="list-group-item board">
+                                <i className="fa fa-file-text-o pr-1 ml-3"> {translate('tests')} </i>
+                            </li>
+                        </Link>
+                    </Fade>
+                </Collapse>
 
                 <li className="list-group-item delete" onClick={this.onDeleteClick.bind(this, id)}>
                     <i className="fa fa-trash-o pr-1"> {translate('delete-course')} </i>

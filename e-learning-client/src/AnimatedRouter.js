@@ -69,6 +69,7 @@ function AnimatedRouter({ locale }) {
 
                     <StudentRoute exact path="/studentPanel" component={StudentPanel}/>
                     <StudentRoute exact path="/studentPanel/course/:id/details" component={CourseDetails}/>
+                    <StudentRoute exact path="/studentPanel/course/:course_name/lectures" component={LectureList} />
                     <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/details" component={TestDetails} />
                     <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/complete" component={CompleteTest} />
                     {

@@ -31,8 +31,10 @@ export default {
         'FIN': 'Faculty of Civil Engineering',
 
         'admin-panel': 'Admin panel',
+        'manage': 'Manage',
         'manage-students': 'Manage students',
         'manage-teachers': 'Manage teachers',
+        'teachers': 'Teachers',
         'edit': 'Edit',
         'reset-password': 'Reset password',
         'students': 'Students',
@@ -56,8 +58,6 @@ export default {
         'name': 'Name',
         'description': 'Description',
         'update-course': 'Update course',
-        'manage-lectures': 'Manage lectures',
-        'manage-tests': 'Manage tests',
         'delete-course': 'Delete course',
         'created': 'Created',
         'updated': 'Last updated',
@@ -131,6 +131,7 @@ export default {
         //#endregion
 
         //#region Lectures
+        'lectures': 'Lectures',
         'add-lecture': 'Add lecture',
         'new-lecture': 'New lecture',
         'lecture.name': 'Lecture name',

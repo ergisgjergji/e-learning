@@ -31,6 +31,7 @@ export default {
         'FIN': 'Fakulteti i Inxhinierisë së Ndërtimit',
 
         'admin-panel': 'Paneli administratorit',
+        'manage': 'Menaxho',
         'manage-students': 'Menaxho studentët',
         'manage-teachers': 'Menaxho pedagogët',
         'edit': 'Modifiko',
@@ -56,8 +57,6 @@ export default {
         'name': 'Emri',
         'description': 'Përshkrimi',
         'update-course': 'Modifiko kursin',
-        'manage-lectures': 'Menaxho leksionet',
-        'manage-tests': 'Menaxho testet',
         'delete-course': 'Fshi kursin',
         'created': 'Krijuar',
         'updated': 'Modifikuar',
@@ -131,6 +130,7 @@ export default {
         //#endregion
 
         //#region Lectures
+        'lectures': 'Leksionet',
         'add-lecture': 'Shto leksion',
         'new-lecture': 'Leksion i ri',
         'lecture.name': 'Emri i leksionit',
