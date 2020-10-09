@@ -18,6 +18,7 @@ export default {
         'minimal-required-1': 'minimalisht 1',
         'view': 'Shiko',
         'download-all': 'Shkarko të gjitha',
+        'upload-time': 'Koha e ngarkimit',
 
         'landing-page-header': 'Një platformë që ndihmon mësuesit dhe studentët në të gjithë botën.',
         'landing-page-demo': 'Përdorni këto kredenciale për demonstrim',

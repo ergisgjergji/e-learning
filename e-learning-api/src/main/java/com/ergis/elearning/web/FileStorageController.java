@@ -36,12 +36,10 @@ public class FileStorageController {
         if(jwtTokenProvider.validateToken(jwt))
         {
             Resource resource = fileStorageService.getFileResource(fileName, fileType);
-            String mimeType;
-            try {
-                mimeType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-            } catch (IOException e) {
-                mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE; // a fallback value
-            }
+            String mimeType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+            if(mimeType == null)
+                mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(mimeType))
@@ -84,9 +82,11 @@ public class FileStorageController {
         String jwt = token.substring(7, token.length());
         if(jwtTokenProvider.validateToken(jwt))
         {
+            String zipFileName = fileType + "s";
+
             response.setStatus(200);
             response.setContentType("application/octet-stream");
-            response.setHeader("Content-Disposition", "attachment;filename=attachments.zip");
+            response.setHeader("Content-Disposition", "attachment;filename="+zipFileName+".zip");
 
             try (ZipOutputStream zos = new ZipOutputStream(response.getOutputStream())) {
                 Arrays.asList(files)

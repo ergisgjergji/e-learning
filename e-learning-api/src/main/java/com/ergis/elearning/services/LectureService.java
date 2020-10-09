@@ -108,7 +108,6 @@ public class LectureService {
         if(materials.size() > 0) {
             materials.forEach(material -> {
                 fileStorageService.removeMaterial(material.getFileName());
-                lecture.getMaterials().remove(material);
             });
         }
 

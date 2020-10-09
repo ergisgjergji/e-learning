@@ -18,6 +18,7 @@ export default {
         'minimal-required-1': 'minimaly required: 1',
         'view': 'View',
         'download-all': 'Download all',
+        'upload-time': 'Uploade time',
 
         'landing-page-header': 'A platform that helps teachers and students all round the world.',
         'landing-page-demo': 'Use these credentials for a demo',

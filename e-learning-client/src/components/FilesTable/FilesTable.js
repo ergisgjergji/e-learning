@@ -58,9 +58,10 @@ class FilesTable extends Component {
                                     <small> <b> {translate('fileName')}:  </b> </small> 
                                 </th>
                                 {
+                                    // If the data has a `key` named `uploadTime`, add it as a column
                                     (files[0].uploadTime) ?
                                         <th className="w-33 text-center"> 
-                                            <small> <b> Upload time:  </b> </small> 
+                                            <small> <b> {translate('upload-time')}:  </b> </small> 
                                         </th> : null
                                 }
                                 <th className="w-33 text-center text-capitalize"> 
