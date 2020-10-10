@@ -1,5 +1,6 @@
 package com.ergis.elearning.exceptions;
 
+import com.ergis.elearning.exceptions.AssignmentExceptions.*;
 import com.ergis.elearning.exceptions.CourseExceptions.*;
 import com.ergis.elearning.exceptions.LectureExceptions.LectureNameException;
 import com.ergis.elearning.exceptions.LectureExceptions.LectureNameExceptionResponse;
@@ -163,6 +164,26 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleMaterialIdException(MaterialIdException ex, WebRequest request) {
         MaterialIdExceptionResponse exceptionResponse = new MaterialIdExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    //#endregion
+
+    //#region - Assignment Exceptions -
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAssignmentIdException(AssignmentIdException ex, WebRequest request) {
+        AssignmentIdExceptionResponse exceptionResponse = new AssignmentIdExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAssignmentNameException(AssignmentNameException ex, WebRequest request) {
+        AssignmentNameExceptionResponse exceptionResponse = new AssignmentNameExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAssignmentDueDateException(AssignmentDueDateException ex, WebRequest request) {
+        AssignmentDueDateExceptionResponse exceptionResponse = new AssignmentDueDateExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
     //#endregion

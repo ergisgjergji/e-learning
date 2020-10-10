@@ -53,6 +53,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<Test> tests = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "assignment", orphanRemoval = true)
+    @JsonIgnore
+    private Set<Solution> solutions = new HashSet<>();
+
     public User() {}
 
     public User(int id, @Email(message = "Username needs to be an email") @NotBlank(message = "Username field is required") String username, @NotBlank(message = "Name field is required") String full_name) {
@@ -185,6 +189,14 @@ public class User implements UserDetails {
 
     public void setTests(Set<Test> tests) {
         this.tests = tests;
+    }
+
+    public Set<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(Set<Solution> solutions) {
+        this.solutions = solutions;
     }
 
     //#region Utility methods for ManyToMany relationship

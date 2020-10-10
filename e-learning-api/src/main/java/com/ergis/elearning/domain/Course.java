@@ -2,6 +2,7 @@ package com.ergis.elearning.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.expression.spel.ast.Assign;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -45,6 +46,10 @@ public class Course {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
     @JsonIgnore
     private Set<Lecture> lectures = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "course", orphanRemoval = true)
+    @JsonIgnore
+    private Set<Assignment> assignments = new HashSet<>();
 
     public Course() {}
 
@@ -148,6 +153,14 @@ public class Course {
 
     public void setLectures(Set<Lecture> lectures) {
         this.lectures = lectures;
+    }
+
+    public Set<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(Set<Assignment> assignments) {
+        this.assignments = assignments;
     }
 
     /*
