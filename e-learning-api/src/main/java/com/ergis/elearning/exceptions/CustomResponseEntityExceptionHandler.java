@@ -16,6 +16,8 @@ import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlterna
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseAlternativesExceptionResponse;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeException;
 import com.ergis.elearning.exceptions.QuestionBaseExceptions.QuestionBaseTypeExceptionResponse;
+import com.ergis.elearning.exceptions.SolutionExceptions.SolutionIdException;
+import com.ergis.elearning.exceptions.SolutionExceptions.SolutionIdExceptionResponse;
 import com.ergis.elearning.exceptions.TestBaseExceptions.*;
 import com.ergis.elearning.exceptions.TestExceptions.TestIdException;
 import com.ergis.elearning.exceptions.TestExceptions.TestIdExceptionResponse;
@@ -184,6 +186,14 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleAssignmentDueDateException(AssignmentDueDateException ex, WebRequest request) {
         AssignmentDueDateExceptionResponse exceptionResponse = new AssignmentDueDateExceptionResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    //#endregion
+
+    //#region - Solution Exceptions -
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleSolutionIdException(SolutionIdException ex, WebRequest request) {
+        SolutionIdExceptionResponse exceptionResponse = new SolutionIdExceptionResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
     //#endregion

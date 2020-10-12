@@ -1,5 +1,6 @@
 package com.ergis.elearning.repositories;
 
+import com.ergis.elearning.domain.Assignment;
 import com.ergis.elearning.domain.Course;
 import com.ergis.elearning.domain.User;
 import org.springframework.data.repository.CrudRepository;
@@ -14,6 +15,7 @@ public interface ICourseRepository extends CrudRepository<Course, Long> {
     Course findByName(String name);
     Course findByIdAndUsers(Long id, User user);
     Course findByNameAndUsers(String name, User user);
+    Course findByAssignmentsAndUsers(Assignment assignment, User user);
 
     Set<Course> findAll();
     Set<Course> findAllByUsers(User user);

@@ -134,7 +134,7 @@ class AddMaterialModal extends Component {
                                         <input type="file" multiple id="files" name="files" id="customFile"
                                             className={classnames("custom-file-input shadow-sm ", {"is-invalid": errors.materials})}
                                             onChange={this.onSelectFile}/>
-                                        <label class="custom-file-label text-muted" for="customFile"> {files.length} {translate('files-selected')} </label>
+                                        <label class="custom-file-label text-muted" htmlFor="customFile"> {files.length} {translate('files-selected')} </label>
                                         { 
                                             errors.materials ? 
                                                 (<div className="invalid-feedback"> { errors.materials } </div>) : null 

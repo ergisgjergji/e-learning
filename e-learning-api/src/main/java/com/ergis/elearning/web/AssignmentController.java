@@ -1,10 +1,10 @@
 package com.ergis.elearning.web;
 
-import com.ergis.elearning.ViewModel.CreateAssignmentViewModel;
-import com.ergis.elearning.ViewModel.CreateLectureViewModel;
+import com.ergis.elearning.ViewModel.*;
 import com.ergis.elearning.domain.Assignment;
 import com.ergis.elearning.domain.Lecture;
 import com.ergis.elearning.services.AssignmentService;
+import com.ergis.elearning.services.SolutionService;
 import com.ergis.elearning.services.errors.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,13 +26,22 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
     @Autowired
+    private SolutionService solutionService;
+    @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
     @GetMapping("/{course_name}/all")
-    public ResponseEntity<Set<Assignment>> getAllByCourse(@PathVariable String course_name, Principal principal) {
+    public ResponseEntity<Set<?>> getAllByCourse(@PathVariable String course_name, Principal principal) {
 
-        Set<Assignment> assignments = assignmentService.findAllByCourse(course_name, principal.getName());
-        return new ResponseEntity<Set<Assignment>>(assignments, HttpStatus.OK);
+        Set<?> assignments = assignmentService.findAllByCourse(course_name, principal.getName());
+        return new ResponseEntity<Set<?>>(assignments, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Set<StudentAssignmentProjection>> getStudentAssignments(Principal principal) {
+
+        Set<StudentAssignmentProjection> assignments = assignmentService.getStudentAssignments(principal.getName());
+        return new ResponseEntity<Set<StudentAssignmentProjection>>(assignments, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('TEACHER')")
@@ -58,4 +67,13 @@ public class AssignmentController {
         assignmentService.delete(Long.parseLong(assignment_id), course_name, principal.getName());
         return new ResponseEntity<String>("Assignment with id '" + assignment_id + "' deleted successfully.", HttpStatus.OK);
     }
+
+    //#region ================================= ASSIGNMENT - SOLUTION relations ========================================
+    @GetMapping("/{assignment_id}/solutions")
+    public ResponseEntity<Set<TeacherAssignmentSolutionProjection>> getAssignmentSolutions(@PathVariable String assignment_id, Principal principal) {
+
+        Set<TeacherAssignmentSolutionProjection> solutions = solutionService.findAllTeacherAssignmentSolutions(Long.parseLong(assignment_id), principal.getName());
+        return new ResponseEntity<Set<TeacherAssignmentSolutionProjection>>(solutions, HttpStatus.OK);
+    }
+    //==================================================================================================================
 }

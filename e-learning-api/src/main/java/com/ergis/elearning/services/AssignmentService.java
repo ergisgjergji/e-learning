@@ -1,14 +1,13 @@
 package com.ergis.elearning.services;
 
-import com.ergis.elearning.ViewModel.CreateAssignmentViewModel;
-import com.ergis.elearning.ViewModel.CreateLectureViewModel;
-import com.ergis.elearning.ViewModel.FileUploadResponse;
+import com.ergis.elearning.ViewModel.*;
 import com.ergis.elearning.domain.*;
 import com.ergis.elearning.exceptions.AssignmentExceptions.AssignmentDueDateException;
 import com.ergis.elearning.exceptions.AssignmentExceptions.AssignmentIdException;
 import com.ergis.elearning.exceptions.AssignmentExceptions.AssignmentNameException;
 import com.ergis.elearning.exceptions.LectureExceptions.LectureNameException;
 import com.ergis.elearning.exceptions.LectureExceptions.LecturelIdException;
+import com.ergis.elearning.exceptions.SolutionExceptions.SolutionIdException;
 import com.ergis.elearning.repositories.IAssignmentRepository;
 import com.ergis.elearning.repositories.ILectureRepository;
 import com.ergis.elearning.repositories.IMaterialRepository;
@@ -20,6 +19,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -60,13 +60,24 @@ public class AssignmentService {
         return assignmentRepository.findAll();
     }
 
-    public Set<Assignment> findAllByCourse(String course_name, String username) {
+    public Set<?> findAllByCourse(String course_name, String username) {
 
         User user = userService.findByUsername(username);
         Course course = courseService.findByNameAndUser(course_name, user);
 
-        Set<Assignment> assignments = assignmentRepository.findAllByCourse(course);
-        return assignments;
+        if(user.getRole().equals("TEACHER"))
+            return assignmentRepository.findAllByCourse(course);
+
+        else if(user.getRole().equals("STUDENT"))
+            return assignmentRepository.findAllByCourseAndStudent(course_name, user.getId());
+
+        return null;
+    }
+
+    public Set<StudentAssignmentProjection> getStudentAssignments(String username) {
+
+        User user = userService.findByUsername(username);
+        return assignmentRepository.findAllByStudent(user.getId());
     }
 
     public Assignment create(CreateAssignmentViewModel model, String course_name, String username) throws Exception {

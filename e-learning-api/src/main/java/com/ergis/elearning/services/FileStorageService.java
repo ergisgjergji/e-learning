@@ -26,6 +26,7 @@ public class FileStorageService {
     private final Path attachmentsPath;
     private final Path materialsPath;
     private final Path assignmentsPath;
+    private final Path solutionsPath;
     private final String storageLocation;
 
     public FileStorageService(@Value("${file.storage.location:temp}") String storageLocation) {
@@ -35,12 +36,14 @@ public class FileStorageService {
         attachmentsPath = Paths.get(storagePath + "\\" + "attachments");
         materialsPath = Paths.get(storagePath + "\\" + "materials");
         assignmentsPath = Paths.get(storagePath + "\\" + "assignments");
+        solutionsPath = Paths.get(storagePath + "\\" + "solutions");
 
         try {
             Files.createDirectories(storagePath);
             Files.createDirectories(attachmentsPath);
             Files.createDirectories(materialsPath);
             Files.createDirectories(assignmentsPath);
+            Files.createDirectories(solutionsPath);
         } catch (IOException e) {
             throw new RuntimeException("Issue in creating file storage directories");
         }
@@ -127,6 +130,33 @@ public class FileStorageService {
         }
     }
 
+    public FileUploadResponse storeSolution(MultipartFile file, String fileName) {
+
+        Path url = Paths.get(solutionsPath + "\\" + fileName);
+
+        try {
+            Files.copy(file.getInputStream(), url, StandardCopyOption.REPLACE_EXISTING);
+            FileUploadResponse response = getFileInfo(file, fileName, "solution");
+
+            response = this.addFileTypeExtension(response, "solution");
+            return response;
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Issue in storing the solution");
+        }
+    }
+    public void removeSolution(String fileName) {
+
+        fileName = StringUtils.cleanPath(fileName);
+        Path url = Paths.get(solutionsPath + "\\" + fileName);
+        try {
+            Files.delete(url);
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Issue in removing the solution");
+        }
+    }
+
     public Resource getFileResource(String fileName, String fileType) {
 
         Path path = this.getFilePath(fileName, fileType);
@@ -185,6 +215,8 @@ public class FileStorageService {
                 path = materialsPath; break;
             case "assignment":
                 path = assignmentsPath; break;
+            case "solution":
+                path = solutionsPath; break;
             default:
                 path = storagePath; break;
         }
