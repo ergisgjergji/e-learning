@@ -44,7 +44,7 @@ public class AssignmentService {
     private void checkForDuplicateFile(String fileName, Course course) throws Exception {
 
         Assignment assignment = assignmentRepository.findByFileNameAndCourse(fileName, course);
-        if(assignment != null) throw new Exception("A document with name '" + fileName + "' already exists");
+        if(assignment != null) throw new Exception("A document with this name  already exists. Please, change its name in order to avoid conflict with other existing document.");
     }
     private void validateDueDate(Date due_date) {
 
@@ -140,11 +140,12 @@ public class AssignmentService {
         Set<Solution> solutions = solutionRepository.findAllByAssignment(assignment);
 
         for(Solution solution: solutions) {
-            if(solution.getFileName() != null)
-                fileStorageService.removeAssignment(solution.getFileName());
+            if(solution.isSubmitted())
+                fileStorageService.removeSolution(solution.getFileName());
             solutionRepository.delete(solution);
         }
 
+        fileStorageService.removeAssignment(assignment.getFileName());
         assignmentRepository.delete(assignment);
     }
 }

@@ -70,6 +70,12 @@ class TeacherCourseMenu extends Component {
                             </li>
                         </Link>
 
+                        <Link to={`/teacherPanel/course/${course_name}/assignments`}>
+                            <li className="list-group-item board">
+                                <i className="fa fa-list-alt pr-1 ml-3" aria-hidden="true"> {translate('assignments')} </i>
+                            </li>
+                        </Link>
+
                         <Link to={`/teacherPanel/course/${id}/students`}>
                             <li className="list-group-item board">
                                 <i className="fa fa-users pr-1 ml-3"> {translate('students')} </i>

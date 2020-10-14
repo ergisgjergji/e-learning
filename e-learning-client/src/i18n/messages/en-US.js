@@ -19,6 +19,10 @@ export default {
         'view': 'View',
         'download-all': 'Download all',
         'upload-time': 'Uploade time',
+        'due_date': 'Due date',
+        'submit_date': 'Submit date',
+        'choose-file': 'Choose a file...',
+        'status': 'Status',
 
         'landing-page-header': 'A platform that helps teachers and students all round the world.',
         'landing-page-demo': 'Use these credentials for a demo',
@@ -95,8 +99,10 @@ export default {
         'total': 'Total',
         'score': 'Score',
         'result': 'Result',
-        'fail': 'FAIL',
-        'pass': 'PASS',
+        'fail': 'Fail',
+        'pass': 'Pass',
+        'submitted': 'Submitted',
+        'not-submitted': 'Not submitted',
         'correct': 'Correct',
         'incorrect': 'Incorrect',
         'minimal-score': 'Minimal passing score is 40%',
@@ -146,12 +152,33 @@ export default {
         'material.add-notification': '✔ Material(s) were added successfully.',
         'material.delete-confirm': 'Are you sure you want to delete this material?',
         'material.delete-notification': 'ℹ Material with id {id} was deleted successfully.',
+        //#endregion
+
+        //#region Assignment
+        'add-assignment': 'Add assignment',
+        'new-assignment': 'New assignment',
+        'assignment.name': 'Assignment name',
+        'assignment.name.example': 'example: Assignment 1',
+
+        'assignment.add-notification': '✔ Assignment was created successfully',
+        'assignment.delete-confirm': 'Are you sure you want to delete this assignment?',
+        'assignment.delete-notification': 'ℹ Assignment with id {id} was deleted successfully.',
+
+        'grade': 'Grade',
+        'student-solutions': 'Student solutions',
+        'upload-solution': 'Upload your solution',
+        'solution.grade-confirm': 'Please, grade the selected assignment:',
+        'solution.grade-notification': '✔ Solution was graded successfully',
+        'solution.add-notification': '✔ Solution was uploaded successfully',
         //#endregion 
 
         // Files
         'attachments': 'Attachments',
         'materials': 'Materials',
         'assignments': 'Assignments',
+        'solution': 'Solution',
+        'solutions': 'Solutions',
+        'file': 'File',
         'fileName': 'Filename',
         'contentType': 'Content type',
         'materials.empty': 'No materials',

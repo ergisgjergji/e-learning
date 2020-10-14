@@ -1,7 +1,8 @@
 export const formatDateTime = (dateTime) => {
 
     const date = new Date(dateTime);
-    const formated = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+    const month = date.getMonth() + 1;
+    const formated = date.getDate() + "-" + month + "-" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
     
     return formated;
 }

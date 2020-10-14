@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import { connect } from 'react-redux';
-import { addLecture } from '../../../redux/actions/lectureActions';
+import { addAssignment } from '../../../redux/actions/assignmentActions';
 
 import translate from '../../../i18n/translate';
 import { injectIntl } from 'react-intl';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
-class AddLectureModal extends Component {
+class AddAssignmentModal extends Component {
 
     constructor() {
         super();
         this.state = {
             name: "",
-            materials: [],
+            due_date: null,
+            assignment: null,
             isOpen: false,
             errors: {}
         }
@@ -26,7 +27,6 @@ class AddLectureModal extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onSelectFile = this.onSelectFile.bind(this);
-        this.onRemoveFile = this.onRemoveFile.bind(this);
     }
 
     componentWillReceiveProps (nextProps) {
@@ -52,42 +52,34 @@ class AddLectureModal extends Component {
 
     onSelectFile = (e) => {
         let errors = this.state.errors;
-        errors.materials = undefined; 
-        this.setState({ materials: [...this.state.materials, ...e.target.files], errors});
-    }
-
-    onRemoveFile = (fileName) => {
-        const materials = this.state.materials.filter((m) => {
-            return m.name !== fileName
-        });
-        this.setState({ materials })
+        errors.assignment = undefined; 
+        this.setState({ assignment: e.target.files[0], errors});
     }
 
     isAnyFileSelected = () => {
-        if(this.state.materials.length === 0)
+        if(this.state.assignment === null)
             return false;
         return true;
     }
 
     onSubmit = e => {
         e.preventDefault();
-        const { name, materials } = this.state;
+        const { name, due_date, assignment } = this.state;
         const { intl, course_name } = this.props; 
 
         if(this.isAnyFileSelected()) {
             const formData = new FormData();
 
             formData.append('name', name);
-            materials.forEach(m => {
-                formData.append('materials', m);
-            })
+            formData.append('due_date', due_date);
+            formData.append('assignment', assignment);
 
-            const notification_message = intl.formatMessage({ id: 'lecture.add-notification' });
-            this.props.addLecture(course_name, formData, notification_message);
+            const notification_message = intl.formatMessage({ id: 'assignment.add-notification' });
+            this.props.addAssignment(course_name, formData, notification_message);
         }
         else {
             let errors = this.state.errors;
-            errors.materials = 'You should select at least 1 file.';
+            errors.assignment = 'You should select 1 file.';
             this.setState({ errors });
         }
     }
@@ -95,24 +87,25 @@ class AddLectureModal extends Component {
     clearData = () => {
         this.setState({
             name: "",
-            materials: [],
+            due_date: null,
+            assignment: null,
             errors: {}
         });
     }
 
     render() {
-        const { name, materials, isOpen, errors } = this.state;
+        const { name, due_date, assignment, isOpen, errors } = this.state;
 
         return (
             <div>
                 <button className="btn btn-md my-btn-primary" onClick={this.toggle}>
-                    <i className="fa fa-plus-circle" aria-hidden="true"/> {translate('add-lecture')}
+                    <i className="fa fa-plus-circle" aria-hidden="true"/> {translate('add-assignment')}
                 </button>
                 <hr/>
 
                 <Modal isOpen={isOpen} toggle={this.toggle} onClosed={this.clearData} backdrop="static">
                     <ModalHeader toggle={this.toggle}>
-                        <h3 className="font-weight-normal"> {translate('new-lecture')} </h3>
+                        <h3 className="font-weight-normal"> {translate('new-assignment')} </h3>
                     </ModalHeader>
 
                     <form onSubmit={this.onSubmit}>
@@ -121,8 +114,8 @@ class AddLectureModal extends Component {
                             <div className="form-row">
 
                                 <div className="form-group col-md-12">
-                                    <label htmlFor="header"> {translate('lecture.name')} </label>
-                                    <small className="text-muted"> ({translate('lecture.name.example')}) </small>
+                                    <label htmlFor="header"> {translate('assignment.name')} </label>
+                                    <small className="text-muted"> ({translate('assignment.name.example')}) </small>
                                     <input type="text" required id="name" name="name" 
                                         className={classnames("form-control form-control-md shadow-sm ", {"is-invalid": errors.name})}
                                         value={name} onChange={this.onChange} />
@@ -133,41 +126,38 @@ class AddLectureModal extends Component {
                                 </div>
 
                                 <div className="form-group col-md-12">
-                                    <label htmlFor="files text-capitalize"> 
-                                        {translate('materials')} 
-                                        <small className="text-muted"> ({translate('minimal-required-1')}) </small> 
-                                    </label>
-                                    <div class="custom-file shadow-sm">
-                                        <input type="file" multiple id="files" name="files" id="customFile"
-                                            className={classnames("custom-file-input ", {"is-invalid": errors.materials})}
-                                            onChange={this.onSelectFile}/>
-                                        <label class="custom-file-label text-muted" for="customFile"> {materials.length} {translate('files-selected')} </label>
+                                    <label htmlFor="due_date"> {translate('due_date')} </label>
+                                    <input type="date" required id="due_date" name="due_date" 
+                                        className={classnames("form-control form-control-md shadow-sm ", {"is-invalid": errors.due_date})}
+                                        value={due_date} onChange={this.onChange} />
                                         { 
-                                            errors.materials ? 
-                                                (<div className="invalid-feedback"> { errors.materials } </div>) : null 
+                                            errors.due_date ? 
+                                                (<div className="invalid-feedback"> { errors.due_date } </div>) : null 
+                                        }
+                                </div>
+
+                                <div className="form-group col-md-12">
+                                    <div class="custom-file shadow-sm">
+                                        <input type="file" id="assignment" name="assignment" id="customFile"
+                                            className={classnames("custom-file-input ", {"is-invalid": errors.assignment})}
+                                            onChange={this.onSelectFile}/>
+                                        <label class="custom-file-label text-muted text-small" for="customFile"> {assignment ? assignment.name : translate('choose-file')} </label>
+                                        { 
+                                            errors.assignment ? 
+                                                (<div className="invalid-feedback"> { errors.assignment } </div>) : null 
                                         }
                                     </div>
                                 </div>
 
-                                <div className="form-group col-md-12">
-                                    <ul class="list-group">
-                                        {
-                                            materials.map( (file, index) => {
-                                                return (
-                                                    <li key={index} class="list-group-item text-muted"> 
-                                                        {file.name}
-                                                        <button
-                                                            type="button"
-                                                            className="btn btn-sm my-btn-danger border-bottom shadow-sm float-right" 
-                                                            onClick={this.onRemoveFile.bind(this, file.name)}> 
-                                                            <i className="fa fa-trash-o text-white" aria-hidden="true" />
-                                                        </button> 
-                                                    </li>
-                                                )
-                                            })
-                                        }
-                                    </ul>
-                                </div>
+                                {
+                                    errors.message ?
+                                        <div className="form-group col-md-12">
+                                            <Alert color="danger">
+                                                {errors.message}
+                                            </Alert>
+                                        </div> : null
+                                }
+                                
                             </div>
                         </ModalBody>
 
@@ -183,13 +173,13 @@ class AddLectureModal extends Component {
     }
 }
 
-AddLectureModal.propTypes = {
+AddAssignmentModal.propTypes = {
     errorStore: PropTypes.object.isRequired,
-    addLecture: PropTypes.func.isRequired
+    addAssignment: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     errorStore: state.errorStore
 });
 
-export default connect(mapStateToProps, { addLecture })(injectIntl(AddLectureModal));
+export default connect(mapStateToProps, { addAssignment })(injectIntl(AddAssignmentModal));

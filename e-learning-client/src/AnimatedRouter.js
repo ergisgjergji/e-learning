@@ -32,6 +32,8 @@ import AddUser from './components/User/AddUser';
 import NewsDetails from './components/News/NewsDetails';
 import NewsList from './components/News/NewsList';
 import LectureList from './components/Course/Lectures/LectureList';
+import AssignmentsTable from './components/Course/Assignments/AssignmentsTable';
+import AssignmentSolutionsTable from './components/Course/Assignments/AssignmentSolutionsTable';
 
 function AnimatedRouter({ locale }) {
     return (
@@ -62,6 +64,8 @@ function AnimatedRouter({ locale }) {
                     <TeacherRoute exact path="/teacherPanel/addCourse" component={AddCourse} />
                     <TeacherRoute exact path="/teacherPanel/updateCourse/:id" component={UpdateCourse} />
                     <TeacherRoute exact path="/teacherPanel/course/:course_name/lectures" component={LectureList} />
+                    <TeacherRoute exact path="/teacherPanel/course/:course_name/assignments" component={AssignmentsTable} />
+                    <TeacherRoute exact path="/teacherPanel/course/:course_name/assignments/:assignment_id/solutions" component={AssignmentSolutionsTable} />
                     <TeacherRoute exact path="/teacherPanel/course/:id/tests" component={TestBaseList} />
                     <TeacherRoute exact path="/teacherPanel/course/:id/addTest" component={AddTest} />
                     <TeacherRoute exact path="/teacherPanel/course/:id/students" component={CourseStudents} />
@@ -70,6 +74,7 @@ function AnimatedRouter({ locale }) {
                     <StudentRoute exact path="/studentPanel" component={StudentPanel}/>
                     <StudentRoute exact path="/studentPanel/course/:id/details" component={CourseDetails}/>
                     <StudentRoute exact path="/studentPanel/course/:course_name/lectures" component={LectureList} />
+                    <StudentRoute exact path="/studentPanel/course/:course_name/assignments" component={AssignmentsTable} />
                     <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/details" component={TestDetails} />
                     <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/complete" component={CompleteTest} />
                     {

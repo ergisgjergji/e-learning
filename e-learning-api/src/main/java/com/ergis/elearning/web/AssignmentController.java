@@ -53,7 +53,7 @@ public class AssignmentController {
             @RequestParam("assignment") MultipartFile file,
             Principal principal) throws Exception
     {
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(due_date);
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(due_date);
         CreateAssignmentViewModel model = new CreateAssignmentViewModel(name, date, file);
 
         Assignment assignment = assignmentService.create(model, course_name, principal.getName());

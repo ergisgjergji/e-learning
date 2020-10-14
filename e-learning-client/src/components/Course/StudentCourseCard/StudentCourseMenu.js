@@ -87,6 +87,12 @@ class StudentCourseMenu extends Component {
                     </li>
                 </Link>
 
+                <Link to={`/studentPanel/course/${course_name}/assignments`}>
+                    <li className="list-group-item board">
+                        <i className="fa fa-list-alt pr-1"> {translate('assignments')} </i>
+                    </li>
+                </Link>
+
 				<li id="manageTestsBtn" className="list-group-item board" onClick={this.toggleDropdown}>
 					<i className="fa fa-file-text pr-1"> {translate('tests')} </i>
                     <i className={`fa ${!isDropdownOpen ? 'fa-chevron-down' : 'fa-chevron-up'} icon-position-right`} aria-hidden="true"/>

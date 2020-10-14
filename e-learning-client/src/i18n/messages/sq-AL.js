@@ -19,6 +19,10 @@ export default {
         'view': 'Shiko',
         'download-all': 'Shkarko të gjitha',
         'upload-time': 'Koha e ngarkimit',
+        'due_date': 'Afati i dorëzimit',
+        'submit_date': 'Data e dorëzimit',
+        'choose-file': 'Zgjidh një dokument...',
+        'status': 'Statusi',
 
         'landing-page-header': 'Një platformë që ndihmon mësuesit dhe studentët në të gjithë botën.',
         'landing-page-demo': 'Përdorni këto kredenciale për demonstrim',
@@ -94,8 +98,10 @@ export default {
         'total': 'Totali',
         'score': 'Pikët',
         'result': 'Rezultati',
-        'fail': 'NGELËS',
-        'pass': 'KALUES',
+        'fail': 'Ngelës',
+        'pass': 'Kalues',
+        'submitted': 'Dorëzuar',
+        'not-submitted': 'Pa dorëzuar',
         'correct': 'Saktë',
         'incorrect': 'Pasaktë',
         'minimal-score': 'Rezultati minimal kalues është 40%',
@@ -145,12 +151,33 @@ export default {
         'material.add-notification': '✔ Materialet u ngarkuan me sukses.',
         'material.delete-confirm': 'Jeni i sigurtë që doni ta fshini këtë material?',
         'material.delete-notification': 'ℹ Materiali me id {id} u fshi me sukses.',
-        //#endregion 
+        //#endregion
+
+         //#region Assignment
+         'add-assignment': 'Shto detyrë',
+         'new-assignment': 'Detyrë e re',
+         'assignment.name': 'Emri i detyrës',
+         'assignment.name.example': 'shembull: Detyra 1',
+ 
+         'assignment.add-notification': '✔ Detyra u krijua me sukses.',
+         'assignment.delete-confirm': 'Jeni i sigurtë që doni ta fshini këtë detyrë?',
+         'assignment.delete-notification': 'ℹ Detyra me id {id} u fshi me sukses.',
+
+         'grade': 'Vlerësim',
+         'student-solutions': 'Zgjidhjet e studentëve',
+         'upload-solution': 'Ngarko zgjidhjen tënde',
+         'solution.grade-confirm': 'Jepni vlerësimin për detyrën e zgjedhur:',
+         'solution.grade-notification': '✔ Detyra e studentit u vlerësua me sukses.',
+         'solution.add-notification': '✔ Zgjidhja u ngarkua me sukses.',
+         //#endregion
 
         // Files
         'attachments': 'Bashkëngjitje',
         'materials': 'Materiale',
-        'assignments': 'Detyra',
+        'assignments': 'Detyrat',
+        'solution': 'Zgjidhja',
+        'solutions': 'Zgjidhjet',
+        'file': 'Dokumenti',
         'fileName': 'Emri i dokumentit',
         'contentType': 'Tipi i dokumentit',
         'materials.empty': 'Asnjë material',

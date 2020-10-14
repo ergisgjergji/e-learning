@@ -41,7 +41,7 @@ public class SolutionController {
 
     @PreAuthorize("hasRole('TEACHER')")
     @PostMapping("/{solution_id}/grade")
-    public ResponseEntity<Solution> gradeSolution(@PathVariable String solution_id, @RequestBody Boolean passed, Principal principal) throws Exception
+    public ResponseEntity<Solution> gradeSolution(@PathVariable String solution_id, @RequestParam("passed") Boolean passed, Principal principal) throws Exception
     {
         Solution solution = solutionService.gradeSolution(Long.parseLong(solution_id), passed, principal.getName());
         return new ResponseEntity<Solution>(solution, HttpStatus.OK);

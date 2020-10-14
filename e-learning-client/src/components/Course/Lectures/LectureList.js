@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert } from 'reactstrap';
+import { Alert, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -12,6 +12,7 @@ import { BeatLoader } from 'react-spinners';
 import { injectIntl } from 'react-intl';
 import { confirmAlert } from 'react-confirm-alert';
 import { roles } from './../../../utils/constants';
+import { Link } from 'react-router-dom';
 
 class LectureList extends Component {
 
@@ -82,11 +83,15 @@ class LectureList extends Component {
 
         return (
             <div className="transition-page">
-                <div className="container mb-4">
+                <div className="container">
                     <div className="row">
-                        <div className="col-12 col-sm-12 col-md-10 col-lg-8 mx-auto">
+                        <div className="col-12 col-sm-12 col-md-10 col-lg-9 p-2 mx-auto mt-2 mb-3">
 
-                            <h1 className="display-4 text-center mt-3"> {course_name} </h1>
+                            <Breadcrumb>
+                                <BreadcrumbItem><Link to="/"> {translate('home')} </Link></BreadcrumbItem>
+                                <BreadcrumbItem active> {course_name} </BreadcrumbItem>
+                                <BreadcrumbItem active> {translate('lectures')} </BreadcrumbItem>
+                            </Breadcrumb>
 
                             { role === roles.teacher ? <AddLectureModal course_name={course_name} /> : <hr/> }
 
