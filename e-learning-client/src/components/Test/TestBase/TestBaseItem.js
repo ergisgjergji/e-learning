@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Collapse, Fade } from 'reactstrap';
+import { Collapse, Fade, Tooltip } from 'reactstrap';
+
+import translate from '../../../i18n/translate';
 import QuestionBaseItem from './QuestionBaseItem';
+import ReportModal from './../../Reports/TestReport/ReportModal';
 
 class TestBaseItem extends Component {
 
@@ -31,9 +34,10 @@ class TestBaseItem extends Component {
         return (
             <div className="col-12 mt-1 p-0 mx-auto">
 
-                <button className="btn btn-md my-btn-secondary shadow" onClick={this.onToggle}>
+                <button className="btn btn-sm my-btn-secondary shadow" onClick={this.onToggle}>
                      {isOpen ? <i className="fa fa-caret-up"/> : <i className="fa fa-caret-down"/>} {header}
                 </button>
+                <ReportModal key={this.props.test.id} testbase_id={this.props.test.id}/>
                 <hr/>
 
                 <div className="paper mt-4">

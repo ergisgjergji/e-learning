@@ -99,7 +99,7 @@ public class FileStorageService {
             Files.delete(url);
         }
         catch (IOException e) {
-            throw new RuntimeException("Issue in removing the material");
+            throw new RuntimeException("Issue in removing material '" + fileName +  "'");
         }
     }
 

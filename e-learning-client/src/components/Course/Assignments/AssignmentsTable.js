@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import { connect } from 'react-redux';
-import { getCourseAssignments, deleteAssignment } from './../../../redux/actions/assignmentActions';
+import { getCourseAssignments, getStudentAssignments, deleteAssignment } from './../../../redux/actions/assignmentActions';
 
 import translate from './../../../i18n/translate';
 import { injectIntl } from 'react-intl';
@@ -17,9 +17,17 @@ import UploadSolutionModal from './UploadSolutionModal';
 
 class AssignmentsTable extends Component {
 
+    state = {
+        filter: 'all'
+    }
+
     componentDidMount() {
-        const { course_name } = this.props.match.params;
-        this.props.getCourseAssignments(course_name);
+        const course_name = this.props.match.params.course_name;
+        if(course_name)
+            this.props.getCourseAssignments(course_name);
+        else
+            this.props.getStudentAssignments();
+        
     }
 
     configureTable = (role, course_name) => {
@@ -52,59 +60,154 @@ class AssignmentsTable extends Component {
                 )
             }}
         ];
-        let student_config = [
-            { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
-            { Header: translate('assignment.name'), accessor: "assignment_name", sortable: true, style: { textAlign: "center" } },
-            { Header: translate('file'), accessor: "assignment_fileName", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
+        
+        let student_config;
+        if(course_name)
+            student_config = [
+                { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
+                { Header: translate('assignment.name'), accessor: "assignment_name", sortable: true, style: { textAlign: "center" } },
+                { Header: translate('file'), accessor: "assignment_fileName", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
 
-                const token = localStorage.getItem('token');
-                const downloadUrl = props.original.assignment_downloadUrl + `&token=${token}`;
-                return (
-                    <a href={downloadUrl} target="_blank">
-                        <i className="fa fa-download" aria-hidden="true"/> {props.original.assignment_fileName}
-                    </a>
-                )
-            }},
-            { Header: translate('due_date'), accessor: "due_date", sortable: true, filterable: true, style: { textAlign: "center" } },
-            { Header: translate('solution'), accessor: "file_name", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
-
-                const token = localStorage.getItem('token');
-                const downloadUrl = props.original.download_url + `&token=${token}`;
-                return (
-                    props.original.submitted ? 
+                    const token = localStorage.getItem('token');
+                    const downloadUrl = props.original.assignment_downloadUrl + `&token=${token}`;
+                    return (
                         <a href={downloadUrl} target="_blank">
-                            <i className="fa fa-download" aria-hidden="true"/> {props.original.file_name}
-                        </a> 
-                        : 
-                        "-"
-                )
-            }},
-            { Header: translate('submit_date'), accessor: "submit_date", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
-                return props.original.submitted ? props.original.submit_date : "-";
-            }},
-            { Header: translate('status'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
+                            <i className="fa fa-download" aria-hidden="true"/> {props.original.assignment_fileName}
+                        </a>
+                    )
+                }},
+                { Header: translate('due_date'), accessor: "due_date", sortable: true, filterable: true, style: { textAlign: "center" } },
+                { Header: translate('solution'), accessor: "file_name", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
 
-                const { submitted, checked, passed } = props.original;
-                let statusMessage;
-                if(submitted === false)
-                    statusMessage = <span className="bg-secondary rounded text-white p-1"> {translate('not-submitted')} </span>;
-                if(submitted === true && checked === false)
-                    statusMessage = <span className="bg-secondary rounded text-white p-1"> {translate('submitted')} </span>;
-                if(submitted === true && checked === true && passed === true)
-                    statusMessage = <span className="rounded bg-success text-white p-1"> {translate('pass')} </span>;
-                if(submitted === true && checked === true && passed === false)
-                    statusMessage = <span className="rounded bg-danger text-white p-1"> {translate('fail')} </span>;
-                return statusMessage;
-            }},
-            { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
-                return <UploadSolutionModal solution={props.original} />;
-            }}
-        ];
+                    const token = localStorage.getItem('token');
+                    const downloadUrl = props.original.download_url + `&token=${token}`;
+                    return (
+                        props.original.submitted ? 
+                            <a href={downloadUrl} target="_blank">
+                                <i className="fa fa-download" aria-hidden="true"/> {props.original.file_name}
+                            </a> 
+                            : 
+                            "-"
+                    )
+                }},
+                { Header: translate('submit_date'), accessor: "submit_date", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
+                    return props.original.submitted ? props.original.submit_date : "-";
+                }},
+                { Header: translate('status'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
+
+                    const { submitted, checked, passed } = props.original;
+                    let statusMessage;
+                    if(submitted === false)
+                        statusMessage = <span className="bg-secondary rounded text-white p-1"> {translate('not-submitted')} </span>;
+                    if(submitted === true && checked === false)
+                        statusMessage = <span className="bg-secondary rounded text-white p-1"> {translate('submitted')} </span>;
+                    if(submitted === true && checked === true && passed === true)
+                        statusMessage = <span className="rounded bg-success text-white p-1"> {translate('pass')} </span>;
+                    if(submitted === true && checked === true && passed === false)
+                        statusMessage = <span className="rounded bg-danger text-white p-1"> {translate('fail')} </span>;
+                    return statusMessage;
+                }},
+                { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
+                    return <UploadSolutionModal solution={props.original} />;
+                }}
+            ];
+        else
+            student_config = [
+                { Header: "Id", accessor: "id", sortable: false, show: false, filterable: false, style: { textAlign: "center" } },
+                { Header: translate('course.name'), accessor: "course_name", sortable: true, filterable: true, style: { textAlign: "center" } },
+                { Header: translate('assignment.name'), accessor: "assignment_name", sortable: true, style: { textAlign: "center" } },
+                { Header: translate('file'), accessor: "assignment_fileName", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
+
+                    const token = localStorage.getItem('token');
+                    const downloadUrl = props.original.assignment_downloadUrl + `&token=${token}`;
+                    return (
+                        <a href={downloadUrl} target="_blank">
+                            <i className="fa fa-download" aria-hidden="true"/> {props.original.assignment_fileName}
+                        </a>
+                    )
+                }},
+                { Header: translate('due_date'), accessor: "due_date", sortable: true, filterable: true, style: { textAlign: "center" } },
+                { Header: translate('solution'), accessor: "file_name", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
+
+                    const token = localStorage.getItem('token');
+                    const downloadUrl = props.original.download_url + `&token=${token}`;
+                    return (
+                        props.original.submitted ? 
+                            <a href={downloadUrl} target="_blank">
+                                <i className="fa fa-download" aria-hidden="true"/> {props.original.file_name}
+                            </a> 
+                            : 
+                            "-"
+                    )
+                }},
+                { Header: translate('submit_date'), accessor: "submit_date", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
+                    return props.original.submitted ? props.original.submit_date : "-";
+                }},
+                { Header: translate('status'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
+
+                    const { submitted, checked, passed } = props.original;
+                    let statusMessage;
+                    if(submitted === false)
+                        statusMessage = <span className="bg-secondary rounded text-white p-1"> {translate('not-submitted')} </span>;
+                    if(submitted === true && checked === false)
+                        statusMessage = <span className="bg-secondary rounded text-white p-1"> {translate('submitted')} </span>;
+                    if(submitted === true && checked === true && passed === true)
+                        statusMessage = <span className="rounded bg-success text-white p-1"> {translate('pass')} </span>;
+                    if(submitted === true && checked === true && passed === false)
+                        statusMessage = <span className="rounded bg-danger text-white p-1"> {translate('fail')} </span>;
+                    return statusMessage;
+                }},
+                { Header: translate('action'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
+                    return <UploadSolutionModal solution={props.original} />;
+                }}
+            ];
 
         if(role === roles.teacher)
             return teacher_config;
         else if(role === roles.student)
             return student_config;
+    }
+
+    onChange = (e) => {
+        this.setState({ filter: e.target.value })
+    }
+
+    renderFilters = () => {
+        const { intl } = this.props;
+        const message1 = intl.formatMessage({ id: 'show-all' });
+        const message2 = intl.formatMessage({ id: 'submitted' });
+        const message3 = intl.formatMessage({ id: 'not-submitted' });
+        return (
+            <div className="text-right mb-1">
+                <select className="btn btn-sm border-primary my-text-primary" onChange={this.onChange} value={this.state.filter}>
+                    <option value="all"> {message1} </option>
+                    <option value="submitted"> {message2} </option>
+                    <option value="not-submitted"> {message3} </option>
+                </select>
+            </div> 
+        )
+    }
+    
+    applyFilters = () => {
+        const { filter } = this.state;
+        const { assignments } = this.props;
+        let result;
+        
+        switch(filter) {
+            case "all":
+                result = assignments;
+                break;
+            case "submitted":
+                result = assignments.filter(a => a.submitted === true);
+                break;
+            case "not-submitted":
+                result = assignments.filter(a => a.submitted === false);
+                break;
+            default:
+                result = assignments;
+                break;
+        }
+        return result;
     }
 
     onDeleteClick = (assignment_id) => {
@@ -136,19 +239,30 @@ class AssignmentsTable extends Component {
 
     render() {
         const { course_name } = this.props.match.params;
-        const { assignments, loading, role } = this.props;
+        const { loading, role } = this.props;
+        const assignments = this.applyFilters();
 
         return (
             <div className="transition-page">
                 <div className="page col-12 col-md-11 col-lg-9 p-1 mx-auto mt-2 mb-3">
-
+                    
                     <Breadcrumb>
                         <BreadcrumbItem><Link to="/"> {translate('home')} </Link></BreadcrumbItem>
-                        <BreadcrumbItem active> {course_name} </BreadcrumbItem>
-                        <BreadcrumbItem active> {translate('assignments')} </BreadcrumbItem>
+                        {
+                            course_name ?
+                                <>
+                                    <BreadcrumbItem active> {course_name} </BreadcrumbItem>
+                                    <BreadcrumbItem active> {translate('assignments')} </BreadcrumbItem>
+                                </> : <BreadcrumbItem active> {translate('assignments')} </BreadcrumbItem>
+                        }
                     </Breadcrumb>
 
-                    { (role === roles.teacher) ? <AddAssignmentModal course_name={course_name} /> : null }
+                    { 
+                        (role === roles.teacher) ? 
+                            <AddAssignmentModal course_name={course_name} /> 
+                            : 
+                            this.renderFilters()
+                    }
 
                     <ReactTable 
                         className="border rounded bg-white"
@@ -170,6 +284,7 @@ AssignmentsTable.propTypes = {
     loading: PropTypes.bool.isRequired,
     role: PropTypes.string.isRequired,
     getCourseAssignments: PropTypes.func.isRequired,
+    getStudentAssignments: PropTypes.func.isRequired,
     deleteAssignment: PropTypes.func.isRequired
 };
 
@@ -179,4 +294,4 @@ const mapStateToProps = state => ({
     role: state.authStore.user.role
 });
 
-export default connect(mapStateToProps, { getCourseAssignments, deleteAssignment })(injectIntl(AssignmentsTable));
+export default connect(mapStateToProps, { getCourseAssignments, getStudentAssignments, deleteAssignment })(injectIntl(AssignmentsTable));

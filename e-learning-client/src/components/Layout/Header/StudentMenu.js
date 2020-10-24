@@ -17,6 +17,11 @@ const StudentMenu = () => {
                         {translate('news')}
                     </Link>
                 </NavItem>
+                <NavItem className="text-center my-auto mx-2 border-bottom">
+                    <Link to="/studentPanel/assignments" className="nav-link">
+                        {translate('assignments')}
+                    </Link>
+                </NavItem>
             </Nav>
         </>
     )

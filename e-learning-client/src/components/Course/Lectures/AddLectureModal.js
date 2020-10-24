@@ -141,7 +141,7 @@ class AddLectureModal extends Component {
                                         <input type="file" multiple id="files" name="files" id="customFile"
                                             className={classnames("custom-file-input ", {"is-invalid": errors.materials})}
                                             onChange={this.onSelectFile}/>
-                                        <label class="custom-file-label text-muted" for="customFile"> {materials.length} {translate('files-selected')} </label>
+                                        <label className="custom-file-label text-muted" htmlFor="customFile"> {materials.length} {translate('files-selected')} </label>
                                         { 
                                             errors.materials ? 
                                                 (<div className="invalid-feedback"> { errors.materials } </div>) : null 

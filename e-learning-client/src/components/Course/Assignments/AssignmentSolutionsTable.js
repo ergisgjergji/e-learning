@@ -82,12 +82,11 @@ class AssignmentSolutionsTable extends Component {
                         <a href={downloadUrl} target="_blank">
                             <i className="fa fa-download" aria-hidden="true"/> {props.original.file_name}
                         </a>
-                        :
-                        null
+                        : "-"
                 )
             }},
             { Header: translate('submit_date'), accessor: "submit_date", sortable: true, filterable: true, style: { textAlign: "center" }, Cell: props => {
-                return props.original.submitted ? props.original.submit_date : null
+                return props.original.submitted ? props.original.submit_date : "-"
             }},
             { Header: translate('status'), sortable: false, filterable: false, style: { textAlign: "center" }, Cell: props => {
 
@@ -112,7 +111,7 @@ class AssignmentSolutionsTable extends Component {
 
                 return (
                     <button disabled={disabled} className="btn btn-sm btn-outline-primary" onClick={this.onGradeSolutionClick.bind(this, props.original.id)}>
-                        <i className="fa fa-upload" aria-hidden="true"/> Grade
+                        <i className="fa fa-upload" aria-hidden="true"/> {translate('grade')}
                     </button>
                 )
             }}

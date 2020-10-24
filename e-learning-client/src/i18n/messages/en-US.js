@@ -58,6 +58,7 @@ export default {
         'new-password': 'New password',
 
         'courses': 'Courses',
+        'course.name': 'Course name',
         'no-courses': 'You have no courses.',
         'add-course': 'Add Course',
         'name': 'Name',
@@ -101,6 +102,7 @@ export default {
         'result': 'Result',
         'fail': 'Fail',
         'pass': 'Pass',
+        'show-all': 'Show all',
         'submitted': 'Submitted',
         'not-submitted': 'Not submitted',
         'correct': 'Correct',

@@ -57,6 +57,7 @@ export default {
         'new-password': 'Fjalëkalimi i ri',
 
         'courses': 'Kurset',
+        'course.name': 'Emri i kursit',
         'no-courses': 'Ju nuk keni asnjë kurs.',
         'add-course': 'Shto Kurs',
         'name': 'Emri',
@@ -100,6 +101,7 @@ export default {
         'result': 'Rezultati',
         'fail': 'Ngelës',
         'pass': 'Kalues',
+        'show-all': 'Të gjitha',
         'submitted': 'Dorëzuar',
         'not-submitted': 'Pa dorëzuar',
         'correct': 'Saktë',
@@ -163,7 +165,7 @@ export default {
          'assignment.delete-confirm': 'Jeni i sigurtë që doni ta fshini këtë detyrë?',
          'assignment.delete-notification': 'ℹ Detyra me id {id} u fshi me sukses.',
 
-         'grade': 'Vlerësim',
+         'grade': 'Vlerëso',
          'student-solutions': 'Zgjidhjet e studentëve',
          'upload-solution': 'Ngarko zgjidhjen tënde',
          'solution.grade-confirm': 'Jepni vlerësimin për detyrën e zgjedhur:',

@@ -77,6 +77,7 @@ function AnimatedRouter({ locale }) {
                     <StudentRoute exact path="/studentPanel/course/:course_name/assignments" component={AssignmentsTable} />
                     <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/details" component={TestDetails} />
                     <StudentRoute exact path="/studentPanel/course/:course_id/test/:test_id/complete" component={CompleteTest} />
+                    <StudentRoute exact path="/studentPanel/assignments" component={AssignmentsTable} />
                     {
                       // Common private routes
                     }

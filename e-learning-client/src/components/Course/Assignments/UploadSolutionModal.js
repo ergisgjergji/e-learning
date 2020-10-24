@@ -105,11 +105,11 @@ class UploadSolutionModal extends Component {
 
                                 <div className="form-group col-md-12">
                                     <label htmlFor="files text-capitalize"> {translate('upload-solution')} </label>
-                                    <div class="custom-file shadow-sm">
+                                    <div className="custom-file shadow-sm">
                                         <input type="file" id="solutionFile" name="solutionFile" id="customFile"
                                             className={classnames("custom-file-input shadow-sm ", {"is-invalid": errors.solution})}
                                             onChange={this.onSelectFile}/>
-                                        <label class="custom-file-label text-muted text-small" for="customFile"> {solutionFile ? solutionFile.name : translate('choose-file')} </label>
+                                        <label class="custom-file-label text-muted text-small" htmlFor="customFile"> {solutionFile ? solutionFile.name : translate('choose-file')} </label>
                                         { 
                                             errors.solution ? 
                                                 (<div className="invalid-feedback"> { errors.solution } </div>) : null 
