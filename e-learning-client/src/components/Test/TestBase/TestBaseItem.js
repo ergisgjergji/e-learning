@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Collapse, Fade, Tooltip } from 'reactstrap';
+import { Collapse, Fade } from 'reactstrap';
 
-import translate from '../../../i18n/translate';
 import QuestionBaseItem from './QuestionBaseItem';
 import ReportModal from './../../Reports/TestReport/ReportModal';
 
@@ -20,7 +19,7 @@ class TestBaseItem extends Component {
 
     componentDidMount() {
         const { header, questions } = this.props.test;
-        this.setState({ header, questions });
+        this.setState({header, questions });
     }
 
     onToggle = () => {
@@ -37,7 +36,7 @@ class TestBaseItem extends Component {
                 <button className="btn btn-sm my-btn-secondary shadow" onClick={this.onToggle}>
                      {isOpen ? <i className="fa fa-caret-up"/> : <i className="fa fa-caret-down"/>} {header}
                 </button>
-                <ReportModal key={this.props.test.id} testbase_id={this.props.test.id}/>
+                <ReportModal key={this.props.test.id} testbase_id={this.props.test.id} title={header}/>
                 <hr/>
 
                 <div className="paper mt-4">

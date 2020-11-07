@@ -127,18 +127,18 @@ class AddNewsModal extends Component {
                                         {translate('news.attachments')} 
                                         <small className="text-muted"> ({translate('optional')}) </small> 
                                     </label>
-                                    <div class="custom-file">
-                                        <input type="file" multiple id="files" name="files" class="custom-file-input shadow-sm" id="customFile" onChange={this.onSelectAttachment}/>
-                                        <label class="custom-file-label text-muted" for="customFile"> {attachments.length} {translate('files-selected')} </label>
+                                    <div className="custom-file">
+                                        <input type="file" multiple id="files" name="files" className="custom-file-input shadow-sm" id="customFile" onChange={this.onSelectAttachment}/>
+                                        <label className="custom-file-label text-muted" for="customFile"> {attachments.length} {translate('files-selected')} </label>
                                     </div>
                                 </div>
 
                                 <div className="form-group col-md-12">
-                                    <ul class="list-group">
+                                    <ul className="list-group">
                                         {
                                             attachments.map( (file, index) => {
                                                 return (
-                                                    <li key={index} class="list-group-item text-muted"> 
+                                                    <li key={index} className="list-group-item text-muted"> 
                                                         {file.name}
                                                         <button
                                                             type="button"
